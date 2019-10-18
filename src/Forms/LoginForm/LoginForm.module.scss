@@ -1,0 +1,21 @@
+@import '../../Styles/variables';
+
+.loginForm {
+  background-color: $white;
+  max-width: 90%;
+  width: 400px;
+}
+
+.logoContainer {
+  padding: 1rem;
+  text-align: center;
+}
+
+.discalimer {
+  font-style: italic;
+}
+
+.form {
+  margin-top: 1rem;
+  padding: 1rem;
+}
