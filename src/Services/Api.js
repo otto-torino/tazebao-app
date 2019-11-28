@@ -31,7 +31,10 @@ const create = (baseURL = config.apiBasePath) => {
   // simulate request timeout
   api.addResponseTransform(response => {
     // console.log(response)
-    if (response.problem === 'NETWORK_ERROR' || response.problem === 'UNKNOWN_ERROR') {
+    if (
+      response.problem === 'NETWORK_ERROR' ||
+      response.problem === 'UNKNOWN_ERROR'
+    ) {
       console.log('network error, redirecting to ', config.urls.networkError)
       setTimeout(() => history.push(config.urls.networkError), 0)
     }
@@ -40,8 +43,7 @@ const create = (baseURL = config.apiBasePath) => {
   // CHANGE AUTH HEADERS AT RUNTIME
   // when login is performed, we need to set the correct auth token for every
   // later request! At the same time we need to remove it on logout
-  const setAuthToken = token =>
-    api.setHeader('Authorization', 'Bearer ' + token)
+  const setAuthToken = token => api.setHeader('Authorization', 'JWT ' + token)
   const removeAuthToken = () => api.setHeader('Authorization', '')
 
   // Define some functions that call the api.  The goal is to provide
@@ -49,13 +51,47 @@ const create = (baseURL = config.apiBasePath) => {
   // rather than "get", "post" and friends.
 
   // AUTHENTICATION stuff
-  const whoami = () => api.get('/users/me')
+  const whoami = () => api.get('/whoami/')
   const login = (username, password) => {
-    return api.post('/users/login', { username, password })
+    return api.post('/login/', { username, password })
   }
   const refresh = (username, refreshToken) => {
-    return api.post('/users/refresh', { username, refreshToken })
+    return api.post('/refresh', { username, refreshToken })
   }
+  // STATS
+  const stats = () => api.get('/newsletter/stats/')
+  // SUBSCRIBERS
+  const subscribers = () => api.get('/newsletter/subscriber/?page_size=50000')
+  const addSubscriber = subscriber => api.post('/newsletter/subscriber/', subscriber)
+  const editSubscriber = subscriber => api.put(`/newsletter/subscriber/${subscriber.id}/`, subscriber)
+  const deleteSubscriber = subscriberId => api.delete(`/newsletter/subscriber/${subscriberId}/`)
+  const subscribersAddLists = (subscribers, lists) =>
+    api.post('/newsletter/subscriber/add_list/', { subscribers, lists })
+  const subscribersRemoveLists = (subscribers, lists) =>
+    api.post('/newsletter/subscriber/remove_list/', { subscribers, lists })
+  // LISTS
+  const lists = () => api.get('/newsletter/subscriberlist/')
+  const addList = list => api.post('/newsletter/subscriberlist/', list)
+  const editList = list => api.put(`/newsletter/subscriberlist/${list.id}/`, list)
+  const deleteList = listId => api.delete(`/newsletter/subscriberlist/${listId}/`)
+  // TOPICS
+  const topics = () => api.get('/newsletter/topic/')
+  const addTopic = topic => api.post('/newsletter/topic/', topic)
+  const editTopic = topic => api.put(`/newsletter/topic/${topic.id}/`, topic)
+  const deleteTopic = topicId => api.delete(`/newsletter/topic/${topicId}/`)
+  // TOPICS
+  const campaigns = () => api.get('/newsletter/campaign/?page_size=50000')
+  const campaignTemplate = campaignId => api.get(`/newsletter/campaign/${campaignId}/get_template`)
+  const sendCampaign = (campaignId, lists) => api.post(`/newsletter/campaign/${campaignId}/send/`, { lists })
+  const deleteCampaign = campaignId => api.delete(`/newsletter/campaign/${campaignId}/`)
+  const duplicateCampaign = campaignId => api.post(`/newsletter/campaign/${campaignId}/duplicate/`)
+  // MOSAICO
+  const mosaicoEditor = () => api.get('/mosaico/editor/')
+  // PLANNING
+  const planning = () => api.get('/newsletter/planning/')
+  const addPlanning = planning => api.post('/newsletter/planning/', planning)
+  const editPlanning = planning => api.put(`/newsletter/planning/${planning.id}/`, planning)
+  const deletePlanning = planningId => api.delete(`/newsletter/planning/${planningId}/`)
 
   // Return back a collection of functions that we would consider our
   // interface.  Most of the time it'll be just the list of all the
@@ -71,7 +107,32 @@ const create = (baseURL = config.apiBasePath) => {
     removeAuthToken,
     whoami,
     login,
-    refresh
+    refresh,
+    stats,
+    subscribers,
+    addSubscriber,
+    editSubscriber,
+    deleteSubscriber,
+    lists,
+    subscribersAddLists,
+    subscribersRemoveLists,
+    addList,
+    editList,
+    deleteList,
+    topics,
+    addTopic,
+    editTopic,
+    deleteTopic,
+    campaigns,
+    campaignTemplate,
+    sendCampaign,
+    mosaicoEditor,
+    planning,
+    addPlanning,
+    editPlanning,
+    deletePlanning,
+    deleteCampaign,
+    duplicateCampaign
   }
 }
 

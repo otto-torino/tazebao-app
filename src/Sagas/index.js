@@ -28,10 +28,22 @@ import { takeLatest, takeEvery, all } from 'redux-saga/effects'
 /* ------------- Types ------------- */
 import { STARTUP } from '../Redux/Startup'
 import { LOGIN_REQUEST, LOGOUT, WHOAMI_REQUEST, REFRESH_REQUEST } from '../Redux/Auth'
+import { STATS_REQUEST } from '../Redux/Stats'
+import { SUBSCRIBERS_REQUEST } from '../Redux/Subscribers'
+import { LISTS_REQUEST } from '../Redux/Lists'
+import { TOPICS_REQUEST } from '../Redux/Topics'
+import { CAMPAIGNS_REQUEST } from '../Redux/Campaigns'
+import { PLANNING_REQUEST } from '../Redux/Planning'
 
 /* ------------- Sagas ------------- */
 import { startup } from './StartupSagas'
 import { login, whoami, refresh, logout } from './AuthSagas'
+import { fetchSubscribers } from './SubscribersSagas'
+import { fetchLists } from './ListsSagas'
+import { fetchTopics } from './TopicsSagas'
+import { fetchCampaigns } from './CampaignsSagas'
+import { fetchPlanning } from './PlanningSagas'
+import { fetchStats } from './StatsSagas'
 
 /* ------------- API ------------- */
 import API from '../Services/Api'
@@ -44,6 +56,12 @@ export default function * root (dispatch) {
     takeLatest(LOGOUT, logout),
     takeLatest(REFRESH_REQUEST, refresh, api),
     takeLatest(WHOAMI_REQUEST, whoami, { api, dispatch }),
+    takeLatest(STATS_REQUEST, fetchStats, api),
+    takeLatest(SUBSCRIBERS_REQUEST, fetchSubscribers, api),
+    takeLatest(LISTS_REQUEST, fetchLists, api),
+    takeLatest(TOPICS_REQUEST, fetchTopics, api),
+    takeLatest(CAMPAIGNS_REQUEST, fetchCampaigns, api),
+    takeLatest(PLANNING_REQUEST, fetchPlanning, api)
   ])
 }
 

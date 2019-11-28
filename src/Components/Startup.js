@@ -1,9 +1,11 @@
 import React from 'react'
-
+import { Dimmer, Loader } from 'semantic-ui-react'
 
 const Startup = () => (
   <div>
-    <p>Loading...</p>
+    <Dimmer active>
+      <Loader>Loading</Loader>
+    </Dimmer>
   </div>
 )
 

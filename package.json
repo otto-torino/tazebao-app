@@ -6,9 +6,11 @@
     "apisauce": "^1.1.1",
     "connected-react-router": "^6.5.2",
     "history": "^4.10.1",
+    "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
+    "react-datetime": "^2.16.3",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
@@ -16,7 +18,9 @@
     "react-toastify": "^5.4.0",
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.1"
   },
   "scripts": {
     "start": "react-scripts start",

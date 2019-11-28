@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-import PropTypes from "prop-types"
+import Logo from '../../Assets/img/logo.png'
+import { Form, Input, Message, Icon, Image, Button } from 'semantic-ui-react'
 
 import styles from './LoginForm.module.scss'
 
@@ -10,28 +12,27 @@ const LoginForm = props => {
   return (
     <div className={styles.loginForm}>
       <div className={styles.logoContainer}>
-        LOGO
+        <Image src={Logo} alt='logo' centered />
       </div>
-      <div className={styles.form}>
+      <Form className={styles.form}>
         {props.error && (
-          <div>
-            warning
-            <p>
+          <Message size='mini' negative icon>
+            <Icon name='warning' />
+            <Message.Content>
               {props.errorMessage}
-            </p>
-          </div>
+            </Message.Content>
+          </Message>
         )}
-        <div>
-          <input placeholder='username' value={username} onChange={e => setUsername(e.target.value)} />
-        </div>
-        <div>
-          <input placeholder='password' type='password' value={password} onChange={e => setPassword(e.target.value)} />
-        </div>
+        <Form.Field>
+          <Input placeholder='username' fluid value={username} onChange={e => setUsername(e.target.value)} />
+        </Form.Field>
+        <Form.Field>
+          <Input placeholder='password' type='password' fluid value={password} onChange={e => setPassword(e.target.value)} />
+        </Form.Field>
         <div style={{ textAlign: 'center' }}>
-          <button onClick={() => props.onSubmit(username, password)}>login</button>
+          <Button onClick={() => props.onSubmit(username, password)}>Login</Button>
         </div>
-        <p className={styles.discalimer}>Vivamus euismod mauris. Fusce neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas nec odio et ante tincidunt tempus. Vestibulum rutrum, mi nec elementum vehicula, eros quam gravida nisl, id fringilla neque ante vel mi.</p>
-      </div>
+      </Form>
     </div>
   )
 }

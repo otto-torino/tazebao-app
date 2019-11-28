@@ -5,9 +5,20 @@ import { ConnectedRouter } from 'connected-react-router'
 import history from '../history'
 import config from '../Config'
 import { Route, Redirect, Switch } from 'react-router-dom'
+// actions
+import StatsActions from '../Redux/Stats'
+import CampaignsActions from '../Redux/Campaigns'
+import PlanningActions from '../Redux/Planning'
 // views
 import LoginView from '../Views/LoginView'
 import HomeView from '../Views/HomeView'
+import AdminSubscribersView from '../Views/AdminSubscribersView'
+import AdminListsView from '../Views/AdminListsView'
+import AdminTopicsView from '../Views/AdminTopicsView'
+import CampaignsView from '../Views/CampaignsView'
+import EditCampaignView from '../Views/EditCampaignView'
+import SendCampaignView from '../Views/SendCampaignView'
+import PlanningView from '../Views/PlanningView'
 import NetworkErrorView from '../Views/NetworkErrorView'
 
 /**
@@ -71,8 +82,61 @@ class AppRouter extends React.Component {
           <Route exact path={config.urls.login} component={LoginView} />
           <PrivateRoute
             exact
+            path={config.urls.adminSubscribers}
+            component={AdminSubscribersView}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.adminLists}
+            component={AdminListsView}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.adminTopics}
+            component={AdminTopicsView}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.createCampaign}
+            component={EditCampaignView}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.editCampaign}
+            component={EditCampaignView}
+            actions={[
+              [CampaignsActions.campaignsRequest(), (state) => true]
+            ]}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.sendCampaign}
+            component={SendCampaignView}
+            actions={[
+              [CampaignsActions.campaignsRequest(), (state) => true]
+            ]}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.campaigns}
+            component={CampaignsView}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.planning}
+            component={PlanningView}
+            actions={[
+              [PlanningActions.planningRequest(), (state) => true],
+              [CampaignsActions.campaignsRequest(), (state) => true]
+            ]}
+          />
+          <PrivateRoute
+            exact
             path={config.urls.home}
             component={HomeView}
+            actions={[
+              [StatsActions.statsRequest(), (state) => true]
+            ]}
           />
         </Switch>
       </ConnectedRouter>

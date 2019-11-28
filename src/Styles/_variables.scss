@@ -1,2 +1,35 @@
 $white: #fff;
+$white30: rgba(255, 255, 255, .3);
+$white80: rgba(255, 255, 255, .8);
+$white90: rgba(255, 255, 255, .9);
 $black: #000;
+$black80: rgba(0, 0, 0, .8);
+$black40: rgba(0, 0, 0, .4);
+
+$primary: #f00;
+$primary-dark: #9b0000;
+$primary-light: #ff3939;
+$primary-extra-light: #ff6464;
+
+$secondary: #0c0;
+$secondary-dark: #007c00;
+$secondary-light: #55d955;
+
+$accent: #ff7400;
+$accent-dark: #9b4600;
+$accent-light: #ff9339;
+$accent-extra-light: #ffaa64;
+
+$flat: #099;
+$flat-dark: #005d5d;
+$flat-light: #24a0a0;
+$flat-extra-light: #46b3b3;
+
+
+
+// navbar
+$navbar-bg: $black80;
+
+// widget
+$widget-bg: #f9f9f9;
+$widget-border-fg: #f2f2f2;

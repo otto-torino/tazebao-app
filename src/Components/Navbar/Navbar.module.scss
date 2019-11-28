@@ -1,0 +1,11 @@
+@import '../../Styles/variables';
+
+.navbar {
+  background: $navbar-bg !important;
+  border-radius: 0 !important;
+  border-width: 0 !important;
+}
+
+.logo {
+  height: 30px;
+}

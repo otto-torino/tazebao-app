@@ -1,14 +1,19 @@
 @import '../../Styles/variables';
 
 .loginForm {
-  background-color: $white;
+  background-color: $white90;
   max-width: 90%;
   width: 400px;
 }
 
 .logoContainer {
+  background-color: $black80;
   padding: 1rem;
   text-align: center;
+
+  img {
+    width: 200px;
+  }
 }
 
 .discalimer {

@@ -1,2 +1,10 @@
 @import '../Styles/variables';
 
+.bg {
+  background: $white !important;
+
+  @media (min-width: 500px) {
+    // background: transparent !important;
+  }
+}
+

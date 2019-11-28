@@ -42,7 +42,6 @@ export const INITIAL_STATE = {
   ...requestStateBlueprint,
   isAuthenticated: false,
   token: JWT.get(),
-  refreshToken: JWT.getRefresh(),
   user: {}
 }
 
@@ -50,28 +49,25 @@ export const INITIAL_STATE = {
 const request = state => Object.assign({}, state, requestBlueprint)
 
 // login
-export const loginSuccess = (state, { token, refreshToken }) => {
+export const loginSuccess = (state, { token }) => {
   JWT.save(token)
-  JWT.saveRefresh(refreshToken)
   return Object.assign({}, state, {
     ...successBlueprint,
     token,
-    refreshToken,
     error: false,
     errorCode: null,
     errorMessage: null,
     isAuthenticated: true
   })
 }
-const loginFailure = (state, { code, message }) => {
+const loginFailure = (state, { code, detail }) => {
   JWT.delete()
-  JWT.deleteRefresh()
   return Object.assign({}, state, {
     ...failureBlueprint,
     isAuthenticated: false,
     error: true,
     errorCode: code,
-    errorMessage: message,
+    errorMessage: detail,
     token: null,
     refreshToken: null,
     user: {}
@@ -80,14 +76,12 @@ const loginFailure = (state, { code, message }) => {
 
 export const logout = state => {
   JWT.delete()
-  JWT.deleteRefresh()
   return INITIAL_STATE
 }
 
 // refresh
 export const refreshSuccess = (state, { token, refreshToken }) => {
   JWT.save(token)
-  JWT.saveRefresh(refreshToken)
   return Object.assign({}, state, {
     ...successBlueprint,
     isAuthenticated: true,
@@ -95,11 +89,11 @@ export const refreshSuccess = (state, { token, refreshToken }) => {
     refreshToken
   })
 }
-const refreshFailure = (state, { code, message }) => Object.assign({}, state, {
+const refreshFailure = (state, { code, detail }) => Object.assign({}, state, {
   ...failureBlueprint,
   isAuthenticated: false,
   errorCode: code,
-  errorMessage: message,
+  errorMessage: detail,
   user: {}
 })
 
@@ -107,17 +101,16 @@ const refreshFailure = (state, { code, message }) => Object.assign({}, state, {
 export const whoamiSuccess = (state, user) => Object.assign({}, state, {
   ...successBlueprint,
   user,
-  isAuthenticated: !!(user && user.email)
+  isAuthenticated: !!(user && user.userId)
 })
-const whoamiFailure = (state, { code, message }) => {
+const whoamiFailure = (state, { code, detail }) => {
   JWT.delete()
-  JWT.deleteRefresh()
   return Object.assign({}, state, {
     ...failureBlueprint,
     user: {},
     isAuthenticated: false,
     errorCode: code,
-    errorMessage: message
+    errorMessage: detail
   })
 }
 

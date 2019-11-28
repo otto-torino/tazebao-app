@@ -2,6 +2,7 @@ export default {
   basePath: '/',
   baseAbsPath: process.env.NODE_ENV === 'test' ? '/' : process.env.REACT_APP_BASE_PATH,
   apiBasePath: process.env.NODE_ENV === 'test' ? 'http://wrong' : process.env.REACT_APP_API_BASE_PATH,
+  // apiBasePath: process.env.NODE_ENV === 'test' ? 'http://wrong' : 'https://tazebao.sqrt64.it/api/v1',
   breakpoints: { // NB this should coincide with Style/css/_variables.scss breakpoints
     tablet: 768,
     smallDesktop: 992,
@@ -10,6 +11,18 @@ export default {
   urls: {
     networkError: '/network-error',
     login: '/login',
-    home: '/'
+    home: '/',
+    adminSubscribers: '/subscribers',
+    adminLists: '/lists',
+    adminTopics: '/topics',
+    campaigns: '/campigns',
+    planning: '/planning',
+    createCampaign: '/campigns/create',
+    editCampaign: '/campigns/edit/:id',
+    campaignDetail: '/campigns/:id',
+    sendCampaign: '/campigns/send/:id'
+  },
+  ui: {
+    adminListPerPage: 50
   }
 }

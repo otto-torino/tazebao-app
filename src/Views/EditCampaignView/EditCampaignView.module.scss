@@ -1,0 +1,42 @@
+.adminView {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.grid {
+  max-width: 100%;
+  margin-top: 0 !important;
+  overflow: auto;
+}
+
+.row {
+  // display: flex;
+  // justify-content: flex-start;
+  // flex-direction: column;
+  // min-width: 1140px;
+
+  // @media (min-width: 1200px) {
+  //   flex-direction: row;
+  // }
+}
+
+.columnForm {
+  background: #f7f7f7;
+  margin: auto;
+  max-width: 95%;
+
+  > div {
+    margin: auto;
+    max-width: 800px;
+    padding:  3rem 2rem;
+    width: 100%;
+  }
+}
+
+.columnMosaico {
+  max-width: 95%;
+  margin: auto;
+  min-width: 1100px;
+  overflow: auto;
+}
