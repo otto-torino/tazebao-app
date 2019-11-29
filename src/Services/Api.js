@@ -65,6 +65,7 @@ const create = (baseURL = config.apiBasePath) => {
   const addSubscriber = subscriber => api.post('/newsletter/subscriber/', subscriber)
   const editSubscriber = subscriber => api.put(`/newsletter/subscriber/${subscriber.id}/`, subscriber)
   const deleteSubscriber = subscriberId => api.delete(`/newsletter/subscriber/${subscriberId}/`)
+  const deleteSubscribersFromBounces = bouncesIds => api.post(`/newsletter/subscriber/delete_from_bounces/`, { bounces: bouncesIds })
   const subscribersAddLists = (subscribers, lists) =>
     api.post('/newsletter/subscriber/add_list/', { subscribers, lists })
   const subscribersRemoveLists = (subscribers, lists) =>
@@ -82,6 +83,7 @@ const create = (baseURL = config.apiBasePath) => {
   // TOPICS
   const campaigns = () => api.get('/newsletter/campaign/?page_size=50000')
   const campaignTemplate = campaignId => api.get(`/newsletter/campaign/${campaignId}/get_template`)
+  const campaignDispatches = campaignId => api.get(`/newsletter/campaign/${campaignId}/dispatches/?page_size=50000`)
   const sendCampaign = (campaignId, lists) => api.post(`/newsletter/campaign/${campaignId}/send/`, { lists })
   const deleteCampaign = campaignId => api.delete(`/newsletter/campaign/${campaignId}/`)
   const duplicateCampaign = campaignId => api.post(`/newsletter/campaign/${campaignId}/duplicate/`)
@@ -92,6 +94,9 @@ const create = (baseURL = config.apiBasePath) => {
   const addPlanning = planning => api.post('/newsletter/planning/', planning)
   const editPlanning = planning => api.put(`/newsletter/planning/${planning.id}/`, planning)
   const deletePlanning = planningId => api.delete(`/newsletter/planning/${planningId}/`)
+  // BOUNCES
+  const bounces = () => api.get('/newsletter/bounces/')
+  const deleteBounce = bounceId => api.delete(`/newsletter/bounces/${bounceId}/`)
 
   // Return back a collection of functions that we would consider our
   // interface.  Most of the time it'll be just the list of all the
@@ -132,7 +137,11 @@ const create = (baseURL = config.apiBasePath) => {
     editPlanning,
     deletePlanning,
     deleteCampaign,
-    duplicateCampaign
+    duplicateCampaign,
+    campaignDispatches,
+    deleteSubscribersFromBounces,
+    bounces,
+    deleteBounce
   }
 }
 

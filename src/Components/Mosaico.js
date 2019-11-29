@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import config from '../Config'
 
 window.addEventListener('message', function ({ data }) {
   if (data.action === 'TAZEBAO') {
-    console.log(data)
   }
 })
 
@@ -13,8 +13,8 @@ const Mosaico = props => {
 
   const src =
     props.template && props.template.id
-      ? `http://localhost:8000/mosaico/appeditor.html?bearer=${token}&id=${props.template.id}`
-      : `http://localhost:8000/mosaico/app.html?bearer=${token}`
+      ? `${config.mosaicoBasePath}/appeditor.html?bearer=${token}&id=${props.template.id}`
+      : `${config.mosaicoBasePath}/app.html?bearer=${token}`
 
   return (
     <iframe

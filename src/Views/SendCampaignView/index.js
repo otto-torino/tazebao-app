@@ -19,16 +19,14 @@ import {
   Popup
 } from 'semantic-ui-react'
 import { withLoader } from '../../HOC/Loader'
-import { getWindowWidth } from '../../Lib/react-admin/Utils'
+import { layoutProps } from '../../Styles/Common'
 import history from '../../history'
 import config from '../../Config'
 import { request } from '../../Services/Request'
 
 import styles from './SendCampaignView.module.scss'
 
-const windowWidth = getWindowWidth()
-
-const EditCampaignView = props => {
+const SendCampaignView = props => {
   const id = props.match.params ? parseInt(props.match.params.id) : null
   const campaigns = useSelector(state => state.campaigns.data)
   const lists = useSelector(state => state.lists.data)
@@ -38,26 +36,6 @@ const EditCampaignView = props => {
   const handleListsField = useCallback(value => {
     setSelectedLists(value)
   })
-  const layoutProps = {
-    containerProps: {
-      fluid: true,
-      style: windowWidth > 500 ? { padding: '2rem' } : { padding: 0, margin: 0 }
-    },
-    segmentProps: {
-      piled: windowWidth > 500,
-      basic: windowWidth <= 500,
-      style: windowWidth > 500 ? {} : { padding: 0, paddingTop: '3rem' }
-    },
-    labelProps: {
-      color: windowWidth > 500 ? 'orange' : null,
-      attached: windowWidth <= 500 ? 'top' : null,
-      ribbon: windowWidth > 500,
-      size: 'big',
-      style: {
-        marginBottom: '2rem'
-      }
-    }
-  }
 
   const selectedSubscribers = Object.keys(lists).reduce(
     (acc, current) =>
@@ -114,7 +92,7 @@ const EditCampaignView = props => {
           <Segment {...layoutProps.segmentProps}>
             <Label {...layoutProps.labelProps}>
               <Icon name='send' />{' '}
-              {campaign ? campaign.name : 'Create campaign'}
+              {campaign ? campaign.name : ''}
             </Label>
             <div>
               <Header as='h2' icon color='blue' textAlign='center' style={{ marginBottom: '2rem' }}>
@@ -189,7 +167,7 @@ const EditCampaignView = props => {
                               trigger={<Icon color='blue' name='info circle' />}
                             />{' '}
                             It will take about{' '}
-                            {Math.ceil(selectedSubscribers / 50) + 1}
+                            {Math.ceil(selectedSubscribers / 50) + 1} min
                           </span>
                         ) : null}
                       </p>
@@ -275,8 +253,8 @@ const EditCampaignView = props => {
   )
 }
 
-EditCampaignView.propTypes = {
+SendCampaignView.propTypes = {
   match: PropTypes.object
 }
 
-export default EditCampaignView
+export default SendCampaignView

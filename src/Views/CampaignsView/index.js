@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import CampaignsActions from '../../Redux/Campaigns'
 import BaseLayout from '../../Layouts/BaseLayout'
@@ -13,14 +14,12 @@ import {
 } from 'semantic-ui-react'
 import { ChangeList } from '../../Lib/react-admin'
 import { request } from '../../Services/Request'
-import { getWindowWidth } from '../../Lib/react-admin/Utils'
+import { layoutProps } from '../../Styles/Common'
 import config from '../../Config'
 import history from '../../history'
 import moment from 'moment'
 
 import styles from './CampaignsView.module.scss'
-
-const windowWidth = getWindowWidth()
 
 const AdminSubscribersView = props => {
   const [deleteModal, setDeleteModal] = useState({ open: false })
@@ -45,7 +44,8 @@ const AdminSubscribersView = props => {
     }
   }
 
-  const handleDelete = campaign => setDeleteModal({ open : true, item: campaign })
+  const handleDelete = campaign =>
+    setDeleteModal({ open: true, item: campaign })
 
   const deleteCampaign = id => {
     return request(
@@ -65,14 +65,22 @@ const AdminSubscribersView = props => {
       [item.id],
       'There was an error duplicating the campaign: {error}',
       response => {
-        history.push(config.urls.editCampaign.replace(':id', response.data.id))
+        toast.success(
+          'The campaign was succesfully duplicated, redirecting to edit page...'
+        )
+        dispatch(CampaignsActions.campaignsRequest())
+        setTimeout(() => {
+          history.push(
+            config.urls.editCampaign.replace(':id', response.data.id)
+          )
+        }, 2000)
       }
     )
   }
 
   const description = (
     <p>
-      All your campaigns. You can only edit campaigns created with this
+      All your campaigns. You can only edit and duplicate campaigns created with this
       application, and that haven't been already dispatched
     </p>
   )
@@ -98,27 +106,6 @@ const AdminSubscribersView = props => {
     </Modal>
   )
 
-  const layoutProps = {
-    containerProps: {
-      fluid: true,
-      style: windowWidth > 500 ? { padding: '2rem' } : { padding: 0, margin: 0 }
-    },
-    segmentProps: {
-      piled: windowWidth > 500,
-      basic: windowWidth <= 500,
-      style: windowWidth > 500 ? {} : { padding: 0, paddingTop: '3rem' }
-    },
-    labelProps: {
-      color: windowWidth > 500 ? 'orange' : '',
-      attached: windowWidth <= 500 ? 'top' : null,
-      ribbon: windowWidth > 500,
-      size: 'big',
-      style: {
-        marginBottom: '2rem'
-      }
-    }
-  }
-
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <Container {...layoutProps.containerProps}>
@@ -143,12 +130,24 @@ const AdminSubscribersView = props => {
             searchFields={['name']}
             moreActions={item => [
               <Icon
+                title='details'
+                name='chart line'
+                circular
+                color='blue'
+                onClick={() => history.push(config.urls.campaignDetail.replace(':id', item.id))}
+                key='detail-btn'
+                style={{
+                  cursor: 'pointer'
+                }}
+              />,
+              <Icon
                 title='duplicate'
                 name='copy outline'
                 circular
+                disabled={!item.template}
                 color='blue'
                 onClick={() => handleDuplicate(item)}
-                key='send-btn'
+                key='duplicate-btn'
                 style={{
                   cursor: 'pointer'
                 }}
@@ -164,23 +163,11 @@ const AdminSubscribersView = props => {
                 style={{
                   cursor: 'pointer'
                 }}
-              />,
-              <Icon
-                title='details'
-                name='bullseye'
-                circular
-                color='blue'
-                onClick={() =>
-                  history.push(config.urls.campaignDetail.replace(':id', item.id))}
-                key='detail-btn'
-                style={{
-                  cursor: 'pointer'
-                }}
               />
             ]}
             fieldsMapping={{
               last_edit_datetime: dt => moment(dt).format('LLL'),
-              last_dispatch: dt => dt ? moment(dt).format('LLL') : null
+              last_dispatch: dt => (dt ? moment(dt).format('LLL') : null)
             }}
           />
           {deleteModal.open && deleteModalComponent(deleteModal.item)}

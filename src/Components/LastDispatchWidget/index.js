@@ -18,7 +18,7 @@ const LastDispatchWidget = props => {
         <Table.Body>
           <Table.Row>
             <Table.Cell rowSpan={3} textAlign='center'>
-              <Statistic color='teal' className={styles.statistic}>
+              <Statistic color='teal' className={styles.statistic} size='huge'>
                 <Statistic.Value>{stats.lastDispatch.sent}</Statistic.Value>
                 <Statistic.Label>Sent E-mails</Statistic.Label>
               </Statistic>
@@ -83,8 +83,12 @@ const LastDispatchWidget = props => {
   )
   return (
     <div className={styles.widget}>
-      <Header textAlign='center' as='h2'>
-        <Icon name='send' className={styles.icon} /> Last Dispatch
+      <Header as='h2' icon>
+        <Icon name='send' className={styles.icon} />
+        Last Dispatch
+        <Header.Subheader>
+          The last dispatch stats
+        </Header.Subheader>
       </Header>
       {withLoader(
         withData(

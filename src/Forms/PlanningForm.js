@@ -44,7 +44,6 @@ class PlanningForm extends React.Component {
   submit () {
     this.setState({ errors: {} })
     const isValid = this.validate()
-    console.log('DIOFFA', isValid)
     if (isValid === true) {
       const fields = Object.assign({}, this.state.fields)
       return { id: this.state.fields.id, data: fields }

@@ -12,6 +12,7 @@
     "react": "^16.10.2",
     "react-datetime": "^2.16.3",
     "react-dom": "^16.10.2",
+    "react-highcharts": "^16.1.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
@@ -54,6 +55,7 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.1.2",
     "eslint-plugin-standard": "^4.0.1",
+    "flightplan": "^0.6.20",
     "redux-mock-store": "^1.5.3"
   }
 }

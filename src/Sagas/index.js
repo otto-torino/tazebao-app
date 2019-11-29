@@ -34,6 +34,7 @@ import { LISTS_REQUEST } from '../Redux/Lists'
 import { TOPICS_REQUEST } from '../Redux/Topics'
 import { CAMPAIGNS_REQUEST } from '../Redux/Campaigns'
 import { PLANNING_REQUEST } from '../Redux/Planning'
+import { BOUNCES_REQUEST } from '../Redux/Bounces'
 
 /* ------------- Sagas ------------- */
 import { startup } from './StartupSagas'
@@ -43,6 +44,7 @@ import { fetchLists } from './ListsSagas'
 import { fetchTopics } from './TopicsSagas'
 import { fetchCampaigns } from './CampaignsSagas'
 import { fetchPlanning } from './PlanningSagas'
+import { fetchBounces } from './BouncesSagas'
 import { fetchStats } from './StatsSagas'
 
 /* ------------- API ------------- */
@@ -61,7 +63,8 @@ export default function * root (dispatch) {
     takeLatest(LISTS_REQUEST, fetchLists, api),
     takeLatest(TOPICS_REQUEST, fetchTopics, api),
     takeLatest(CAMPAIGNS_REQUEST, fetchCampaigns, api),
-    takeLatest(PLANNING_REQUEST, fetchPlanning, api)
+    takeLatest(PLANNING_REQUEST, fetchPlanning, api),
+    takeLatest(BOUNCES_REQUEST, fetchBounces, api)
   ])
 }
 

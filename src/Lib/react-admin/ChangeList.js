@@ -230,7 +230,7 @@ const ChangeList = props => {
     })
 
     // single record actions
-    let actions = [];
+    let actions = props.moreActions(item);
     ['edit', 'delete'].forEach(a => {
       if (!props.hideButtonWithoutPermissions || props['can' + _.upperFirst(a)](item)) {
         actions.push(
@@ -249,7 +249,6 @@ const ChangeList = props => {
         )
       }
     })
-    actions = actions.concat(props.moreActions(item))
     cells.push(
       <Table.Cell collapsing key='cell-actions' textAlign='right'>
         {actions}

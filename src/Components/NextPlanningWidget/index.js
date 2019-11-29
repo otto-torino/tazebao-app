@@ -23,8 +23,12 @@ const NextPlanningWidget = props => {
 
   return (
     <div className={styles.widget}>
-      <Header textAlign='center' as='h2'>
-        <Icon name='clock' className={styles.icon} /> Next Scheduling
+      <Header as='h2' icon>
+        <Icon name='clock' className={styles.icon} />
+        Planning
+        <Header.Subheader>
+          Next Scheduling
+        </Header.Subheader>
       </Header>
       {withLoader(
         withData(content, stats, stats.nextPlanning && stats.nextPlanning.id),

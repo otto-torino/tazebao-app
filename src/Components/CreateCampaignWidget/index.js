@@ -8,12 +8,16 @@ import styles from './CreateCampaignWidget.module.scss'
 const CreateCampaignWidget = props => {
   return (
     <div className={styles.widget}>
-      <Header as='h2'>
+
+      <Header as='h2' icon>
         <Icon name='newspaper outline' className={styles.icon} />
-        Create a campaign
+        Create Campaign
+        <Header.Subheader>
+          Compose and send your campaign
+        </Header.Subheader>
       </Header>
       <Link to={config.urls.createCampaign}>
-        <Icon name='add circle' size='huge' color='green' />
+        <Icon name='add circle' size='huge' color='blue' />
       </Link>
     </div>
   )

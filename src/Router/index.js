@@ -9,6 +9,7 @@ import { Route, Redirect, Switch } from 'react-router-dom'
 import StatsActions from '../Redux/Stats'
 import CampaignsActions from '../Redux/Campaigns'
 import PlanningActions from '../Redux/Planning'
+import BouncesActions from '../Redux/Bounces'
 // views
 import LoginView from '../Views/LoginView'
 import HomeView from '../Views/HomeView'
@@ -18,7 +19,9 @@ import AdminTopicsView from '../Views/AdminTopicsView'
 import CampaignsView from '../Views/CampaignsView'
 import EditCampaignView from '../Views/EditCampaignView'
 import SendCampaignView from '../Views/SendCampaignView'
+import CampaignDetailView from '../Views/CampaignDetailView'
 import PlanningView from '../Views/PlanningView'
+import BouncesView from '../Views/BouncesView'
 import NetworkErrorView from '../Views/NetworkErrorView'
 
 /**
@@ -118,6 +121,14 @@ class AppRouter extends React.Component {
           />
           <PrivateRoute
             exact
+            path={config.urls.campaignDetail}
+            component={CampaignDetailView}
+            actions={[
+              [CampaignsActions.campaignsRequest(), (state) => true]
+            ]}
+          />
+          <PrivateRoute
+            exact
             path={config.urls.campaigns}
             component={CampaignsView}
           />
@@ -128,6 +139,14 @@ class AppRouter extends React.Component {
             actions={[
               [PlanningActions.planningRequest(), (state) => true],
               [CampaignsActions.campaignsRequest(), (state) => true]
+            ]}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.bounces}
+            component={BouncesView}
+            actions={[
+              [BouncesActions.bouncesRequest(), (state) => true]
             ]}
           />
           <PrivateRoute

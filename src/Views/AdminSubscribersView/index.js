@@ -5,6 +5,7 @@ import BaseLayout from '../../Layouts/BaseLayout'
 import SubscriberForm from '../../Forms/SubscriberForm'
 import ChooseListsModal from '../../Components/ChooseListsModal'
 import SubscribersActions from '../../Redux/Subscribers'
+import ListActions from '../../Redux/Lists'
 import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
 import { request } from '../../Services/Request'
 import moment from 'moment'
@@ -26,7 +27,6 @@ const AdminSubscribersView = props => {
     logSelected: {
       label: 'Log selected',
       action: ids => {
-        console.log(ids)
         dispatch(SubscribersActions.subscribersRequest())
       }
     },
@@ -34,12 +34,14 @@ const AdminSubscribersView = props => {
       label: 'Add selected items to lists',
       action: ids => {
         setChooseListModalData({ open: true, cb: handleAddLists(ids) })
+        dispatch(ListActions.listsRequest())
       }
     },
     removeFromList: {
       label: 'Remove selected items from lists',
       action: ids => {
         setChooseListModalData({ open: true, cb: handleRemoveLists(ids) })
+        dispatch(ListActions.listsRequest())
       }
     }
   }

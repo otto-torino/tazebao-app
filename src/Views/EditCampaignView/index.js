@@ -7,14 +7,12 @@ import { toast } from 'react-toastify'
 import { Segment, Container, Label, Icon, Button } from 'semantic-ui-react'
 import CampaignForm from '../../Forms/CampaignForm'
 import { withLoader } from '../../HOC/Loader'
-import { getWindowWidth } from '../../Lib/react-admin/Utils'
+import { layoutProps } from '../../Styles/Common'
 import history from '../../history'
 import config from '../../Config'
 import { request } from '../../Services/Request'
 
 import styles from './EditCampaignView.module.scss'
-
-const windowWidth = getWindowWidth()
 
 const EditCampaignView = props => {
   const id = props.match.params ? parseInt(props.match.params.id) : null
@@ -25,26 +23,6 @@ const EditCampaignView = props => {
   const [enableSave, setEnableSave] = useState(false)
   const [template, saveTemplate] = useState({})
   const topics = useSelector(state => state.topics.data)
-  const layoutProps = {
-    containerProps: {
-      fluid: true,
-      style: windowWidth > 500 ? { padding: '2rem' } : { padding: 0, margin: 0 }
-    },
-    segmentProps: {
-      piled: windowWidth > 500,
-      basic: windowWidth <= 500,
-      style: windowWidth > 500 ? {} : { padding: 0, paddingTop: '3rem' }
-    },
-    labelProps: {
-      color: windowWidth > 500 ? 'orange' : '',
-      attached: windowWidth <= 500 ? 'top' : null,
-      ribbon: windowWidth > 500,
-      size: 'big',
-      style: {
-        marginBottom: '2rem'
-      }
-    }
-  }
 
   useEffect(() => {
     console.log('RUNNING EFFECT')

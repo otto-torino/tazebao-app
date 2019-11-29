@@ -29,6 +29,10 @@ const AppMenu = props => {
     <Menu.Item as={Link} to={config.urls.planning} key='menu-voice-plannings'>
       <Icon name='clock' />
         Planning
+    </Menu.Item>,
+    <Menu.Item as={Link} to={config.urls.bounces} key='menu-voice-bounces'>
+      <Icon name='exclamation triangle' />
+        Bounces
     </Menu.Item>
   ]
 }

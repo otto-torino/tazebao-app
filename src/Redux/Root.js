@@ -8,6 +8,7 @@ import { reducer as listsReducer } from './Lists'
 import { reducer as topicsReducer } from './Topics'
 import { reducer as campaignsReducer } from './Campaigns'
 import { reducer as planningReducer } from './Planning'
+import { reducer as bouncesReducer } from './Bounces'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -18,5 +19,6 @@ export default (history) => combineReducers({
   lists: listsReducer,
   topics: topicsReducer,
   campaigns: campaignsReducer,
-  planning: planningReducer
+  planning: planningReducer,
+  bounces: bouncesReducer
 })
