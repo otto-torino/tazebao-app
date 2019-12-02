@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Tab, Icon, Form, Input, Message, Select } from 'semantic-ui-react'
 import Datetime from 'react-datetime'
 import MultipleChoiceField from '../Components/MultipleChoiceField'
+import { withTranslation } from 'react-i18next'
 import moment from 'moment'
 
 class PlanningForm extends React.Component {
@@ -24,15 +25,16 @@ class PlanningForm extends React.Component {
   // return true if finds errors, false otherwise
   // sets errors in state
   validate () {
+    const { t } = this.props
     const errors = {}
     let result = true;
     ['lists', 'campaign', 'schedule'].forEach(f => {
       if (!this.state.fields[f]) {
-        errors[f] = 'this field is required'
+        errors[f] = t('this field is required')
         result = false
       }
       if (f === 'lists' && this.state.fields.lists.length === 0) {
-        errors[f] = 'this field is required'
+        errors[f] = t('this field is required')
         result = false
       }
     })
@@ -74,15 +76,16 @@ class PlanningForm extends React.Component {
   }
 
   fieldset () {
+    const { t } = this.props
     return {
-      menuItem: 'Main',
+      menuItem: t('Main'),
       render: () => {
         return (
           <div className='form-fieldset'>
             <Form.Field>
-              <label>Campaign</label>
+              <label>{t('Campaign')}</label>
               <Select
-                placeholder='Campaign'
+                placeholder={t('Campaign')}
                 error={!!this.state.errors.campaign}
                 defaultValue={this.state.fields.campaign}
                 onChange={this.onChangeField('campaign', 'value')}
@@ -98,7 +101,7 @@ class PlanningForm extends React.Component {
               )}
             </Form.Field>
             <Form.Field>
-              <label>Date&Time</label>
+              <label>{t('Date&Time')}</label>
 
               <div
                 style={{
@@ -127,8 +130,9 @@ class PlanningForm extends React.Component {
   }
 
   listsFieldset () {
+    const { t } = this.props
     return {
-      menuItem: 'Lists',
+      menuItem: t('Lists'),
       render: () => {
         return (
           <div className='form-fieldset'>
@@ -161,7 +165,8 @@ class PlanningForm extends React.Component {
 PlanningForm.propTypes = {
   item: PropTypes.object,
   lists: PropTypes.object,
-  campaigns: PropTypes.array
+  campaigns: PropTypes.array,
+  t: PropTypes.func
 }
 
-export default PlanningForm
+export default withTranslation(null, { withRef: true })(PlanningForm)

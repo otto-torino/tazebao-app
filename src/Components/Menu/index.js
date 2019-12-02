@@ -2,8 +2,10 @@ import React from 'react'
 import { Menu, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import config from '../../Config'
+import { useTranslation } from 'react-i18next'
 
 const AppMenu = props => {
+  const { t, i18n } = useTranslation()
   return [
     <Menu.Item active header key='menu'>Menu</Menu.Item>,
     <Menu.Item as={Link} to={config.urls.home} key='menu-voice-home'>
@@ -12,27 +14,27 @@ const AppMenu = props => {
     </Menu.Item>,
     <Menu.Item as={Link} to={config.urls.adminSubscribers} key='menu-voice-admin-users'>
       <Icon name='user' />
-        Subscribers
+      {t('Subscribers')}
     </Menu.Item>,
     <Menu.Item as={Link} to={config.urls.adminLists} key='menu-voice-admin-lists'>
       <Icon name='users' />
-        Lists
+      {t('Lists')}
     </Menu.Item>,
     <Menu.Item as={Link} to={config.urls.adminTopics} key='menu-voice-admin-topics'>
       <Icon name='tags' />
-        Topics
+      {t('Topics')}
     </Menu.Item>,
     <Menu.Item as={Link} to={config.urls.campaigns} key='menu-voice-campaigns'>
       <Icon name='newspaper outline' />
-        Campaigns
+      {t('Campaigns')}
     </Menu.Item>,
     <Menu.Item as={Link} to={config.urls.planning} key='menu-voice-plannings'>
       <Icon name='clock' />
-        Planning
+      {t('Planning')}
     </Menu.Item>,
     <Menu.Item as={Link} to={config.urls.bounces} key='menu-voice-bounces'>
-      <Icon name='exclamation triangle' />
-        Bounces
+      <Icon name='ban' />
+      {t('Bounces')}
     </Menu.Item>
   ]
 }

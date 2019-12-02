@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Form, Input, Message } from 'semantic-ui-react'
+import { withTranslation } from 'react-i18next'
 
 class TopicForm extends React.Component {
   constructor (props) {
@@ -20,15 +21,16 @@ class TopicForm extends React.Component {
   // return true if finds errors, false otherwise
   // sets errors in state
   validate () {
+    const { t } = this.props
     const errors = {}
     let result = true;
     ['name', 'sending_address', 'sending_name', 'unsubscribe_url'].forEach(f => {
       if (!this.state.fields[f]) {
-        errors[f] = 'this field is required'
+        errors[f] = t('this field is required')
         result = false
       }
       if (f === 'sending_address' && !/\S+@\S+\.\S+/.test(this.state.fields.sending_address)) {
-        errors[f] = 'invalid e-mail address'
+        errors[f] = t('invalid e-mail address')
         result = false
       }
     })
@@ -54,12 +56,13 @@ class TopicForm extends React.Component {
   }
 
   fieldset () {
+    const { t } = this.props
     return (
       <div className='form-fieldset'>
         <Form.Field>
-          <label>Name</label>
+          <label>{t('Name')}</label>
           <Input
-            placeholder='i.e. Promotions'
+            placeholder={t('i.e. Promotions')}
             error={!!this.state.errors.name}
             defaultValue={this.state.fields.name}
             onChange={this.onChangeField('name', 'value')}
@@ -69,9 +72,9 @@ class TopicForm extends React.Component {
           )}
         </Form.Field>
         <Form.Field>
-          <label>Sending address</label>
+          <label>{t('Sending address')}</label>
           <Input
-            placeholder='i.e. newsletter@example.com'
+            placeholder={t('i.e. newsletter@example.com')}
             error={!!this.state.errors.sending_address}
             defaultValue={this.state.fields.sending_address}
             onChange={this.onChangeField('sending_address', 'value')}
@@ -81,9 +84,9 @@ class TopicForm extends React.Component {
           )}
         </Form.Field>
         <Form.Field>
-          <label>Sending name</label>
+          <label>{t('Sending name')}</label>
           <Input
-            placeholder='i.e. Newsletter'
+            placeholder={t('i.e. Newsletter')}
             error={!!this.state.errors.sending_name}
             defaultValue={this.state.fields.sending_name}
             onChange={this.onChangeField('sending_name', 'value')}
@@ -93,9 +96,9 @@ class TopicForm extends React.Component {
           )}
         </Form.Field>
         <Form.Field>
-          <label>Unsubscribe URL</label>
+          <label>{t('Unsubscribe URL')}</label>
           <Input
-            placeholder='i.e. http://www.example.com/unsubscribe/?s={% encrypt id email %}&id={{ id }}&email={{ email }}'
+            placeholder={t('i.e. ') + 'http://www.example.com/unsubscribe/?s={% encrypt id email %}&id={{ id }}&email={{ email }}'}
             error={!!this.state.errors.unsubscribe_url}
             defaultValue={this.state.fields.unsubscribe_url}
             onChange={this.onChangeField('unsubscribe_url', 'value')}
@@ -104,15 +107,15 @@ class TopicForm extends React.Component {
             <Message attached='top'><Icon name='warning circle' /> {this.state.errors.unsubscribe_url}</Message>
           )}
           <Message info size='mini'>
-            <p>You can use the following variables and tags:</p>
+            <p>{t('You can use the following variables and tags')}:</p>
             <ul>
-              <li><strong>{'{{ id }}'}</strong>: subscriber's id</li>
-              <li><strong>{'{{ email }}'}</strong>: subscriber's e-mail</li>
-              <li><strong>{'{{ subscription_datetime }}'}</strong>: subscribtion datetime</li>
+              <li><strong>{'{{ id }}'}</strong>: {t('subscriber\'s id')}</li>
+              <li><strong>{'{{ email }}'}</strong>: {t('subscriber\'s e-mail')}</li>
+              <li><strong>{'{{ subscription_datetime }}'}</strong>: {t('subscribtion datetime')}</li>
             </ul>
-            <p>You can encrypt variables with your private SECRET KEY:</p>
+            <p>{t('You can encrypt variables with your private SECRET KEY')}:</p>
             <code><strong>{'{% encrypt id email %}'}</strong></code>
-            <p>will generate an encrypted string of the concatenation of the subscriber id and e-mail</p>
+            <p>{t('will generate an encrypted string of the concatenation of the subscriber id and e-mail')}</p>
           </Message>
         </Form.Field>
       </div>
@@ -132,4 +135,4 @@ TopicForm.propTypes = {
   item: PropTypes.object
 }
 
-export default TopicForm
+export default withTranslation(null, { withRef: true })(TopicForm)

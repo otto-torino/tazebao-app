@@ -9,12 +9,14 @@ import CampaignForm from '../../Forms/CampaignForm'
 import { withLoader } from '../../HOC/Loader'
 import { layoutProps } from '../../Styles/Common'
 import history from '../../history'
+import { useTranslation } from 'react-i18next'
 import config from '../../Config'
 import { request } from '../../Services/Request'
 
 import styles from './EditCampaignView.module.scss'
 
 const EditCampaignView = props => {
+  const { t } = useTranslation()
   const id = props.match.params ? parseInt(props.match.params.id) : null
   const campaigns = useSelector(state => state.campaigns.data)
   const campaign = id ? campaigns.filter(c => c.id === id)[0] : null
@@ -53,7 +55,7 @@ const EditCampaignView = props => {
       request(
         'campaignTemplate',
         [id],
-        'Cannot fetch saved campaign',
+        t('Cannot fetch saved campaign'),
         response => {
           saveTemplate(response.data)
         },
@@ -90,7 +92,7 @@ const EditCampaignView = props => {
         {withLoader(
           <Segment {...layoutProps.segmentProps}>
             <Label {...layoutProps.labelProps}>
-              <Icon name='newspaper outline' /> {campaign ? campaign.name : 'Create campaign'}
+              <Icon name='newspaper outline' /> {campaign ? campaign.name : t('Create campaign')}
             </Label>
             <div className={styles.grid}>
               <div className={styles.row}>
@@ -104,10 +106,10 @@ const EditCampaignView = props => {
                     {enableSave && (
                       <p style={{ textAlign: 'center', margin: '3rem 0 1rem' }}>
                         <Button color='green' onClick={handleSave(true)}>
-                          Save and continue editing
+                          {t('Save and continue editing')}
                         </Button>
                         <Button color='green' onClick={handleSave(false)}>
-                          Save
+                          {t('Save')}
                         </Button>
                       </p>
                     )}
@@ -123,10 +125,10 @@ const EditCampaignView = props => {
                   {enableSave && (
                     <p style={{ textAlign: 'center', margin: '3rem 0 1rem' }}>
                       <Button color='green' onClick={handleSave(true)}>
-                        Save and continue editing
+                        {t('Save and continue editing')}
                       </Button>
                       <Button color='green' onClick={handleSave(false)}>
-                        Save
+                        {t('Save')}
                       </Button>
                     </p>
                   )}

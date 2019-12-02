@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import BaseLayout from '../../Layouts/BaseLayout'
 import TopicForm from '../../Forms/TopicForm'
 import TopicsActions from '../../Redux/Topics'
+import { useTranslation, Trans } from 'react-i18next'
 import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
 import { request } from '../../Services/Request'
 
 import styles from './AdminTopicsView.module.scss'
 
 const AdminSubscribersView = props => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const topics = useSelector(state => state.topics.data)
   const isLoading = useSelector(state => state.topics.fetching)
@@ -20,7 +22,7 @@ const AdminSubscribersView = props => {
     return request(
       'addTopic',
       [data],
-      'There was an error inserting the topic: {error}',
+      t('There was an error inserting the topic') + ': {error}',
       response => dispatch(TopicsActions.topicsRequest())
     )
   }
@@ -29,7 +31,7 @@ const AdminSubscribersView = props => {
     return request(
       'editTopic',
       [data],
-      'There was an error editing the topic: {error}',
+      t('There was an error editing the topic') + ': {error}',
       response => dispatch(TopicsActions.topicsRequest())
     )
   }
@@ -38,23 +40,17 @@ const AdminSubscribersView = props => {
     return request(
       'deleteTopic',
       [id],
-      'There was an error deleting the topic: {error}',
+      t('There was an error deleting the topic') + ': {error}',
       response => dispatch(TopicsActions.topicsRequest())
     )
   }
 
   const description = (
-    <p>
-      Your campaign are grouped by topics. a Topic defines the sending e-mail address and name and
-      the unsubscribe url.<br />
-      <strong>Pay attention</strong>: when you delete a topic, you'll also delete all related campaigns!
-    </p>
+    <p>{t('admin_topic_description')}</p>
   )
 
   const deleteModalContent = (
-    <div>
-      <p>Deleted items cannot be restored. <strong>Deleting a topic you'll delete also all related campaigns! Proceed?</strong></p>
-    </div>
+    <div><p><Trans>topic_delete_message</Trans></p></div>
   )
 
   return (

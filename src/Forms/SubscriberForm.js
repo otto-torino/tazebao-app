@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Form, Tab, Input, Message } from 'semantic-ui-react'
 import MultipleChoiceField from '../Components/MultipleChoiceField'
+import { withTranslation } from 'react-i18next'
 
 class SubscriberForm extends React.Component {
   constructor (props) {
@@ -21,11 +22,12 @@ class SubscriberForm extends React.Component {
   // return true if finds errors, false otherwise
   // sets errors in state
   validate () {
+    const { t } = this.props
     const errors = {}
     let result = true;
     ['email'].forEach(f => {
       if (!this.state.fields[f]) {
-        errors[f] = 'this field is required'
+        errors[f] = t('this field is required')
         result = false
       }
     })
@@ -33,7 +35,7 @@ class SubscriberForm extends React.Component {
       try {
         JSON.parse(this.state.fields.info)
       } catch {
-        errors.info = 'this field should contain a valid json string'
+        errors.info = t('this field should contain a valid json string')
         result = false
       }
     }
@@ -63,15 +65,16 @@ class SubscriberForm extends React.Component {
   }
 
   fieldset () {
+    const { t } = this.props
     return {
-      menuItem: 'Profile',
+      menuItem: t('Profile'),
       render: () => {
         return (
           <div className='form-fieldset'>
             <Form.Field>
               <label>E-mail</label>
               <Input
-                placeholder='E-mail'
+                placeholder={t('E-mail')}
                 error={!!this.state.errors.email}
                 defaultValue={this.state.fields.email}
                 onChange={this.onChangeField('email', 'value')}
@@ -83,7 +86,7 @@ class SubscriberForm extends React.Component {
             <Form.Field>
               <label>Info</label>
               <Input
-                placeholder='Info'
+                placeholder={t('Info')}
                 error={!!this.state.errors.info}
                 defaultValue={this.state.fields.info}
                 onChange={this.onChangeField('info', 'value')}
@@ -99,8 +102,9 @@ class SubscriberForm extends React.Component {
   }
 
   listsFieldset () {
+    const { t } = this.props
     return {
-      menuItem: 'Lists',
+      menuItem: t('Lists'),
       render: () => {
         return (
           <div className='form-fieldset'>
@@ -127,7 +131,9 @@ class SubscriberForm extends React.Component {
 
 SubscriberForm.propTypes = {
   item: PropTypes.object,
-  lists: PropTypes.object
+  lists: PropTypes.object,
+  t: PropTypes.func
 }
 
-export default SubscriberForm
+export default withTranslation(null, { withRef: true })(SubscriberForm)
+

@@ -1,4 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Trans } from 'react-i18next'
 import PropTypes from 'prop-types'
 
 import {
@@ -16,6 +18,7 @@ import { getWindowWidth } from './Utils'
 const windowWidth = getWindowWidth()
 
 const ModelAdmin = props => {
+  const { t } = useTranslation()
   const [insertItem, setInsertItem] = useState(null)
   const [editItem, setEditItem] = useState(null)
   const [deleteItem, setDeleteItem] = useState(null)
@@ -47,6 +50,7 @@ const ModelAdmin = props => {
 
   // edit form submit (submit button is external to the form component)
   const editSubmit = () => {
+    console.log(editForm)
     const res = editForm.current.submit()
     if (res !== false) {
       // false means errors
@@ -81,7 +85,7 @@ const ModelAdmin = props => {
       <Modal.Content>{content}</Modal.Content>
       <Modal.Actions>
         <Button color='red' inverted onClick={onClose}>
-          <Icon name='remove' /> Cancel
+          <Icon name='remove' /> {t('Cancel')}
         </Button>
         <Button color='green' inverted onClick={onSave}>
           <Icon name={saveIcon} /> {saveString}
@@ -92,15 +96,15 @@ const ModelAdmin = props => {
 
   const insertModal = () =>
     formModal(
-      `Add ${props.verboseName}`,
+      t('Add') + ` ${props.verboseName}`,
       <props.FormComponent ref={insertForm} {...props.formProps} />,
       closeInsertModal,
       insertSubmit,
-      'Insert'
+      t('Insert')
     )
   const editModal = () =>
     formModal(
-      `Edit ${props.verboseName}: ${editItem[props.toStringProp]}`,
+      t('Edit') + ` ${props.verboseName}: ${editItem[props.toStringProp]}`,
       <props.FormComponent
         item={editItem}
         ref={editForm}
@@ -108,15 +112,15 @@ const ModelAdmin = props => {
       />,
       closeEditModal,
       editSubmit,
-      'Edit'
+      t('Edit')
     )
   const deleteModal = () =>
     formModal(
-      `Delete ${props.verboseName}: ${deleteItem[props.toStringProp]}`,
+      t('Delete') + ` ${props.verboseName}: ${deleteItem[props.toStringProp]}`,
       props.deleteModalContent,
       closeDeleteModal,
       deleteSubmit,
-      'Delete',
+      t('Delete'),
       'trash alternate'
     )
 
@@ -129,7 +133,7 @@ const ModelAdmin = props => {
         </Modal.Content>
         <Modal.Actions>
           <Button color='green' inverted onClick={closeErrorModal}>
-            <Icon name='checkmark' /> Close
+            <Icon name='checkmark' /> {t('Close')}
           </Button>
         </Modal.Actions>
       </Modal>
@@ -183,7 +187,7 @@ ModelAdmin.defaultProps = {
     }
   },
   formProps: {},
-  deleteModalContent: <p>Deleted items cannot be restored. Proceed?</p>
+  deleteModalContent: <Trans>Deleted items cannot be restored. Proceed?</Trans>
 }
 
 ModelAdmin.propTypes = {
@@ -197,7 +201,10 @@ ModelAdmin.propTypes = {
   verboseName: PropTypes.string.isRequired,
   verboseNamePlural: PropTypes.string.isRequired,
   toStringProp: PropTypes.string,
-  FormComponent: PropTypes.func,
+  FormComponent: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object
+  ]),
   formProps: PropTypes.object,
   onInsert: PropTypes.func,
   onDelete: PropTypes.func,

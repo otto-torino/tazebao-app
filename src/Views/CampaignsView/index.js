@@ -17,11 +17,13 @@ import { request } from '../../Services/Request'
 import { layoutProps } from '../../Styles/Common'
 import config from '../../Config'
 import history from '../../history'
+import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 
 import styles from './CampaignsView.module.scss'
 
 const AdminSubscribersView = props => {
+  const { t } = useTranslation()
   const [deleteModal, setDeleteModal] = useState({ open: false })
   const dispatch = useDispatch()
   const campaigns = useSelector(state => state.campaigns.data)
@@ -51,7 +53,7 @@ const AdminSubscribersView = props => {
     return request(
       'deleteCampaign',
       [id],
-      'There was an error deleting the campaign: {error}',
+      t('There was an error deleting the campaign') + ': {error}',
       response => {
         dispatch(CampaignsActions.campaignsRequest())
         setDeleteModal({ open: false })
@@ -63,10 +65,10 @@ const AdminSubscribersView = props => {
     return request(
       'duplicateCampaign',
       [item.id],
-      'There was an error duplicating the campaign: {error}',
+      t('There was an error duplicating the campaign') + ': {error}',
       response => {
         toast.success(
-          'The campaign was succesfully duplicated, redirecting to edit page...'
+          t('The campaign was succesfully duplicated, redirecting to edit page...')
         )
         dispatch(CampaignsActions.campaignsRequest())
         setTimeout(() => {
@@ -79,17 +81,14 @@ const AdminSubscribersView = props => {
   }
 
   const description = (
-    <p>
-      All your campaigns. You can only edit and duplicate campaigns created with this
-      application, and that haven't been already dispatched
-    </p>
+    <p>{t('admin_campaign_description')}</p>
   )
 
   const deleteModalComponent = item => (
     <Modal open size='small' onClose={() => setDeleteModal({ open: false })}>
-      <Modal.Header>Delete campaign: {item.name}</Modal.Header>
+      <Modal.Header>{t('Delete campaign')}: {item.name}</Modal.Header>
       <Modal.Content>
-        <p>Deleted items cannot be restored. Proceed?</p>
+        <p>{t('Deleted items cannot be restored. Proceed?')}</p>
       </Modal.Content>
       <Modal.Actions>
         <Button
@@ -97,10 +96,10 @@ const AdminSubscribersView = props => {
           inverted
           onClick={() => setDeleteModal({ open: false })}
         >
-          <Icon name='remove' /> Cancel
+          <Icon name='remove' /> {t('Cancel')}
         </Button>
         <Button color='green' inverted onClick={() => deleteCampaign(item.id)}>
-          <Icon name='trash alternate' /> Delete
+          <Icon name='trash alternate' /> {t('Delete')}
         </Button>
       </Modal.Actions>
     </Modal>
@@ -111,7 +110,7 @@ const AdminSubscribersView = props => {
       <Container {...layoutProps.containerProps}>
         <Segment {...layoutProps.segmentProps}>
           <Label {...layoutProps.labelProps}>
-            <Icon name='newspaper outline' /> Campaigns
+            <Icon name='newspaper outline' /> {t('Campaigns')}
           </Label>
           <ChangeList
             onInsert={handleInsert}
@@ -125,12 +124,12 @@ const AdminSubscribersView = props => {
             idProp='id'
             sortField='id'
             sortDirection='desc'
-            verboseName='campaign'
-            verboseNamePlural='campaigns'
+            verboseName={t('campaign')}
+            verboseNamePlural={t('campaigns')}
             searchFields={['name']}
             moreActions={item => [
               <Icon
-                title='details'
+                title={t('details')}
                 name='chart line'
                 circular
                 color='blue'
@@ -141,7 +140,7 @@ const AdminSubscribersView = props => {
                 }}
               />,
               <Icon
-                title='duplicate'
+                title={t('duplicate')}
                 name='copy outline'
                 circular
                 disabled={!item.template}
@@ -153,7 +152,7 @@ const AdminSubscribersView = props => {
                 }}
               />,
               <Icon
-                title='send'
+                title={t('send')}
                 name='send'
                 circular
                 color='blue'

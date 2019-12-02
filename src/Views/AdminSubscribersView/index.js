@@ -7,12 +7,14 @@ import ChooseListsModal from '../../Components/ChooseListsModal'
 import SubscribersActions from '../../Redux/Subscribers'
 import ListActions from '../../Redux/Lists'
 import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
+import { useTranslation } from 'react-i18next'
 import { request } from '../../Services/Request'
 import moment from 'moment'
 
 import styles from './AdminSubscribersView.module.scss'
 
 const AdminSubscribersView = props => {
+  const { t, i18n } = useTranslation()
   const dispatch = useDispatch()
   const [chooseListModalData, setChooseListModalData] = useState({
     open: false,
@@ -24,21 +26,15 @@ const AdminSubscribersView = props => {
 
   const listDisplay = ['id', 'email', 'subscription_datetime', 'lists', 'info']
   const listActions = {
-    logSelected: {
-      label: 'Log selected',
-      action: ids => {
-        dispatch(SubscribersActions.subscribersRequest())
-      }
-    },
     addToList: {
-      label: 'Add selected items to lists',
+      label: t('Add selected items to lists'),
       action: ids => {
         setChooseListModalData({ open: true, cb: handleAddLists(ids) })
         dispatch(ListActions.listsRequest())
       }
     },
     removeFromList: {
-      label: 'Remove selected items from lists',
+      label: t('Remove selected items from lists'),
       action: ids => {
         setChooseListModalData({ open: true, cb: handleRemoveLists(ids) })
         dispatch(ListActions.listsRequest())
@@ -48,7 +44,7 @@ const AdminSubscribersView = props => {
   const listFilters = Object.keys(lists).length
     ? {
       lists: {
-        label: 'List',
+        label: t('List'),
         options: [
           { value: null, text: 'All lists', key: 0 },
           ...Object.keys(lists).map(id => ({
@@ -98,7 +94,7 @@ const AdminSubscribersView = props => {
     return request(
       'addSubscriber',
       [data],
-      'There was an error inserting the subscriber: {error}',
+      t('There was an error inserting the subscriber') + ': {error}',
       response => dispatch(SubscribersActions.subscribersRequest())
     )
   }
@@ -107,7 +103,7 @@ const AdminSubscribersView = props => {
     return request(
       'editSubscriber',
       [data],
-      'There was an error editing the subscriber: {error}',
+      t('There was an error editing the subscriber') + ': {error}',
       response => dispatch(SubscribersActions.subscribersRequest())
     )
   }
@@ -116,7 +112,7 @@ const AdminSubscribersView = props => {
     return request(
       'deleteSubscriber',
       [id],
-      'There was an error deleting the subscriber: {error}',
+      t('There was an error deleting the subscriber') + ': {error}',
       response => dispatch(SubscribersActions.subscribersRequest())
     )
   }
@@ -125,7 +121,7 @@ const AdminSubscribersView = props => {
     request(
       'subscribersAddLists',
       [ids, selectedLists],
-      'There was an error adding the selected lists',
+      t('There was an error adding the selected lists'),
       response => {
         dispatch(SubscribersActions.subscribersRequest())
         setChooseListModalData({ open: false, cb: null })
@@ -138,7 +134,7 @@ const AdminSubscribersView = props => {
     request(
       'subscribersRemoveLists',
       [ids, selectedLists],
-      'There was an error removing the selected lists',
+      t('There was an error removing the selected lists'),
       response => {
         dispatch(SubscribersActions.subscribersRequest())
         setChooseListModalData({ open: false, cb: null })
@@ -148,24 +144,19 @@ const AdminSubscribersView = props => {
   }
 
   const description = (
-    <p>
-      Manage all your subscribers, insert, edit, delete, add to and remove from lists.
-      The <code>info</code> field should be a json field, you can use
-      this <a href='https://jsonformatter.curiousconcept.com/' target='_blank'>online tool</a> to
-      validate it.
-    </p>
+    <p dangerouslySetInnerHTML={{ __html: t('admin_subscribers_description') }}></p>
   )
 
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <ModelAdmin
         icon='user'
-        title='Subscribers'
+        title={t('Subscribers')}
         FormComponent={SubscriberForm}
         formProps={{ lists }}
         toStringProp='email'
-        verboseName='subscriber'
-        verboseNamePlural='subscribers'
+        verboseName={t('subscriber')}
+        verboseNamePlural={t('subscribers')}
         onInsert={handleInsert}
         onEdit={handleEdit}
         onDelete={handleDelete}

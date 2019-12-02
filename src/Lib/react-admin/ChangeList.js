@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next'
 import _ from 'lodash'
 import { withLoader, varToVerbose, inDiv } from './Utils'
 import {
@@ -19,6 +20,8 @@ import {
 } from './Hooks'
 
 const ChangeList = props => {
+  // translations
+  const { t, i18n } = useTranslation()
   // checkboxes, actions to be performed on selected items
   const [selectedItems, setSelectedItems] = useState([])
   const [allSelected, setAllSelected] = useState(false)
@@ -82,7 +85,7 @@ const ChangeList = props => {
       Object.keys(props.listFilters).map(f => (
         <Select
           key={'filter-' + f}
-          placeholder={'Select ' + props.listFilters[f].label}
+          placeholder={t('Select') + ' ' + props.listFilters[f].label}
           options={props.listFilters[f].options}
           onChange={(e, { value }) => {
             setAllSelected(false)
@@ -107,11 +110,11 @@ const ChangeList = props => {
     return inDiv(
       <Select
         key='list-actions'
-        placeholder='Perform action on selected items'
+        placeholder={t('Perform action on selected items')}
         disabled={!selectedItems.length}
         value={selectedAction}
         options={[
-          { value: null, text: 'Perform action on selected items', key: 0 },
+          { value: null, text: t('Perform action on selected items'), key: 0 },
           ...Object.keys(props.listActions).map(a => ({
             value: a,
             text: props.listActions[a].label,
@@ -164,7 +167,7 @@ const ChangeList = props => {
                 cursor: 'pointer'
               }}
             >
-              {varToVerbose(field)}
+              {t(varToVerbose(field))}
               <Icon
                 name={
                   sort.field === field && sort.direction === 'asc'
@@ -286,7 +289,7 @@ const ChangeList = props => {
             icon
             style={{ marginBottom: '1rem' }}
           >
-            <Icon name='plus' /> Add {props.verboseName}
+            <Icon name='plus' /> {t('Add')} {props.verboseName}
           </Button>
         )}
       </div>
@@ -305,10 +308,10 @@ const ChangeList = props => {
                     ? props.verboseName
                     : props.verboseNamePlural}
                   {search || Object.keys(filters).length
-                    ? ' (' + props.items.length + ' total)'
+                    ? ' (' + props.items.length + ' ' + t('totalp') + ')'
                     : ''}
                   {selectedItems.length
-                    ? ' (' + selectedItems.length + ' selected)'
+                      ? ' (' + selectedItems.length + ' ' + t(selectedItems.length > 1 ? 'selectedp' : 'selecteds') + ')'
                     : null}
                 </Table.HeaderCell>
               </Table.Row>

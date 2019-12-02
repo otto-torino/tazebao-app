@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { withTranslation } from 'react-i18next'
 import { Icon, Form, Message, Checkbox } from 'semantic-ui-react'
 
 class CampaignForm extends React.Component {
@@ -19,11 +20,12 @@ class CampaignForm extends React.Component {
   // return true if finds errors, false otherwise
   // sets errors in state
   validate () {
+    const { t } = this.props
     const errors = {}
     let result = true;
     ['name', 'topic', 'subject'].forEach(f => {
       if (!this.state.fields[f]) {
-        errors[f] = 'this field is required'
+        errors[f] = t('this field is required')
         result = false
       }
     })
@@ -49,13 +51,14 @@ class CampaignForm extends React.Component {
   }
 
   fieldset () {
+    const { t } = this.props
     return (
       <div className='form-fieldset'>
         <Form.Group widths='equal'>
           <Form.Field>
             <Form.Input
-              label='Name'
-              placeholder='i.e. Newsletter n. XIX'
+              label={t('Name')}
+              placeholder={t('i.e. Newsletter n. XIX')}
               error={!!this.state.errors.name}
               defaultValue={this.state.fields.name}
               onChange={this.onChangeField('name', 'value')}
@@ -66,8 +69,8 @@ class CampaignForm extends React.Component {
           </Form.Field>
           <Form.Field>
             <Form.Select
-              label='Topic'
-              placeholder='Select topic'
+              label={t('Topic')}
+              placeholder={t('Select topic')}
               error={!!this.state.errors.topic}
               defaultValue={this.state.fields.topic}
               onChange={this.onChangeField('topic', 'value')}
@@ -81,9 +84,9 @@ class CampaignForm extends React.Component {
         <Form.Group widths='equal'>
           <Form.Field>
             <Form.Input
-              label='Subject'
+              label={t('Subject')}
               fluid
-              placeholder='i.e. Special offer!'
+              placeholder={t('i.e. Special offer!')}
               error={!!this.state.errors.subject}
               defaultValue={this.state.fields.subject}
               onChange={this.onChangeField('subject', 'value')}
@@ -95,7 +98,7 @@ class CampaignForm extends React.Component {
           <Form.Field>
             <label>View on-line</label>
             <Checkbox
-              label='Check in order to make the newsletter available on-line at a public URL'
+              label={t('Check in order to make the newsletter available on-line at a public URL')}
               onChange={this.onChangeField('view_online', 'checked')}
               checked={this.state.fields.view_online}
             />
@@ -118,7 +121,8 @@ class CampaignForm extends React.Component {
 }
 
 CampaignForm.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
+  t: PropTypes.func
 }
 
-export default CampaignForm
+export default withTranslation(null, { withRef: true })(CampaignForm)

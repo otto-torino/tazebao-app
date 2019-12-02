@@ -1,0 +1,12 @@
+{
+  "translation": {
+    "admin_subscribers_description": "Manage all your subscribers, insert, edit, delete, add to and remove from lists. The <code>info</code> field should be a json field, you can use this <a href='https://jsonformatter.curiousconcept.com/' target='_blank'>online tool</a> to validate it.",
+    "totalp": "total",
+    "selectedp": "selected",
+    "selecteds": "selected",
+    "admin_lists_description": "You can organize your subscribers in lists. In this section you can create, edit and delete lists. Use the subscribers section in order to add contacts to a list.",
+    "admin_topic_description": "Your campaign are grouped by topics. a Topic defines the sending e-mail address and name and the unsubscribe url.<br /><strong>Pay attention</strong>: when you delete a topic, you'll also delete all related campaigns!",
+    "topic_delete_message": "Deleted items cannot be restored. <strong>Deleting a topic you'll delete also all related campaigns! Proceed?</strong>",
+    "admin_campaign_description": "All your campaigns. You can only edit and duplicate campaigns created with this application, and that haven't been already dispatched"
+  }
+}

@@ -9,9 +9,11 @@ import ClickTrackingTable from '../ClickTrackingTable'
 import RatePieChart from '../RatePieChart'
 import StatisticsTimelineChart from '../StatisticsTimelineChart'
 import BouncesTable from '../BouncesTable'
+import { useTranslation } from 'react-i18next'
 import { request } from '../../Services/Request'
 
 const DispatchDetail = ({ dispatch, onChange }) => {
+  const { t } = useTranslation()
   const lists = useSelector(state => state.lists.data)
   const [trackOpenModalIsOpen, setTrackOpenModalIsOpen] = useState(false)
   const [trackClickModalIsOpen, setTrackClickModalIsOpen] = useState(false)
@@ -22,7 +24,7 @@ const DispatchDetail = ({ dispatch, onChange }) => {
     return request(
       'deleteSubscribersFromBounces',
       [selectedBounces],
-      'There was an error removing the subscribers: {error}',
+      t('There was an error removing the subscribers'),
       response => {
         onChange()
         setBouncesModalIsOpen(false)
@@ -32,29 +34,29 @@ const DispatchDetail = ({ dispatch, onChange }) => {
 
   return (
     <div>
-      <p>Information about the campaign dispatch</p>
+      <p>{t('Information about the campaign dispatch')}</p>
       <Table definition>
         <Table.Body>
           <Table.Row>
-            <Table.Cell>Start</Table.Cell>
+            <Table.Cell>{t('Start')}</Table.Cell>
             <Table.Cell>{moment(dispatch.started_at).format('LLL')}</Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Lists</Table.Cell>
+            <Table.Cell>{t('Lists')}</Table.Cell>
             <Table.Cell>
               {dispatch.lists.map(l => lists[l].name).join(', ')}
             </Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>E-mail sent</Table.Cell>
+            <Table.Cell>{t('E-mail sent')}</Table.Cell>
             <Table.Cell>{dispatch.sent}</Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>
-              Bounces{' '}
+              {t('Bounces')}{' '}
               <Popup
                 basic
-                content='Bounces are cleared every week'
+                content={t('Bounces are cleared every week')}
                 trigger={<Icon color='blue' name='info circle' />}
               />
             </Table.Cell>
@@ -71,15 +73,15 @@ const DispatchDetail = ({ dispatch, onChange }) => {
             </Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Result</Table.Cell>
+            <Table.Cell>{t('Result')}</Table.Cell>
             <Table.Cell>
               <Label color={dispatch.error ? 'red' : 'green'}>
-                {dispatch.error ? 'Error' : 'Success'}
+                {dispatch.error ? t('Error') : t('Success')}
               </Label>
             </Table.Cell>
           </Table.Row>
           <Table.Row>
-            <Table.Cell>Open rate</Table.Cell>
+            <Table.Cell>{t('Open rate')}</Table.Cell>
             <Table.Cell>
               <OpenRateLabel rate={dispatch.open_rate} />{' '}
               <Icon
@@ -92,7 +94,7 @@ const DispatchDetail = ({ dispatch, onChange }) => {
           </Table.Row>
           {dispatch.click_statistics && (
             <Table.Row>
-              <Table.Cell>Click rate</Table.Cell>
+              <Table.Cell>{t('Click rate')}</Table.Cell>
               <Table.Cell>
                 <Label color='teal'>{dispatch.click_rate}%</Label>{' '}
                 <Icon
@@ -108,33 +110,33 @@ const DispatchDetail = ({ dispatch, onChange }) => {
       </Table>
       {trackOpenModalIsOpen && (
         <Modal open size='small' onClose={() => setTrackOpenModalIsOpen(false)}>
-          <Modal.Header>Open events</Modal.Header>
+          <Modal.Header>{t('Open events')}</Modal.Header>
           <Modal.Content scrolling>
             <OpenTrackingTable events={dispatch.trackings.filter(t => t.type === 'apertura')} />
           </Modal.Content>
           <Modal.Actions>
             <Button onClick={() => setTrackOpenModalIsOpen(false)}>
-              Close
+              {t('Close')}
             </Button>
           </Modal.Actions>
         </Modal>
       )}
       {trackClickModalIsOpen && (
         <Modal open size='small' onClose={() => setTrackClickModalIsOpen(false)}>
-          <Modal.Header>Click events</Modal.Header>
+          <Modal.Header>{t('Click events')}</Modal.Header>
           <Modal.Content scrolling>
             <ClickTrackingTable events={dispatch.trackings.filter(t => t.type === 'click')} />
           </Modal.Content>
           <Modal.Actions>
             <Button onClick={() => setTrackClickModalIsOpen(false)}>
-              Close
+              {t('Close')}
             </Button>
           </Modal.Actions>
         </Modal>
       )}
       {bouncesModalIsOpen && (
         <Modal open onClose={() => setBouncesModalIsOpen(false)}>
-          <Modal.Header>Bounces</Modal.Header>
+          <Modal.Header>{t('Bounces')}</Modal.Header>
           <Modal.Content scrolling>
             <BouncesTable
               bounces={dispatch.bounces}
@@ -145,11 +147,11 @@ const DispatchDetail = ({ dispatch, onChange }) => {
           </Modal.Content>
           <Modal.Actions>
             <Button onClick={() => setBouncesModalIsOpen(false)}>
-              Close
+              {t('Close')}
             </Button>
             <Button disabled={!selectedBounces.length} onClick={handleDeleteBounces} color='red'>
               <Icon name='trash alternate' />
-              Remove selected subscribers
+              {t('Remove selected subscribers')}
             </Button>
           </Modal.Actions>
         </Modal>
@@ -159,16 +161,16 @@ const DispatchDetail = ({ dispatch, onChange }) => {
           <Grid.Row>
             <Grid.Column width={10}>
               <StatisticsTimelineChart
-                title='Open through time'
-                label='Open acc.'
+                title={t('Open through time')}
+                label={t('Open acc')}
                 data={dispatch.trackings.filter(t => t.type === 'apertura')} />
             </Grid.Column>
             <Grid.Column width={6}>
               <RatePieChart
-                title='Open Statistics'
-                label='Open Rate'
-                trueLabel='Open e-mails'
-                falseLabel='Unopened e-mails'
+                title={t('Open Statistics')}
+                label={t('Open Rate')}
+                trueLabel={t('Open e-mails')}
+                falseLabel={t('Unopened e-mails')}
                 data={dispatch.open_rate}
               />
             </Grid.Column>
@@ -177,17 +179,17 @@ const DispatchDetail = ({ dispatch, onChange }) => {
             <Grid.Row>
               <Grid.Column width={6}>
                 <RatePieChart
-                  title='Click Statistics'
-                  label='Click Rate'
-                  trueLabel='One or more click'
-                  falseLabel='No clicks'
+                  title={t('Click Statistics')}
+                  label={t('Click Rate')}
+                  trueLabel={t('One or more click')}
+                  falseLabel={t('No clicks')}
                   data={dispatch.click_rate}
                 />
               </Grid.Column>
               <Grid.Column width={10}>
                 <StatisticsTimelineChart
-                  title='Click through time'
-                  label='Clicks'
+                  title={t('Click through time')}
+                  label={t('Clicks')}
                   data={dispatch.trackings.filter(t => t.type === 'click')} />
               </Grid.Column>
             </Grid.Row>

@@ -1,11 +1,8 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import BaseLayout from '../../Layouts/BaseLayout'
 import { Link } from 'react-router-dom'
-import Datetime from 'react-datetime'
-import { toast } from 'react-toastify'
-import MultipleChoiceField from '../../Components/MultipleChoiceField'
 import ContentLoader from '../../Components/ContentLoader'
 import DispatchDetail from '../../Components/DispatchDetail'
 import {
@@ -13,26 +10,22 @@ import {
   Container,
   Label,
   Icon,
-  Divider,
   Header,
   Grid,
-  Statistic,
-  Button,
-  Responsive,
-  Popup,
   Message,
   Tab
 } from 'semantic-ui-react'
 import { withLoader } from '../../HOC/Loader'
-import history from '../../history'
 import config from '../../Config'
 import { request } from '../../Services/Request'
 import { layoutProps } from '../../Styles/Common'
+import { useTranslation } from 'react-i18next'
 import moment from 'moment'
 
 import styles from './CampaignDetailView.module.scss'
 
 const CampaignDetailView = props => {
+  const { t } = useTranslation()
   const id = props.match.params ? parseInt(props.match.params.id) : null
   const campaigns = useSelector(state => state.campaigns.data)
   const campaign = id ? campaigns.filter(c => c.id === id)[0] : {}
@@ -46,7 +39,7 @@ const CampaignDetailView = props => {
     request(
       'campaignDispatches',
       [id],
-      'There was an error retrieving the campaign dispatches: {error}',
+      t('There was an error retrieving the campaign dispatches') + ': {error}',
       response => {
         setDispatches({ fetched: true, data: response.data, error: false })
       },
@@ -66,12 +59,12 @@ const CampaignDetailView = props => {
     if (fetched && !error && !data.length) {
       return (
         <Message info>
-          <Message.Header>Dispatches</Message.Header>
+          <Message.Header>{t('Dispatches')}</Message.Header>
           <p>
-            The campaign was never sent
+            {t('The campaign was never sent')}
             <br />
             <Link to={config.urls.sendCampaign.replace(':id', campaign.id)}>
-              Send now
+              {t('Send now')}
             </Link>
           </p>
         </Message>
@@ -85,7 +78,7 @@ const CampaignDetailView = props => {
       }))
       return (
         <div>
-          <Header>Dispatches</Header>
+          <Header>{t('Dispatches')}</Header>
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
         </div>
       )
@@ -105,17 +98,17 @@ const CampaignDetailView = props => {
                 <Grid.Row>
                   <Grid.Column width={5}>
                     <p style={{ lineHeight: '2rem' }}>
-                      <strong>Subject</strong>: {campaign.subject}
+                      <strong>{t('Oggetto')}</strong>: {campaign.subject}
                       <br />
-                      <strong>Topic</strong>: {campaign.topic}
+                      <strong>{t('Topic')}</strong>: {campaign.topic}
                       <br />
-                      <strong>Created</strong>:{' '}
+                      <strong>{t('Created')}</strong>:{' '}
                       {moment(campaign.insertion_datetime).format('LLL')}
                       <br />
-                      <strong>Last edit</strong>:{' '}
+                      <strong>{t('Last edit')}</strong>:{' '}
                       {moment(campaign.last_edit_datetime).format('LLL')}
                       <br />
-                      <strong>View online</strong>:{' '}
+                      <strong>{t('View online')}</strong>:{' '}
                       {campaign.view_online ? (
                         [
                           <Icon key='icon' name='thumbs up' color='green' />,

@@ -7,7 +7,15 @@ export function toastOnError (fn, errorMessage, onError = () => {}) {
     if (response.ok) {
       fn(response)
     } else {
-      toast(errorMessage.replace('{error}', response.data.detail), { type: 'error' })
+      if (response.data.detail) {
+        toast(errorMessage.replace('{error}', response.data.detail), { type: 'error' })
+      } else {
+        let str = ''
+        Object.keys(response.data).forEach(k => {
+          str += `${k} > ${response.data[k]};`
+        })
+        toast(errorMessage.replace('{error}', str), { type: 'error' })
+      }
       onError(response.data.detail)
     }
   }

@@ -22,7 +22,7 @@ export const withLoader = (Component, isLoading) => {
   }
 }
 
-export const varToVerbose = v => _.capitalize(v.replace(/_/g, ' '))
+export const varToVerbose = v => _.capitalize(v.replace(/_/g, ' ').replace(/([a-z0-9])([A-Z])/g, '$1 $2'))
 
 export const inDiv = (Components, style = {}) => <div style={style}>{Components}</div>
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Form, Input, Message } from 'semantic-ui-react'
+import { withTranslation } from 'react-i18next'
 
 class ListsForm extends React.Component {
   constructor (props) {
@@ -17,11 +18,12 @@ class ListsForm extends React.Component {
   // return true if finds errors, false otherwise
   // sets errors in state
   validate () {
+    const { t } = this.props
     const errors = {}
     let result = true;
     ['name'].forEach(f => {
       if (!this.state.fields[f]) {
-        errors[f] = 'this field is required'
+        errors[f] = t('this field is required')
         result = false
       }
     })
@@ -47,12 +49,13 @@ class ListsForm extends React.Component {
   }
 
   fieldset () {
+    const { t } = this.props
     return (
       <div className='form-fieldset'>
         <Form.Field>
-          <label>Name</label>
+          <label>{t('Name')}</label>
           <Input
-            placeholder='Name'
+            placeholder={t('Name')}
             error={!!this.state.errors.name}
             defaultValue={this.state.fields.name}
             onChange={this.onChangeField('name', 'value')}
@@ -76,7 +79,8 @@ class ListsForm extends React.Component {
 
 ListsForm.propTypes = {
   item: PropTypes.object,
-  lists: PropTypes.object
+  lists: PropTypes.object,
+  t: PropTypes.func
 }
 
-export default ListsForm
+export default withTranslation(null, { withRef: true })(ListsForm)

@@ -4,12 +4,14 @@ import BaseLayout from '../../Layouts/BaseLayout'
 import PlanningForm from '../../Forms/PlanningForm'
 import PlanningActions from '../../Redux/Planning'
 import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
+import { useTranslation } from 'react-i18next'
 import { request } from '../../Services/Request'
 import moment from 'moment'
 
 import styles from './PlanningView.module.scss'
 
 const PlanningView = props => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const planning = useSelector(state => state.planning.data)
   const campaigns = useSelector(state => state.campaigns.data)
@@ -23,7 +25,7 @@ const PlanningView = props => {
     return request(
       'addPlanning',
       [data],
-      'There was an error inserting the schedule: {error}',
+      t('There was an error inserting the schedule') + ': {error}',
       response => dispatch(PlanningActions.planningRequest())
     )
   }
@@ -32,7 +34,7 @@ const PlanningView = props => {
     return request(
       'editPlanning',
       [data],
-      'There was an error editing the schedule: {error}',
+      t('There was an error editing the schedule') + ': {error}',
       response => dispatch(PlanningActions.planningRequest())
     )
   }
@@ -41,15 +43,13 @@ const PlanningView = props => {
     return request(
       'deletePlanning',
       [id],
-      'There was an error deleting the schedule: {error}',
+      t('There was an error deleting the schedule') + ': {error}',
       response => dispatch(PlanningActions.planningRequest())
     )
   }
 
   const description = (
-    <p>
-      Here is your planning of scheduled dispatches.
-    </p>
+    <p>{t('Here is your planning of scheduled dispatches')}.</p>
   )
 
   return (
@@ -60,8 +60,8 @@ const PlanningView = props => {
         FormComponent={PlanningForm}
         formProps={{ lists, campaigns }}
         toStringProp='campaign_name'
-        verboseName='schedule'
-        verboseNamePlural='schedules'
+        verboseName={t('schedule')}
+        verboseNamePlural={t('schedules')}
         onInsert={handleInsert}
         onEdit={handleEdit}
         onDelete={handleDelete}

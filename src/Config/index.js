@@ -16,13 +16,13 @@ export default {
     adminSubscribers: '/subscribers',
     adminLists: '/lists',
     adminTopics: '/topics',
-    campaigns: '/campigns',
+    campaigns: '/campaigns',
     planning: '/planning',
     bounces: '/bounces',
-    createCampaign: '/campigns/create',
-    editCampaign: '/campigns/edit/:id',
-    campaignDetail: '/campigns/:id',
-    sendCampaign: '/campigns/send/:id'
+    createCampaign: '/campaigns/create',
+    editCampaign: '/campaigns/edit/:id',
+    campaignDetail: '/campaigns/:id',
+    sendCampaign: '/campaigns/send/:id'
   },
   ui: {
     adminListPerPage: 50

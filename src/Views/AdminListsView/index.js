@@ -4,11 +4,13 @@ import BaseLayout from '../../Layouts/BaseLayout'
 import ListForm from '../../Forms/ListForm'
 import ListsActions from '../../Redux/Lists'
 import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
+import { useTranslation } from 'react-i18next'
 import { request } from '../../Services/Request'
 
 import styles from './AdminListsView.module.scss'
 
 const AdminListsView = props => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const lists = useSelector(state => state.lists.data)
   const isLoading = useSelector(state => state.lists.fetching)
@@ -19,7 +21,7 @@ const AdminListsView = props => {
     return request(
       'addList',
       [data],
-      'There was an error inserting the list: {error}',
+      t('There was an error inserting the list') + ': {error}',
       response => dispatch(ListsActions.listsRequest())
     )
   }
@@ -28,7 +30,7 @@ const AdminListsView = props => {
     return request(
       'editList',
       [data],
-      'There was an error editing the list: {error}',
+      t('There was an error editing the list') + ': {error}',
       response => dispatch(ListsActions.listsRequest())
     )
   }
@@ -37,27 +39,24 @@ const AdminListsView = props => {
     return request(
       'deleteList',
       [id],
-      'There was an error deleting the list: {error}',
+      t('There was an error deleting the list') + ': {error}',
       response => dispatch(ListsActions.listsRequest())
     )
   }
 
   const description = (
-    <p>
-      You can organize your subscribers in lists. In this section you can create, edit and delete lists.
-      Use the subscribers section in order to add contacts to a list.
-    </p>
+    <p>{t('admin_lists_description')}</p>
   )
 
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <ModelAdmin
         icon='users'
-        title='Lists'
+        title={t('Lists')}
         FormComponent={ListForm}
         toStringProp='name'
-        verboseName='list'
-        verboseNamePlural='lists'
+        verboseName={t('list')}
+        verboseNamePlural={t('lists')}
         onInsert={handleInsert}
         onEdit={handleEdit}
         onDelete={handleDelete}

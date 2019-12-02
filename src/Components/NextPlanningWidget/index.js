@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { Header, Icon } from 'semantic-ui-react'
 import { withLoader } from '../../HOC/Loader'
 import { withData } from '../../HOC/Empty'
+import { useTranslation } from 'react-i18next'
 import propTypes from 'prop-types'
 import moment from 'moment'
 
@@ -11,6 +12,7 @@ import styles from './NextPlanningWidget.module.scss'
 const NextPlanningWidget = props => {
   const stats = useSelector(state => state.stats.data)
   const isLoading = useSelector(state => state.stats.fetching)
+  const { t, i18n } = useTranslation()
 
   const content = stats => (
     <div>
@@ -25,9 +27,9 @@ const NextPlanningWidget = props => {
     <div className={styles.widget}>
       <Header as='h2' icon>
         <Icon name='clock' className={styles.icon} />
-        Planning
+        {t('Planning')}
         <Header.Subheader>
-          Next Scheduling
+          {t('Next Scheduling')}
         </Header.Subheader>
       </Header>
       {withLoader(

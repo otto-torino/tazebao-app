@@ -4,12 +4,14 @@ import BaseLayout from '../../Layouts/BaseLayout'
 import BouncesActions from '../../Redux/Bounces'
 import { Confirm } from 'semantic-ui-react'
 import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
+import { useTranslation } from 'react-i18next'
 import { request } from '../../Services/Request'
 import moment from 'moment'
 
 import styles from './BouncesView.module.scss'
 
 const BouncesView = props => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const bounces = useSelector(state => state.bounces.data)
   const isLoading = useSelector(state => state.planning.fetching)
@@ -22,7 +24,7 @@ const BouncesView = props => {
     return request(
       'deleteBounce',
       [id],
-      'There was an error deleting the bounce: {error}',
+      t('There was an error deleting the bounce') + ': {error}',
       response => dispatch(BouncesActions.bouncesRequest())
     )
   }
@@ -36,7 +38,7 @@ const BouncesView = props => {
     return request(
       'deleteSubscribersFromBounces',
       [selectedBounces],
-      'There was an error removing the subscribers: {error}',
+      t('There was an error removing the subscribers') + ': {error}',
       response => {
         dispatch(BouncesActions.bouncesRequest())
         setShowConfirm(false)
@@ -49,19 +51,17 @@ const BouncesView = props => {
   }
 
   const description = (
-    <p>
-      Here are your bounces. The system tries to understand at which dispatch they belongs and shows trhe campaign name.
-    </p>
+    <p>{t('Here are your bounces. The system tries to understand at which dispatch they belongs and shows trhe campaign name')}.</p>
   )
 
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <ModelAdmin
-        icon='exclamation triangle'
+        icon='ban'
         title='Bounces'
         toStringProp='subscriber_email'
-        verboseName='bounce'
-        verboseNamePlural='bounces'
+        verboseName={t('bounce')}
+        verboseNamePlural={t('bounces')}
         onInsert={null}
         onEdit={null}
         onDelete={handleDelete}
@@ -97,7 +97,7 @@ const BouncesView = props => {
             }}
             listActions={{
               deleteSubscribers: {
-                label: 'Unsubscribe selected e-mails',
+                label: t('Unsubscribe selected e-mails'),
                 action: confirmUnsubscribe
               }
             }}

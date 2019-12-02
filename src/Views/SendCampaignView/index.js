@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import BaseLayout from '../../Layouts/BaseLayout'
 import Datetime from 'react-datetime'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import MultipleChoiceField from '../../Components/MultipleChoiceField'
 import {
@@ -27,6 +28,7 @@ import { request } from '../../Services/Request'
 import styles from './SendCampaignView.module.scss'
 
 const SendCampaignView = props => {
+  const { t } = useTranslation()
   const id = props.match.params ? parseInt(props.match.params.id) : null
   const campaigns = useSelector(state => state.campaigns.data)
   const lists = useSelector(state => state.lists.data)
@@ -58,10 +60,10 @@ const SendCampaignView = props => {
     request(
       'addPlanning',
       [p],
-      'Cannot add the scheduling',
+      t('Cannot add the scheduling'),
       response => {
         // show toast and redirect to home
-        toast.success('The scheduling was suceesfully set, redirecting to the home page...')
+        toast.success(t('The scheduling was suceesfully set, redirecting to the home page...'))
         setTimeout(() => history.push(config.urls.home), 2000)
       },
       error => console.log(error)
@@ -75,10 +77,10 @@ const SendCampaignView = props => {
     request(
       'sendCampaign',
       [campaign.id, selectedLists],
-      'Cannot send the campaign: {error}',
+      t('Cannot send the campaign') + ': {error}',
       response => {
         // show toast and redirect to home
-        toast.success('The campaign will be sent in the next minutes!')
+        toast.success(t('The campaign will be sent in the next minutes') + '!')
         setTimeout(() => history.push(config.urls.home), 2000)
       },
       error => console.log(error)
@@ -98,9 +100,9 @@ const SendCampaignView = props => {
               <Header as='h2' icon color='blue' textAlign='center' style={{ marginBottom: '2rem' }}>
                 1<br />
                 <Icon name='users' />
-                Choose your list
+                {t('Choose your lists')}
                 <Header.Subheader>
-                  If a subscriber belongs to more than one list, it'll receive the e-mail twice
+                  {t('If a subscriber belongs to more than one list, it\'ll receive the e-mail twice')}
                 </Header.Subheader>
               </Header>
               <Grid padded centered stackable columns={2}>
@@ -136,9 +138,9 @@ const SendCampaignView = props => {
               <Header as='h2' icon color='blue' textAlign='center' style={{ marginBottom: '2rem', marginTop: '4rem' }}>
                 2<br />
                 <Icon name='mail outline' />
-                Send
+                {t('Send')}
                 <Header.Subheader>
-                  You can send it now or later on
+                  {t('You can send it now or later on')}
                 </Header.Subheader>
               </Header>
               <div
@@ -157,16 +159,16 @@ const SendCampaignView = props => {
                       largeScreen={4}
                       tablet={6}
                     >
-                      <p style={{ fontSize: '1.4rem' }}>Immediately</p>
+                      <p style={{ fontSize: '1.4rem' }}>{t('Immediately')}</p>
                       <p>
                         {selectedSubscribers ? (
                           <span>
                             <Popup
                               basic
-                              content='Starting when the process is taken over, that depends on the state of the queue at the moment.'
+                              content={t('Starting when the process is taken over, that depends on the state of the queue at the moment')}
                               trigger={<Icon color='blue' name='info circle' />}
                             />{' '}
-                            It will take about{' '}
+                            {t('It will take about')}{' '}
                             {Math.ceil(selectedSubscribers / 50) + 1} min
                           </span>
                         ) : null}
@@ -195,7 +197,7 @@ const SendCampaignView = props => {
                       >
                         OR
                       </Responsive>
-                      <p style={{ fontSize: '1.4rem' }}>Schedule</p>
+                      <p style={{ fontSize: '1.4rem' }}>{t('Schedule')}</p>
                       {selectedDatetime ? (
                         <Button
                           animated='fade'
@@ -209,11 +211,11 @@ const SendCampaignView = props => {
                             {selectedDatetime.format('LLL')}
                           </Button.Content>
                           <Button.Content hidden>
-                            <Icon name='send' /> Set scheduling
+                            <Icon name='send' /> {t('Set scheduling')}
                           </Button.Content>
                         </Button>
                       ) : (
-                        <p>Select date and time</p>
+                        <p>{t('Select date and time')}</p>
                       )}
                       <div
                         style={{
@@ -241,7 +243,7 @@ const SendCampaignView = props => {
                   vertical
                   minWidth={Responsive.onlyTablet.maxWidth}
                 >
-                  OR
+                  {t('OR')}
                 </Responsive>
               </div>
             </div>

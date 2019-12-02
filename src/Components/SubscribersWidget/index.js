@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux'
 import { Header, Statistic, Icon, Grid } from 'semantic-ui-react'
 import { withLoader } from '../../HOC/Loader'
 import { withData } from '../../HOC/Empty'
+import { useTranslation } from 'react-i18next'
 import propTypes from 'prop-types'
 
 import styles from './SubscribersWidget.module.scss'
 
 const SubscribersWidget = props => {
+  const { t, i18n } = useTranslation()
   const stats = useSelector(state => state.stats.data)
   const isLoading = useSelector(state => state.stats.fetching)
 
@@ -22,7 +24,7 @@ const SubscribersWidget = props => {
       <Grid.Row>
         <Grid.Column>
           <Statistic color='green'>
-            <Statistic.Value>
+            <Statistic.Value style={{ whiteSpace: 'nowrap' }}>
               <Icon name='arrow up' color='green' size='tiny' style={{ position: 'relative', bottom: '12px', left: '-10px' }} />
               {stats.lastMonthSubscribers}
             </Statistic.Value>
@@ -30,7 +32,7 @@ const SubscribersWidget = props => {
         </Grid.Column>
         <Grid.Column>
           <Statistic color='red'>
-            <Statistic.Value>
+            <Statistic.Value style={{ whiteSpace: 'nowrap' }}>
               {stats.lastMonthUnsubscriptions}
               <Icon name='arrow down' color='red' size='tiny'  style={{ position: 'relative', bottom: '12px', right: '-10px' }}/>
             </Statistic.Value>
@@ -44,15 +46,15 @@ const SubscribersWidget = props => {
     <div className={styles.widget}>
       <Header as='h2' icon>
         <Icon name='users' className={styles.icon} />
-        Subscribers
+        {t('Subscribers')}
         <Header.Subheader>
-          Total and last month stats
+          {t('Total and last month stats')}
         </Header.Subheader>
       </Header>
       {withLoader(withData(content, stats, stats.subscribers && stats.subscribers !== null), isLoading && (!stats.subscribers || stats.subscribers.length === 0))}
       <Header as='h2' icon size='small'>
         <Icon name='calendar alternate outline' className={styles.icon} />
-        Last Month
+        {t('Last Month')}
       </Header>
       {withLoader(withData(contentMonth, stats, stats.subscribers && stats.subscribers !== null), isLoading && (!stats.subscribers || stats.subscribers.length === 0))}
     </div>
