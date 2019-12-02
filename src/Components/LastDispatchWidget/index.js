@@ -47,7 +47,7 @@ const LastDispatchWidget = props => {
                   <Icon name='folder open' style={{ marginRight: '1rem' }} />
                   {stats.lastDispatch.open_rate}%
                 </Statistic.Value>
-                <Statistic.Label>{t('Open Rate')}</Statistic.Label>
+                <Statistic.Label style={{ textAlign: 'left' }}>{t('Open Rate')}</Statistic.Label>
               </Statistic>
             </Table.Cell>
           </Table.Row>

@@ -14,7 +14,7 @@ const BouncesView = props => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const bounces = useSelector(state => state.bounces.data)
-  const isLoading = useSelector(state => state.planning.fetching)
+  const isLoading = useSelector(state => state.bounces.fetching)
   const [showConfirm, setShowConfirm] = useState(false)
   const [selectedBounces, setSelectedBounces] = useState([])
 
