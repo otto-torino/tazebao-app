@@ -22,6 +22,7 @@ import SendCampaignView from '../Views/SendCampaignView'
 import CampaignDetailView from '../Views/CampaignDetailView'
 import PlanningView from '../Views/PlanningView'
 import BouncesView from '../Views/BouncesView'
+import IntegrationView from '../Views/IntegrationView'
 import NetworkErrorView from '../Views/NetworkErrorView'
 
 /**
@@ -148,6 +149,11 @@ class AppRouter extends React.Component {
             actions={[
               [BouncesActions.bouncesRequest(), (state) => true]
             ]}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.integration}
+            component={IntegrationView}
           />
           <PrivateRoute
             exact

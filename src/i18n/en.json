@@ -7,6 +7,8 @@
     "admin_lists_description": "You can organize your subscribers in lists. In this section you can create, edit and delete lists. Use the subscribers section in order to add contacts to a list.",
     "admin_topic_description": "Your campaign are grouped by topics. a Topic defines the sending e-mail address and name and the unsubscribe url.<br /><strong>Pay attention</strong>: when you delete a topic, you'll also delete all related campaigns!",
     "topic_delete_message": "Deleted items cannot be restored. <strong>Deleting a topic you'll delete also all related campaigns! Proceed?</strong>",
-    "admin_campaign_description": "All your campaigns. You can only edit and duplicate campaigns created with this application, and that haven't been already dispatched"
+    "admin_campaign_description": "All your campaigns. You can only edit and duplicate campaigns created with this application, and that haven't been already dispatched",
+    "integration_description": "Tazebao don't provide subscription forms out of the box, because every web site has its own styles and needs. Also the subscriber collected data may vary. So tazebao provides a simple way of communication that lets you develop your own form on your platform while sending the collected data to Tazebao in a secure way.<br />Given the two parameters shown below (Id KEY and Secret KEY) you can authenticate some REST requests in order to pass the collected data to Tazebao. You can some integration examples in this section (PHP, Python).",
+    "integration_api_link_description": "You can find a complete description of the provided API on the "
   }
 }

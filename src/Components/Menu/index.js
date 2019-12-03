@@ -35,6 +35,10 @@ const AppMenu = props => {
     <Menu.Item as={Link} to={config.urls.bounces} key='menu-voice-bounces'>
       <Icon name='ban' />
       {t('Bounces')}
+    </Menu.Item>,
+    <Menu.Item as={Link} to={config.urls.integration} key='menu-voice-integration'>
+      <Icon name='globe' />
+      {t('Integration')}
     </Menu.Item>
   ]
 }

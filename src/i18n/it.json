@@ -154,6 +154,10 @@
     "One or more click": "Uno o più click",
     "'No clicks'": "Nessun click",
     "Click through time": "Click nel tempo",
-    "Clicks": "Click"
+    "Clicks": "Click",
+    "Integration": "Integrazione",
+    "integration_description": "Tazebao non fornisce al momento dei form di iscrizione da embeddare all'interno del tuo sito. Gli stili sarebbero troppo differenti, ogni sito ha le sue esigenze, ed anche il tipo di informazioni richieste cambia di volta in volta. Per questo fornisce invece un meccanismo di comunicazione che permette di sviluppare facilmente un modulo di integrazione.<br /><br />Dati i due valori mostrati qua sotto (Id KEY e Secret KEY) è possibile autenticare delle chiamate REST verso Tazebao per passargli i dati desiderati. Puoi vedere qui a lato degli esempi di integrazione in codice PHP e Python.",
+    "integration_api_link_description": "Puoi vedere la descrizione completa delle API sulla ",
+    "project's GitHub page": "pagina GitHub del progetto"
   }
 }

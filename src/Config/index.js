@@ -22,7 +22,8 @@ export default {
     createCampaign: '/campaigns/create',
     editCampaign: '/campaigns/edit/:id',
     campaignDetail: '/campaigns/:id',
-    sendCampaign: '/campaigns/send/:id'
+    sendCampaign: '/campaigns/send/:id',
+    integration: '/integration'
   },
   ui: {
     adminListPerPage: 50
