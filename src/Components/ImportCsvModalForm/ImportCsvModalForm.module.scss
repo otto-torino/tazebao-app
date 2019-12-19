@@ -1,0 +1,11 @@
+@import '../../Styles/variables';
+
+.drop {
+  border: 1px dashed $light-gray;
+  padding: 2rem;
+  text-align: center;
+
+  &:hover {
+    background: lighten($primary, 40%);
+  }
+}

@@ -21,7 +21,7 @@ import {
 
 const ChangeList = props => {
   // translations
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   // checkboxes, actions to be performed on selected items
   const [selectedItems, setSelectedItems] = useState([])
   const [allSelected, setAllSelected] = useState(false)
@@ -281,17 +281,20 @@ const ChangeList = props => {
           {!!listFiltersLength && listFilters()}
           {!!listActionsLength && listActions()}
         </div>
-        {(!props.hideButtonWithoutPermissions || props.canInsert) &&  (
-          <Button
-            disabled={!props.canInsert}
-            color='blue'
-            onClick={insertRecord}
-            icon
-            style={{ marginBottom: '1rem' }}
-          >
-            <Icon name='plus' /> {t('Add')} {props.verboseName}
-          </Button>
-        )}
+        <div>
+          {(!props.hideButtonWithoutPermissions || props.canInsert) &&  (
+            <Button
+              disabled={!props.canInsert}
+              color='blue'
+              onClick={insertRecord}
+              icon
+              style={{ marginBottom: '1rem' }}
+            >
+              <Icon name='plus' /> {t('Add')} {props.verboseName}
+            </Button>
+          )}
+          {props.toolbarButtons}
+        </div>
       </div>
       {withLoader(
         <div>
@@ -345,7 +348,8 @@ ChangeList.defaultProps = {
   listActions: {},
   description: null,
   hideButtonWithoutPermissions: false,
-  moreActions: item => []
+  moreActions: item => [],
+  toolbarButtons: null
 }
 
 ChangeList.propTypes = {
@@ -373,7 +377,12 @@ ChangeList.propTypes = {
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
   hideButtonWithoutPermissions: PropTypes.bool,
-  moreActions: PropTypes.func
+  moreActions: PropTypes.func,
+  toolbarButtons: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+    PropTypes.array
+  ])
 }
 
 export default ChangeList

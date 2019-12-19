@@ -62,19 +62,38 @@ const create = (baseURL = config.apiBasePath) => {
   const stats = () => api.get('/newsletter/stats/')
   // SUBSCRIBERS
   const subscribers = () => api.get('/newsletter/subscriber/?page_size=50000')
-  const addSubscriber = subscriber => api.post('/newsletter/subscriber/', subscriber)
-  const editSubscriber = subscriber => api.put(`/newsletter/subscriber/${subscriber.id}/`, subscriber)
-  const deleteSubscriber = subscriberId => api.delete(`/newsletter/subscriber/${subscriberId}/`)
-  const deleteSubscribersFromBounces = bouncesIds => api.post(`/newsletter/subscriber/delete_from_bounces/`, { bounces: bouncesIds })
+  const addSubscriber = subscriber =>
+    api.post('/newsletter/subscriber/', subscriber)
+  const editSubscriber = subscriber =>
+    api.put(`/newsletter/subscriber/${subscriber.id}/`, subscriber)
+  const deleteSubscriber = subscriberId =>
+    api.delete(`/newsletter/subscriber/${subscriberId}/`)
+  const deleteSubscribers = ids =>
+    api.post('/newsletter/subscriber/delete_many/', {
+      ids: ids
+    })
+  const deleteSubscribersFromBounces = bouncesIds =>
+    api.post('/newsletter/subscriber/delete_from_bounces/', {
+      bounces: bouncesIds
+    })
   const subscribersAddLists = (subscribers, lists) =>
     api.post('/newsletter/subscriber/add_list/', { subscribers, lists })
   const subscribersRemoveLists = (subscribers, lists) =>
     api.post('/newsletter/subscriber/remove_list/', { subscribers, lists })
+  const importSubscribers = data =>
+    api.post('/newsletter/subscriber/import/', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+        // 'Content-Disposition': 'inline;filename=import.csv'
+      }
+    })
   // LISTS
   const lists = () => api.get('/newsletter/subscriberlist/')
   const addList = list => api.post('/newsletter/subscriberlist/', list)
-  const editList = list => api.put(`/newsletter/subscriberlist/${list.id}/`, list)
-  const deleteList = listId => api.delete(`/newsletter/subscriberlist/${listId}/`)
+  const editList = list =>
+    api.put(`/newsletter/subscriberlist/${list.id}/`, list)
+  const deleteList = listId =>
+    api.delete(`/newsletter/subscriberlist/${listId}/`)
   // TOPICS
   const topics = () => api.get('/newsletter/topic/')
   const addTopic = topic => api.post('/newsletter/topic/', topic)
@@ -82,21 +101,29 @@ const create = (baseURL = config.apiBasePath) => {
   const deleteTopic = topicId => api.delete(`/newsletter/topic/${topicId}/`)
   // TOPICS
   const campaigns = () => api.get('/newsletter/campaign/?page_size=50000')
-  const campaignTemplate = campaignId => api.get(`/newsletter/campaign/${campaignId}/get_template`)
-  const campaignDispatches = campaignId => api.get(`/newsletter/campaign/${campaignId}/dispatches/?page_size=50000`)
-  const sendCampaign = (campaignId, lists) => api.post(`/newsletter/campaign/${campaignId}/send/`, { lists })
-  const deleteCampaign = campaignId => api.delete(`/newsletter/campaign/${campaignId}/`)
-  const duplicateCampaign = campaignId => api.post(`/newsletter/campaign/${campaignId}/duplicate/`)
+  const campaignTemplate = campaignId =>
+    api.get(`/newsletter/campaign/${campaignId}/get_template`)
+  const campaignDispatches = campaignId =>
+    api.get(`/newsletter/campaign/${campaignId}/dispatches/?page_size=50000`)
+  const sendCampaign = (campaignId, lists) =>
+    api.post(`/newsletter/campaign/${campaignId}/send/`, { lists })
+  const deleteCampaign = campaignId =>
+    api.delete(`/newsletter/campaign/${campaignId}/`)
+  const duplicateCampaign = campaignId =>
+    api.post(`/newsletter/campaign/${campaignId}/duplicate/`)
   // MOSAICO
   const mosaicoEditor = () => api.get('/mosaico/editor/')
   // PLANNING
   const planning = () => api.get('/newsletter/planning/')
   const addPlanning = planning => api.post('/newsletter/planning/', planning)
-  const editPlanning = planning => api.put(`/newsletter/planning/${planning.id}/`, planning)
-  const deletePlanning = planningId => api.delete(`/newsletter/planning/${planningId}/`)
+  const editPlanning = planning =>
+    api.put(`/newsletter/planning/${planning.id}/`, planning)
+  const deletePlanning = planningId =>
+    api.delete(`/newsletter/planning/${planningId}/`)
   // BOUNCES
   const bounces = () => api.get('/newsletter/bounces/')
-  const deleteBounce = bounceId => api.delete(`/newsletter/bounces/${bounceId}/`)
+  const deleteBounce = bounceId =>
+    api.delete(`/newsletter/bounces/${bounceId}/`)
 
   // Return back a collection of functions that we would consider our
   // interface.  Most of the time it'll be just the list of all the
@@ -118,9 +145,11 @@ const create = (baseURL = config.apiBasePath) => {
     addSubscriber,
     editSubscriber,
     deleteSubscriber,
+    deleteSubscribers, // many
     lists,
     subscribersAddLists,
     subscribersRemoveLists,
+    importSubscribers,
     addList,
     editList,
     deleteList,

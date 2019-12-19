@@ -9,6 +9,11 @@
     "topic_delete_message": "Deleted items cannot be restored. <strong>Deleting a topic you'll delete also all related campaigns! Proceed?</strong>",
     "admin_campaign_description": "All your campaigns. You can only edit and duplicate campaigns created with this application, and that haven't been already dispatched",
     "integration_description": "Tazebao don't provide subscription forms out of the box, because every web site has its own styles and needs. Also the subscriber collected data may vary. So tazebao provides a simple way of communication that lets you develop your own form on your platform while sending the collected data to Tazebao in a secure way.<br />Given the two parameters shown below (Id KEY and Secret KEY) you can authenticate some REST requests in order to pass the collected data to Tazebao. You can some integration examples in this section (PHP, Python).",
-    "integration_api_link_description": "You can find a complete description of the provided API on the "
+    "integration_api_link_description": "You can find a complete description of the provided API on the ",
+    "upload_csv_description": "The uploaded file should be a csv file with the following columns: E-MAIL, SUBSCRIPTION DATETIME, INFO, OPT IN, OPT IN DATETIME",
+    "upload_subscription_datetime_description": "should be in the format YYYY-MM-DD HH:mm:ss, if empty will be filled with current datetimewhether if the subscriber gave his consent or not, possible values: 1 or 0",
+    "upload_subscription_optin_description": "whether if the subscriber gave his consent or not, possible values: 1 or 0",
+    "upload_optin_datetime_description": "should be in the format YYYY-MM-DD HH:mm:ss, it is the date and time when the subscriber accepted the privacy terms",
+    "upload_drag_description": "Drag 'n' drop the file here, or click to open the file browser"
   }
 }

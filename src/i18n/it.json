@@ -158,6 +158,24 @@
     "Integration": "Integrazione",
     "integration_description": "Tazebao non fornisce al momento dei form di iscrizione da embeddare all'interno del tuo sito. Gli stili sarebbero troppo differenti, ogni sito ha le sue esigenze, ed anche il tipo di informazioni richieste cambia di volta in volta. Per questo fornisce invece un meccanismo di comunicazione che permette di sviluppare facilmente un modulo di integrazione.<br /><br />Dati i due valori mostrati qua sotto (Id KEY e Secret KEY) è possibile autenticare delle chiamate REST verso Tazebao per passargli i dati desiderati. Puoi vedere qui a lato degli esempi di integrazione in codice PHP e Python.",
     "integration_api_link_description": "Puoi vedere la descrizione completa delle API sulla ",
-    "project's GitHub page": "pagina GitHub del progetto"
+    "project's GitHub page": "pagina GitHub del progetto",
+    "Import from CSV file": "Importa da file CSV",
+    "Upload CSV file": "Upload da file CSV",
+    "upload_csv_description": "Il file da importare deve essere un CSV con le seguenti colonne: E-MAIL, DATA SOTTOSCRIZIONE, INFO, OPT IN, DATA OPT IN",
+    "E-MAIL": "E-MAIL",
+    "subscriber's e-mail": "e-mail iscritto",
+    "SUBSCRIPTION DATETIME": "DATA SOTTOSCRIZIONE",
+    "upload_subscription_datetime_description": "deve essere nel formato AAAA-MM-GG HH:mm:ss, se non inserita verrà considerata la data ed ora di effetuazione dell'operazione",
+    "can contain all the needed information in a JSON format": "può contenere tutte le informazioni necessarie in formato JSON",
+    "upload_subscription_optin_description": "indica se l'iscritto ha accettato le condizioni sulla privacy (GDPR), possibili valori: 1 o 0",
+    "upload_optin_datetime_description": "deve essere nel formato AAAA-MM-GG HH:mm:ss, è la data in cui l'iscritto ha accettato le condizioni sulla privacy, lasciare vuoto se non ha accettato le condizioni",
+    "OPT IN DATETIME": "DATA OPT IN",
+    "Drop the files here...": "Rilascia i dile qui...",
+    "upload_drag_description": "Trascina il file qui, oppure clicca per aprire il file browser",
+    "Selected file": "File selezionato",
+    "Please choose a CSV file": "Seleziona un file CSV",
+    "Import succeded": "L'importazione è avvenuta con successo",
+    "Delete selected subscribers": "Elimina gli iscritti selezionati",
+    "All lists": "Tutte le liste"
   }
 }

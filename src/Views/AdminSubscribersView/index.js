@@ -4,40 +4,57 @@ import PropTypes from 'prop-types'
 import BaseLayout from '../../Layouts/BaseLayout'
 import SubscriberForm from '../../Forms/SubscriberForm'
 import ChooseListsModal from '../../Components/ChooseListsModal'
+import ImportCsvModalForm from '../../Components/ImportCsvModalForm'
 import SubscribersActions from '../../Redux/Subscribers'
 import ListActions from '../../Redux/Lists'
+import { toast } from 'react-toastify'
 import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
-import { useTranslation } from 'react-i18next'
+import {
+  Icon,
+  Button,
+  Modal
+} from 'semantic-ui-react'
+import { useTranslation, Trans } from 'react-i18next'
 import { request } from '../../Services/Request'
 import moment from 'moment'
 
 import styles from './AdminSubscribersView.module.scss'
 
 const AdminSubscribersView = props => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const [chooseListModalData, setChooseListModalData] = useState({
     open: false,
     cb: null
   })
+  const [deleteModalData, setDeleteModalData] = useState({
+    open: false,
+    cb: null
+  })
+  const [showSpinner, setShowSpinner] = useState(false)
   const subscribers = useSelector(state => state.subscribers.data)
   const lists = useSelector(state => state.lists.data)
   const isLoading = useSelector(state => state.subscribers.fetching)
+  const [importCsvModalIsOpen, setImportCsvModalIsOpen] = useState(false)
 
   const listDisplay = ['id', 'email', 'subscription_datetime', 'lists', 'info']
   const listActions = {
+    delete: {
+      label: t('Delete selected subscribers'),
+      action: ids => {
+        setDeleteModalData({ open: true, cb: () => handleDeleteSelected(ids) })
+      }
+    },
     addToList: {
       label: t('Add selected items to lists'),
       action: ids => {
         setChooseListModalData({ open: true, cb: handleAddLists(ids) })
-        dispatch(ListActions.listsRequest())
       }
     },
     removeFromList: {
       label: t('Remove selected items from lists'),
       action: ids => {
         setChooseListModalData({ open: true, cb: handleRemoveLists(ids) })
-        dispatch(ListActions.listsRequest())
       }
     }
   }
@@ -46,7 +63,7 @@ const AdminSubscribersView = props => {
       lists: {
         label: t('List'),
         options: [
-          { value: null, text: 'All lists', key: 0 },
+          { value: null, text: t('All lists'), key: 0 },
           ...Object.keys(lists).map(id => ({
             value: id,
             text: lists[id].name,
@@ -117,6 +134,19 @@ const AdminSubscribersView = props => {
     )
   }
 
+  const handleDeleteSelected = ids => {
+    return request(
+      'deleteSubscribers',
+      [ids],
+      t('There was an error deleting the subscribers') + ': {error}',
+      response => {
+        dispatch(SubscribersActions.subscribersRequest())
+        setDeleteModalData({ open: false, cb: null })
+        dispatch(ListActions.listsRequest())
+      }
+    )
+  }
+
   const handleAddLists = ids => selectedLists => {
     request(
       'subscribersAddLists',
@@ -125,6 +155,7 @@ const AdminSubscribersView = props => {
       response => {
         dispatch(SubscribersActions.subscribersRequest())
         setChooseListModalData({ open: false, cb: null })
+        dispatch(ListActions.listsRequest())
       },
       error => setChooseListModalData({ open: false, cb: null })
     )
@@ -138,13 +169,46 @@ const AdminSubscribersView = props => {
       response => {
         dispatch(SubscribersActions.subscribersRequest())
         setChooseListModalData({ open: false, cb: null })
+        dispatch(ListActions.listsRequest())
       },
       error => setChooseListModalData({ open: false, cb: null })
     )
   }
 
+  const handleImport = (file, lists) => {
+    // set spinner before request
+    setShowSpinner(true)
+    const formData = new FormData()
+    formData.append('lists', lists)
+    formData.append('file', file)
+    request(
+      'importSubscribers',
+      [formData],
+      'There was an error importing the file: {error}',
+      response => {
+        dispatch(SubscribersActions.subscribersRequest())
+        dispatch(ListActions.listsRequest())
+        setShowSpinner(false)
+        setImportCsvModalIsOpen(false)
+        toast(t('Import succeded'), { type: 'success' })
+      },
+      error => setShowSpinner(false)
+    )
+  }
+
   const description = (
     <p dangerouslySetInnerHTML={{ __html: t('admin_subscribers_description') }}></p>
+  )
+
+  const toolbarButtons = (
+    <Button
+      color='blue'
+      onClick={() => setImportCsvModalIsOpen(true)}
+      icon
+      style={{ marginBottom: '1rem' }}
+    >
+      <Icon name='file excel outline' /> {t('Import from CSV file')}
+    </Button>
   )
 
   return (
@@ -175,6 +239,7 @@ const AdminSubscribersView = props => {
             onInsert={handleInsert}
             onEdit={handleEdit}
             onDelete={handleDelete}
+            toolbarButtons={toolbarButtons}
             items={subscribers}
             isLoading={isLoading}
             listDisplay={listDisplay}
@@ -195,6 +260,27 @@ const AdminSubscribersView = props => {
           onClose={() => setChooseListModalData({...chooseListModalData, open: false, cb: null})}
           onSubmit={lists => chooseListModalData.cb(lists)}
         />
+      )}
+      {importCsvModalIsOpen && (
+        <ImportCsvModalForm
+          onClose={() => setImportCsvModalIsOpen(false)}
+          onImport={handleImport}
+          loading={showSpinner}
+        />
+      )}
+      {deleteModalData.open && (
+        <Modal open size='small' onClose={() => setDeleteModalData({ open: false })}>
+          <Modal.Header>{t('Delete selected subscribers')}</Modal.Header>
+          <Modal.Content><Trans>Deleted items cannot be restored. Proceed?</Trans></Modal.Content>
+          <Modal.Actions>
+            <Button color='red' inverted onClick={() => setDeleteModalData({ open: false })}>
+              <Icon name='remove' /> {t('Cancel')}
+            </Button>
+            <Button color='green' inverted onClick={deleteModalData.cb}>
+              <Icon name='trash alternate' /> {t('Delete')}
+            </Button>
+          </Modal.Actions>
+        </Modal>
       )}
     </BaseLayout>
   )

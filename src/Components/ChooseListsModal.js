@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
-import { Modal, Button, Icon, Form, Checkbox } from 'semantic-ui-react'
+import { Modal, Button, Icon, Form } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next'
 import MultipleChoiceField from './MultipleChoiceField'
 
 const ChooseListsModal = props => {
+  // translations
+  const { t } = useTranslation()
   const lists = useSelector(state => state.lists.data)
   const [selected, setSelected] = useState([])
-  console.log('FORM', selected)
   return (
     <Modal open size='tiny' onClose={props.onClose}>
-      <Modal.Header>Add selected items to lists</Modal.Header>
+      <Modal.Header>{t('Add selected items to lists')}</Modal.Header>
       <Modal.Content>
         <Form>
           <MultipleChoiceField
