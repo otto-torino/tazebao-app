@@ -64,6 +64,32 @@ const PythonIntegration = props => {
           result = response.read() # contains the subscriber json
 
       return result
+
+  def unsubscribe(id):
+      date = formatdate(timeval=None, localtime=False, usegmt=True)
+      signature = encrypt(
+          SECRET_KEY,
+          'date: ' + date
+      )
+
+      req = urllib2.Request('https://tazebao.sqrt64.it/api/v1/newsletter/subscriber/' + id + '/') # noqa
+      req.add_header('Content-Type', 'application/json')
+      req.add_header('Accept', 'application/json')
+      req.add_header('Cache-Control', 'no-cache')
+      req.add_header('Date', date)
+      req.add_header('X-Api-Key', API_KEY)
+      req.add_header('Authorization', 'Signature keyId="' + API_KEY + '",algorithm="hmac-sha256",headers="date",signature="' + signature + '"') # noqa
+      req.get_method = lambda: 'DELETE' # noqa
+
+      try:
+          response = urllib2.urlopen(req)
+      except urllib2.HTTPError as e:
+          result = 'HTTP error'
+      except urllib2.URLError as e:
+          result = 'Connection error'
+      else:
+          result = 'Success'
+
   `
   return (
     <Code codeString={code} language='python' />

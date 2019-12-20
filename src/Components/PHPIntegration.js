@@ -47,6 +47,15 @@ const PHPIntegration = props => {
   $server_output = curl_exec ($ch);
   curl_close ($ch);
   $result = $server_output;
+
+  // you can unsubscribe emails:
+  $id = $_POST['s-id'];
+  curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+  curl_setopt($ch, CURLOPT_URL,"https://tazebao.sqrt64.it/api/v1/newsletter/subscriber/".$id."/");
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+  $server_output = curl_exec ($ch);
+  curl_close ($ch);
+  $result = $server_output;
   `
   return (
     <Code codeString={code} language='php' />

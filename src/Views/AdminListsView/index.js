@@ -15,7 +15,7 @@ const AdminListsView = props => {
   const lists = useSelector(state => state.lists.data)
   const isLoading = useSelector(state => state.lists.fetching)
 
-  const listDisplay = ['id', 'name']
+  const listDisplay = ['id', 'name', 'tot_subscribers']
 
   const handleInsert = data => {
     return request(
