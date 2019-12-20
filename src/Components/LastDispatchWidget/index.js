@@ -62,7 +62,7 @@ const LastDispatchWidget = props => {
                 <Statistic.Value>
                   <Icon name='hand pointer' style={{ marginRight: '1rem' }} />
                   {stats.lastDispatch.click_statistics
-                    ? stats.last_dispatch.click_rate + '%'
+                    ? stats.lastDispatch.click_rate + '%'
                     : 'N.A.'}
                 </Statistic.Value>
                 <Statistic.Label>
