@@ -176,6 +176,7 @@
     "Please choose a CSV file": "Seleziona un file CSV",
     "Import succeded": "L'importazione è avvenuta con successo",
     "Delete selected subscribers": "Elimina gli iscritti selezionati",
-    "All lists": "Tutte le liste"
+    "All lists": "Tutte le liste",
+    "Tot subscribers": "Numero iscritti"
   }
 }
