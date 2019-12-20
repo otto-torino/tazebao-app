@@ -46,7 +46,7 @@ const AdminSubscribersView = props => {
   }
 
   const description = (
-    <p><Trans>dmin_topic_description</Trans></p>
+    <p><Trans>admin_topic_description</Trans></p>
   )
 
   const deleteModalContent = (
