@@ -13,6 +13,7 @@ import {
   Header,
   Grid,
   Message,
+  Checkbox,
   Tab
 } from 'semantic-ui-react'
 import { withLoader } from '../../HOC/Loader'
@@ -29,6 +30,7 @@ const CampaignDetailView = props => {
   const id = props.match.params ? parseInt(props.match.params.id) : null
   const campaigns = useSelector(state => state.campaigns.data)
   const campaign = id ? campaigns.filter(c => c.id === id)[0] : {}
+  const [viewTest, setViewTest] = useState(false)
   const [dispatches, setDispatches] = useState({
     fetched: false,
     error: false,
@@ -72,13 +74,19 @@ const CampaignDetailView = props => {
     } else if (!fetched) {
       return <ContentLoader />
     } else {
-      const panes = data.map(d => ({
+      const panes = data.filter(d => (d.test && viewTest) || (!d.test && !viewTest)).map(d => ({
         menuItem: moment(d.started_at).format('MMM DD YYYY, HH:mm'),
         render: () => <DispatchDetail dispatch={d} onChange={fetchDispatches} />
       }))
       return (
         <div>
-          <Header>{t('Dispatches')}</Header>
+          <Header>
+            {t('Dispatches')}
+          </Header>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            <Checkbox toggle onChange={(e, { checked }) => setViewTest(checked)} />
+            <span style={{ marginLeft: '.5rem' }}>{t('View test dispatches')}</span>
+          </div>
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
         </div>
       )

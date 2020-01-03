@@ -34,7 +34,7 @@ const AdminSubscribersView = props => {
     'name',
     'topic',
     'last_edit_datetime',
-    'last_dispatch',
+    'last_not_test_dispatch',
     'subject',
     'view_online'
   ]
@@ -115,7 +115,7 @@ const AdminSubscribersView = props => {
           <ChangeList
             onInsert={handleInsert}
             onEdit={handleEdit}
-            canEdit={item => item.template && !item.last_dispatch}
+            canEdit={item => item.template && !item.last_not_test_dispatch}
             description={description}
             onDelete={handleDelete}
             items={campaigns}

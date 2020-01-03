@@ -6,6 +6,8 @@
     "Create Campaign": "Crea una campagna",
     "Compose and send your campaign": "Componi ed invia una nuova campagna",
     "Last Dispatch": "Ultimo invio",
+    "Last not test dispatch": "Ultimo invio (no test)",
+    "Test": "Test",
     "The last dispatch stats": "Statistiche dell'ultimo invio",
     "Open Rate": "Percentuale e-mail aperte",
     "Click Rate": "Percentuale click",
@@ -42,7 +44,7 @@
     "this field is required": "questo campo è obbligatorio",
     "this field should contain a valid json string": "questo campo deve contenere un json valido",
     "Profile": "Profilo",
-    "Cancel": "Cancella",
+    "Cancel": "Annulla",
     "Insert": "Inserisci",
     "Edit": "Modifica",
     "Delete": "Elimina",
@@ -78,7 +80,7 @@
     "There was an error deleting the campaign": "Si è verificato un errore nell'eliminazione della campagna",
     "There was an error duplicating the campaign": "Si è verificato un errore nella duplicazione della campagna",
     "The campaign was succesfully duplicated, redirecting to edit page...": "La campagna è stata duplicata correttamente, a breve sarai rediretto alla pagina di modifica...",
-    "admin_campaign_description": "In questa sezione puoi vedere tutte le tue campagne. Puoi modificare e duplicare solamente campagne create con questa applicazione, e puoi modificarle solamente nel caso in cui non siano mai state inviate",
+    "admin_campaign_description": "In questa sezione puoi vedere tutte le tue campagne. Puoi modificare e duplicare solamente campagne create con questa applicazione, e puoi modificarle solamente nel caso in cui non siano mai state inviate (se non come invio di test).",
     "Delete campaign": "Elimina la campagna",
     "details": "dettagli",
     "duplicate": "duplica",
@@ -177,6 +179,10 @@
     "Import succeded": "L'importazione è avvenuta con successo",
     "Delete selected subscribers": "Elimina gli iscritti selezionati",
     "All lists": "Tutte le liste",
-    "Tot subscribers": "Numero iscritti"
+    "Tot subscribers": "Numero iscritti",
+    "Select lists for test dispatch": "Seleziona liste per invio di test",
+    "The test dispatch will be sent in a moment": "L'invio di test verrà effettuato tra un momento!",
+    "Campaign succesfully saved": "La campagna è stata salvata con successo",
+    "View test dispatches": "Visualizza invii di test"
   }
 }

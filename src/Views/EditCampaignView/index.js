@@ -5,6 +5,7 @@ import BaseLayout from '../../Layouts/BaseLayout'
 import Mosaico from '../../Components/Mosaico'
 import { toast } from 'react-toastify'
 import { Segment, Container, Label, Icon, Button } from 'semantic-ui-react'
+import ChooseListsModal from '../../Components/ChooseListsModal'
 import CampaignForm from '../../Forms/CampaignForm'
 import { withLoader } from '../../HOC/Loader'
 import { layoutProps } from '../../Styles/Common'
@@ -23,6 +24,7 @@ const EditCampaignView = props => {
   const mosaicoFrame = useRef(null)
   const campaignForm = useRef(null)
   const [enableSave, setEnableSave] = useState(false)
+  const [testModalIsOpen, setTestModalIsOpen] = useState(false)
   const [template, saveTemplate] = useState({})
   const topics = useSelector(state => state.topics.data)
 
@@ -30,18 +32,21 @@ const EditCampaignView = props => {
     console.log('RUNNING EFFECT')
     const listener = function ({ data }) {
       const { type } = data
-      console.log('RECEIVED', data)
       if (type === 'TAZEBAO') {
-        const { event, campaignId, continueEditing } = data.data
+        console.log(data.data)
+        const { event, campaignId, continueEditing, test, lists } = data.data
         if (event === 'READY') {
           console.log('SETTING SAVE')
           setEnableSave(true)
         } else if (event === 'SAVE') {
           if (continueEditing) {
-            toast.success('Campaign succesfully saved')
+            toast.success(t('Campaign succesfully saved'))
             history.push(config.urls.editCampaign.replace(':id', campaignId))
+            if (test && lists) {
+              sendTest(campaignId, lists)
+            }
           } else {
-            toast.success('Campaign succesfully saved')
+            toast.success(t('Campaign succesfully saved'))
             setTimeout(() => {
               history.push(config.urls.sendCampaign.replace(':id', campaignId))
             }, 1000)
@@ -68,7 +73,8 @@ const EditCampaignView = props => {
     }
   }, [id])
 
-  const handleSave = continueEditing => () => {
+  const handleSave = (continueEditing, test = false, lists = []) => () => {
+    console.log('SAVING')
     const data = campaignForm.current.submit()
     if (data) {
       mosaicoFrame.current.contentWindow.postMessage(
@@ -78,12 +84,35 @@ const EditCampaignView = props => {
             event: 'SAVE',
             // add id otherwise a new campaign is created every time
             fields: Object.assign({}, data.data, { id: data.id }),
-            continueEditing: continueEditing
+            continueEditing,
+            test,
+            lists
           }
         },
         '*'
       )
     }
+  }
+
+  const handleTest = listIds => {
+    handleSave(true, true, listIds)()
+  }
+
+  const sendTest = (campaignId, listIds) => {
+    if (!listIds || !listIds.length) {
+      return
+    }
+    request(
+      'sendCampaign',
+      [campaignId, listIds, true],
+      t('Cannot test the campaign') + ': {error}',
+      response => {
+        // show toast and redirect to home
+        toast.info(t('The test dispatch will be sent in a moment') + '!')
+        setTestModalIsOpen(false)
+      },
+      error => console.log(error)
+    )
   }
 
   return (
@@ -106,10 +135,16 @@ const EditCampaignView = props => {
                     {enableSave && (
                       <p style={{ textAlign: 'center', margin: '3rem 0 1rem' }}>
                         <Button color='green' onClick={handleSave(true)}>
+                          <Icon name='save' />
                           {t('Save and continue editing')}
                         </Button>
                         <Button color='green' onClick={handleSave(false)}>
+                          <Icon name='save' />
                           {t('Save')}
+                        </Button>
+                        <Button color='blue' onClick={() => setTestModalIsOpen(true)}>
+                          <Icon name='send' />
+                          {t('Test')}
                         </Button>
                       </p>
                     )}
@@ -125,16 +160,31 @@ const EditCampaignView = props => {
                   {enableSave && (
                     <p style={{ textAlign: 'center', margin: '3rem 0 1rem' }}>
                       <Button color='green' onClick={handleSave(true)}>
+                        <Icon name='save' />
                         {t('Save and continue editing')}
                       </Button>
                       <Button color='green' onClick={handleSave(false)}>
+                        <Icon name='save' />
                         {t('Save')}
+                      </Button>
+                      <Button color='blue' onClick={() => setTestModalIsOpen(true)}>
+                        <Icon name='send' />
+                        {t('Test')}
                       </Button>
                     </p>
                   )}
                 </div>
               </div>
             </div>
+            {testModalIsOpen && (
+              <ChooseListsModal
+                onClose={() => setTestModalIsOpen(false)}
+                onSubmit={handleTest}
+                okButtonIcon='send'
+                okButtonLabel='save and test'
+                title={t('Select lists for test dispatch')}
+              />
+            )}
           </Segment>,
           id && campaigns.length === 0
         )}

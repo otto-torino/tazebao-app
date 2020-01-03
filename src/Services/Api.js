@@ -102,11 +102,11 @@ const create = (baseURL = config.apiBasePath) => {
   // TOPICS
   const campaigns = () => api.get('/newsletter/campaign/?page_size=50000')
   const campaignTemplate = campaignId =>
-    api.get(`/newsletter/campaign/${campaignId}/get_template`)
+    api.get(`/newsletter/campaign/${campaignId}/get_template/`)
   const campaignDispatches = campaignId =>
     api.get(`/newsletter/campaign/${campaignId}/dispatches/?page_size=50000`)
-  const sendCampaign = (campaignId, lists) =>
-    api.post(`/newsletter/campaign/${campaignId}/send/`, { lists })
+  const sendCampaign = (campaignId, lists, test = false) =>
+    api.post(`/newsletter/campaign/${campaignId}/send/${test ? '?test=1' : ''}`, { lists })
   const deleteCampaign = campaignId =>
     api.delete(`/newsletter/campaign/${campaignId}/`)
   const duplicateCampaign = campaignId =>
