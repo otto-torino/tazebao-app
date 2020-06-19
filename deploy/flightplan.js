@@ -4,7 +4,7 @@ var plan = require('flightplan')
 // configuration
 // edit this object to match your requirements!
 const config = {
-  deployHost: 'app.tazebao.sqrt64.it',
+  deployHost: 'app.tazebao.email',
   deployPath: '/home/otto/www/tazebaoapp',
   deployUser: 'otto'
 }

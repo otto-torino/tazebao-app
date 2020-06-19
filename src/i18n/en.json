@@ -14,6 +14,7 @@
     "upload_subscription_datetime_description": "should be in the format YYYY-MM-DD HH:mm:ss, if empty will be filled with current datetimewhether if the subscriber gave his consent or not, possible values: 1 or 0",
     "upload_subscription_optin_description": "whether if the subscriber gave his consent or not, possible values: 1 or 0",
     "upload_optin_datetime_description": "should be in the format YYYY-MM-DD HH:mm:ss, it is the date and time when the subscriber accepted the privacy terms",
-    "upload_drag_description": "Drag 'n' drop the file here, or click to open the file browser"
+    "upload_drag_description": "Drag 'n' drop the file here, or click to open the file browser",
+    "tazebao_unsubscribe_topic_helptext": "If you want Tazebao manage the unsubscription process for you, just insert the following URL:"
   }
 }

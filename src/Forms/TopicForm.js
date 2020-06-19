@@ -116,6 +116,8 @@ class TopicForm extends React.Component {
             <p>{t('You can encrypt variables with your private SECRET KEY')}:</p>
             <code><strong>{'{% encrypt id email %}'}</strong></code>
             <p>{t('will generate an encrypted string of the concatenation of the subscriber id and e-mail')}</p>
+            <p>{t('tazebao_unsubscribe_topic_helptext')}</p>
+            <p><code>{'https://www.tazebao.email/newsletter/unsubscribe/?id={{ id }}&email={{ email }}&sig={% encrypt id email %}'}</code></p>
           </Message>
         </Form.Field>
       </div>
