@@ -8,7 +8,7 @@ import ImportCsvModalForm from '../../Components/ImportCsvModalForm'
 import SubscribersActions from '../../Redux/Subscribers'
 import ListActions from '../../Redux/Lists'
 import { toast } from 'react-toastify'
-import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
+import { ModelAdmin, ChangeList, Buffer } from '../../Lib/react-admin'
 import {
   Icon,
   Button,
@@ -282,6 +282,7 @@ const AdminSubscribersView = props => {
           </Modal.Actions>
         </Modal>
       )}
+    <Buffer/>
     </BaseLayout>
   )
 }
