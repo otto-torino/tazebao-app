@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { backgroundRequest } from '../../Services/Request';
-import PropTypes from 'prop-types';
-
-import { from } from 'rxjs';
+import { from, interval } from 'rxjs';
 import { expand, reduce, scan, delay } from 'rxjs/operators';
 import { EMPTY } from 'rxjs/index';
 
@@ -20,11 +18,13 @@ function useObservable(observable, init) {
 }
 
 
-function useBuffer(request, requestInit, bufferInit) {
+function useBuffer(request, requestInit, bufferInit, delayTime=1000) {
 
-    const bufferObservable = from(request(requestInit)).pipe(
-        expand(result => result.next ? request(result.next) : EMPTY),
-        scan((buffer, result) => [...buffer, ...result.data], [])
+    const requestObservable = source => from(request(source)).pipe(delay(delayTime));
+
+    const bufferObservable = requestObservable(requestInit).pipe(
+        expand(result => result.next ? requestObservable(result.next) : EMPTY),
+        reduce((buffer, result) => [...buffer, ...result.data], [])
     );
 
     return useObservable(bufferObservable, bufferInit);
@@ -34,7 +34,7 @@ function useBuffer(request, requestInit, bufferInit) {
 const djangoSauceRequest = () => {
 
     const endpoint = 'subscribers';
-    const pageSize = 1000;
+    const pageSize = 50000;
 
     return function(page) {
         return backgroundRequest(endpoint, [page, pageSize])
@@ -54,9 +54,11 @@ const djangoSauceRequest = () => {
 const Buffer = () => {
 
     const request = djangoSauceRequest();
-    const buffer = useBuffer(request, 1, []);
+    const buffer = useBuffer(request, 1, [], 1000);
 
-    return <div>{buffer.length}</div>;
+    console.log('test');
+
+    return <div></div>;
 }
 
 
