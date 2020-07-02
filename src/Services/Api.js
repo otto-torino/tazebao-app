@@ -61,7 +61,7 @@ const create = (baseURL = config.apiBasePath) => {
   // STATS
   const stats = () => api.get('/newsletter/stats/')
   // SUBSCRIBERS
-  const subscribers = (page=1, size=50000) => api.get(`/newsletter/subscriber/?page_size=${size}&&page=${page}`)
+  const subscribers = (page=1, size=50000) => api.get(`/newsletter/subscriber/?page=${page}&&page_size=${size}`)
   const addSubscriber = subscriber =>
     api.post('/newsletter/subscriber/', subscriber)
   const editSubscriber = subscriber =>

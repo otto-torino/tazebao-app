@@ -2,11 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { backgroundRequest } from '../../Services/Request';
 import PropTypes from 'prop-types';
 
+import { from } from 'rxjs';
+import { expand, reduce, scan, delay } from 'rxjs/operators';
+import { EMPTY } from 'rxjs/index';
+
+
+function useObservable(observable, init) {
+
+    const [state, setState] = useState(init);
+
+    useEffect(() => {
+        const subscription = observable.subscribe(setState);
+        return () => subscription.unsubscribe();
+    }, []);
+
+    return state;
+}
+
+
+function useBuffer(request, requestInit, bufferInit) {
+
+    const bufferObservable = from(request(requestInit)).pipe(
+        expand(result => result.next ? request(result.next) : EMPTY),
+        scan((buffer, result) => [...buffer, ...result.data], [])
+    );
+
+    return useObservable(bufferObservable, bufferInit);
+}
+
 
 const djangoSauceRequest = () => {
 
     const endpoint = 'subscribers';
-    const pageSize = 10000;
+    const pageSize = 1000;
 
     return function(page) {
         return backgroundRequest(endpoint, [page, pageSize])
@@ -23,35 +51,12 @@ const djangoSauceRequest = () => {
 }
 
 
-const useBuffer = (request, init) => {
-
-    const [buffer, setBuffer] = useState([]);
-    const [next, setNext] = useState(init);
-
-    // useEffect(() => {
-    //     if(next !== null) {
-    //         request(next).then(result => {
-    //             setBuffer([...buffer, ...result.data]);
-    //             setNext(result.next); 
-    //         });
-    //     }
-    // }, [next]);
-
-    return buffer;
-}
-
-
-const request = djangoSauceRequest();
-
 const Buffer = () => {
 
-    const buffer = useBuffer(request, 1);
+    const request = djangoSauceRequest();
+    const buffer = useBuffer(request, 1, []);
 
-    // const list = buffer.map(e => <li> { e.toString() } </li>);
-
-    console.log(buffer);
-
-    return <div><ul></ul></div>;
+    return <div>{buffer.length}</div>;
 }
 
 
