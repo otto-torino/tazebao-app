@@ -1,64 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { backgroundRequest } from '../../Services/Request';
-import { expand, reduce, delay } from 'rxjs/operators';
-import { defer, EMPTY } from 'rxjs/index';
+import { useBuffer as useBuffer2 } from './Buffer2';
 
 
-function pagination(request, endpoint, init, update, delayTime=0) {
+function djangoSaucePageRequest(endpoint, pageSize) {
 
-    const lazyRequest$ = page => defer(() => request(page)).pipe(delay(delayTime));
-
-    return lazyRequest$(endpoint).pipe(
-        expand(result => result.next ? lazyRequest$(result.next) : EMPTY),
-        reduce((data, result) => update(data, result.data), init)
-    );
+    return async function(next) {
+        const response = await backgroundRequest(endpoint, [next, pageSize]);
+        const data = response.data.results;
+        next = response.data.next;
+        next = next ? (new URL(next)).searchParams.get("page") : null;
+        return {data, next};
+    }
 }
 
 
-function useObservable(observable, init) {
+function useBuffer(request, start, init, update, delayTime=0) {
 
-    const [state, setState] = useState(init);
+    const [buffer, setBuffer] = useState(init);
+    const [next, setNext] = useState(start);
 
     useEffect(() => {
-        const subscription = observable.subscribe(setState);
-        return () => subscription.unsubscribe();
-    }, []);
-
-    return state;
-}
-
-
-function useBuffer(request, endpoint, init, update, delayTime=0) {
-
-    const page$ = pagination(request, endpoint, init, update, delayTime);
-    return useObservable(page$, init);
-}
-
-
-const djangoSauceRequest = () => {
-
-    const endpoint = 'subscribers';
-    const pageSize = 100;
-
-    return function(page) {
-        return backgroundRequest(endpoint, [page, pageSize])
-            .then(response => {
-                const data = response.data.results;
-                let next = response.data.next;
-                if(next !== null) {
-                    next = new URL(next);
-                    next = next.searchParams.get("page");
-                }
-                return {data, next};
+        if(next !== null) {
+            request(next).then(result => {
+                setBuffer(update(buffer, result.data));
+                setNext(result.next); 
             });
-    }
+        }
+    }, [next]);
+
+    return buffer;
 }
 
 
 const Buffer = () => {
 
-    const request = djangoSauceRequest();
-    const buffer = useBuffer(request, 1, [], (oldData, newData) => [...oldData, ...newData], 1000);
+    const request = djangoSaucePageRequest('subscribers', 10000);
+    const update = (oldData, newData) => [...oldData, ...newData];
+    const buffer = useBuffer2(request, 1, [], update, 1000);
 
     return <div></div>;
 }
