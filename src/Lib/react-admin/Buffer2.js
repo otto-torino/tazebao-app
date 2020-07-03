@@ -5,10 +5,10 @@ import { defer, EMPTY } from 'rxjs/index';
 
 export function pagination(request, start, init, update, delayTime=0) {
 
-    const lazyRequest$ = page => defer(() => request(page)).pipe(delay(delayTime));
+    const lazyRequest = page => defer(() => request(page)).pipe(delay(delayTime));
 
-    return lazyRequest$(start).pipe(
-        expand(result => result.next ? lazyRequest$(result.next) : EMPTY),
+    return lazyRequest(start).pipe(
+        expand(result => result.next ? lazyRequest(result.next) : EMPTY),
         reduce((data, result) => update(data, result.data), init)
     );
 }

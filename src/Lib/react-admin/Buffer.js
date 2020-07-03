@@ -33,11 +33,25 @@ function useBuffer(request, start, init, update, delayTime=0) {
 }
 
 
+function useBufferArray(request, start, delayTime=0) {
+    const init = [];
+    const update = (buffer, data) => [...buffer, ...data];
+    return useBuffer(request, start, init, update, delayTime=0);
+}
+
+
+function useBufferObject(request, start, delayTime=0) {
+    const init = {};
+    const update = (buffer, data) => ({...buffer, ...data});
+    return useBuffer(request, start, init, update, delayTime=0);
+}
+
+
 const Buffer = () => {
 
     const request = djangoSaucePageRequest('subscribers', 10000);
     const update = (oldData, newData) => [...oldData, ...newData];
-    const buffer = useBuffer2(request, 1, [], update, 1000);
+    const buffer = useBufferArray(request, 1, [], update, 0);
 
     return <div></div>;
 }

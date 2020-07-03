@@ -19,6 +19,8 @@ import {
   useListFilters
 } from './Hooks'
 
+import Buffer from './Buffer'
+
 const ChangeList = props => {
   // translations
   const { t } = useTranslation()
@@ -295,6 +297,7 @@ const ChangeList = props => {
           )}
           {props.toolbarButtons}
         </div>
+        <Buffer/>
       </div>
       {withLoader(
         <div>
