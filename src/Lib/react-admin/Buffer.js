@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { backgroundRequest } from '../../Services/Request';
-import { from, interval } from 'rxjs';
-import { expand, reduce, scan, delay } from 'rxjs/operators';
-import { EMPTY } from 'rxjs/index';
+import { expand, reduce, delay } from 'rxjs/operators';
+import { defer, EMPTY } from 'rxjs/index';
+
+
+function pagination(request, endpoint, init, update, delayTime=0) {
+
+    const lazyRequest$ = page => defer(() => request(page)).pipe(delay(delayTime));
+
+    return lazyRequest$(endpoint).pipe(
+        expand(result => result.next ? lazyRequest$(result.next) : EMPTY),
+        reduce((data, result) => update(data, result.data), init)
+    );
+}
 
 
 function useObservable(observable, init) {
@@ -18,23 +28,17 @@ function useObservable(observable, init) {
 }
 
 
-function useBuffer(request, requestInit, bufferInit, delayTime=1000) {
+function useBuffer(request, endpoint, init, update, delayTime=0) {
 
-    const requestObservable = source => from(request(source)).pipe(delay(delayTime));
-
-    const bufferObservable = requestObservable(requestInit).pipe(
-        expand(result => result.next ? requestObservable(result.next) : EMPTY),
-        reduce((buffer, result) => [...buffer, ...result.data], [])
-    );
-
-    return useObservable(bufferObservable, bufferInit);
+    const page$ = pagination(request, endpoint, init, update, delayTime);
+    return useObservable(page$, init);
 }
 
 
 const djangoSauceRequest = () => {
 
     const endpoint = 'subscribers';
-    const pageSize = 50000;
+    const pageSize = 100;
 
     return function(page) {
         return backgroundRequest(endpoint, [page, pageSize])
@@ -54,9 +58,7 @@ const djangoSauceRequest = () => {
 const Buffer = () => {
 
     const request = djangoSauceRequest();
-    const buffer = useBuffer(request, 1, [], 1000);
-
-    console.log('test');
+    const buffer = useBuffer(request, 1, [], (oldData, newData) => [...oldData, ...newData], 1000);
 
     return <div></div>;
 }
