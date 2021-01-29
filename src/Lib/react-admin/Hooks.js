@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState } from 'react'
 import _ from 'lodash'
 
 // hook used to slice a set of data

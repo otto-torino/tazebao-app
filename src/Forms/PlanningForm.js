@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Tab, Icon, Form, Input, Message, Select } from 'semantic-ui-react'
+import { Tab, Icon, Form, Message, Select } from 'semantic-ui-react'
 import Datetime from 'react-datetime'
 import MultipleChoiceField from '../Components/MultipleChoiceField'
 import { withTranslation } from 'react-i18next'

@@ -4,7 +4,7 @@ import { Header, Icon } from 'semantic-ui-react'
 import { withLoader } from '../../HOC/Loader'
 import { withData } from '../../HOC/Empty'
 import { useTranslation } from 'react-i18next'
-import propTypes from 'prop-types'
+// import propTypes from 'prop-types'
 import moment from 'moment'
 
 import styles from './NextPlanningWidget.module.scss'
@@ -12,7 +12,7 @@ import styles from './NextPlanningWidget.module.scss'
 const NextPlanningWidget = props => {
   const stats = useSelector(state => state.stats.data)
   const isLoading = useSelector(state => state.stats.fetching)
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   const content = stats => (
     <div>

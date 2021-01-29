@@ -1,7 +1,5 @@
-import { call, put, select } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'
 import BouncesActions from '../Redux/Bounces'
-import history from '../history'
-import config from '../Config'
 
 export function * fetchBounces (api, { payload }) {
   // request

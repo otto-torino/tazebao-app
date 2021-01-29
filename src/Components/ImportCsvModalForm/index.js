@@ -21,7 +21,7 @@ const ImportCsvModalForm = props => {
     } else {
       toast(t('Please choose a CSV file'), { type: 'warning' })
     }
-  }, [])
+  }, [t, setFiles])
 
   const handleImport = () => {
     props.onImport(files[0], selected)

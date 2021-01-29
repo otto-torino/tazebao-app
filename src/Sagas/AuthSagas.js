@@ -64,9 +64,9 @@ export function * whoami ({ api, dispatch }) {
     const startupComplete = yield select(state => state.startup.complete)
     if (isAuthenticated) {
       // set refresh token
-      const refresh = () => {
-        dispatch(AuthActions.refreshRequest())
-      }
+      // const refresh = () => {
+      //   dispatch(AuthActions.refreshRequest())
+      // }
       // setInterval(refresh, config.refreshTokenInterval) // @TODO
       // goto page user was trying to access, if any
       let redirectUrl

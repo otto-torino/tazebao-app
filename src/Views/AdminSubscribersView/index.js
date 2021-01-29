@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import BaseLayout from '../../Layouts/BaseLayout'
 import SubscriberForm from '../../Forms/SubscriberForm'
 import ChooseListsModal from '../../Components/ChooseListsModal'

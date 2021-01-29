@@ -5,7 +5,7 @@ import { Input } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
 const SearchFilter = props => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   return (
     <Input
       icon='search'

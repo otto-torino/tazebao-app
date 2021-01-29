@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import BaseLayout from '../../Layouts/BaseLayout'
 import Datetime from 'react-datetime'
 import { useTranslation } from 'react-i18next'
@@ -37,7 +37,7 @@ const SendCampaignView = props => {
   const [selectedDatetime, setSelectedDatetime] = useState(null)
   const handleListsField = useCallback(value => {
     setSelectedLists(value)
-  })
+  }, [setSelectedLists])
 
   const selectedSubscribers = Object.keys(lists).reduce(
     (acc, current) =>
@@ -49,7 +49,7 @@ const SendCampaignView = props => {
 
   const handleDatetimeScheduling = useCallback(dt => {
     setSelectedDatetime(dt)
-  })
+  }, [setSelectedDatetime])
 
   const handleSetScheduling = useCallback(() => {
     const p = {
@@ -68,7 +68,7 @@ const SendCampaignView = props => {
       },
       error => console.log(error)
     )
-  })
+  }, [campaign, selectedLists, selectedDatetime, t])
 
   const handleSendNow = useCallback(() => {
     if (!selectedSubscribers) {
@@ -85,7 +85,7 @@ const SendCampaignView = props => {
       },
       error => console.log(error)
     )
-  }, [selectedSubscribers])
+  }, [selectedSubscribers, campaign, selectedLists, t])
 
   return (
     <BaseLayout wrapperStyle={styles.adminView}>

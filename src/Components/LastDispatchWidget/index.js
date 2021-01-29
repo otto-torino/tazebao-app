@@ -6,12 +6,12 @@ import { withLoader } from '../../HOC/Loader'
 import { withData } from '../../HOC/Empty'
 import { useTranslation } from 'react-i18next'
 import config from '../../Config'
-import propTypes from 'prop-types'
+// import propTypes from 'prop-types'
 
 import styles from './LastDispatchWidget.module.scss'
 
 const LastDispatchWidget = props => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const stats = useSelector(state => state.stats.data)
   const isLoading = useSelector(state => state.stats.fetching)
 

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import styles from './CreateCampaignWidget.module.scss'
 
 const CreateCampaignWidget = props => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   return (
     <div className={styles.widget}>
 

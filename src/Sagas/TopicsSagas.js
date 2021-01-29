@@ -1,4 +1,4 @@
-import { call, put, select } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'
 import TopicsActions from '../Redux/Topics'
 
 export function * fetchTopics (api, { payload }) {

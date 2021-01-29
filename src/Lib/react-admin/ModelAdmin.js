@@ -26,10 +26,10 @@ const ModelAdmin = props => {
   const insertForm = useRef(null)
   const editForm = useRef(null)
 
-  const closeInsertModal = useCallback(() => setInsertItem(null))
-  const closeEditModal = useCallback(() => setEditItem(null))
-  const closeDeleteModal = useCallback(() => setDeleteItem(null))
-  const closeErrorModal = useCallback(() => setError(null))
+  const closeInsertModal = useCallback(() => setInsertItem(null), [setInsertItem])
+  const closeEditModal = useCallback(() => setEditItem(null), [setEditItem])
+  const closeDeleteModal = useCallback(() => setDeleteItem(null), [setDeleteItem])
+  const closeErrorModal = useCallback(() => setError(null), [setError])
 
   const handleInsert = () => setInsertItem(true)
   const handleEdit = item => setEditItem(item)

@@ -46,16 +46,17 @@ const CampaignDetailView = props => {
         setDispatches({ fetched: true, data: response.data, error: false })
       },
       error => {
+        console.log(error)
         setDispatches({ fetched: true, data: [], error: true })
       }
     )
-  })
+  }, [id, setDispatches, t])
 
   useEffect(() => {
     if (id) {
       fetchDispatches()
     }
-  }, [id])
+  }, [id, fetchDispatches])
 
   const dispatchesSection = ({ fetched, error, data }) => {
     if (fetched && !error && !data.length) {
@@ -120,7 +121,7 @@ const CampaignDetailView = props => {
                       {campaign.view_online ? (
                         [
                           <Icon key='icon' name='thumbs up' color='green' />,
-                          <a key='link' target='_blank' href={campaign.url}>
+                          <a key='link' target='_blank' href={campaign.url} rel='noopener noreferrer'>
                             <Icon
                               key='link'
                               name='external alternate'

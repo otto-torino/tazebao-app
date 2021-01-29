@@ -48,7 +48,7 @@ const ChangeList = props => {
   // pagination
   const [page, setPage, items] = usePagination(sortedItems, props.listPerPage)
   const handlePageChange = useCallback((e, { activePage }) =>
-    setPage(activePage)
+    setPage(activePage), [setPage]
   )
 
   //  insert/edit/delete

@@ -1,7 +1,5 @@
-import { call, put, select } from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'
 import ListsActions from '../Redux/Lists'
-import history from '../history'
-import config from '../Config'
 
 export function * fetchLists (api, { payload }) {
   // request

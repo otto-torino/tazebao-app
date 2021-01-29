@@ -22,7 +22,7 @@
  * So in our example, you need only to manually dispatch the request action,
  * and saga will take care of dispatching the subsequent action after the request is complete.
  */
-import { takeLatest, takeEvery, all } from 'redux-saga/effects'
+import { takeLatest, all } from 'redux-saga/effects'
 // the majority of sagas regards api calls
 
 /* ------------- Types ------------- */

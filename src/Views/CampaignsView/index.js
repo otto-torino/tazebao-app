@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
+// import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import CampaignsActions from '../../Redux/Campaigns'

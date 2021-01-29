@@ -4,7 +4,7 @@ import SubscribersWidget from '../SubscribersWidget'
 import LastDispatchWidget from '../LastDispatchWidget'
 import NextPlanningWidget from '../NextPlanningWidget'
 import CreateCampaignWidget from '../CreateCampaignWidget'
-import propTypes from 'prop-types'
+// import propTypes from 'prop-types'
 
 const Dashboard = props => {
   return (
