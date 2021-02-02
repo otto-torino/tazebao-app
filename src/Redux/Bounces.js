@@ -57,7 +57,7 @@ export const bouncesSuccess = (state, data) => {
     error: false,
     errorCode: null,
     errorMessage: null,
-    data: data,
+    data: results,
     isWholeDataSet: data.count === undefined,
     count,
     next,

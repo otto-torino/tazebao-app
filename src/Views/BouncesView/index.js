@@ -111,6 +111,7 @@ const BouncesView = props => {
                 options: { setPage: 1 }
               }
             }}
+            isWholeDataSet={isWholeDataSet}
             querystring={querystring}
             dataSetCount={bouncesCount}
             onUpdateQuerystring={handleUpdateQuerystring}
