@@ -7,13 +7,14 @@ import {
 } from './Utils'
 
 // Types
+export const SUBSCRIBERS_QUERYSTRING = 'SUBSCRIBERS_QUERYSTRING'
 export const SUBSCRIBERS_REQUEST = 'SUBSCRIBERS_REQUEST'
 export const SUBSCRIBERS_SUCCESS = 'SUBSCRIBERS_SUCCESS'
 export const SUBSCRIBERS_FAILURE = 'SUBSCRIBERS_FAILURE'
 
 // Actions
 export default {
-  // login
+  subscribersQuerystring: actionCreator(SUBSCRIBERS_QUERYSTRING),
   subscribersRequest: actionCreator(SUBSCRIBERS_REQUEST),
   subscribersSuccess: actionCreator(SUBSCRIBERS_SUCCESS),
   subscribersFailure: actionCreator(SUBSCRIBERS_FAILURE)
@@ -25,14 +26,20 @@ export const INITIAL_STATE = {
   data: [],
   count: 0,
   next: '',
-  previous: ''
+  previous: '',
+  qs: {
+    page: 1,
+    page_size: 20,
+    sort: 'id',
+    sort_direction: 'desc'
+  }
 }
 
 // Reducers
-const request = (state, payload = {}) => Object.assign({}, state, {
-  ...requestBlueprint,
-  reset: Object.keys(payload).length === 0
-})
+
+const querystring = (state, qs) => Object.assign({}, state, { qs })
+
+const request = (state) => Object.assign({}, state, { ...requestBlueprint })
 
 // login
 export const subscribersSuccess = (state, data) => {
@@ -65,6 +72,8 @@ const subscribersFailure = (state, { code, detail }) => {
 
 export function reducer (state = INITIAL_STATE, { type, payload }) {
   switch (type) {
+    case SUBSCRIBERS_QUERYSTRING:
+      return querystring(state, payload)
     case SUBSCRIBERS_REQUEST:
       return request(state, payload)
     case SUBSCRIBERS_SUCCESS:

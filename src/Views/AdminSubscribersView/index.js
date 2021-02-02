@@ -34,8 +34,8 @@ const AdminSubscribersView = props => {
   const [showSpinner, setShowSpinner] = useState(false)
   const subscribers = useSelector(state => state.subscribers.data)
   const isWholeDataSet = useSelector(state => state.subscribers.isWholeDataSet)
+  const querystring = useSelector(state => state.subscribers.qs)
   const subscribersCount = useSelector(state => state.subscribers.count)
-  const reset = useSelector(state => state.subscribers.reset)
   const lists = useSelector(state => state.lists.data)
   const isLoading = useSelector(state => state.subscribers.fetching)
   const [importCsvModalIsOpen, setImportCsvModalIsOpen] = useState(false)
@@ -115,16 +115,16 @@ const AdminSubscribersView = props => {
       'addSubscriber',
       [data],
       t('There was an error inserting the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest(qs))
+      response => dispatch(SubscribersActions.subscribersRequest())
     )
   }
 
-  const handleEdit = (id, data, qs = {}) => {
+  const handleEdit = (id, data) => {
     return request(
       'editSubscriber',
       [data],
       t('There was an error editing the subscriber') + ': {error}',
-      response => handleUpdate(qs)
+      response => dispatch(SubscribersActions.subscribersRequest())
     )
   }
 
@@ -133,7 +133,7 @@ const AdminSubscribersView = props => {
       'deleteSubscriber',
       [id],
       t('There was an error deleting the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest(qs))
+      response => dispatch(SubscribersActions.subscribersRequest())
     )
   }
 
@@ -143,7 +143,7 @@ const AdminSubscribersView = props => {
       [ids],
       t('There was an error deleting the subscribers') + ': {error}',
       response => {
-        handleUpdate({}) // reset ui page, filters, etc...
+        dispatch(SubscribersActions.subscribersRequest({}))
         setDeleteModalData({ open: false, cb: null })
         dispatch(ListActions.listsRequest())
       }
@@ -156,7 +156,7 @@ const AdminSubscribersView = props => {
       [ids, selectedLists],
       t('There was an error adding the selected lists'),
       response => {
-        handleUpdate(qs)
+        dispatch(SubscribersActions.subscribersRequest())
         setChooseListModalData({ open: false, cb: null })
         dispatch(ListActions.listsRequest())
       },
@@ -170,7 +170,7 @@ const AdminSubscribersView = props => {
       [ids, selectedLists],
       t('There was an error removing the selected lists'),
       response => {
-        handleUpdate(qs)
+        dispatch(SubscribersActions.subscribersRequest())
         setChooseListModalData({ open: false, cb: null })
         dispatch(ListActions.listsRequest())
       },
@@ -189,7 +189,7 @@ const AdminSubscribersView = props => {
       [formData],
       'There was an error importing the file: {error}',
       response => {
-        dispatch(SubscribersActions.subscribersRequest())
+        dispatch(SubscribersActions.subscribersRequest({}))
         dispatch(ListActions.listsRequest())
         setShowSpinner(false)
         setImportCsvModalIsOpen(false)
@@ -200,7 +200,9 @@ const AdminSubscribersView = props => {
   }
 
   const handleUpdate = qs => {
-    dispatch(SubscribersActions.subscribersRequest(qs))
+    if (!isWholeDataSet) {
+      dispatch(SubscribersActions.subscribersQuerystring(qs))
+    }
   }
 
   const description = (
@@ -237,7 +239,6 @@ const AdminSubscribersView = props => {
           handleInsert,
           handleEdit,
           handleDelete,
-          handleQueryString,
           idProp,
           verboseName,
           verboseNamePlural
@@ -247,7 +248,6 @@ const AdminSubscribersView = props => {
             onInsert={handleInsert}
             onEdit={handleEdit}
             onDelete={handleDelete}
-            onQueryStringChange={handleQueryString}
             toolbarButtons={toolbarButtons}
             items={subscribers}
             isLoading={isLoading}
@@ -266,7 +266,7 @@ const AdminSubscribersView = props => {
             dataSetCount={subscribersCount}
             listPerPage={isWholeDataSet ? 10 : 20}
             onUpdate={handleUpdate}
-            reset={reset}
+            querystring={querystring}
           />
         )}
       </ModelAdmin>

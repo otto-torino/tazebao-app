@@ -43,6 +43,7 @@ const ChangeList = props => {
     setAllSelected(false)
     setPage(1)
     setSearch(value)
+    onUpdate({ ...props.querystring, q: value, page: 1 })
   }
 
   // apply filters
@@ -61,22 +62,25 @@ const ChangeList = props => {
       copy[filter] = value
     }
     setFilters(copy)
+    onUpdate({ ...props.querystring, filters: copy, page: 1 })
   }
   // sorting
   const [sort, setSort, sortedItems] = useSorting(
     filteredItems,
-    props.sortField,
-    props.sortDirection,
+    isWholeDataSet ? props.sortField : props.querystring.sort,
+    isWholeDataSet ? props.sortDirection : props.querystring.sort_direction,
     isWholeDataSet
   )
   const handleSort = ({ field, direction }) => {
     setSort({ field, direction })
+    onUpdate({ ...props.querystring, sort: field, sort_direction: direction })
   }
 
   // pagination
   const [page, setPage, items] = usePagination(sortedItems, props.listPerPage, isWholeDataSet)
   const handlePageChange = (e, { activePage }) => {
     setPage(activePage)
+    onUpdate({ ...props.querystring, page: activePage })
   }
 
   // retrieve query string
@@ -90,31 +94,32 @@ const ChangeList = props => {
     }
   }
 
+  // const { onQueryStringChange } = props
   // refresh items if not isWholeDataSet
-  useEffect(() => {
-    if (!isWholeDataSet) {
-      const qs = getQueryString()
-      props.onQueryStringChange(qs)
-      onUpdate(qs)
-    }
-  }, [page, sort, filters, search])
+  // useEffect(() => {
+  //   if (!isWholeDataSet) {
+  //     const qs = getQueryString()
+  //     onQueryStringChange(qs)
+  //     onUpdate(qs)
+  //   }
+  // }, [page, sort, filters, search, getQueryString, onQueryStringChange, onUpdate, isWholeDataSet])
 
   // reset
-  useEffect(() => {
-    if (props.reset) {
-      setAllSelected(false)
-      setSelectedItems([])
-      setPage(1)
-      setFilters({})
-    }
-  }, [props.reset])
+  // useEffect(() => {
+  //   if (props.reset) {
+  //     setAllSelected(false)
+  //     setSelectedItems([])
+  //     setPage(1)
+  //     setFilters({})
+  //   }
+  // }, [props.reset])
 
   //  insert/edit/delete
   const insertRecord = () => {
     return props.canInsert ? props.onInsert() : null
   }
   const editRecord = item => {
-    return props.canEdit(item) ? props.onEdit(item, getQueryString()) : null
+    return props.canEdit(item) ? props.onEdit(item) : null
   }
   const deleteRecord = item => {
     return props.canDelete(item) ? props.onDelete(item) : null
@@ -403,8 +408,7 @@ ChangeList.defaultProps = {
   isWholeDataSet: true,
   dataSetCount: null,
   onUpdate: () => {},
-  onQueryStringChange: () => {},
-  reset: false
+  querystring: {}
 }
 
 ChangeList.propTypes = {
@@ -432,7 +436,6 @@ ChangeList.propTypes = {
   onInsert: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  onQueryStringChange: PropTypes.func,
   hideButtonWithoutPermissions: PropTypes.bool,
   moreActions: PropTypes.func,
   toolbarButtons: PropTypes.oneOfType([
@@ -443,7 +446,7 @@ ChangeList.propTypes = {
   isWholeDataSet: PropTypes.bool,
   dataSetCount: PropTypes.number,
   onUpdate: PropTypes.func,
-  reset: PropTypes.bool
+  querystring: PropTypes.object
 }
 
 export default ChangeList

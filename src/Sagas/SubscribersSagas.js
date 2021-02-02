@@ -1,10 +1,14 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import SubscribersActions from '../Redux/Subscribers'
 
 export function * fetchSubscribers (api, { payload }) {
-  console.log(payload, 'PAYLOAD')
+  if (payload === undefined) {
+    payload = yield select(state => state.subscribers.qs)
+  }
+
+  const { filters, ...rest } = payload
   // request
-  const response = yield call(api.subscribers, payload)
+  const response = yield call(api.subscribers, { ...rest, ...filters })
 
   // success?
   if (response.ok) {
@@ -14,3 +18,6 @@ export function * fetchSubscribers (api, { payload }) {
   }
 }
 
+export function * requestSubscribers (api) {
+  yield put(SubscribersActions.subscribersRequest())
+}
