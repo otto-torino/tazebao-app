@@ -120,6 +120,7 @@ const BouncesView = props => {
       {showConfirm && (
         <Confirm
           open
+          content={t('AreYouSure')}
           onCancel={() => setShowConfirm(false)}
           onConfirm={unsubscribe}
         />
