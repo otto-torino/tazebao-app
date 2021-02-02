@@ -41,7 +41,6 @@ const querystring = (state, qs) => Object.assign({}, state, { qs })
 
 const request = state => Object.assign({}, state, requestBlueprint)
 
-// login
 export const listsSuccess = (state, data) => {
   // if not paginated, data.count is undefined, because data only contains the list of items
   const { count, next, previous, results } = data.count !== undefined

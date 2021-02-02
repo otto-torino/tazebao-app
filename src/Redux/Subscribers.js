@@ -29,7 +29,7 @@ export const INITIAL_STATE = {
   previous: '',
   qs: {
     page: 1,
-    page_size: 20,
+    page_size: 10,
     sort: 'id',
     sort_direction: 'desc'
   }

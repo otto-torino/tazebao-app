@@ -61,8 +61,8 @@ const create = (baseURL = config.apiBasePath) => {
   const login = (username, password) => {
     return api.post('/login/', { username, password })
   }
-  const refresh = (username, refreshToken) => {
-    return api.post('/refresh', { username, refreshToken })
+  const refresh = token => {
+    return api.post('/refresh-token/', { token })
   }
   // STATS
   const stats = () => api.get('/newsletter/stats/')

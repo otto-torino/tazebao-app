@@ -173,6 +173,7 @@ const AdminSubscribersView = props => {
               last_edit_datetime: dt => moment(dt).format('LLL'),
               last_dispatch: dt => (dt ? moment(dt).format('LLL') : null)
             }}
+            isWholeDataSet={isWholeDataSet}
             querystring={querystring}
             dataSetCount={campaignsCount}
             onUpdateQuerystring={handleUpdateQuerystring}
