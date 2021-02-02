@@ -65,7 +65,7 @@ const LastDispatchWidget = props => {
                     ? stats.lastDispatch.click_rate + '%'
                     : 'N.A.'}
                 </Statistic.Value>
-                <Statistic.Label>
+                <Statistic.Label style={{ textAlign: 'left' }}>
                   {t('Click Rate')}{' '}
                   {!stats.lastDispatch.click_statistics && (
                     <Popup
