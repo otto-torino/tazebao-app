@@ -2,8 +2,9 @@ import { call, put } from 'redux-saga/effects'
 import SubscribersActions from '../Redux/Subscribers'
 
 export function * fetchSubscribers (api, { payload }) {
+  console.log(payload, 'PAYLOAD')
   // request
-  const response = yield call(api.subscribers)
+  const response = yield call(api.subscribers, payload)
 
   // success?
   if (response.ok) {

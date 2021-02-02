@@ -23,6 +23,7 @@ const ModelAdmin = props => {
   const [editItem, setEditItem] = useState(null)
   const [deleteItem, setDeleteItem] = useState(null)
   const [error, setError] = useState(false)
+  const [qs, setQueryString] = useState({})
   const insertForm = useRef(null)
   const editForm = useRef(null)
 
@@ -34,13 +35,14 @@ const ModelAdmin = props => {
   const handleInsert = () => setInsertItem(true)
   const handleEdit = item => setEditItem(item)
   const handleDelete = item => setDeleteItem(item)
+  const handleQueryString = qs => setQueryString(qs)
 
   // let's insert
   const insertSubmit = () => {
     const res = insertForm.current.submit()
     if (res !== false) {
       // false means errors
-      const response = props.onInsert(res.data)
+      const response = props.onInsert(res.data, qs)
       response.then(
         closeInsertModal, // success
         error => setError(error.message)
@@ -50,11 +52,10 @@ const ModelAdmin = props => {
 
   // edit form submit (submit button is external to the form component)
   const editSubmit = () => {
-    console.log(editForm)
     const res = editForm.current.submit()
     if (res !== false) {
       // false means errors
-      const response = props.onEdit(res[props.idProp], res.data)
+      const response = props.onEdit(res[props.idProp], res.data, qs)
       response.then(
         closeEditModal, // success
         error => setError(error.message)
@@ -64,7 +65,7 @@ const ModelAdmin = props => {
 
   // let's delete
   const deleteSubmit = () => {
-    const response = props.onDelete(deleteItem[props.idProp])
+    const response = props.onDelete(deleteItem[props.idProp], qs)
     response.then(
       closeDeleteModal, // success
       error => setError(error.message)
@@ -150,6 +151,7 @@ const ModelAdmin = props => {
           handleInsert,
           handleEdit,
           handleDelete,
+          handleQueryString,
           idProp: props.idProp,
           verboseName: props.verboseName,
           verboseNamePlural: props.verboseNamePlural

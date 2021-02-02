@@ -8,6 +8,12 @@ import config from '../Config'
 //   setTimeout(() => resolve({ ok: true, data:json }), 1500)
 // })
 
+const url = (endpoint, querystring) => {
+  return endpoint + (Object.keys(querystring).length
+    ? '?' + Object.keys(querystring).map(k => `${k}=${querystring[k]}`).join('&')
+    : '')
+}
+
 // our "constructor"
 const create = (baseURL = config.apiBasePath) => {
   //
@@ -61,7 +67,12 @@ const create = (baseURL = config.apiBasePath) => {
   // STATS
   const stats = () => api.get('/newsletter/stats/')
   // SUBSCRIBERS
-  const subscribers = () => api.get('/newsletter/subscriber/?page_size=50000')
+  const subscribers = (qs = {}) => {
+    const endpoint = '/newsletter/subscriber/'
+    qs.page_size = 20
+
+    return api.get(url(endpoint, qs))
+  }
   const addSubscriber = subscriber =>
     api.post('/newsletter/subscriber/', subscriber)
   const editSubscriber = subscriber =>

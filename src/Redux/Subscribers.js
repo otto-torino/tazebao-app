@@ -24,22 +24,31 @@ export const INITIAL_STATE = {
   ...requestStateBlueprint,
   data: [],
   count: 0,
-  next: ''
+  next: '',
+  previous: ''
 }
 
 // Reducers
-const request = state => Object.assign({}, state, requestBlueprint)
+const request = (state, payload = {}) => Object.assign({}, state, {
+  ...requestBlueprint,
+  reset: Object.keys(payload).length === 0
+})
 
 // login
-export const subscribersSuccess = (state, { count, next, results }) => {
+export const subscribersSuccess = (state, data) => {
+  const { count, next, previous, results } = data.count !== undefined
+    ? data // no pagination
+    : { count: data.length, next: null, previous: null, results: data } // pagination
   return Object.assign({}, state, {
     ...successBlueprint,
     error: false,
     errorCode: null,
     errorMessage: null,
     data: results,
+    isWholeDataSet: data.count === undefined,
     count,
-    next
+    next,
+    previous
   })
 }
 const subscribersFailure = (state, { code, detail }) => {
@@ -57,7 +66,7 @@ const subscribersFailure = (state, { code, detail }) => {
 export function reducer (state = INITIAL_STATE, { type, payload }) {
   switch (type) {
     case SUBSCRIBERS_REQUEST:
-      return request(state)
+      return request(state, payload)
     case SUBSCRIBERS_SUCCESS:
       return subscribersSuccess(state, payload)
     case SUBSCRIBERS_FAILURE:

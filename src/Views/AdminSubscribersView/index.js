@@ -33,6 +33,9 @@ const AdminSubscribersView = props => {
   })
   const [showSpinner, setShowSpinner] = useState(false)
   const subscribers = useSelector(state => state.subscribers.data)
+  const isWholeDataSet = useSelector(state => state.subscribers.isWholeDataSet)
+  const subscribersCount = useSelector(state => state.subscribers.count)
+  const reset = useSelector(state => state.subscribers.reset)
   const lists = useSelector(state => state.lists.data)
   const isLoading = useSelector(state => state.subscribers.fetching)
   const [importCsvModalIsOpen, setImportCsvModalIsOpen] = useState(false)
@@ -41,20 +44,20 @@ const AdminSubscribersView = props => {
   const listActions = {
     delete: {
       label: t('Delete selected subscribers'),
-      action: ids => {
-        setDeleteModalData({ open: true, cb: () => handleDeleteSelected(ids) })
+      action: (ids, qs) => {
+        setDeleteModalData({ open: true, cb: () => handleDeleteSelected(ids, qs) })
       }
     },
     addToList: {
       label: t('Add selected items to lists'),
-      action: ids => {
-        setChooseListModalData({ open: true, cb: handleAddLists(ids) })
+      action: (ids, qs) => {
+        setChooseListModalData({ open: true, cb: handleAddLists(ids, qs) })
       }
     },
     removeFromList: {
       label: t('Remove selected items from lists'),
-      action: ids => {
-        setChooseListModalData({ open: true, cb: handleRemoveLists(ids) })
+      action: (ids, qs) => {
+        setChooseListModalData({ open: true, cb: handleRemoveLists(ids, qs) })
       }
     }
   }
@@ -107,53 +110,53 @@ const AdminSubscribersView = props => {
     }
   }
 
-  const handleInsert = data => {
+  const handleInsert = (data, qs = {}) => {
     return request(
       'addSubscriber',
       [data],
       t('There was an error inserting the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest())
+      response => dispatch(SubscribersActions.subscribersRequest(qs))
     )
   }
 
-  const handleEdit = (id, data) => {
+  const handleEdit = (id, data, qs = {}) => {
     return request(
       'editSubscriber',
       [data],
       t('There was an error editing the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest())
+      response => handleUpdate(qs)
     )
   }
 
-  const handleDelete = id => {
+  const handleDelete = (id, qs) => {
     return request(
       'deleteSubscriber',
       [id],
       t('There was an error deleting the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest())
+      response => dispatch(SubscribersActions.subscribersRequest(qs))
     )
   }
 
-  const handleDeleteSelected = ids => {
+  const handleDeleteSelected = (ids, qs) => {
     return request(
       'deleteSubscribers',
       [ids],
       t('There was an error deleting the subscribers') + ': {error}',
       response => {
-        dispatch(SubscribersActions.subscribersRequest())
+        handleUpdate({}) // reset ui page, filters, etc...
         setDeleteModalData({ open: false, cb: null })
         dispatch(ListActions.listsRequest())
       }
     )
   }
 
-  const handleAddLists = ids => selectedLists => {
+  const handleAddLists = (ids, qs) => selectedLists => {
     request(
       'subscribersAddLists',
       [ids, selectedLists],
       t('There was an error adding the selected lists'),
       response => {
-        dispatch(SubscribersActions.subscribersRequest())
+        handleUpdate(qs)
         setChooseListModalData({ open: false, cb: null })
         dispatch(ListActions.listsRequest())
       },
@@ -161,13 +164,13 @@ const AdminSubscribersView = props => {
     )
   }
 
-  const handleRemoveLists = ids => selectedLists => {
+  const handleRemoveLists = (ids, qs) => selectedLists => {
     request(
       'subscribersRemoveLists',
       [ids, selectedLists],
       t('There was an error removing the selected lists'),
       response => {
-        dispatch(SubscribersActions.subscribersRequest())
+        handleUpdate(qs)
         setChooseListModalData({ open: false, cb: null })
         dispatch(ListActions.listsRequest())
       },
@@ -196,8 +199,12 @@ const AdminSubscribersView = props => {
     )
   }
 
+  const handleUpdate = qs => {
+    dispatch(SubscribersActions.subscribersRequest(qs))
+  }
+
   const description = (
-    <p dangerouslySetInnerHTML={{ __html: t('admin_subscribers_description') }}></p>
+    <p dangerouslySetInnerHTML={{ __html: t('admin_subscribers_description') }} />
   )
 
   const toolbarButtons = (
@@ -230,6 +237,7 @@ const AdminSubscribersView = props => {
           handleInsert,
           handleEdit,
           handleDelete,
+          handleQueryString,
           idProp,
           verboseName,
           verboseNamePlural
@@ -239,6 +247,7 @@ const AdminSubscribersView = props => {
             onInsert={handleInsert}
             onEdit={handleEdit}
             onDelete={handleDelete}
+            onQueryStringChange={handleQueryString}
             toolbarButtons={toolbarButtons}
             items={subscribers}
             isLoading={isLoading}
@@ -247,11 +256,17 @@ const AdminSubscribersView = props => {
             idProp='id'
             sortField='id'
             sortDirection='desc'
+            sortableFields={['id', 'email', 'subscription_datetime']}
             verboseName={verboseName}
             verboseNamePlural={verboseNamePlural}
             listFilters={listFilters}
             searchFields={['email', 'info']}
             fieldsMapping={fieldsMapping}
+            isWholeDataSet={isWholeDataSet}
+            dataSetCount={subscribersCount}
+            listPerPage={isWholeDataSet ? 10 : 20}
+            onUpdate={handleUpdate}
+            reset={reset}
           />
         )}
       </ModelAdmin>
