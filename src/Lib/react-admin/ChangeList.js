@@ -24,7 +24,7 @@ const ChangeList = props => {
   const { t } = useTranslation()
 
   // whole set or just the correct filtered and sorted data?
-  const { onUpdate, isWholeDataSet } = props
+  const { onUpdateQuerystring, isWholeDataSet } = props
 
   // checkboxes, actions to be performed on selected items
   const [selectedItems, setSelectedItems] = useState([])
@@ -43,7 +43,9 @@ const ChangeList = props => {
     setAllSelected(false)
     setPage(1)
     setSearch(value)
-    onUpdate({ ...props.querystring, q: value, page: 1 })
+    if (!isWholeDataSet) {
+      onUpdateQuerystring({ ...props.querystring, q: value, page: 1 })
+    }
   }
 
   // apply filters
@@ -62,7 +64,9 @@ const ChangeList = props => {
       copy[filter] = value
     }
     setFilters(copy)
-    onUpdate({ ...props.querystring, filters: copy, page: 1 })
+    if (!isWholeDataSet) {
+      onUpdateQuerystring({ ...props.querystring, filters: copy, page: 1 })
+    }
   }
   // sorting
   const [sort, setSort, sortedItems] = useSorting(
@@ -73,46 +77,19 @@ const ChangeList = props => {
   )
   const handleSort = ({ field, direction }) => {
     setSort({ field, direction })
-    onUpdate({ ...props.querystring, sort: field, sort_direction: direction })
+    if (!isWholeDataSet) {
+      onUpdateQuerystring({ ...props.querystring, sort: field, sort_direction: direction })
+    }
   }
 
   // pagination
   const [page, setPage, items] = usePagination(sortedItems, props.listPerPage, isWholeDataSet)
   const handlePageChange = (e, { activePage }) => {
     setPage(activePage)
-    onUpdate({ ...props.querystring, page: activePage })
-  }
-
-  // retrieve query string
-  const getQueryString = () => {
-    return {
-      page: page,
-      sort: sort.field,
-      sort_direction: sort.direction,
-      ...filters,
-      ...(search !== null && { q: search })
+    if (!isWholeDataSet) {
+      onUpdateQuerystring({ ...props.querystring, page: activePage })
     }
   }
-
-  // const { onQueryStringChange } = props
-  // refresh items if not isWholeDataSet
-  // useEffect(() => {
-  //   if (!isWholeDataSet) {
-  //     const qs = getQueryString()
-  //     onQueryStringChange(qs)
-  //     onUpdate(qs)
-  //   }
-  // }, [page, sort, filters, search, getQueryString, onQueryStringChange, onUpdate, isWholeDataSet])
-
-  // reset
-  // useEffect(() => {
-  //   if (props.reset) {
-  //     setAllSelected(false)
-  //     setSelectedItems([])
-  //     setPage(1)
-  //     setFilters({})
-  //   }
-  // }, [props.reset])
 
   //  insert/edit/delete
   const insertRecord = () => {
@@ -171,8 +148,10 @@ const ChangeList = props => {
           }))
         ]}
         onChange={(e, { value }) => {
-          value !== null && props.listActions[value].action(selectedItems, { ...getQueryString() })
+          value !== null && props.listActions[value].action(selectedItems)
           setSelectedAction(null)
+          setAllSelected(false)
+          setSelectedItems([])
         }}
         style={{ marginBottom: '1rem' }}
       />
@@ -407,7 +386,7 @@ ChangeList.defaultProps = {
   toolbarButtons: null,
   isWholeDataSet: true,
   dataSetCount: null,
-  onUpdate: () => {},
+  onUpdateQuerystring: () => {},
   querystring: {}
 }
 
@@ -445,7 +424,7 @@ ChangeList.propTypes = {
   ]),
   isWholeDataSet: PropTypes.bool,
   dataSetCount: PropTypes.number,
-  onUpdate: PropTypes.func,
+  onUpdateQuerystring: PropTypes.func,
   querystring: PropTypes.object
 }
 

@@ -42,7 +42,7 @@ const querystring = (state, qs) => Object.assign({}, state, { qs })
 const request = (state) => Object.assign({}, state, { ...requestBlueprint })
 
 // login
-export const subscribersSuccess = (state, data) => {
+export const subscribersSuccess = (state, data, init = false) => {
   const { count, next, previous, results } = data.count !== undefined
     ? data // no pagination
     : { count: data.length, next: null, previous: null, results: data } // pagination

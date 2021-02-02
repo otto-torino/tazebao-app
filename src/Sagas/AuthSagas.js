@@ -79,7 +79,7 @@ export function * whoami ({ api, dispatch }) {
       }
       history.push(redirectUrl)
       yield put(ListsActions.listsRequest())
-      yield put(SubscribersActions.subscribersRequest())
+      yield put(SubscribersActions.subscribersRequest({}))
       yield put(TopicsActions.topicsRequest())
       yield put(CampaignsActions.campaignsRequest())
       if (!startupComplete) {

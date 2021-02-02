@@ -2,7 +2,9 @@ import { call, put, select } from 'redux-saga/effects'
 import SubscribersActions from '../Redux/Subscribers'
 
 export function * fetchSubscribers (api, { payload }) {
+  let init = false
   if (payload === undefined) {
+    init = true
     payload = yield select(state => state.subscribers.qs)
   }
 
@@ -12,7 +14,7 @@ export function * fetchSubscribers (api, { payload }) {
 
   // success?
   if (response.ok) {
-    yield put(SubscribersActions.subscribersSuccess(response.data))
+    yield put(SubscribersActions.subscribersSuccess(response.data, init))
   } else {
     yield put(SubscribersActions.subscribersFailure({ code: response.status, detail: response.data.detail }))
   }

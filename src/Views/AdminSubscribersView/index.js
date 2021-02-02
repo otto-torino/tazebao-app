@@ -115,7 +115,7 @@ const AdminSubscribersView = props => {
       'addSubscriber',
       [data],
       t('There was an error inserting the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest())
+      response => dispatch(SubscribersActions.subscribersRequest({}))
     )
   }
 
@@ -124,7 +124,7 @@ const AdminSubscribersView = props => {
       'editSubscriber',
       [data],
       t('There was an error editing the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest())
+      response => dispatch(SubscribersActions.subscribersRequest({}))
     )
   }
 
@@ -133,7 +133,7 @@ const AdminSubscribersView = props => {
       'deleteSubscriber',
       [id],
       t('There was an error deleting the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest())
+      response => dispatch(SubscribersActions.subscribersRequest({}))
     )
   }
 
@@ -143,7 +143,11 @@ const AdminSubscribersView = props => {
       [ids],
       t('There was an error deleting the subscribers') + ': {error}',
       response => {
-        dispatch(SubscribersActions.subscribersRequest({}))
+        if (isWholeDataSet) {
+          dispatch(SubscribersActions.subscribersRequest())
+        } else {
+          handleUpdateQuerystring({ ...querystring })
+        }
         setDeleteModalData({ open: false, cb: null })
         dispatch(ListActions.listsRequest())
       }
@@ -189,7 +193,11 @@ const AdminSubscribersView = props => {
       [formData],
       'There was an error importing the file: {error}',
       response => {
-        dispatch(SubscribersActions.subscribersRequest({}))
+        if (isWholeDataSet) {
+          dispatch(SubscribersActions.subscribersRequest())
+        } else {
+          handleUpdateQuerystring({ ...querystring })
+        }
         dispatch(ListActions.listsRequest())
         setShowSpinner(false)
         setImportCsvModalIsOpen(false)
@@ -199,10 +207,8 @@ const AdminSubscribersView = props => {
     )
   }
 
-  const handleUpdate = qs => {
-    if (!isWholeDataSet) {
-      dispatch(SubscribersActions.subscribersQuerystring(qs))
-    }
+  const handleUpdateQuerystring = qs => {
+    dispatch(SubscribersActions.subscribersQuerystring(qs))
   }
 
   const description = (
@@ -265,7 +271,7 @@ const AdminSubscribersView = props => {
             isWholeDataSet={isWholeDataSet}
             dataSetCount={subscribersCount}
             listPerPage={isWholeDataSet ? 10 : 20}
-            onUpdate={handleUpdate}
+            onUpdateQuerystring={handleUpdateQuerystring}
             querystring={querystring}
           />
         )}

@@ -69,8 +69,6 @@ const create = (baseURL = config.apiBasePath) => {
   // SUBSCRIBERS
   const subscribers = (qs = {}) => {
     const endpoint = '/newsletter/subscriber/'
-    qs.page_size = 20
-
     return api.get(url(endpoint, qs))
   }
   const addSubscriber = subscriber =>
