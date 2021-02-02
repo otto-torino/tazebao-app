@@ -32,6 +32,8 @@ const DispatchDetail = ({ dispatch, onChange }) => {
     )
   }, [selectedBounces, t, onChange, setBouncesModalIsOpen])
 
+  const dispatchListsLength = dispatch.lists.length
+
   return (
     <div>
       <p>{t('Information about the campaign dispatch')}</p>
@@ -44,7 +46,7 @@ const DispatchDetail = ({ dispatch, onChange }) => {
           <Table.Row>
             <Table.Cell>{t('Lists')}</Table.Cell>
             <Table.Cell>
-              {dispatch.lists.map(l => lists[l].name).join(', ')}
+              {dispatch.lists.map((l, idx) => lists[l] ? <span>{lists[l].name}, </span> : <span><s>{t('Deleted')}</s>{dispatchListsLength - 1 === idx ? '' : ', '}</span>)}
             </Table.Cell>
           </Table.Row>
           <Table.Row>
