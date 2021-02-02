@@ -30,7 +30,8 @@ export function * login (api, { payload }) {
 }
 
 export function * logout () {
-  yield history.push(config.urls.login)
+  // yield history.push(config.urls.login)
+  yield window.location.reload(true)
 }
 
 // refresh token
