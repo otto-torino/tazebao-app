@@ -20,6 +20,8 @@
     "Lists": "Liste",
     "Topics": "Topics",
     "Campaigns": "Campagne",
+    "campaigns": "campagne",
+    "campaign_name": "nome campagna",
     "Planning": "Programmazione",
     "Bounces": "Bounces",
     "Add selected items to lists": "Aggiungi gli iscritti selezionati a liste",

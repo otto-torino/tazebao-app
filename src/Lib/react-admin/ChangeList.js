@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import _ from 'lodash'
@@ -24,7 +24,7 @@ const ChangeList = props => {
   const { t } = useTranslation()
 
   // whole set or just the correct filtered and sorted data?
-  const { onUpdateQuerystring, isWholeDataSet } = props
+  const { querystring, onUpdateQuerystring, isWholeDataSet } = props
 
   // checkboxes, actions to be performed on selected items
   const [selectedItems, setSelectedItems] = useState([])
@@ -36,22 +36,21 @@ const ChangeList = props => {
   const [search, setSearch, textFilteredItems] = useFullTextSearch(
     props.items.slice(),
     props.searchFields,
-    '',
+    querystring.q || '',
     isWholeDataSet
   )
   const handleSearch = (e, { value }) => {
     setAllSelected(false)
     setPage(1)
     setSearch(value)
-    if (!isWholeDataSet) {
-      onUpdateQuerystring({ ...props.querystring, q: value, page: 1 })
-    }
+    onUpdateQuerystring({ ...props.querystring, q: value, page: 1 })
   }
 
   // apply filters
   const [filters, setFilters, filteredItems] = useListFilters(
     textFilteredItems,
     props.listFilters,
+    querystring.filters,
     isWholeDataSet
   )
   const handleFilter = filter => (e, { value }) => {
@@ -64,31 +63,25 @@ const ChangeList = props => {
       copy[filter] = value
     }
     setFilters(copy)
-    if (!isWholeDataSet) {
-      onUpdateQuerystring({ ...props.querystring, filters: copy, page: 1 })
-    }
+    onUpdateQuerystring({ ...props.querystring, filters: copy, page: 1 })
   }
   // sorting
   const [sort, setSort, sortedItems] = useSorting(
     filteredItems,
-    isWholeDataSet ? props.sortField : props.querystring.sort,
-    isWholeDataSet ? props.sortDirection : props.querystring.sort_direction,
+    props.querystring.sort,
+    props.querystring.sort_direction,
     isWholeDataSet
   )
   const handleSort = ({ field, direction }) => {
     setSort({ field, direction })
-    if (!isWholeDataSet) {
-      onUpdateQuerystring({ ...props.querystring, sort: field, sort_direction: direction })
-    }
+    onUpdateQuerystring({ ...props.querystring, sort: field, sort_direction: direction })
   }
 
   // pagination
-  const [page, setPage, items] = usePagination(sortedItems, props.listPerPage, isWholeDataSet)
+  const [page, setPage, items] = usePagination(sortedItems, querystring.page_size, querystring.page, isWholeDataSet)
   const handlePageChange = (e, { activePage }) => {
     setPage(activePage)
-    if (!isWholeDataSet) {
-      onUpdateQuerystring({ ...props.querystring, page: activePage })
-    }
+    onUpdateQuerystring({ ...props.querystring, page: activePage })
   }
 
   //  insert/edit/delete
@@ -111,6 +104,7 @@ const ChangeList = props => {
     inDiv(
       <SearchFilter
         searchFields={props.searchFields}
+        value={search}
         onChange={handleSearch}
       />
     )
@@ -149,6 +143,7 @@ const ChangeList = props => {
         ]}
         onChange={(e, { value }) => {
           value !== null && props.listActions[value].action(selectedItems)
+          props.listActions[value].options && props.listActions[value].options.setPage && setPage(props.listActions[value].options.setPage)
           setSelectedAction(null)
           setAllSelected(false)
           setSelectedItems([])
@@ -267,7 +262,7 @@ const ChangeList = props => {
     })
 
     // single record actions
-    let actions = props.moreActions(item);
+    const actions = props.moreActions(item);
     ['edit', 'delete'].forEach(a => {
       if (!props.hideButtonWithoutPermissions || props['can' + _.upperFirst(a)](item)) {
         actions.push(
@@ -359,7 +354,7 @@ const ChangeList = props => {
             <Pagination
               activePage={page}
               onPageChange={handlePageChange}
-              totalPages={Math.ceil(totItems / props.listPerPage)}
+              totalPages={Math.ceil(totItems / querystring.page_size)}
             />
           </div>
         </div>,
@@ -370,7 +365,6 @@ const ChangeList = props => {
 }
 
 ChangeList.defaultProps = {
-  listPerPage: 10,
   listDisplay: [],
   canInsert: true,
   canEdit: item => true,
@@ -401,7 +395,6 @@ ChangeList.propTypes = {
   listFilters: PropTypes.object,
   listActions: PropTypes.object,
   searchFields: PropTypes.array,
-  listPerPage: PropTypes.number,
   fieldsMapping: PropTypes.object,
   verboseName: PropTypes.string.isRequired,
   verboseNamePlural: PropTypes.string.isRequired,
@@ -409,8 +402,6 @@ ChangeList.propTypes = {
   canInsert: PropTypes.bool,
   canEdit: PropTypes.func,
   canDelete: PropTypes.func,
-  sortField: PropTypes.string,
-  sortDirection: PropTypes.oneOf(['asc', 'desc']),
   sortableFields: PropTypes.array,
   onInsert: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,

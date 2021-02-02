@@ -44,20 +44,21 @@ const AdminSubscribersView = props => {
   const listActions = {
     delete: {
       label: t('Delete selected subscribers'),
-      action: (ids, qs) => {
-        setDeleteModalData({ open: true, cb: () => handleDeleteSelected(ids, qs) })
-      }
+      action: ids => {
+        setDeleteModalData({ open: true, cb: () => handleDeleteSelected(ids) })
+      },
+      options: { setPage: 1 }
     },
     addToList: {
       label: t('Add selected items to lists'),
-      action: (ids, qs) => {
-        setChooseListModalData({ open: true, cb: handleAddLists(ids, qs) })
+      action: ids => {
+        setChooseListModalData({ open: true, cb: handleAddLists(ids) })
       }
     },
     removeFromList: {
       label: t('Remove selected items from lists'),
-      action: (ids, qs) => {
-        setChooseListModalData({ open: true, cb: handleRemoveLists(ids, qs) })
+      action: ids => {
+        setChooseListModalData({ open: true, cb: handleRemoveLists(ids) })
       }
     }
   }
@@ -110,12 +111,12 @@ const AdminSubscribersView = props => {
     }
   }
 
-  const handleInsert = (data, qs = {}) => {
+  const handleInsert = data => {
     return request(
       'addSubscriber',
       [data],
       t('There was an error inserting the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest({}))
+      response => dispatch(SubscribersActions.subscribersRequest())
     )
   }
 
@@ -124,29 +125,29 @@ const AdminSubscribersView = props => {
       'editSubscriber',
       [data],
       t('There was an error editing the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest({}))
+      response => dispatch(SubscribersActions.subscribersRequest())
     )
   }
 
-  const handleDelete = (id, qs) => {
+  const handleDelete = id => {
     return request(
       'deleteSubscriber',
       [id],
       t('There was an error deleting the subscriber') + ': {error}',
-      response => dispatch(SubscribersActions.subscribersRequest({}))
+      response => dispatch(SubscribersActions.subscribersRequest())
     )
   }
 
-  const handleDeleteSelected = (ids, qs) => {
+  const handleDeleteSelected = ids => {
     return request(
       'deleteSubscribers',
       [ids],
       t('There was an error deleting the subscribers') + ': {error}',
       response => {
-        if (isWholeDataSet) {
-          dispatch(SubscribersActions.subscribersRequest())
+        if (!isWholeDataSet) {
+          handleUpdateQuerystring({ ...querystring, page: 1 }, true)
         } else {
-          handleUpdateQuerystring({ ...querystring })
+          dispatch(SubscribersActions.subscribersRequest())
         }
         setDeleteModalData({ open: false, cb: null })
         dispatch(ListActions.listsRequest())
@@ -154,7 +155,7 @@ const AdminSubscribersView = props => {
     )
   }
 
-  const handleAddLists = (ids, qs) => selectedLists => {
+  const handleAddLists = ids => selectedLists => {
     request(
       'subscribersAddLists',
       [ids, selectedLists],
@@ -168,7 +169,7 @@ const AdminSubscribersView = props => {
     )
   }
 
-  const handleRemoveLists = (ids, qs) => selectedLists => {
+  const handleRemoveLists = ids => selectedLists => {
     request(
       'subscribersRemoveLists',
       [ids, selectedLists],
@@ -193,11 +194,7 @@ const AdminSubscribersView = props => {
       [formData],
       'There was an error importing the file: {error}',
       response => {
-        if (isWholeDataSet) {
-          dispatch(SubscribersActions.subscribersRequest())
-        } else {
-          handleUpdateQuerystring({ ...querystring })
-        }
+        dispatch(SubscribersActions.subscribersRequest())
         dispatch(ListActions.listsRequest())
         setShowSpinner(false)
         setImportCsvModalIsOpen(false)
@@ -260,8 +257,6 @@ const AdminSubscribersView = props => {
             listDisplay={listDisplay}
             listActions={listActions}
             idProp='id'
-            sortField='id'
-            sortDirection='desc'
             sortableFields={['id', 'email', 'subscription_datetime']}
             verboseName={verboseName}
             verboseNamePlural={verboseNamePlural}
@@ -270,7 +265,6 @@ const AdminSubscribersView = props => {
             fieldsMapping={fieldsMapping}
             isWholeDataSet={isWholeDataSet}
             dataSetCount={subscribersCount}
-            listPerPage={isWholeDataSet ? 10 : 20}
             onUpdateQuerystring={handleUpdateQuerystring}
             querystring={querystring}
           />

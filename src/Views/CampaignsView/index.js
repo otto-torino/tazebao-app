@@ -27,6 +27,9 @@ const AdminSubscribersView = props => {
   const [deleteModal, setDeleteModal] = useState({ open: false })
   const dispatch = useDispatch()
   const campaigns = useSelector(state => state.campaigns.data)
+  const isWholeDataSet = useSelector(state => state.campaigns.isWholeDataSet)
+  const querystring = useSelector(state => state.campaigns.qs)
+  const campaignsCount = useSelector(state => state.campaigns.count)
   const isLoading = useSelector(state => state.campaigns.fetching)
 
   const listDisplay = [
@@ -105,6 +108,10 @@ const AdminSubscribersView = props => {
     </Modal>
   )
 
+  const handleUpdateQuerystring = qs => {
+    dispatch(CampaignsActions.campaignsQuerystring(qs))
+  }
+
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <Container {...layoutProps.containerProps}>
@@ -122,8 +129,6 @@ const AdminSubscribersView = props => {
             isLoading={isLoading}
             listDisplay={listDisplay}
             idProp='id'
-            sortField='id'
-            sortDirection='desc'
             verboseName={t('campaign')}
             verboseNamePlural={t('campaigns')}
             searchFields={['name']}
@@ -168,6 +173,9 @@ const AdminSubscribersView = props => {
               last_edit_datetime: dt => moment(dt).format('LLL'),
               last_dispatch: dt => (dt ? moment(dt).format('LLL') : null)
             }}
+            querystring={querystring}
+            dataSetCount={campaignsCount}
+            onUpdateQuerystring={handleUpdateQuerystring}
           />
           {deleteModal.open && deleteModalComponent(deleteModal.item)}
         </Segment>

@@ -2,8 +2,8 @@ import { useState } from 'react'
 import _ from 'lodash'
 
 // hook used to slice a set of data
-export const usePagination = (items, listPerPage, isWholeDataSet = true) => {
-  const [page, setPage] = useState(1)
+export const usePagination = (items, listPerPage, initPage = 1, isWholeDataSet = true) => {
+  const [page, setPage] = useState(initPage)
   let paginatedItems = [...items]
 
   if (isWholeDataSet) {
@@ -28,7 +28,11 @@ export const useSorting = (items, initSortField, initSortDir, isWholeDataSet = t
     sortedItems = [...items].sort((a, b) => {
       if (!sort.field) return -1
       const m = sort.direction === 'asc' ? 1 : -1
-      return a[sort.field] < b[sort.field] ? -1 * m : 1 * m
+      if (typeof a[sort.field] === 'string' && typeof b[sort.field] === 'string') {
+        return a[sort.field].toLowerCase().localeCompare(b[sort.field].toLowerCase()) * m
+      } else {
+        return a[sort.field] < b[sort.field] ? -1 * m : 1 * m
+      }
     })
   }
 
@@ -37,7 +41,7 @@ export const useSorting = (items, initSortField, initSortDir, isWholeDataSet = t
 
 // hook used to perform a full-text search
 export const useFullTextSearch = (items, fields, initSearch, isWholeDataSet) => {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(initSearch)
   let filteredItems = items
   if (isWholeDataSet) {
     const re = new RegExp(search, 'i')
@@ -57,8 +61,8 @@ export const useFullTextSearch = (items, fields, initSearch, isWholeDataSet) => 
   return [search, setSearch, filteredItems]
 }
 
-export const useListFilters = (items, listFilters, isWholeDataSet) => {
-  const [filters, setFilters] = useState({}) // stores filters values in a dict field: value
+export const useListFilters = (items, listFilters, initFilters, isWholeDataSet) => {
+  const [filters, setFilters] = useState(initFilters || {}) // stores filters values in a dict field: value
   let filteredItems = items
   if (isWholeDataSet) {
     const filtersKeys = Object.keys(filters)

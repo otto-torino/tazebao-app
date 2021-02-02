@@ -13,6 +13,9 @@ const AdminListsView = props => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const lists = useSelector(state => state.lists.data)
+  const isWholeDataSet = useSelector(state => state.lists.isWholeDataSet)
+  const querystring = useSelector(state => state.lists.qs)
+  const listsCount = useSelector(state => state.lists.count)
   const isLoading = useSelector(state => state.lists.fetching)
 
   const listDisplay = ['id', 'name', 'tot_subscribers']
@@ -48,6 +51,10 @@ const AdminListsView = props => {
     <p>{t('admin_lists_description')}</p>
   )
 
+  const handleUpdateQuerystring = qs => {
+    dispatch(ListsActions.listsQuerystring(qs))
+  }
+
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <ModelAdmin
@@ -79,8 +86,10 @@ const AdminListsView = props => {
             isLoading={isLoading}
             listDisplay={listDisplay}
             idProp={idProp}
-            sortField='id'
-            sortDirection='desc'
+            isWholeDataSet={isWholeDataSet}
+            querystring={querystring}
+            dataSetCount={listsCount}
+            onUpdateQuerystring={handleUpdateQuerystring}
             verboseName={verboseName}
             verboseNamePlural={verboseNamePlural}
             searchFields={['name']}

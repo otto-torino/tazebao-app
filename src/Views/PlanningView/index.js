@@ -15,6 +15,9 @@ const PlanningView = props => {
   const dispatch = useDispatch()
   const planning = useSelector(state => state.planning.data)
   const campaigns = useSelector(state => state.campaigns.data)
+  const isWholeDataSet = useSelector(state => state.planning.isWholeDataSet)
+  const querystring = useSelector(state => state.planning.qs)
+  const planningCount = useSelector(state => state.planning.count)
   const lists = useSelector(state => state.lists.data)
   const isLoading = useSelector(state => state.planning.fetching)
 
@@ -52,6 +55,10 @@ const PlanningView = props => {
     <p>{t('Here is your planning of scheduled dispatches')}.</p>
   )
 
+  const handleUpdateQuerystring = qs => {
+    dispatch(PlanningActions.planningQuerystring(qs))
+  }
+
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <ModelAdmin
@@ -84,14 +91,15 @@ const PlanningView = props => {
             isLoading={isLoading}
             listDisplay={listDisplay}
             idProp={idProp}
-            sortField='id'
-            sortDirection='desc'
             verboseName={verboseName}
             verboseNamePlural={verboseNamePlural}
             searchFields={['campaign_name']}
             fieldsMapping={{
               schedule: v => moment(v).format('LLL')
             }}
+            querystring={querystring}
+            dataSetCount={planningCount}
+            onUpdateQuerystring={handleUpdateQuerystring}
           />
         )}
       </ModelAdmin>

@@ -43,9 +43,15 @@ const request = (state) => Object.assign({}, state, { ...requestBlueprint })
 
 // login
 export const subscribersSuccess = (state, data, init = false) => {
+  // if not paginated, data.count is undefined, because data only contains the list of items
   const { count, next, previous, results } = data.count !== undefined
     ? data // no pagination
     : { count: data.length, next: null, previous: null, results: data } // pagination
+  // calculate the page size if it is not the whole set (do this just for the first request or increased page size)
+  const qs = { ...state.qs }
+  if (data.count !== undefined && (!state.fetched || state.qs.page_size < results.length)) {
+    qs.page_size = results.length
+  }
   return Object.assign({}, state, {
     ...successBlueprint,
     error: false,
@@ -55,7 +61,8 @@ export const subscribersSuccess = (state, data, init = false) => {
     isWholeDataSet: data.count === undefined,
     count,
     next,
-    previous
+    previous,
+    qs
   })
 }
 const subscribersFailure = (state, { code, detail }) => {

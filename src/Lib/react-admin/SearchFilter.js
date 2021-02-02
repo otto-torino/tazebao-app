@@ -11,9 +11,10 @@ const SearchFilter = props => {
       icon='search'
       placeholder={
         t('Search') + ' ' +
-        props.searchFields.map(f => varToVerbose(f)).join(', ')
+        props.searchFields.map(f => t(varToVerbose(f))).join(', ')
       }
       onChange={props.onChange}
+      value={props.value}
       style={{ marginRight: '1rem', marginBottom: '1rem' }}
     />
   )
@@ -21,7 +22,8 @@ const SearchFilter = props => {
 
 SearchFilter.propTypes = {
   searchFields: PropTypes.array,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  value: PropTypes.string
 }
 
 export default SearchFilter

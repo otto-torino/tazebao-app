@@ -97,19 +97,28 @@ const create = (baseURL = config.apiBasePath) => {
       }
     })
   // LISTS
-  const lists = () => api.get('/newsletter/subscriberlist/')
+  const lists = (qs = {}) => {
+    const endpoint = '/newsletter/subscriberlist/'
+    return api.get(url(endpoint, qs))
+  }
   const addList = list => api.post('/newsletter/subscriberlist/', list)
   const editList = list =>
     api.put(`/newsletter/subscriberlist/${list.id}/`, list)
   const deleteList = listId =>
     api.delete(`/newsletter/subscriberlist/${listId}/`)
   // TOPICS
-  const topics = () => api.get('/newsletter/topic/')
+  const topics = (qs = {}) => {
+    const endpoint = '/newsletter/topic/'
+    return api.get(url(endpoint, qs))
+  }
   const addTopic = topic => api.post('/newsletter/topic/', topic)
   const editTopic = topic => api.put(`/newsletter/topic/${topic.id}/`, topic)
   const deleteTopic = topicId => api.delete(`/newsletter/topic/${topicId}/`)
-  // TOPICS
-  const campaigns = () => api.get('/newsletter/campaign/?page_size=50000')
+  // CAMPAIGNS
+  const campaigns = (qs = {}) => {
+    const endpoint = '/newsletter/campaign/'
+    return api.get(url(endpoint, qs))
+  }
   const campaignTemplate = campaignId =>
     api.get(`/newsletter/campaign/${campaignId}/get_template/`)
   const campaignDispatches = campaignId =>
@@ -123,14 +132,20 @@ const create = (baseURL = config.apiBasePath) => {
   // MOSAICO
   const mosaicoEditor = () => api.get('/mosaico/editor/')
   // PLANNING
-  const planning = () => api.get('/newsletter/planning/')
+  const planning = (qs = {}) => {
+    const endpoint = '/newsletter/planning/'
+    return api.get(url(endpoint, qs))
+  }
   const addPlanning = planning => api.post('/newsletter/planning/', planning)
   const editPlanning = planning =>
     api.put(`/newsletter/planning/${planning.id}/`, planning)
   const deletePlanning = planningId =>
     api.delete(`/newsletter/planning/${planningId}/`)
   // BOUNCES
-  const bounces = () => api.get('/newsletter/bounces/')
+  const bounces = (qs = {}) => {
+    const endpoint = '/newsletter/bounces/'
+    return api.get(url(endpoint, qs))
+  }
   const deleteBounce = bounceId =>
     api.delete(`/newsletter/bounces/${bounceId}/`)
 
