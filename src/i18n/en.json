@@ -23,7 +23,7 @@
     "name-sf": "name",
     "campaign_name-sf": "campaign",
     "subscriber_email-sf": "email",
-    "MailerMessageAdminText": "Here are the send e-mail logs. Pay attention to the unsent emails, it probably means that the recipient is not a valid email address! Sent email logs are cleared everytwo days, unset email logs are kept and should be deleted manually",
+    "MailerMessageAdminText": "Here are the send e-mail logs. Pay attention to the unsent emails which have a last attempt date, it probably means that the recipient is not a valid email address! In such case select all the different email logs and run the unsubscribe action. Sent email logs are cleared everytwo days, unset email logs are kept (because of the retry policy)",
     "to_address-sf": "to address"
   }
 }

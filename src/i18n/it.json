@@ -200,7 +200,7 @@
     "subscriber_email-sf": "email",
     "Logs": "Log",
     "logs": "log",
-    "MailerMessageAdminText": "In questa sezione sono raccolti i log degli invii email. Fare attenzione alle email che sono segnalate come non inviate, probabilmente significa che l'inidirizzo del destinatario non è un indirizzo email valido! I log delle email inviate vengono cancellato ogni due giorni, quelli delle email non inviate sono conservati e vanno eliminati manualmente",
+    "MailerMessageAdminText": "In questa sezione sono raccolti i log degli invii email. Presta attenzione alle email che sono segnalate come non inviate ed hanno una data di ultimo tentativo, probabilmente significa che l'inidirizzo del destinatario non è un indirizzo email valido! In questo caso selezionare i log delle diverse e-mail ed eseguire l'azione di disiscrizione dei destinatari. I log delle email inviate vengono cancellati ogni due giorni, quelli delle email non inviate sono conservati (perché l'invio viene riprovato)",
     "There was an error deleting the log": "Si è verificato un errore nell'eliminazione del log",
     "To address": "Destinatario",
     "From address": "Mittente",
