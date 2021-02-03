@@ -31,6 +31,7 @@ const AdminSubscribersView = props => {
   const querystring = useSelector(state => state.campaigns.qs)
   const campaignsCount = useSelector(state => state.campaigns.count)
   const isLoading = useSelector(state => state.campaigns.fetching)
+  const topics = useSelector(state => state.topics.data)
 
   const listDisplay = [
     'id',
@@ -108,6 +109,25 @@ const AdminSubscribersView = props => {
     </Modal>
   )
 
+  const topicFilters = Object.keys(topics).length
+    ? {
+      topic: {
+        label: t('topic'),
+        options: [
+          { value: null, text: t('All topics'), key: 0 },
+          ...Object.keys(topics).map(id => ({
+            value: id,
+            text: topics[id].name,
+            key: id
+          }))
+        ],
+        filter: (record, value) => {
+          return record.topic_id === parseInt(value)
+        }
+      }
+    }
+    : {}
+
   const handleUpdateQuerystring = qs => {
     dispatch(CampaignsActions.campaignsQuerystring(qs))
   }
@@ -127,11 +147,13 @@ const AdminSubscribersView = props => {
             onDelete={handleDelete}
             items={campaigns}
             isLoading={isLoading}
+            listFilters={topicFilters}
             listDisplay={listDisplay}
             idProp='id'
             verboseName={t('campaign')}
             verboseNamePlural={t('campaigns')}
             searchFields={['name']}
+            sortableFields={['id', 'name', 'topic', 'last_edit_datetime', 'subject', 'view_online']}
             moreActions={item => [
               <Icon
                 title={t('details')}

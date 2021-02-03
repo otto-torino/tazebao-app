@@ -11,7 +11,7 @@ const SearchFilter = props => {
       icon='search'
       placeholder={
         t('Search') + ' ' +
-        props.searchFields.map(f => t(varToVerbose(f))).join(', ')
+        props.searchFields.map(f => t(`${f}-sf`)).join(', ')
       }
       onChange={props.onChange}
       value={props.value}

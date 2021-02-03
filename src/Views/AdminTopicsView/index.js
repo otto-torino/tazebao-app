@@ -95,6 +95,8 @@ const AdminSubscribersView = props => {
             verboseName={verboseName}
             verboseNamePlural={verboseNamePlural}
             searchFields={['name']}
+            forceJsSorting
+            isWholeDataSet={isWholeDataSet}
             querystring={querystring}
             dataSetCount={topicsCount}
             onUpdateQuerystring={handleUpdateQuerystring}

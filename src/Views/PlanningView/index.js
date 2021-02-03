@@ -97,6 +97,7 @@ const PlanningView = props => {
             fieldsMapping={{
               schedule: v => moment(v).format('LLL')
             }}
+            isWholeDataSet={isWholeDataSet}
             querystring={querystring}
             dataSetCount={planningCount}
             onUpdateQuerystring={handleUpdateQuerystring}

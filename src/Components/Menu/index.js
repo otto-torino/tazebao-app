@@ -36,6 +36,10 @@ const AppMenu = props => {
       <Icon name='ban' />
       {t('Bounces')}
     </Menu.Item>,
+    <Menu.Item as={Link} to={config.urls.mailerMessages} key='menu-voice-mailer-messages'>
+      <Icon name='file text' />
+      {t('MailerMessages')}
+    </Menu.Item>,
     <Menu.Item as={Link} to={config.urls.integration} key='menu-voice-integration'>
       <Icon name='globe' />
       {t('Integration')}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import BaseLayout from '../../Layouts/BaseLayout'
-import BouncesActions from '../../Redux/Bounces'
+import MailerMessagesActions from '../../Redux/MailerMessages'
 import SubscribersActions from '../../Redux/Subscribers'
 import { Confirm } from 'semantic-ui-react'
 import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
@@ -9,49 +9,49 @@ import { useTranslation } from 'react-i18next'
 import { request } from '../../Services/Request'
 import moment from 'moment'
 
-import styles from './BouncesView.module.scss'
+import styles from './MailerMessagesView.module.scss'
 
-const BouncesView = props => {
+const MailerMessagesView = props => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const bounces = useSelector(state => state.bounces.data)
-  const isWholeDataSet = useSelector(state => state.bounces.isWholeDataSet)
-  const querystring = useSelector(state => state.bounces.qs)
-  const bouncesCount = useSelector(state => state.bounces.count)
-  const isLoading = useSelector(state => state.bounces.fetching)
+  const mailerMessages = useSelector(state => state.mailerMessages.data)
+  const isWholeDataSet = useSelector(state => state.mailerMessages.isWholeDataSet)
+  const querystring = useSelector(state => state.mailerMessages.qs)
+  const mailerMessagesCount = useSelector(state => state.mailerMessages.count)
+  const isLoading = useSelector(state => state.mailerMessages.fetching)
   const [showConfirm, setShowConfirm] = useState(false)
-  const [selectedBounces, setSelectedBounces] = useState([])
+  const [selectedMailerMessages, setSelectedMailerMessages] = useState([])
 
-  const listDisplay = ['id', 'datetime', 'subscriber_email', 'message', 'campaign_name']
+  const listDisplay = ['id', 'created', 'to_address', 'from_address', 'sent', 'last_attempt']
 
   const handleDelete = id => {
     return request(
-      'deleteBounce',
+      'deleteMailerMessage',
       [id],
-      t('There was an error deleting the bounce') + ': {error}',
-      response => dispatch(BouncesActions.bouncesRequest())
+      t('There was an error deleting the log') + ': {error}',
+      response => dispatch(MailerMessagesActions.mailerMessagesRequest())
     )
   }
 
   const confirmUnsubscribe = ids => {
-    setSelectedBounces(ids)
+    setSelectedMailerMessages(ids)
     setShowConfirm(true)
   }
 
   const unsubscribe = () => {
     return request(
-      'deleteSubscribersFromBounces',
-      [selectedBounces],
+      'deleteSubscribersFromMailerMessages',
+      [selectedMailerMessages],
       t('There was an error removing the subscribers') + ': {error}',
       response => {
         if (!isWholeDataSet) {
           handleUpdateQuerystring({ ...querystring, page: 1 }, true)
         } else {
-          dispatch(BouncesActions.bouncesRequest())
+          dispatch(MailerMessagesActions.mailerMessagesRequest())
         }
         dispatch(SubscribersActions.subscribersRequest())
         setShowConfirm(false)
-        setSelectedBounces([])
+        setSelectedMailerMessages([])
       },
       error => {
         setShowConfirm(false)
@@ -59,22 +59,36 @@ const BouncesView = props => {
     )
   }
 
+  const listFilters = {
+    sent: {
+      label: t('sent'),
+      options: [
+        { value: null, text: t('All'), key: 0 },
+        { value: 0, text: t('No'), key: 1 },
+        { value: 1, text: t('Yes'), key: 2 }
+      ],
+      filter: (record, value) => {
+        return record.sent === !!value
+      }
+    }
+  }
+
   const description = (
-    <p>{t('Here are your bounces. The system tries to understand at which dispatch they belongs and shows the campaign name')}.</p>
+    <p>{t('MailerMessageAdminText')}.</p>
   )
 
   const handleUpdateQuerystring = qs => {
-    dispatch(BouncesActions.bouncesQuerystring(qs))
+    dispatch(MailerMessagesActions.mailerMessagesQuerystring(qs))
   }
 
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <ModelAdmin
-        icon='ban'
-        title='Bounces'
-        toStringProp='subscriber_email'
-        verboseName={t('bounce')}
-        verboseNamePlural={t('bounces')}
+        icon='file text'
+        title={t('Logs')}
+        toStringProp='id'
+        verboseName={t('log')}
+        verboseNamePlural={t('logs')}
         onInsert={null}
         onEdit={null}
         onDelete={handleDelete}
@@ -96,26 +110,28 @@ const BouncesView = props => {
             description={description}
             onDelete={handleDelete}
             hideButtonWithoutPermissions
-            items={bounces}
+            items={mailerMessages}
             isLoading={isLoading}
             listDisplay={listDisplay}
+            listFilters={listFilters}
             idProp={idProp}
             verboseName={verboseName}
             verboseNamePlural={verboseNamePlural}
-            searchFields={['subscriber_email', 'campaign_name']}
+            searchFields={['to_address']}
             fieldsMapping={{
-              datetime: v => moment(v).format('LLL')
+              created: v => moment(v).format('LLL'),
+              last_attempt: v => v ? moment(v).format('LLL') : ''
             }}
             listActions={{
               deleteSubscribers: {
-                label: t('Unsubscribe selected e-mails'),
+                label: t('Unsubscribe selected to e-mails'),
                 action: confirmUnsubscribe,
                 options: { setPage: 1 }
               }
             }}
             isWholeDataSet={isWholeDataSet}
             querystring={querystring}
-            dataSetCount={bouncesCount}
+            dataSetCount={mailerMessagesCount}
             onUpdateQuerystring={handleUpdateQuerystring}
           />
         )}
@@ -132,6 +148,6 @@ const BouncesView = props => {
   )
 }
 
-BouncesView.propTypes = {}
+MailerMessagesView.propTypes = {}
 
-export default BouncesView
+export default MailerMessagesView

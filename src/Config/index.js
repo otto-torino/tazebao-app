@@ -19,6 +19,7 @@ export default {
     campaigns: '/campaigns',
     planning: '/planning',
     bounces: '/bounces',
+    mailerMessages: '/logs',
     createCampaign: '/campaigns/create',
     editCampaign: '/campaigns/edit/:id',
     campaignDetail: '/campaigns/:id',

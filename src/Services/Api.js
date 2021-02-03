@@ -85,6 +85,10 @@ const create = (baseURL = config.apiBasePath) => {
     api.post('/newsletter/subscriber/delete_from_bounces/', {
       bounces: bouncesIds
     })
+  const deleteSubscribersFromMailerMessages = mailerMessagesIds =>
+    api.post('/newsletter/subscriber/delete_from_mailermessages/', {
+      mailermessages: mailerMessagesIds
+    })
   const subscribersAddLists = (subscribers, lists) =>
     api.post('/newsletter/subscriber/add_list/', { subscribers, lists })
   const subscribersRemoveLists = (subscribers, lists) =>
@@ -148,6 +152,13 @@ const create = (baseURL = config.apiBasePath) => {
   }
   const deleteBounce = bounceId =>
     api.delete(`/newsletter/bounces/${bounceId}/`)
+  // MAILER MESSAGES
+  const mailerMessages = (qs = {}) => {
+    const endpoint = '/newsletter/mailermessage/'
+    return api.get(url(endpoint, qs))
+  }
+  const deleteMailerMessage = mailerMessageId =>
+    api.delete(`/newsletter/mailermessage/${mailerMessageId}/`)
 
   // Return back a collection of functions that we would consider our
   // interface.  Most of the time it'll be just the list of all the
@@ -193,8 +204,11 @@ const create = (baseURL = config.apiBasePath) => {
     duplicateCampaign,
     campaignDispatches,
     deleteSubscribersFromBounces,
+    deleteSubscribersFromMailerMessages,
     bounces,
-    deleteBounce
+    deleteBounce,
+    mailerMessages,
+    deleteMailerMessage
   }
 }
 

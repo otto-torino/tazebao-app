@@ -65,7 +65,7 @@ const AdminSubscribersView = props => {
   const listFilters = Object.keys(lists).length
     ? {
       lists: {
-        label: t('List'),
+        label: t('list'),
         options: [
           { value: null, text: t('All lists'), key: 0 },
           ...Object.keys(lists).map(id => ({
@@ -74,8 +74,8 @@ const AdminSubscribersView = props => {
             key: id
           }))
         ],
-        filter: (field, value) => {
-          return field.lists.indexOf(parseInt(value)) !== -1
+        filter: (record, value) => {
+          return record.lists.indexOf(parseInt(value)) !== -1
         }
       }
     }

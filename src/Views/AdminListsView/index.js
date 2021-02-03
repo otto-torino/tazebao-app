@@ -86,6 +86,8 @@ const AdminListsView = props => {
             isLoading={isLoading}
             listDisplay={listDisplay}
             idProp={idProp}
+            sortableFields={isWholeDataSet ? ['id', 'name', 'tot_subscribers'] : ['id', 'name']}
+            forceJsSorting
             isWholeDataSet={isWholeDataSet}
             querystring={querystring}
             dataSetCount={listsCount}

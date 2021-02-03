@@ -79,7 +79,8 @@ const ChangeList = props => {
     filteredItems,
     props.querystring.sort,
     props.querystring.sort_direction,
-    isWholeDataSet
+    isWholeDataSet,
+    props.forceJsSorting
   )
   const handleSort = ({ field, direction }) => {
     setSort({ field, direction })
@@ -385,7 +386,8 @@ ChangeList.defaultProps = {
   isWholeDataSet: true,
   dataSetCount: null,
   onUpdateQuerystring: () => {},
-  querystring: {}
+  querystring: {},
+  forceJsSorting: false
 }
 
 ChangeList.propTypes = {
@@ -420,7 +422,8 @@ ChangeList.propTypes = {
   isWholeDataSet: PropTypes.bool,
   dataSetCount: PropTypes.number,
   onUpdateQuerystring: PropTypes.func,
-  querystring: PropTypes.object
+  querystring: PropTypes.object,
+  forceJsSorting: PropTypes.bool
 }
 
 export default ChangeList

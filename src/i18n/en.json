@@ -16,6 +16,14 @@
     "upload_optin_datetime_description": "should be in the format YYYY-MM-DD HH:mm:ss, it is the date and time when the subscriber accepted the privacy terms",
     "upload_drag_description": "Drag 'n' drop the file here, or click to open the file browser",
     "tazebao_unsubscribe_topic_helptext": "If you want Tazebao manage the unsubscription process for you, just insert the following URL:",
-    "AreYouSure": "Are you sure?"
+    "AreYouSure": "Are you sure?",
+    "MailerMessages": "Dispatches logs ",
+    "email-sf": "email",
+    "info-sf": "info",
+    "name-sf": "name",
+    "campaign_name-sf": "campaign",
+    "subscriber_email-sf": "email",
+    "MailerMessageAdminText": "Here are the send e-mail logs. Pay attention to the unsent emails, it probably means that the recipient is not a valid email address! Sent email logs are cleared everytwo days, unset email logs are kept and should be deleted manually",
+    "to_address-sf": "to address"
   }
 }

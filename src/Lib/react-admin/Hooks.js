@@ -17,14 +17,14 @@ export const usePagination = (items, listPerPage, initPage = 1, isWholeDataSet =
 }
 
 // hook used to sort a set of data (one field sorting)
-export const useSorting = (items, initSortField, initSortDir, isWholeDataSet = true) => {
+export const useSorting = (items, initSortField, initSortDir, isWholeDataSet = true, forceJsSorting = false) => {
   const [sort, setSort] = useState({
     field: initSortField,
     direction: initSortDir
   })
   let sortedItems = items
 
-  if (isWholeDataSet) {
+  if (isWholeDataSet || forceJsSorting) {
     sortedItems = [...items].sort((a, b) => {
       if (!sort.field) return -1
       const m = sort.direction === 'asc' ? 1 : -1

@@ -35,6 +35,7 @@ import { TOPICS_REQUEST, TOPICS_QUERYSTRING } from '../Redux/Topics'
 import { CAMPAIGNS_REQUEST, CAMPAIGNS_QUERYSTRING } from '../Redux/Campaigns'
 import { PLANNING_REQUEST, PLANNING_QUERYSTRING } from '../Redux/Planning'
 import { BOUNCES_REQUEST, BOUNCES_QUERYSTRING } from '../Redux/Bounces'
+import { MAILER_MESSAGES_REQUEST, MAILER_MESSAGES_QUERYSTRING } from '../Redux/MailerMessages'
 
 /* ------------- Sagas ------------- */
 import { startup } from './StartupSagas'
@@ -45,6 +46,7 @@ import { fetchTopics, requestsTopics } from './TopicsSagas'
 import { fetchCampaigns, requestCampaigns } from './CampaignsSagas'
 import { fetchPlanning, requestPlanning } from './PlanningSagas'
 import { fetchBounces, requestBounces } from './BouncesSagas'
+import { fetchMailerMessages, requestMailerMessages } from './MailerMessagesSagas'
 import { fetchStats } from './StatsSagas'
 
 /* ------------- API ------------- */
@@ -70,7 +72,9 @@ export default function * root (dispatch) {
     takeLatest(PLANNING_QUERYSTRING, requestPlanning, api),
     takeLatest(PLANNING_REQUEST, fetchPlanning, api),
     takeLatest(BOUNCES_QUERYSTRING, requestBounces, api),
-    takeLatest(BOUNCES_REQUEST, fetchBounces, api)
+    takeLatest(BOUNCES_REQUEST, fetchBounces, api),
+    takeLatest(MAILER_MESSAGES_QUERYSTRING, requestMailerMessages, api),
+    takeLatest(MAILER_MESSAGES_REQUEST, fetchMailerMessages, api)
   ])
 }
 
