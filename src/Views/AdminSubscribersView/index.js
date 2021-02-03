@@ -1,6 +1,6 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import BaseLayout from '../../Layouts/BaseLayout'
 import SubscriberForm from '../../Forms/SubscriberForm'
 import ChooseListsModal from '../../Components/ChooseListsModal'
@@ -33,6 +33,9 @@ const AdminSubscribersView = props => {
   })
   const [showSpinner, setShowSpinner] = useState(false)
   const subscribers = useSelector(state => state.subscribers.data)
+  const isWholeDataSet = useSelector(state => state.subscribers.isWholeDataSet)
+  const querystring = useSelector(state => state.subscribers.qs)
+  const subscribersCount = useSelector(state => state.subscribers.count)
   const lists = useSelector(state => state.lists.data)
   const isLoading = useSelector(state => state.subscribers.fetching)
   const [importCsvModalIsOpen, setImportCsvModalIsOpen] = useState(false)
@@ -43,7 +46,8 @@ const AdminSubscribersView = props => {
       label: t('Delete selected subscribers'),
       action: ids => {
         setDeleteModalData({ open: true, cb: () => handleDeleteSelected(ids) })
-      }
+      },
+      options: { setPage: 1 }
     },
     addToList: {
       label: t('Add selected items to lists'),
@@ -140,7 +144,11 @@ const AdminSubscribersView = props => {
       [ids],
       t('There was an error deleting the subscribers') + ': {error}',
       response => {
-        dispatch(SubscribersActions.subscribersRequest())
+        if (!isWholeDataSet) {
+          handleUpdateQuerystring({ ...querystring, page: 1 }, true)
+        } else {
+          dispatch(SubscribersActions.subscribersRequest())
+        }
         setDeleteModalData({ open: false, cb: null })
         dispatch(ListActions.listsRequest())
       }
@@ -196,8 +204,12 @@ const AdminSubscribersView = props => {
     )
   }
 
+  const handleUpdateQuerystring = qs => {
+    dispatch(SubscribersActions.subscribersQuerystring(qs))
+  }
+
   const description = (
-    <p dangerouslySetInnerHTML={{ __html: t('admin_subscribers_description') }}></p>
+    <p dangerouslySetInnerHTML={{ __html: t('admin_subscribers_description') }} />
   )
 
   const toolbarButtons = (
@@ -245,13 +257,16 @@ const AdminSubscribersView = props => {
             listDisplay={listDisplay}
             listActions={listActions}
             idProp='id'
-            sortField='id'
-            sortDirection='desc'
+            sortableFields={['id', 'email', 'subscription_datetime']}
             verboseName={verboseName}
             verboseNamePlural={verboseNamePlural}
             listFilters={listFilters}
             searchFields={['email', 'info']}
             fieldsMapping={fieldsMapping}
+            isWholeDataSet={isWholeDataSet}
+            dataSetCount={subscribersCount}
+            onUpdateQuerystring={handleUpdateQuerystring}
+            querystring={querystring}
           />
         )}
       </ModelAdmin>

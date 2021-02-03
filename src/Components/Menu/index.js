@@ -5,7 +5,7 @@ import config from '../../Config'
 import { useTranslation } from 'react-i18next'
 
 const AppMenu = props => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   return [
     <Menu.Item active header key='menu'>Menu</Menu.Item>,
     <Menu.Item as={Link} to={config.urls.home} key='menu-voice-home'>

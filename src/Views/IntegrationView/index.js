@@ -1,26 +1,20 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import BaseLayout from '../../Layouts/BaseLayout'
-import ContentLoader from '../../Components/ContentLoader'
 import {
   Segment,
   Container,
   Label,
   Icon,
-  Header,
   Grid,
-  Message,
   Tab
 } from 'semantic-ui-react'
 import { withLoader } from '../../HOC/Loader'
-import config from '../../Config'
-import { request } from '../../Services/Request'
 import { layoutProps } from '../../Styles/Common'
 import { useTranslation, Trans } from 'react-i18next'
 import PHPIntegration from '../../Components/PHPIntegration'
 import PythonIntegration from '../../Components/PythonIntegration'
-import moment from 'moment'
 
 import styles from './IntegrationView.module.scss'
 
@@ -59,7 +53,7 @@ const IntegrationView = props => {
                     </div>
                     <p>
                       {t('integration_api_link_description')}
-                      <a href='https://github.com/otto-torino/tazebao' target='_blank'>{t('project\'s GitHub page')}</a>
+                      <a href='https://github.com/otto-torino/tazebao' target='_blank' rel='noopener noreferrer'>{t('project\'s GitHub page')}</a>
                     </p>
                   </Grid.Column>
                   <Grid.Column width={12}>

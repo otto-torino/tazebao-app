@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+// import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import BaseLayout from '../../Layouts/BaseLayout'
 import TopicForm from '../../Forms/TopicForm'
@@ -14,6 +14,9 @@ const AdminSubscribersView = props => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const topics = useSelector(state => state.topics.data)
+  const isWholeDataSet = useSelector(state => state.topics.isWholeDataSet)
+  const querystring = useSelector(state => state.topics.qs)
+  const topicsCount = useSelector(state => state.topics.count)
   const isLoading = useSelector(state => state.topics.fetching)
 
   const listDisplay = ['id', 'name', 'sending_address', 'sending_name', 'unsubscribe_url']
@@ -53,6 +56,10 @@ const AdminSubscribersView = props => {
     <div><p><Trans>topic_delete_message</Trans></p></div>
   )
 
+  const handleUpdateQuerystring = qs => {
+    dispatch(TopicsActions.topicsQuerystring(qs))
+  }
+
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <ModelAdmin
@@ -85,11 +92,12 @@ const AdminSubscribersView = props => {
             isLoading={isLoading}
             listDisplay={listDisplay}
             idProp={idProp}
-            sortField='id'
-            sortDirection='desc'
             verboseName={verboseName}
             verboseNamePlural={verboseNamePlural}
             searchFields={['name']}
+            querystring={querystring}
+            dataSetCount={topicsCount}
+            onUpdateQuerystring={handleUpdateQuerystring}
           />
         )}
       </ModelAdmin>

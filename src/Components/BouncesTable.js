@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import { Table, Icon, Checkbox } from 'semantic-ui-react'
+import { Table, Checkbox } from 'semantic-ui-react'
 
 const BouncesTable = ({ bounces, onSelectionChange }) => {
   const [selected, setSelected] = useState([])
@@ -10,7 +10,7 @@ const BouncesTable = ({ bounces, onSelectionChange }) => {
     const s = checked ? bounces.map(b => b.id) : []
     setSelected(s)
     onSelectionChange(s)
-  })
+  }, [bounces, setSelected, onSelectionChange])
   return (
     <Table compact>
       <Table.Header>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import _ from 'lodash'
@@ -19,9 +19,22 @@ import {
   useListFilters
 } from './Hooks'
 
+/**
+ * ChangeList
+ *
+ * This component can wirkl with a whole set of data, or a paginated set of data.
+ * In case of a whole set of data, it manages directly pagination, sorting,
+ * filtering and full text search. In case of paginated set of data id relies on
+ * changing the queryset object which stores all this information (page, sort, filter, full-text)
+ * calling the onUpdateQuerystring function.
+ */
 const ChangeList = props => {
   // translations
   const { t } = useTranslation()
+
+  // manage pageinated data sets
+  const { querystring, onUpdateQuerystring, isWholeDataSet } = props
+
   // checkboxes, actions to be performed on selected items
   const [selectedItems, setSelectedItems] = useState([])
   const [allSelected, setAllSelected] = useState(false)
@@ -32,35 +45,59 @@ const ChangeList = props => {
   const [search, setSearch, textFilteredItems] = useFullTextSearch(
     props.items.slice(),
     props.searchFields,
-    ''
+    querystring.q || '',
+    isWholeDataSet
   )
+  const handleSearch = (e, { value }) => {
+    setAllSelected(false)
+    setPage(1)
+    setSearch(value)
+    onUpdateQuerystring({ ...props.querystring, q: value, page: 1 })
+  }
+
   // apply filters
   const [filters, setFilters, filteredItems] = useListFilters(
     textFilteredItems,
-    props.listFilters
+    props.listFilters,
+    querystring.filters,
+    isWholeDataSet
   )
+  const handleFilter = filter => (e, { value }) => {
+    setAllSelected(false)
+    setPage(1)
+    const copy = { ...filters }
+    if (value === null) {
+      delete copy[filter]
+    } else {
+      copy[filter] = value
+    }
+    setFilters(copy)
+    onUpdateQuerystring({ ...props.querystring, filters: copy, page: 1 })
+  }
   // sorting
   const [sort, setSort, sortedItems] = useSorting(
     filteredItems,
-    props.sortField,
-    props.sortDirection
+    props.querystring.sort,
+    props.querystring.sort_direction,
+    isWholeDataSet
   )
+  const handleSort = ({ field, direction }) => {
+    setSort({ field, direction })
+    onUpdateQuerystring({ ...props.querystring, sort: field, sort_direction: direction })
+  }
+
   // pagination
-  const [page, setPage, items] = usePagination(sortedItems, props.listPerPage)
-  const handlePageChange = useCallback((e, { activePage }) =>
+  const [page, setPage, items] = usePagination(sortedItems, querystring.page_size, querystring.page, isWholeDataSet)
+  const handlePageChange = (e, { activePage }) => {
     setPage(activePage)
-  )
+    onUpdateQuerystring({ ...props.querystring, page: activePage })
+  }
 
   //  insert/edit/delete
-  const insertRecord = () => {
-    return props.canInsert ? props.onInsert() : null
-  }
-  const editRecord = item => {
-    return props.canEdit(item) ? props.onEdit(item) : null
-  }
-  const deleteRecord = item => {
-    return props.canDelete(item) ? props.onDelete(item) : null
-  }
+  const withPermission = (perm, fn, hasItem) => arg => hasItem && perm(arg) ? fn(arg) : (!hasItem && perm ? fn() : null)
+  const insertRecord = withPermission(props.canInsert, props.onInsert, false)
+  const editRecord = withPermission(props.canEdit, props.onEdit, true)
+  const deleteRecord = withPermission(props.canDelete, props.onDelete, true)
 
   // shortcuts
   const listFiltersLength = Object.keys(props.listFilters).length
@@ -71,11 +108,8 @@ const ChangeList = props => {
     inDiv(
       <SearchFilter
         searchFields={props.searchFields}
-        onChange={(e, { value }) => {
-          setAllSelected(false)
-          setPage(1)
-          setSearch(value)
-        }}
+        value={search}
+        onChange={handleSearch}
       />
     )
 
@@ -87,17 +121,7 @@ const ChangeList = props => {
           key={'filter-' + f}
           placeholder={t('Select') + ' ' + props.listFilters[f].label}
           options={props.listFilters[f].options}
-          onChange={(e, { value }) => {
-            setAllSelected(false)
-            setPage(1)
-            const copy = { ...filters }
-            if (value === null) {
-              delete copy[f]
-            } else {
-              copy[f] = value
-            }
-            setFilters(copy)
-          }}
+          onChange={handleFilter(f)}
           style={{ marginRight: '1rem', marginBottom: '1rem' }}
         />
       )),
@@ -123,7 +147,10 @@ const ChangeList = props => {
         ]}
         onChange={(e, { value }) => {
           value !== null && props.listActions[value].action(selectedItems)
+          props.listActions[value].options && props.listActions[value].options.setPage && setPage(props.listActions[value].options.setPage)
           setSelectedAction(null)
+          setAllSelected(false)
+          setSelectedItems([])
         }}
         style={{ marginBottom: '1rem' }}
       />
@@ -148,37 +175,43 @@ const ChangeList = props => {
             />
           </Table.HeaderCell>
         )}
-        {props.listDisplay.map(field => (
-          <Table.HeaderCell
-            key={'th-' + field}
-            onClick={() =>
-              setSort({
-                field,
-                direction: sort.direction === 'asc' ? 'desc' : 'asc'
-              })}
-          >
-            <div
-              style={{
-                whiteSpace: 'nowrap',
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                cursor: 'pointer'
+        {props.listDisplay.map(field => {
+          const sortable = props.sortableFields === null || props.sortableFields.indexOf(field) !== -1
+          return (
+            <Table.HeaderCell
+              key={'th-' + field}
+              onClick={() => {
+                if (sortable) {
+                  handleSort({
+                    field,
+                    direction: sort.direction === 'asc' ? 'desc' : 'asc'
+                  })
+                }
               }}
             >
-              {t(varToVerbose(field))}
-              <Icon
-                name={
-                  sort.field === field && sort.direction === 'asc'
-                    ? 'angle up'
-                    : 'angle down'
-                }
-                style={sort.field === field ? {} : { color: '#fff' }}
-              />
-            </div>
-          </Table.HeaderCell>
-        ))}
+              <div
+                style={{
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  cursor: sortable ? 'pointer' : 'auto'
+                }}
+              >
+                {t(varToVerbose(field))}
+                <Icon
+                  name={
+                    sort.field === field && sort.direction === 'asc'
+                      ? 'angle up'
+                      : 'angle down'
+                  }
+                  style={sort.field === field ? {} : { color: '#fff' }}
+                />
+              </div>
+            </Table.HeaderCell>
+          )
+        })}
         <Table.HeaderCell key='th-actions' style={{ whiteSpace: 'nowrap' }} />
       </Table.Row>
     )
@@ -233,7 +266,7 @@ const ChangeList = props => {
     })
 
     // single record actions
-    let actions = props.moreActions(item);
+    const actions = props.moreActions(item);
     ['edit', 'delete'].forEach(a => {
       if (!props.hideButtonWithoutPermissions || props['can' + _.upperFirst(a)](item)) {
         actions.push(
@@ -261,6 +294,8 @@ const ChangeList = props => {
       <Table.Row key={item[props.idProp] || Math.random()}>{cells}</Table.Row>
     )
   }
+
+  const totItems = props.isWholeDataSet ? filteredItems.length : props.dataSetCount
 
   // finally...
   return (
@@ -306,15 +341,12 @@ const ChangeList = props => {
                     props.listDisplay.length + 1 + (listActionsLength ? 1 : 0)
                   }
                 >
-                  {filteredItems.length}{' '}
-                  {filteredItems.length === 1
+                  {totItems}{' '}
+                  {totItems === 1
                     ? props.verboseName
                     : props.verboseNamePlural}
-                  {search || Object.keys(filters).length
-                    ? ' (' + props.items.length + ' ' + t('totalp') + ')'
-                    : ''}
                   {selectedItems.length
-                      ? ' (' + selectedItems.length + ' ' + t(selectedItems.length > 1 ? 'selectedp' : 'selecteds') + ')'
+                    ? ' (' + selectedItems.length + ' ' + t(selectedItems.length > 1 ? 'selectedp' : 'selecteds') + ')'
                     : null}
                 </Table.HeaderCell>
               </Table.Row>
@@ -326,7 +358,7 @@ const ChangeList = props => {
             <Pagination
               activePage={page}
               onPageChange={handlePageChange}
-              totalPages={Math.ceil(filteredItems.length / props.listPerPage)}
+              totalPages={Math.ceil(totItems / querystring.page_size)}
             />
           </div>
         </div>,
@@ -337,7 +369,6 @@ const ChangeList = props => {
 }
 
 ChangeList.defaultProps = {
-  listPerPage: 10,
   listDisplay: [],
   canInsert: true,
   canEdit: item => true,
@@ -346,10 +377,15 @@ ChangeList.defaultProps = {
   searchFields: [],
   listFilters: {},
   listActions: {},
+  sortableFields: null,
   description: null,
   hideButtonWithoutPermissions: false,
   moreActions: item => [],
-  toolbarButtons: null
+  toolbarButtons: null,
+  isWholeDataSet: true,
+  dataSetCount: null,
+  onUpdateQuerystring: () => {},
+  querystring: {}
 }
 
 ChangeList.propTypes = {
@@ -363,7 +399,6 @@ ChangeList.propTypes = {
   listFilters: PropTypes.object,
   listActions: PropTypes.object,
   searchFields: PropTypes.array,
-  listPerPage: PropTypes.number,
   fieldsMapping: PropTypes.object,
   verboseName: PropTypes.string.isRequired,
   verboseNamePlural: PropTypes.string.isRequired,
@@ -371,8 +406,7 @@ ChangeList.propTypes = {
   canInsert: PropTypes.bool,
   canEdit: PropTypes.func,
   canDelete: PropTypes.func,
-  sortField: PropTypes.string,
-  sortDirection: PropTypes.oneOf(['asc', 'desc']),
+  sortableFields: PropTypes.array,
   onInsert: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
@@ -382,7 +416,11 @@ ChangeList.propTypes = {
     PropTypes.func,
     PropTypes.object,
     PropTypes.array
-  ])
+  ]),
+  isWholeDataSet: PropTypes.bool,
+  dataSetCount: PropTypes.number,
+  onUpdateQuerystring: PropTypes.func,
+  querystring: PropTypes.object
 }
 
 export default ChangeList

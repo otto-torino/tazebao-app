@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import moment from 'moment'
 import OpenRateLabel from '../OpenRateLabel'
 import { Table, Label, Popup, Icon, Button, Modal, Grid } from 'semantic-ui-react'
@@ -30,7 +30,9 @@ const DispatchDetail = ({ dispatch, onChange }) => {
         setBouncesModalIsOpen(false)
       }
     )
-  })
+  }, [selectedBounces, t, onChange, setBouncesModalIsOpen])
+
+  const dispatchListsLength = dispatch.lists.length
 
   return (
     <div>
@@ -44,7 +46,7 @@ const DispatchDetail = ({ dispatch, onChange }) => {
           <Table.Row>
             <Table.Cell>{t('Lists')}</Table.Cell>
             <Table.Cell>
-              {dispatch.lists.map(l => lists[l].name).join(', ')}
+              {dispatch.lists.map((l, idx) => lists[l] ? <span>{lists[l].name}, </span> : <span><s>{t('Deleted')}</s>{dispatchListsLength - 1 === idx ? '' : ', '}</span>)}
             </Table.Cell>
           </Table.Row>
           <Table.Row>
@@ -201,7 +203,8 @@ const DispatchDetail = ({ dispatch, onChange }) => {
 }
 
 DispatchDetail.propTypes = {
-  dispatch: PropTypes.object
+  dispatch: PropTypes.object,
+  onChange: PropTypes.func
 }
 
 export default DispatchDetail

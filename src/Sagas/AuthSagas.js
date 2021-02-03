@@ -30,24 +30,25 @@ export function * login (api, { payload }) {
 }
 
 export function * logout () {
-  yield history.push(config.urls.login)
+  // yield history.push(config.urls.login)
+  yield window.location.reload(true)
 }
 
 // refresh token
 export function * refresh (api) {
   // get refresh token
-  const refreshToken = yield select(state => state.auth.refreshToken)
-  const email = yield select(state => state.auth.user.email)
+  const token = yield select(state => state.auth.token)
+  // const email = yield select(state => state.auth.user.email)
   // request
-  const response = yield call(api.refresh, email, refreshToken)
+  const response = yield call(api.refresh, token)
 
   // success?
   if (response.ok) {
     // set token in the api requests header
-    yield call(api.setAuthToken, response.data.data.token)
-    yield put(AuthActions.refreshSuccess(response.data.data))
+    yield call(api.setAuthToken, response.data.token)
+    yield put(AuthActions.refreshSuccess(response.data))
   } else {
-    yield put(AuthActions.refreshFailure({ code: response.status, detail: response.data.detail }))
+    yield put(AuthActions.refreshFailure({ code: response.status, detail: 'Error refreshing token' }))
   }
 }
 
@@ -63,11 +64,11 @@ export function * whoami ({ api, dispatch }) {
     const isAuthenticated = yield select(state => state.auth.isAuthenticated)
     const startupComplete = yield select(state => state.startup.complete)
     if (isAuthenticated) {
-      // set refresh token
+      //  set refresh token
       const refresh = () => {
         dispatch(AuthActions.refreshRequest())
       }
-      // setInterval(refresh, config.refreshTokenInterval) // @TODO
+      setInterval(refresh, config.refreshTokenInterval) // @TODO
       // goto page user was trying to access, if any
       let redirectUrl
       try {

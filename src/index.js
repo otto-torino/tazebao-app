@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import store from './Redux/Store'
 import 'semantic-ui-css/semantic.min.css'
 import './index.css'
-import  './i18n'
+import './i18n'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 

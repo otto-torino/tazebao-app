@@ -25,7 +25,7 @@ const ClickTrackingTable = ({ events }) => {
           <Table.Row key={'event-' + idx}>
             <Table.Cell>{moment(e.datetime).format('LLL')}</Table.Cell>
             <Table.Cell>{e.subscriber_email}</Table.Cell>
-            <Table.Cell><a href={e.notes} target='_blank'>{e.notes}</a></Table.Cell>
+            <Table.Cell><a href={e.notes} target='_blank' rel='noopener noreferrer'>{e.notes}</a></Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>

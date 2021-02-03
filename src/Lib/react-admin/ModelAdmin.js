@@ -19,18 +19,20 @@ const windowWidth = getWindowWidth()
 
 const ModelAdmin = props => {
   const { t } = useTranslation()
+  // crud
   const [insertItem, setInsertItem] = useState(null)
   const [editItem, setEditItem] = useState(null)
   const [deleteItem, setDeleteItem] = useState(null)
   const [error, setError] = useState(false)
+  // forms
   const insertForm = useRef(null)
   const editForm = useRef(null)
-
-  const closeInsertModal = useCallback(() => setInsertItem(null))
-  const closeEditModal = useCallback(() => setEditItem(null))
-  const closeDeleteModal = useCallback(() => setDeleteItem(null))
-  const closeErrorModal = useCallback(() => setError(null))
-
+  // modals
+  const closeInsertModal = useCallback(() => setInsertItem(null), [setInsertItem])
+  const closeEditModal = useCallback(() => setEditItem(null), [setEditItem])
+  const closeDeleteModal = useCallback(() => setDeleteItem(null), [setDeleteItem])
+  const closeErrorModal = useCallback(() => setError(null), [setError])
+  // crud cb
   const handleInsert = () => setInsertItem(true)
   const handleEdit = item => setEditItem(item)
   const handleDelete = item => setDeleteItem(item)
@@ -50,7 +52,6 @@ const ModelAdmin = props => {
 
   // edit form submit (submit button is external to the form component)
   const editSubmit = () => {
-    console.log(editForm)
     const res = editForm.current.submit()
     if (res !== false) {
       // false means errors

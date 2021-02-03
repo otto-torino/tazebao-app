@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import BaseLayout from '../../Layouts/BaseLayout'
 import Mosaico from '../../Components/Mosaico'
 import { toast } from 'react-toastify'
@@ -27,6 +27,48 @@ const EditCampaignView = props => {
   const [testModalIsOpen, setTestModalIsOpen] = useState(false)
   const [template, saveTemplate] = useState({})
   const topics = useSelector(state => state.topics.data)
+
+  const handleSave = (continueEditing, test = false, lists = []) => () => {
+    console.log('SAVING')
+    const data = campaignForm.current.submit()
+    if (data) {
+      mosaicoFrame.current.contentWindow.postMessage(
+        {
+          type: 'TAZEBAO',
+          data: {
+            event: 'SAVE',
+            // add id otherwise a new campaign is created every time
+            fields: Object.assign({}, data.data, { id: data.id }),
+            continueEditing,
+            test,
+            lists
+          }
+        },
+        '*'
+      )
+    }
+  }
+
+  const handleTest = listIds => {
+    handleSave(true, true, listIds)()
+  }
+
+  const sendTest = useCallback((campaignId, listIds) => {
+    if (!listIds || !listIds.length) {
+      return
+    }
+    request(
+      'sendCampaign',
+      [campaignId, listIds, true],
+      t('Cannot test the campaign') + ': {error}',
+      response => {
+        // show toast and redirect to home
+        toast.info(t('The test dispatch will be sent in a moment') + '!')
+        setTestModalIsOpen(false)
+      },
+      error => console.log(error)
+    )
+  }, [setTestModalIsOpen, t])
 
   useEffect(() => {
     console.log('RUNNING EFFECT')
@@ -71,49 +113,7 @@ const EditCampaignView = props => {
     return () => {
       window.removeEventListener('message', listener)
     }
-  }, [id])
-
-  const handleSave = (continueEditing, test = false, lists = []) => () => {
-    console.log('SAVING')
-    const data = campaignForm.current.submit()
-    if (data) {
-      mosaicoFrame.current.contentWindow.postMessage(
-        {
-          type: 'TAZEBAO',
-          data: {
-            event: 'SAVE',
-            // add id otherwise a new campaign is created every time
-            fields: Object.assign({}, data.data, { id: data.id }),
-            continueEditing,
-            test,
-            lists
-          }
-        },
-        '*'
-      )
-    }
-  }
-
-  const handleTest = listIds => {
-    handleSave(true, true, listIds)()
-  }
-
-  const sendTest = (campaignId, listIds) => {
-    if (!listIds || !listIds.length) {
-      return
-    }
-    request(
-      'sendCampaign',
-      [campaignId, listIds, true],
-      t('Cannot test the campaign') + ': {error}',
-      response => {
-        // show toast and redirect to home
-        toast.info(t('The test dispatch will be sent in a moment') + '!')
-        setTestModalIsOpen(false)
-      },
-      error => console.log(error)
-    )
-  }
+  }, [id, sendTest, t])
 
   return (
     <BaseLayout wrapperStyle={styles.adminView}>

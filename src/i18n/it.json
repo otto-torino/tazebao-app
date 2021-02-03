@@ -20,6 +20,8 @@
     "Lists": "Liste",
     "Topics": "Topics",
     "Campaigns": "Campagne",
+    "campaigns": "campagne",
+    "campaign_name": "nome campagna",
     "Planning": "Programmazione",
     "Bounces": "Bounces",
     "Add selected items to lists": "Aggiungi gli iscritti selezionati a liste",
@@ -184,6 +186,8 @@
     "The test dispatch will be sent in a moment": "L'invio di test verrà effettuato tra un momento!",
     "Campaign succesfully saved": "La campagna è stata salvata con successo",
     "View test dispatches": "Visualizza invii di test",
-    "tazebao_unsubscribe_topic_helptext": "Se vuoi avere tutto quanto gestito da Tazebao (la disiscrizione avverrà sul dominio Tazebao), inserisci questo URL:"
+    "tazebao_unsubscribe_topic_helptext": "Se vuoi avere tutto quanto gestito da Tazebao (la disiscrizione avverrà sul dominio Tazebao), inserisci questo URL:",
+    "AreYouSure": "Sei sicuro?",
+    "Deleted": "Eliminata"
   }
 }
