@@ -19,11 +19,20 @@ import {
   useListFilters
 } from './Hooks'
 
+/**
+ * ChangeList
+ *
+ * This component can wirkl with a whole set of data, or a paginated set of data.
+ * In case of a whole set of data, it manages directly pagination, sorting,
+ * filtering and full text search. In case of paginated set of data id relies on
+ * changing the queryset object which stores all this information (page, sort, filter, full-text)
+ * calling the onUpdateQuerystring function.
+ */
 const ChangeList = props => {
   // translations
   const { t } = useTranslation()
 
-  // whole set or just the correct filtered and sorted data?
+  // manage pageinated data sets
   const { querystring, onUpdateQuerystring, isWholeDataSet } = props
 
   // checkboxes, actions to be performed on selected items
@@ -85,15 +94,10 @@ const ChangeList = props => {
   }
 
   //  insert/edit/delete
-  const insertRecord = () => {
-    return props.canInsert ? props.onInsert() : null
-  }
-  const editRecord = item => {
-    return props.canEdit(item) ? props.onEdit(item) : null
-  }
-  const deleteRecord = item => {
-    return props.canDelete(item) ? props.onDelete(item) : null
-  }
+  const withPermission = (perm, fn, hasItem) => arg => hasItem && perm(arg) ? fn(arg) : (!hasItem && perm ? fn() : null)
+  const insertRecord = withPermission(props.canInsert, props.onInsert, false)
+  const editRecord = withPermission(props.canEdit, props.onEdit, true)
+  const deleteRecord = withPermission(props.canDelete, props.onDelete, true)
 
   // shortcuts
   const listFiltersLength = Object.keys(props.listFilters).length
