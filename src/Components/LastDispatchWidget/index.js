@@ -106,7 +106,7 @@ const LastDispatchWidget = props => {
     </div>
   )
   return (
-    <div className={styles.widget}>
+    <div className={styles.widget} data-tour='last-dispatch-widget'>
       <Header as='h2' icon>
         <Icon name='send' className={styles.icon} />
         {t('Last Dispatch')}

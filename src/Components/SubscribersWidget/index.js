@@ -43,7 +43,7 @@ const SubscribersWidget = props => {
   )
 
   return (
-    <div className={styles.widget}>
+    <div className={styles.widget} data-tour='subscribers-widget'>
       <Header as='h2' icon>
         <Icon name='users' className={styles.icon} />
         {t('Subscribers')}

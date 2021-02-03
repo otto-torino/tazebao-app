@@ -10,6 +10,7 @@ import { reducer as campaignsReducer } from './Campaigns'
 import { reducer as planningReducer } from './Planning'
 import { reducer as bouncesReducer } from './Bounces'
 import { reducer as mailerMessagesReducer } from './MailerMessages'
+import { reducer as tourReducer } from './Tour'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -22,5 +23,6 @@ export default (history) => combineReducers({
   campaigns: campaignsReducer,
   planning: planningReducer,
   bounces: bouncesReducer,
-  mailerMessages: mailerMessagesReducer
+  mailerMessages: mailerMessagesReducer,
+  tour: tourReducer
 })

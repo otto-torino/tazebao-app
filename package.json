@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "apisauce": "^1.1.1",
+    "body-scroll-lock": "^3.1.5",
     "connected-react-router": "^6.5.2",
     "history": "^4.10.1",
     "i18next": "^19.0.1",
@@ -21,11 +22,13 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
     "react-toastify": "^5.4.0",
+    "reactour": "^1.18.0",
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.1"
+    "semantic-ui-react": "^0.88.1",
+    "styled-components": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

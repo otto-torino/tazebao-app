@@ -9,7 +9,7 @@ import styles from './CreateCampaignWidget.module.scss'
 const CreateCampaignWidget = props => {
   const { t } = useTranslation()
   return (
-    <div className={styles.widget}>
+    <div className={styles.widget} data-tour='campaigns-widget'>
 
       <Header as='h2' icon>
         <Icon name='newspaper outline' className={styles.icon} />

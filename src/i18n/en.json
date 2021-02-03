@@ -24,6 +24,15 @@
     "campaign_name-sf": "campaign",
     "subscriber_email-sf": "email",
     "MailerMessageAdminText": "Here are the send e-mail logs. Pay attention to the unsent emails which have a last attempt date, it probably means that the recipient is not a valid email address! In such case select all the different email logs and run the unsubscribe action. Sent email logs are cleared everytwo days, unset email logs are kept (because of the retry policy)",
-    "to_address-sf": "to address"
+    "to_address-sf": "to address",
+    "DashboardHelpStep0Text": "This is your dashboard. Here you can overview all the main events which regard your campaigns.",
+    "DashboardHelpStep1Text": "You can access the dashboard page from anywhere just by clicking the logo in the topbar",
+    "DashboardHelpStep2Text": "You can logout at any moment clicking on your user name",
+    "DashboardHelpStep3Text": "This is the subscribers widget. You can see the total number of subscribers, along with some statistics about new and lost subscribers in the last month",
+    "DashboardHelpStep4Text": "This is the campaigns widget. Click the plus button to go directly to the page for the creation of a new campaign.",
+    "DashboardHelpStep5Text": "This widget shows information about the last dispatch: campaign, statistics about open rate and click rate, bounces. Keep in mind that bounces information is deleted every week, so you should act accordingly in order to unsubscribe all emails that doesn't exist anymore, or have some unrecovable error.",
+    "DashboardHelpStep6Text": "Here you can see your dispatch future planning.",
+    "DashboardHelpStep7Text": "Click the menu icon to open the sidebar menu",
+    "DashboardHelpStep8Text": "Use the sidebar menu to explore all the applications pages where you can manage all of your data. In every page that has an help tour available, the help menu voice is visible. Click it to start the tour."
   }
 }

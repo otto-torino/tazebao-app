@@ -213,6 +213,23 @@
     "yes": "si",
     "no": "no",
     "Yes": "Si",
-    "No": "No"
+    "No": "No",
+    "Help": "Aiuto",
+    "Dashboard": "Dashboard",
+    "Subscribers widget": "Widget iscritti",
+    "Campaigns widget": "Widget campagne",
+    "Last dispatch widget": "Widget ultimo invio",
+    "Planning widget": "Widget invio programmato",
+    "Menu": "Menu",
+    "SidebarMenu": "Menu laterale",
+    "DashboardHelpStep0Text": "Questa è la tua dashboard, da qui puoi tenere sotto controllo i principali eventi che riguardano le tue campagne.",
+    "DashboardHelpStep1Text": "Potrai sempre accedere a questa pagina cliccando sul logo visualizzato nella barra superiore.",
+    "DashboardHelpStep2Text": "Puoi effettuare il logout in ogni momento cliccando sul tuo nome utente.",
+    "DashboardHelpStep3Text": "Questo è il widget degli iscritti. Puoi visualizzare quanti sono gli iscritti totali, e delle statistiche di nuovi iscritti e iscritti perduti nell'ultimo mese.",
+    "DashboardHelpStep4Text": "Questo è il widget delle campagne, clicca il bottone con il più per accedere direttamente alla pagina di creazione di una nuova campagna.",
+    "DashboardHelpStep5Text": "Questo è il widget dell'ultimo invio. Riporta informazioni e statistiche riguardo all'ultimo invio: campagna, percentuali di e-mail aperte, percentuali di click effettuati ed e-mail rimbalzate. Nota bene che le informazioni riguardo i rimbalzi persistono per una settimana circa, poi vengono automaticamente eliminate. In questo lasso di tempo dovresti provvedere a controllarli ed a disiscrivere eventuali contatti non più esistenti o con errori non recuperabili.",
+    "DashboardHelpStep6Text": "Questo è il widget della programmazione degli invii. Ti mostra quali sono tutti i prossimi invii programmati.",
+    "DashboardHelpStep7Text": "Clicca l'icona evidenziata per aprire il menu laterale.",
+    "DashboardHelpStep8Text": "Attraverso il menu laterale potrai muoverti in tutte le sezioni dell'applicazione per gestire tutti i tuoi dati. In ogni videata per la quale è disponibile un menu interattivo sarà visualizzata la voce di menu di aiuto. Cliccala per visualizzarlo."
   }
 }

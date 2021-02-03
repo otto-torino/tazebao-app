@@ -24,7 +24,7 @@ const NextPlanningWidget = props => {
   )
 
   return (
-    <div className={styles.widget}>
+    <div className={styles.widget} data-tour='planning-widget'>
       <Header as='h2' icon>
         <Icon name='clock' className={styles.icon} />
         {t('Planning')}

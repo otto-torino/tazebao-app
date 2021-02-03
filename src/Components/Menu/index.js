@@ -1,16 +1,29 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Menu, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import config from '../../Config'
+import TourActions from '../../Redux/Tour'
 import { useTranslation } from 'react-i18next'
+import EventDispatcher from '../../Services/EventDispatcher'
 
 const AppMenu = props => {
   const { t } = useTranslation()
-  return [
+  const dispatch = useDispatch()
+  const path = useSelector(state => state.router.location.pathname)
+  const helpTours = {
+    '/': 'Dashboard'
+  }
+  const openHelp = () => {
+    EventDispatcher.emit('closeSidebar')
+    dispatch(TourActions.openTour(helpTours[path]))
+  }
+
+  const menu = [
     <Menu.Item active header key='menu'>Menu</Menu.Item>,
     <Menu.Item as={Link} to={config.urls.home} key='menu-voice-home'>
       <Icon name='home' />
-        Home
+      Home
     </Menu.Item>,
     <Menu.Item as={Link} to={config.urls.adminSubscribers} key='menu-voice-admin-users'>
       <Icon name='user' />
@@ -40,11 +53,22 @@ const AppMenu = props => {
       <Icon name='file text' />
       {t('MailerMessages')}
     </Menu.Item>,
-    <Menu.Item as={Link} to={config.urls.integration} key='menu-voice-integration'>
+    <Menu.Item as={Link} to={config.urls.integration} key='menu-voice-integration' data-tour='help-menu-voice'>
       <Icon name='globe' />
       {t('Integration')}
     </Menu.Item>
   ]
+
+  if (helpTours[path]) {
+    menu.push(
+      <Menu.Item as='a' onClick={openHelp} key='menu-voice-help'>
+        <Icon name='life ring outline' />
+        {t('Help')}
+      </Menu.Item>
+    )
+  }
+
+  return menu
 }
 
 AppMenu.propTypes = {

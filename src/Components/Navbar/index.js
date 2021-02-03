@@ -20,16 +20,16 @@ const Navbar = props => {
   return (
     <Menu secondary inverted size='huge' className={styles.navbar}>
       <Menu.Item>
-        <Icon name='bars' size='big' onClick={props.onHamburgerClick} style={{ cursor: 'pointer', marginRight: 0 }} />
+        <Icon name='bars' size='big' onClick={props.onHamburgerClick} style={{ cursor: 'pointer', marginRight: 0 }} data-tour='menu-icon' />
       </Menu.Item>
       <Menu.Item style={{ paddingLeft: 0, paddingRight: 0 }}>
         <Link to={config.urls.home}>
-          <Responsive as={Image} className={styles.logo} src={Logo} minWidth={500} />
-          <Responsive as={Image} className={styles.logo} src={LogoMobile} maxWidth={500} />
+          <Responsive as={Image} className={styles.logo} src={Logo} minWidth={500} data-tour='logo' />
+          <Responsive as={Image} className={styles.logo} src={LogoMobile} maxWidth={500} data-tour='logo' />
         </Link>
       </Menu.Item>
       <Menu.Menu position='right'>
-        <Menu.Item className='actions-menu'>
+        <Menu.Item className='actions-menu' data-tour='profile'>
           <Dropdown trigger={trigger} pointing className='link item'>
             <Dropdown.Menu>
               <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>

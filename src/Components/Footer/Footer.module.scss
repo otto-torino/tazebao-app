@@ -1,0 +1,21 @@
+@import '../../Styles/variables';
+
+.footer {
+  background: $footer-bg !important;
+  border-radius: 0 !important;
+  border-width: 0 !important;
+  color: $footer-fg;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.text {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  height: 30px;
+  margin-left: .5rem;
+}

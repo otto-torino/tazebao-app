@@ -2,11 +2,17 @@ import React, { useState } from 'react'
 import { Sidebar, Menu, Segment } from 'semantic-ui-react'
 import MenuVoices from '../Components/Menu'
 import Navbar from '../Components/Navbar'
+import Footer from '../Components/Footer'
 import PropTypes from 'prop-types'
+import EventDispatcher from '../Services/EventDispatcher'
 
 import styles from './BaseLayout.module.scss'
 
 const BaseLayout = props => {
+  // control sidebar from anywhere
+  EventDispatcher.register('openSidebar', () => setNavbarVisibility(true))
+  EventDispatcher.register('closeSidebar', () => setNavbarVisibility(false))
+
   const [navbarIsVisible, setNavbarVisibility] = useState(false)
   return (
     <div className={props.wrapperStyle}>
@@ -22,6 +28,7 @@ const BaseLayout = props => {
           onHide={() => setNavbarVisibility(false)}
           vertical
           visible={navbarIsVisible}
+          data-tour='sidebar'
         >
           <MenuVoices />
         </Sidebar>
@@ -32,6 +39,7 @@ const BaseLayout = props => {
           <Segment basic style={{ padding: '2rem 0' }}>
             {props.children}
           </Segment>
+          <Footer />
         </Sidebar.Pusher>
       </Sidebar.Pushable>
     </div>

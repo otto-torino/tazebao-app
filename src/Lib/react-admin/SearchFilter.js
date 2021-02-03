@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { varToVerbose } from './Utils'
 import { Input } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 
