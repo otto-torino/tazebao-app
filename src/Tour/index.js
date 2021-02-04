@@ -1,12 +1,15 @@
 import DashboardSteps from './DashboardSteps'
-import SubscribersSteps from './SubscribersStep'
+import SubscribersSteps from './SubscribersSteps'
+import ListsSteps from './ListsSteps'
 
 export const tourPaths = {
   '/': 'Dashboard',
-  '/subscribers': 'Subscribers'
+  '/subscribers': 'Subscribers',
+  '/lists': 'Lists'
 }
 
 export default {
   Dashboard: DashboardSteps,
-  Subscribers: SubscribersSteps
+  Subscribers: SubscribersSteps,
+  Lists: ListsSteps
 }

@@ -233,6 +233,11 @@
     "Filter subscriber": "Filtra iscritto",
     "Multiple actions 1/2": "Azioni multiple 1/2",
     "Multiple actions 2/2": "Azioni multiple 2/2",
+    "Lists list": "Lista delle liste di contatti",
+    "Edit list": "Modifica lista",
+    "Delete list": "Elimina lista",
+    "Add list": "Aggiungi lista",
+    "Search list": "Ricerca lista",
     "DashboardHelpStep0Text": "Questa è la tua dashboard, da qui puoi tenere sotto controllo i principali eventi che riguardano le tue campagne.",
     "DashboardHelpStep1Text": "Potrai sempre accedere a questa pagina cliccando sul logo visualizzato nella barra superiore.",
     "DashboardHelpStep2Text": "Puoi effettuare il logout in ogni momento cliccando sul tuo nome utente.",
@@ -253,6 +258,12 @@
     "SubscribersHelpStep7Text": "Utilizza questo campo per ricercare i tuoi contatti per email o informazioni",
     "SubscribersHelpStep8Text": "Qui puoi filtrare i contatti per lista di appartenenza.",
     "SubscribersHelpStep9Text": "Puoi eseguire delle azioni su più contatti contemporaneamente, devi solamente selezionare i contatti di interesse con questo toggler...",
-    "SubscribersHelpStep10Text": "... e poi selezionare l'azione desiderata da questa tendina. "
+    "SubscribersHelpStep10Text": "... e poi selezionare l'azione desiderata da questa tendina. ",
+    "ListsHelpStep0Text": "Questa è la pagina in cui puoi visualizzare, modificare ed eliminare le liste in cui suddividere i tuoi contatti.",
+    "ListsHelpStep1Text": "Questa tabella serve a navigare tra tutte le tue liste. Puoi cliccare sul nome delle colonne per ordinare i dati (quando possibile) in entrambe le direzioni.",
+    "ListsHelpStep2Text": "Premi questo bottone per aprire il form che ti consente di creare una nuova lista.",
+    "ListsHelpStep3Text": "Puoi modificare la scheda di ciascuna lista premendo questo bottone.",
+    "ListsHelpStep4Text": "Puoi eliminare una lista cliccando questo bottone. Ti verrà comunque chiesta una conferma prima di procedere.",
+    "ListsHelpStep5Text": "Utilizza questo campo per ricercare le tue liste per nome"
   }
 }
