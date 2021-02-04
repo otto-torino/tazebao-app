@@ -254,6 +254,11 @@
     "Send campaign": "Invia campagna",
     "Search campaign": "Ricerca campagna",
     "Filter campaigns": "Filtra campagne",
+    "Planning list": "Lista delle programmazioni degli invii",
+    "Edit scheduled dispatch": "Modifica programmazione",
+    "Delete scheduled dispatch": "Elimina programmazione",
+    "Add scheduled dispatch": "Aggiungi programmazione",
+    "Search scheduled dispatch": "Ricerca programmazione",
     "DashboardHelpStep0Text": "Questa è la tua dashboard, da qui puoi tenere sotto controllo i principali eventi che riguardano le tue campagne.",
     "DashboardHelpStep1Text": "Potrai sempre accedere a questa pagina cliccando sul logo visualizzato nella barra superiore.",
     "DashboardHelpStep2Text": "Puoi effettuare il logout in ogni momento cliccando sul tuo nome utente.",
@@ -298,6 +303,12 @@
     "CampaignsHelpStep7Text": "Puoi eliminare una campagna cliccando questo bottone. Ti verrà comunque chiesta una conferma prima di procedere.",
     "CampaignsHelpStep8Text": "Usa lo strumento di paginazione per naviagre fra le diverse pagine delle tue campagne.",
     "CampaignsHelpStep9Text": "Utilizza questo campo per ricercare le campagne per nome",
-    "CampaignsHelpStep10Text": "Qui puoi filtrare le campagne per topic"
+    "CampaignsHelpStep10Text": "Qui puoi filtrare le campagne per topic",
+    "PlanningHelpStep0Text": "Questa è la pagina in cui puoi visualizzare, aggiungere, modificare ed eliminare le programmazioni degli invii. E' possible programmare l'invio schedulato nel tempo per ciascuna campagna.",
+    "PlanningHelpStep1Text": "Questa tabella serve a navigare tra tutte le tue programmazioni. Puoi cliccare sul nome delle colonne per ordinare i dati (quando possibile) in entrambe le direzioni.",
+    "PlanningHelpStep2Text": "Premi questo bottone per aprire il form che ti consente di programmare l'invio di una campagna.",
+    "PlanningHelpStep3Text": "Puoi modificare ciascuna programmazione premendo questo bottone.",
+    "PlanningHelpStep4Text": "Puoi eliminare una programmazione cliccando questo bottone. Ti verrà comunque chiesta una conferma prima di procedere.",
+    "PlanningHelpStep5Text": "Utilizza questo campo per ricercare le tue programmazione per nome della campagna"
   }
 }

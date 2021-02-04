@@ -69,6 +69,12 @@
     "CampaignsHelpStep7Text": "You can delete a campaign clicking this icon, you'll need to confirm the operation.",,
     "CampaignsHelpStep8Text": "Use the pagination tool to move through all the campaigns pages.",
     "CampaignsHelpStep9Text": "Use this field to filter campaigns by name",
-    "CampaignsHelpStep10Text": "Here you can filter the campaigns by topic"
+    "CampaignsHelpStep10Text": "Here you can filter the campaigns by topic",
+    "PlanningHelpStep0Text": "This is the page where you can view, add, edit and delete the scheduled dispatches for your campaigns",
+    "PlanningHelpStep1Text": "This table shows all your scheduled dispatches. You can click a column name in order to sort data in the two directions (when available)",
+    "PlanningHelpStep2Text": "Click this button to open a form that will let you schedule a new dispatch",
+    "PlanningHelpStep3Text": "You can edit your scheduled dispatch clicking this icon.",
+    "PlanningHelpStep4Text": "You can delete a cheduled dispatch clicking this icon, you'll need to confirm the operation.",
+    "PlanningHelpStep5Text": "Use this field to filter scheduled dispatches by campaign name"
   }
 }
