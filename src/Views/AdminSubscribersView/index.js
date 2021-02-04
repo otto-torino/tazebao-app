@@ -217,6 +217,7 @@ const AdminSubscribersView = props => {
       color='blue'
       onClick={() => setImportCsvModalIsOpen(true)}
       icon
+      data-tour='changelist-import'
       style={{ marginBottom: '1rem' }}
     >
       <Icon name='file excel outline' /> {t('Import from CSV file')}

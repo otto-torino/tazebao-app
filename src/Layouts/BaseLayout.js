@@ -1,17 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Sidebar, Menu, Segment } from 'semantic-ui-react'
+import { useDispatch, useSelector } from 'react-redux'
 import MenuVoices from '../Components/Menu'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import PropTypes from 'prop-types'
 import EventDispatcher from '../Services/EventDispatcher'
+// tour
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+import TourActions from '../Redux/Tour'
+import Steps from '../Tour'
+import Tour from '../Reactour'
 
 import styles from './BaseLayout.module.scss'
 
 const BaseLayout = props => {
+  const dispatch = useDispatch()
   // control sidebar from anywhere
   EventDispatcher.register('openSidebar', () => setNavbarVisibility(true))
   EventDispatcher.register('closeSidebar', () => setNavbarVisibility(false))
+
+  const tourIsOpen = useSelector(state => state.tour.isOpen)
+  const tourName = useSelector(state => state.tour.name)
+  // overflow is evil for reactour
+  const handleOpenTour = useCallback(target => {
+    disableBodyScroll(target)
+    document.getElementById('changelist').style.overflow = 'visible'
+    document.getElementById('changelist-pagination-container').style.overflow = 'visible'
+  }, [])
+  const handleCloseTour = useCallback(target => {
+    enableBodyScroll(target)
+    document.getElementById('changelist').style.overflow = 'auto'
+    document.getElementById('changelist-pagination-container').style.overflow = 'auto'
+  }, [])
 
   const [navbarIsVisible, setNavbarVisibility] = useState(false)
   return (
@@ -42,6 +63,17 @@ const BaseLayout = props => {
           <Footer />
         </Sidebar.Pusher>
       </Sidebar.Pushable>
+      <Tour
+        dispatch={dispatch}
+        steps={Steps[tourName]}
+        isOpen={tourIsOpen}
+        showNavigation={false}
+        showButtons={false}
+        disableKeyboardNavigation
+        onRequestClose={() => dispatch(TourActions.closeTour())}
+        onAfterOpen={handleOpenTour}
+        onBeforeClose={handleCloseTour}
+      />
     </div>
   )
 }

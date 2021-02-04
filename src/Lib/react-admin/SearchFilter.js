@@ -8,6 +8,7 @@ const SearchFilter = props => {
   return (
     <Input
       icon='search'
+      data-tour='changelist-search'
       placeholder={
         t('Search') + ' ' +
         props.searchFields.map(f => t(`${f}-sf`)).join(', ')

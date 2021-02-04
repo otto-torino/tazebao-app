@@ -120,6 +120,7 @@ const ChangeList = props => {
       Object.keys(props.listFilters).map(f => (
         <Select
           key={'filter-' + f}
+          data-tour={`changelist-filter-${f}`}
           placeholder={t('Select') + ' ' + props.listFilters[f].label}
           options={props.listFilters[f].options}
           onChange={handleFilter(f)}
@@ -135,6 +136,7 @@ const ChangeList = props => {
     return inDiv(
       <Select
         key='list-actions'
+        data-tour='changelist-actions'
         placeholder={t('Perform action on selected items')}
         disabled={!selectedItems.length}
         value={selectedAction}
@@ -167,6 +169,7 @@ const ChangeList = props => {
             <Checkbox
               checked={allSelected}
               toggle
+              data-tour='changelist-selection'
               onChange={(e, { checked }) => {
                 setAllSelected(checked)
                 setSelectedItems(
@@ -276,6 +279,7 @@ const ChangeList = props => {
             name={a === 'edit' ? 'pencil' : 'trash'}
             circular
             color='blue'
+            data-tour={`changelist-${a}`}
             disabled={!props['can' + _.upperFirst(a)](item)}
             onClick={() => (a === 'edit' ? editRecord(item) : deleteRecord(item))}
             key={a + '-btn'}
@@ -300,7 +304,7 @@ const ChangeList = props => {
 
   // finally...
   return (
-    <div className='changelist' style={{ maxWidth: '100%', overflow: 'auto' }}>
+    <div className='changelist' id='changelist' style={{ maxWidth: '100%', overflow: 'auto' }}>
       {props.description ? <div style={{ marginBottom: '2rem' }}>{props.description}</div> : null}
       <div
         className='changelist-tools'
@@ -324,6 +328,7 @@ const ChangeList = props => {
               color='blue'
               onClick={insertRecord}
               icon
+              data-tour='changelist-add'
               style={{ marginBottom: '1rem' }}
             >
               <Icon name='plus' /> {t('Add')} {props.verboseName}
@@ -334,7 +339,7 @@ const ChangeList = props => {
       </div>
       {withLoader(
         <div>
-          <Table celled striped>
+          <Table celled striped data-tour='changelist-table'>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell
@@ -355,8 +360,9 @@ const ChangeList = props => {
             </Table.Header>
             <Table.Body>{items.map(item => row(item))}</Table.Body>
           </Table>
-          <div style={{ maxWidth: '100%', overflow: 'auto' }}>
+          <div style={{ maxWidth: '100%', overflow: 'auto' }} id='changelist-pagination-container'>
             <Pagination
+              data-tour='changelist-pagination'
               activePage={page}
               onPageChange={handlePageChange}
               totalPages={Math.ceil(totItems / querystring.page_size)}

@@ -12,8 +12,8 @@ steps.push({
   content: ({ goTo, inDOM }) => {
     return (
       <div>
-        <h4>{i18next.t('Dashboard')}</h4>
-        <p>{i18next.t('DashboardHelpStep0Text')}</p>
+        <h4>{i18next.t('Subscribers')}</h4>
+        <p>{i18next.t('SubscribersHelpStep0Text')}</p>
         {nextButton(goTo, 1)}
       </div>
     )
@@ -26,12 +26,12 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="logo"]',
+  selector: '[data-tour="changelist-table"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Logo')}</h4>
-        <p>{i18next.t('DashboardHelpStep1Text')}</p>
+        <h4>{i18next.t('Subscribers list')}</h4>
+        <p>{i18next.t('SubscribersHelpStep1Text')}</p>
         {nextButton(goTo, 2)}
       </div>
     )
@@ -44,12 +44,12 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="profile"]',
+  selector: '[data-tour="changelist-add"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Logout')}</h4>
-        <p>{i18next.t('DashboardHelpStep2Text')}</p>
+        <h4>{i18next.t('Add subscriber')}</h4>
+        <p>{i18next.t('SubscribersHelpStep2Text')}</p>
         {nextButton(goTo, 3)}
       </div>
     )
@@ -62,12 +62,12 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="subscribers-widget"]',
+  selector: '[data-tour="changelist-import"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Subscribers widget')}</h4>
-        <p>{i18next.t('DashboardHelpStep3Text')}</p>
+        <h4>{i18next.t('Import subscribers')}</h4>
+        <p>{i18next.t('SubscribersHelpStep3Text')}</p>
         {nextButton(goTo, 4)}
       </div>
     )
@@ -80,12 +80,12 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="campaigns-widget"]',
+  selector: '[data-tour="changelist-edit"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Campaigns widget')}</h4>
-        <p>{i18next.t('DashboardHelpStep4Text')}</p>
+        <h4>{i18next.t('Edit subscriber')}</h4>
+        <p>{i18next.t('SubscribersHelpStep4Text')}</p>
         {nextButton(goTo, 5)}
       </div>
     )
@@ -94,16 +94,17 @@ steps.push({
   style: {
     backgroundColor: bgColor
   },
-  stepInteraction: false
+  stepInteraction: false,
+  skipIfNotVisible: true
 })
 
 steps.push({
-  selector: '[data-tour="last-dispatch-widget"]',
+  selector: '[data-tour="changelist-delete"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Last dispatch widget')}</h4>
-        <p>{i18next.t('DashboardHelpStep5Text')}</p>
+        <h4>{i18next.t('Delete subscriber')}</h4>
+        <p>{i18next.t('SubscribersHelpStep5Text')}</p>
         {nextButton(goTo, 6)}
       </div>
     )
@@ -112,16 +113,17 @@ steps.push({
   style: {
     backgroundColor: bgColor
   },
-  stepInteraction: false
+  stepInteraction: false,
+  skipIfNotVisible: true
 })
 
 steps.push({
-  selector: '[data-tour="planning-widget"]',
+  selector: '[data-tour="changelist-pagination"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Planning widget')}</h4>
-        <p>{i18next.t('DashboardHelpStep6Text')}</p>
+        <h4>{i18next.t('Pagination')}</h4>
+        <p>{i18next.t('SubscribersHelpStep6Text')}</p>
         {nextButton(goTo, 7)}
       </div>
     )
@@ -134,12 +136,13 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="menu-icon"]',
+  selector: '[data-tour="changelist-search"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Menu')}</h4>
-        <p>{i18next.t('DashboardHelpStep7Text')}</p>
+        <h4>{i18next.t('Search subscriber')}</h4>
+        <p>{i18next.t('SubscribersHelpStep7Text')}</p>
+        {nextButton(goTo, 8)}
       </div>
     )
   },
@@ -147,22 +150,54 @@ steps.push({
   style: {
     backgroundColor: bgColor
   },
-  onSpotClick: (goto, dispatch) => {
-    EventDispatcher.emit('tourSuspend', { interval: 500 })
-    EventDispatcher.emit('openSidebar')
-    setTimeout(() => goto(8), 500)
+  stepInteraction: false
+})
+
+steps.push({
+  selector: '[data-tour="changelist-filter-lists"]',
+  content: ({ goTo, inDOM, close }) => {
+    return (
+      <div>
+        <h4>{i18next.t('Filter subscriber')}</h4>
+        <p>{i18next.t('SubscribersHelpStep8Text')}</p>
+        {nextButton(goTo, 9)}
+      </div>
+    )
+  },
+  position: 'bottom',
+  style: {
+    backgroundColor: bgColor
   },
   stepInteraction: false
 })
 
 steps.push({
-  selector: '[data-tour="sidebar"]',
+  selector: '[data-tour="changelist-selection"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Sidebar menu')}</h4>
-        <p>{i18next.t('DashboardHelpStep8Text')}</p>
-        {nextButton(goTo, 9)}
+        <h4>{i18next.t('Multiple actions 1/2')}</h4>
+        <p>{i18next.t('SubscribersHelpStep9Text')}</p>
+        {nextButton(goTo, 10)}
+      </div>
+    )
+  },
+  position: 'bottom',
+  style: {
+    backgroundColor: bgColor
+  },
+  stepInteraction: false,
+  skipIfNotVisible: true
+})
+
+steps.push({
+  selector: '[data-tour="changelist-actions"]',
+  content: ({ goTo, inDOM, close }) => {
+    return (
+      <div>
+        <h4>{i18next.t('Multiple actions 2/2')}</h4>
+        <p>{i18next.t('SubscribersHelpStep10Text')}</p>
+        {nextButton(goTo, 11)}
       </div>
     )
   },

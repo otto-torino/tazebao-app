@@ -33,6 +33,18 @@
     "DashboardHelpStep5Text": "This widget shows information about the last dispatch: campaign, statistics about open rate and click rate, bounces. Keep in mind that bounces information is deleted every week, so you should act accordingly in order to unsubscribe all emails that doesn't exist anymore, or have some unrecovable error.",
     "DashboardHelpStep6Text": "Here you can see your dispatch future planning.",
     "DashboardHelpStep7Text": "Click the menu icon to open the sidebar menu",
-    "DashboardHelpStep8Text": "Use the sidebar menu to explore all the applications pages where you can manage all of your data. In every page that has an help tour available, the help menu voice is visible. Click it to start the tour."
+    "DashboardHelpStep8Text": "Use the sidebar menu to explore all the applications pages where you can manage all of your data",
+    "DashboardHelpStep9Text": "For any page that has an help tour available, thvis button is visiible. Click it to start the tour.",
+    "SubscribersHelpStep0Text": "This is the page where you can view, edit, delete, import and perform other actions on your contacts",
+    "SubscribersHelpStep1Text": "This table shows all yor contacts. You can click a column name in order to sort data in the two directions (when available)",
+    "SubscribersHelpStep2Text": "Click this button to open a form that will let you create a new subscriber",
+    "SubscribersHelpStep3Text": "Click this button to open the import subscribers window. You can import your contacts from a csv file. Please pay attention at the provided instructions, the application will be able to correctly import the data only if the file has the correct format!",
+    "SubscribersHelpStep4Text": "You can edit your contact clicking this icon. You can edit the email address, some info and the associated lists",
+    "SubscribersHelpStep5Text": "You can delete a contact clicking this icon, you'll need to confirm the operation.",
+    "SubscribersHelpStep6Text": "Use the pagination tool to move through all the contacts pages.",
+    "SubscribersHelpStep7Text": "Use this field to filter contacts by email or info",
+    "SubscribersHelpStep8Text": "Here you can filter the contacts by associated list",
+    "SubscribersHelpStep9Text": "You can perform actions on multiple contacts at once, Just selectthe desired contacts...",
+    "SubscribersHelpStep10Text": "... and then select the desired action from the dropdown. "
   }
 }
