@@ -15,7 +15,6 @@ export const closeButton = close => (
     <strong
       style={{ cursor: 'pointer' }}
       onClick={() => {
-        history.push(config.urls.docs)
         close()
       }}
     >
