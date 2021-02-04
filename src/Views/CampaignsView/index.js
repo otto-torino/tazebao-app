@@ -159,6 +159,7 @@ const AdminSubscribersView = props => {
                 title={t('details')}
                 name='chart line'
                 circular
+                data-tour='changelist-stats'
                 color='blue'
                 onClick={() => history.push(config.urls.campaignDetail.replace(':id', item.id))}
                 key='detail-btn'
@@ -171,16 +172,18 @@ const AdminSubscribersView = props => {
                 name='copy outline'
                 circular
                 disabled={!item.template}
+                data-tour='changelist-duplicate'
                 color='blue'
                 onClick={() => handleDuplicate(item)}
                 key='duplicate-btn'
                 style={{
-                  cursor: 'pointer'
+                  cursor: !item.template ? 'auto' : 'pointer'
                 }}
               />,
               <Icon
                 title={t('send')}
                 name='send'
+                data-tour='changelist-send'
                 circular
                 color='blue'
                 onClick={() =>

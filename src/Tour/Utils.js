@@ -1,6 +1,7 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
 import history from '../history'
+import i18next from 'i18next'
 import config from '../Config'
 
 export const nextButton = (goTo, step) => (
@@ -18,7 +19,7 @@ export const closeButton = close => (
         close()
       }}
     >
-      END TOUR
+      {i18next.t('END TOUR')}
     </strong>
   </div>
 )

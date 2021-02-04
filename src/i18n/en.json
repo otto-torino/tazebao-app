@@ -59,5 +59,16 @@
     "TopicsHelpStep3Text": "You can edit your topic clicking this icon.",
     "TopicsHelpStep4Text": "You can delete a topic clicking this icon, you'll need to confirm the operation.",
     "TopicsHelpStep5Text": "Use this field to filter topics by name",
+    "CampaignsHelpStep0Text": "This is the page where you can view, create, edit, delete and perform other actions on your campaigns. Each campaign is associated to a topic, from which it takes the from address, and can be sent multiple times (multiple dispatches) immediately or scheduling the exact time. A campaign can be made available online.",
+    "CampaignsHelpStep1Text": "This table shows all your campaigns. You can click a column name in order to sort data in the two directions (when available)",
+    "CampaignsHelpStep2Text": "Click this button to open a page that will let you create a new campaign",
+    "CampaignsHelpStep3Text": "Click this button to open a page where you can seeall the statistics related to the campaign dispatches, You can see the number of email sent, the bounces and the events of opening and clicks, also represented in a time chart.",
+    "CampaignsHelpStep4Text": "Click this button to duplicate a campaign that you can then edit. You can duplicate only the campaigns created with this application, not the ones created with the old system.",
+    "CampaignsHelpStep5Text": "Click this button to send the campaign. You'll be redirected to a page when you can choose the contacts lists that will receive the newsletter and a calendar to schedule the dispatch. You can also send it immediately.",
+    "CampaignsHelpStep6Text": "You can edit your campaign clicking this icon. You can edit only the campaigns created with this application, not the ones created with the old system.",
+    "CampaignsHelpStep7Text": "You can delete a campaign clicking this icon, you'll need to confirm the operation.",,
+    "CampaignsHelpStep8Text": "Use the pagination tool to move through all the campaigns pages.",
+    "CampaignsHelpStep9Text": "Use this field to filter campaigns by name",
+    "CampaignsHelpStep10Text": "Here you can filter the campaigns by topic"
   }
 }
