@@ -23,15 +23,18 @@ const BaseLayout = props => {
   const tourIsOpen = useSelector(state => state.tour.isOpen)
   const tourName = useSelector(state => state.tour.name)
   // overflow is evil for reactour
+  const overflowCorrections = [
+    'changelist',
+    'changelist-pagination-container'
+  ]
+  const setOverflow = v => el => { if (document.getElementById(el)) document.getElementById(el).style.overflow = v }
   const handleOpenTour = useCallback(target => {
     disableBodyScroll(target)
-    document.getElementById('changelist').style.overflow = 'visible'
-    document.getElementById('changelist-pagination-container').style.overflow = 'visible'
+    overflowCorrections.forEach(setOverflow('visible'))
   }, [])
   const handleCloseTour = useCallback(target => {
     enableBodyScroll(target)
-    document.getElementById('changelist').style.overflow = 'auto'
-    document.getElementById('changelist-pagination-container').style.overflow = 'auto'
+    overflowCorrections.forEach(setOverflow('auto'))
   }, [])
 
   const [navbarIsVisible, setNavbarVisibility] = useState(false)
