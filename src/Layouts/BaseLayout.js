@@ -14,6 +14,11 @@ import Tour from '../Reactour'
 
 import styles from './BaseLayout.module.scss'
 
+const overflowCorrections = [
+  'changelist',
+  'changelist-pagination-container'
+]
+
 const BaseLayout = props => {
   const dispatch = useDispatch()
   // control sidebar from anywhere
@@ -23,10 +28,6 @@ const BaseLayout = props => {
   const tourIsOpen = useSelector(state => state.tour.isOpen)
   const tourName = useSelector(state => state.tour.name)
   // overflow is evil for reactour
-  const overflowCorrections = [
-    'changelist',
-    'changelist-pagination-container'
-  ]
   const setOverflow = v => el => { if (document.getElementById(el)) document.getElementById(el).style.overflow = v }
   const handleOpenTour = useCallback(target => {
     disableBodyScroll(target)

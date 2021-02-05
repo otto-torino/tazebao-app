@@ -1,5 +1,4 @@
 import React from 'react'
-import EventDispatcher from '../Services/EventDispatcher'
 import i18next from 'i18next'
 import { nextButton, closeButton } from './Utils'
 

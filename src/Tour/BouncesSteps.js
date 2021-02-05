@@ -11,8 +11,10 @@ steps.push({
   content: ({ goTo, inDOM }) => {
     return (
       <div>
-        <h4>{i18next.t('Subscribers')}</h4>
-        <p>{i18next.t('SubscribersHelpStep0Text')}</p>
+        <h4>{i18next.t('Bounces')}</h4>
+        <p>{i18next.t('BouncesHelpStep0TextA')}</p>
+        <p>{i18next.t('BouncesHelpStep0TextB')}</p>
+        <p>{i18next.t('BouncesHelpStep0TextC')}</p>
         {nextButton(goTo, 1)}
       </div>
     )
@@ -29,8 +31,8 @@ steps.push({
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Subscribers list')}</h4>
-        <p>{i18next.t('SubscribersHelpStep1Text')}</p>
+        <h4>{i18next.t('Bounces list')}</h4>
+        <p>{i18next.t('BouncesHelpStep1Text')}</p>
         {nextButton(goTo, 2)}
       </div>
     )
@@ -43,68 +45,13 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="changelist-add"]',
-  content: ({ goTo, inDOM, close }) => {
-    return (
-      <div>
-        <h4>{i18next.t('Add subscriber')}</h4>
-        <p>{i18next.t('SubscribersHelpStep2Text')}</p>
-        {nextButton(goTo, 3)}
-      </div>
-    )
-  },
-  position: 'bottom',
-  style: {
-    backgroundColor: bgColor
-  },
-  stepInteraction: false
-})
-
-steps.push({
-  selector: '[data-tour="changelist-import"]',
-  content: ({ goTo, inDOM, close }) => {
-    return (
-      <div>
-        <h4>{i18next.t('Import subscribers')}</h4>
-        <p>{i18next.t('SubscribersHelpStep3Text')}</p>
-        {nextButton(goTo, 4)}
-      </div>
-    )
-  },
-  position: 'bottom',
-  style: {
-    backgroundColor: bgColor
-  },
-  stepInteraction: false
-})
-
-steps.push({
-  selector: '[data-tour="changelist-edit"]',
-  content: ({ goTo, inDOM, close }) => {
-    return (
-      <div>
-        <h4>{i18next.t('Edit subscriber')}</h4>
-        <p>{i18next.t('SubscribersHelpStep4Text')}</p>
-        {nextButton(goTo, 5)}
-      </div>
-    )
-  },
-  position: 'bottom',
-  style: {
-    backgroundColor: bgColor
-  },
-  stepInteraction: false,
-  skipIfNotVisible: true
-})
-
-steps.push({
   selector: '[data-tour="changelist-delete"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Delete subscriber')}</h4>
-        <p>{i18next.t('SubscribersHelpStep5Text')}</p>
-        {nextButton(goTo, 6)}
+        <h4>{i18next.t('Delete bounce')}</h4>
+        <p>{i18next.t('BouncesHelpStep2Text')}</p>
+        {nextButton(goTo, 3)}
       </div>
     )
   },
@@ -122,8 +69,8 @@ steps.push({
     return (
       <div>
         <h4>{i18next.t('Pagination')}</h4>
-        <p>{i18next.t('SubscribersHelpStep6Text')}</p>
-        {nextButton(goTo, 7)}
+        <p>{i18next.t('BouncesHelpStep3Text')}</p>
+        {nextButton(goTo, 4)}
       </div>
     )
   },
@@ -139,27 +86,9 @@ steps.push({
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
-        <h4>{i18next.t('Search subscriber')}</h4>
-        <p>{i18next.t('SubscribersHelpStep7Text')}</p>
-        {nextButton(goTo, 8)}
-      </div>
-    )
-  },
-  position: 'bottom',
-  style: {
-    backgroundColor: bgColor
-  },
-  stepInteraction: false
-})
-
-steps.push({
-  selector: '[data-tour="changelist-filter-lists"]',
-  content: ({ goTo, inDOM, close }) => {
-    return (
-      <div>
-        <h4>{i18next.t('Filter subscriber')}</h4>
-        <p>{i18next.t('SubscribersHelpStep8Text')}</p>
-        {nextButton(goTo, 9)}
+        <h4>{i18next.t('Search bounces')}</h4>
+        <p>{i18next.t('BouncesHelpStep4Text')}</p>
+        {nextButton(goTo, 5)}
       </div>
     )
   },
@@ -176,8 +105,8 @@ steps.push({
     return (
       <div>
         <h4>{i18next.t('Multiple actions 1/2')}</h4>
-        <p>{i18next.t('SubscribersHelpStep9Text')}</p>
-        {nextButton(goTo, 10)}
+        <p>{i18next.t('BouncesHelpStep5Text')}</p>
+        {nextButton(goTo, 6)}
       </div>
     )
   },
@@ -195,8 +124,8 @@ steps.push({
     return (
       <div>
         <h4>{i18next.t('Multiple actions 2/2')}</h4>
-        <p>{i18next.t('SubscribersHelpStep10Text')}</p>
-        {nextButton(goTo, 11)}
+        <p>{i18next.t('BouncesHelpStep6Text')}</p>
+        {nextButton(goTo, 7)}
       </div>
     )
   },

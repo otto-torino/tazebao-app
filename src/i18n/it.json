@@ -259,6 +259,13 @@
     "Delete scheduled dispatch": "Elimina programmazione",
     "Add scheduled dispatch": "Aggiungi programmazione",
     "Search scheduled dispatch": "Ricerca programmazione",
+    "Datetime": "Data e ora",
+    "Subscriber email": "Email iscritto",
+    "Message": "Messaggio",
+    "Bounces list": "Lista rimbalzi",
+    "Delete bounce": "Elimina rimbalzo",
+    "Search bounces": "Ricerca rimbalzi",
+    "Filter bounces": "Filtra rimbalzi",
     "DashboardHelpStep0Text": "Questa è la tua dashboard, da qui puoi tenere sotto controllo i principali eventi che riguardano le tue campagne.",
     "DashboardHelpStep1Text": "Potrai sempre accedere a questa pagina cliccando sul logo visualizzato nella barra superiore.",
     "DashboardHelpStep2Text": "Puoi effettuare il logout in ogni momento cliccando sul tuo nome utente.",
@@ -309,6 +316,15 @@
     "PlanningHelpStep2Text": "Premi questo bottone per aprire il form che ti consente di programmare l'invio di una campagna.",
     "PlanningHelpStep3Text": "Puoi modificare ciascuna programmazione premendo questo bottone.",
     "PlanningHelpStep4Text": "Puoi eliminare una programmazione cliccando questo bottone. Ti verrà comunque chiesta una conferma prima di procedere.",
-    "PlanningHelpStep5Text": "Utilizza questo campo per ricercare le tue programmazione per nome della campagna"
+    "PlanningHelpStep5Text": "Utilizza questo campo per ricercare le tue programmazione per nome della campagna",
+    "BouncesHelpStep0TextA": "Questa è la pagina in cui visualizzare le email rimbalzate, i bounces. Nel campo \"Messaggio\" puoi leggere il motivo del rimbalzo, così come segnalato dal server di ricezione dell'email in questione.",
+    "BouncesHelpStep0TextB": "Tieni conto che i bounces vengono eliminati quando raggiungono un numero critico. E' importante controllarli sovente e provvedere alla disiscrizione dei contatti che non ricevono la mail a causa di un problema non recuperabile, ad esempio se la casella di posta non esiste più. Puoi utilizzare le azioni specifiche per disiscrivere facilmente i contatti rimbalzati.",
+    "BouncesHelpStep0TextC": "Potrai anche vedere quando un indirizzo email non riceve la newsletter perché considerata spam, in questo caso puoi avvisare il contatto chiedendo di inserire il tuo mittente nella sua rubrica.",
+    "BouncesHelpStep1Text": "Questa tabella serve a navigare tra tutti i bounces. Puoi cliccare sul nome delle colonne per ordinare i dati (quando possibile) in entrambe le direzioni.",
+    "BouncesHelpStep2Text": "Puoi eliminare un rimbalzo cliccando questo bottone. Ti verrà comunque chiesta una conferma prima di procedere.",
+    "BouncesHelpStep3Text": "Usa lo strumento di paginazione per naviagre fra le diverse pagine.",
+    "BouncesHelpStep4Text": "Utilizza questo campo per ricercare i bounces per email destinatario e nome campagna.",
+    "BouncesHelpStep5Text": "Puoi eseguire delle azioni su più bounces contemporaneamente, devi solamente selezionare i record di interesse con questo toggler...",
+    "BouncesHelpStep6Text": "... e poi selezionare l'azione desiderata da questa tendina."
   }
 }

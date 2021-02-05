@@ -1,8 +1,6 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
-import history from '../history'
 import i18next from 'i18next'
-import config from '../Config'
 
 export const nextButton = (goTo, step) => (
   <div style={{ textAlign: 'right' }}>

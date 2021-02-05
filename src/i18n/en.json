@@ -44,7 +44,7 @@
     "SubscribersHelpStep6Text": "Use the pagination tool to move through all the contacts pages.",
     "SubscribersHelpStep7Text": "Use this field to filter contacts by email or info",
     "SubscribersHelpStep8Text": "Here you can filter the contacts by associated list",
-    "SubscribersHelpStep9Text": "You can perform actions on multiple contacts at once, Just selectthe desired contacts...",
+    "SubscribersHelpStep9Text": "You can perform actions on multiple contacts at once, Just select the desired contacts...",
     "SubscribersHelpStep10Text": "... and then select the desired action from the dropdown. ",
     "ListsHelpStep0Text": "This is the page where you can view, add, edit and delete the lists you can use to organize your contacts",
     "ListsHelpStep1Text": "This table shows all your lists. You can click a column name in order to sort data in the two directions (when available)",
@@ -75,6 +75,15 @@
     "PlanningHelpStep2Text": "Click this button to open a form that will let you schedule a new dispatch",
     "PlanningHelpStep3Text": "You can edit your scheduled dispatch clicking this icon.",
     "PlanningHelpStep4Text": "You can delete a cheduled dispatch clicking this icon, you'll need to confirm the operation.",
-    "PlanningHelpStep5Text": "Use this field to filter scheduled dispatches by campaign name"
+    "PlanningHelpStep5Text": "Use this field to filter scheduled dispatches by campaign name",
+    "BouncesHelpStep0TextA": "This is the page where you can view all bounced emails. In the \"Message\" field you can read the motivation, as the incoming server points out.",
+    "BouncesHelpStep0TextB": "Pay attention that bounces are removed when they reach a critical amount. It's important to control them often and unsubscribe the email addresses that were bounced because of unrecovable issues. You can use the provided specific actions to perform the unsubscription.",
+    "BouncesHelpStep0TextC": "You can also detect when an email reipient considers your emails as spam, in such case you can ask them to add your from address to their adress books.",
+    "BouncesHelpStep1Text": "This table shows all your bounces. You can click a column name in order to sort data in the two directions (when available)",
+    "BouncesHelpStep2Text": "You can delete a bounce clicking this icon, you'll need to confirm the operation.",
+    "BouncesHelpStep3Text": "Use the pagination tool to move through all the bounces.",
+    "BouncesHelpStep4Text": "Use this field to search bounces for subscriber email and campaign name.",
+    "BouncesHelpStep5Text": "You can perform actions on multiple bounces at once, Just select the desired items...",
+    "BouncesHelpStep6Text": "... and then select the desired action from the dropdown."
   }
 }
