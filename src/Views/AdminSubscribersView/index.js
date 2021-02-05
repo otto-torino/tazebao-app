@@ -104,7 +104,7 @@ const AdminSubscribersView = props => {
       return (
         <ul>
           {value.map(lid => (
-            <li key={lid}>{lists[lid].name}</li>
+            <li key={lid}>{lists[lid] ? lists[lid].name : <s>{t('Deleted')}</s>}</li>
           ))}
         </ul>
       )

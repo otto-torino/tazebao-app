@@ -365,7 +365,7 @@ const ChangeList = props => {
               data-tour='changelist-pagination'
               activePage={page}
               onPageChange={handlePageChange}
-              totalPages={Math.ceil(totItems / querystring.page_size)}
+              totalPages={Math.ceil(totItems / (querystring.page_size || 1))}
             />
           </div>
         </div>,
