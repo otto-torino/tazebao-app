@@ -84,6 +84,16 @@
     "BouncesHelpStep3Text": "Use the pagination tool to move through all the bounces.",
     "BouncesHelpStep4Text": "Use this field to search bounces for subscriber email and campaign name.",
     "BouncesHelpStep5Text": "You can perform actions on multiple bounces at once, Just select the desired items...",
-    "BouncesHelpStep6Text": "... and then select the desired action from the dropdown."
+    "BouncesHelpStep6Text": "... and then select the desired action from the dropdown.",
+    "MailerMessagesHelpStep0TextA": "When a campaign dispatch is done, all the email are not sent immediately. They are prepared and then dispatched along time. These dispatches show all the prepared emails and provide information about them. Logs are removed automatically by the application, which keeps a one day archive.",
+    "MailerMessagesHelpStep0TextB": "A not dispatched email without a last attempt datetime is an email that was prepared but not yet sent. An unsent email with a last attempt datetime is an email that was sent, but the dispatch failed. If a dispatch fails at this point, it is probably because the email address is wrong.",
+    "MailerMessagesHelpStep0TextC": "You can use the actions the system provides in this page  in order to easily unsubscribe malformed emails. That operation should be done because unsent email are kept and the application retries to send them, slowing down all the dispatching process.",
+    "MailerMessagesHelpStep1Text": "This table shows all your dispatches logs. You can click a column name in order to sort data in the two directions (when available)",
+    "MailerMessagesHelpStep2Text": "You can delete a log clicking this icon, you'll need to confirm the operation.",
+    "MailerMessagesHelpStep3Text": "Use the pagination tool to move through all the bounces.",
+    "MailerMessagesHelpStep4Text": "Use this field to search logs for subscriber email.",
+    "MailerMessagesHelpStep5Text": "Use this field to filter logs by send status.",
+    "MailerMessagesHelpStep6Text": "You can perform actions on multiple logs at once, Just select the desired items...",
+    "MailerMessagesHelpStep7Text": "... and then select the desired action from the dropdown."
   }
 }

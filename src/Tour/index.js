@@ -5,6 +5,7 @@ import TopicsSteps from './TopicsSteps'
 import CampaignsSteps from './CampaignsSteps'
 import PlanningSteps from './PlanningSteps'
 import BouncesSteps from './BouncesSteps'
+import MailerMessagesSteps from './MailerMessagesSteps'
 
 export const tourPaths = {
   '/': 'Dashboard',
@@ -13,7 +14,8 @@ export const tourPaths = {
   '/topics': 'Topics',
   '/campaigns': 'Campaigns',
   '/planning': 'Planning',
-  '/bounces': 'Bounces'
+  '/bounces': 'Bounces',
+  '/logs': 'MailerMessages'
 }
 
 export default {
@@ -23,5 +25,6 @@ export default {
   Topics: TopicsSteps,
   Campaigns: CampaignsSteps,
   Planning: PlanningSteps,
-  Bounces: BouncesSteps
+  Bounces: BouncesSteps,
+  MailerMessages: MailerMessagesSteps
 }
