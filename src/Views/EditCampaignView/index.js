@@ -29,7 +29,6 @@ const EditCampaignView = props => {
   const topics = useSelector(state => state.topics.data)
 
   const handleSave = (continueEditing, test = false, lists = []) => () => {
-    console.log('SAVING')
     const data = campaignForm.current.submit()
     if (data) {
       mosaicoFrame.current.contentWindow.postMessage(
@@ -126,14 +125,14 @@ const EditCampaignView = props => {
             <div className={styles.grid}>
               <div className={styles.row}>
                 <div className={styles.columnForm}>
-                  <div>
+                  <div data-tour='create-campaign-form'>
                     <CampaignForm
                       ref={campaignForm}
                       item={campaign ? Object.assign({}, campaign, { topic: campaign.topic_id }) : {}}
                       topics={Object.keys(topics).map(id => topics[id])}
                     />
                     {enableSave && (
-                      <p style={{ textAlign: 'center', margin: '3rem 0 1rem' }}>
+                      <p style={{ textAlign: 'center', margin: '3rem 0 1rem' }} data-tour='create-campaign-submit-row'>
                         <Button color='green' onClick={handleSave(true)}>
                           <Icon name='save' />
                           {t('Save and continue editing')}
@@ -150,7 +149,7 @@ const EditCampaignView = props => {
                     )}
                   </div>
                 </div>
-                <div className={styles.columnMosaico}>
+                <div data-tour='create-campaign-mosaico' className={styles.columnMosaico}>
                   {(!id || (id && Object.keys(template).length)) && (
                     <Mosaico
                       windowRef={mosaicoFrame}

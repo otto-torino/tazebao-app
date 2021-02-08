@@ -94,6 +94,10 @@
     "MailerMessagesHelpStep4Text": "Use this field to search logs for subscriber email.",
     "MailerMessagesHelpStep5Text": "Use this field to filter logs by send status.",
     "MailerMessagesHelpStep6Text": "You can perform actions on multiple logs at once, Just select the desired items...",
-    "MailerMessagesHelpStep7Text": "... and then select the desired action from the dropdown."
+    "MailerMessagesHelpStep7Text": "... and then select the desired action from the dropdown.",
+    "CreateCampaignHelpStep0Text": "This is the create campaign page",
+    "CreateCampaignHelpStep1Text": "Insert here the information required: campaign name, topic, email subject and decide if you want to make it public and visible online.",
+    "CreateCampaignHelpStep2Text": "Use the Mosaico utility to insert your contents: choose your preferred template and start creating the newsletter using the drag&drop feature provided. Click the bottom help icon to display firther information about the tool. Choose the template in order to continue...",
+    "CreateCampaignHelpStep3Text": "When you're satisfied with your campaign, you can save it and continue editing, save it and go to the send page, or send a test email to one or more of your contacts lists."
   }
 }
