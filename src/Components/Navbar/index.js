@@ -7,9 +7,10 @@ import Logo from '../../Assets/img/logo.png'
 import LogoMobile from '../../Assets/img/logo-mobile.png'
 import config from '../../Config'
 import TourActions from '../../Redux/Tour'
-import { tourPaths } from '../../Tour'
+import { tourPaths, tourRegExps } from '../../Tour'
 import EventDispatcher from '../../Services/EventDispatcher'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 import styles from './Navbar.module.scss'
 
@@ -27,9 +28,18 @@ const Navbar = props => {
 
   // tour
   const path = useSelector(state => state.router.location.pathname)
+  let tour = tourPaths[path]
+  if (tour === undefined) {
+    // use regexp
+    tour = _.head(Object.keys(tourRegExps).filter(name => {
+      const re = new RegExp(tourRegExps[name])
+      return re.test(path)
+    }))
+  }
+
   const openHelp = () => {
     EventDispatcher.emit('closeSidebar')
-    dispatch(TourActions.openTour(tourPaths[path]))
+    dispatch(TourActions.openTour(tour))
   }
 
   return (
@@ -62,7 +72,7 @@ const Navbar = props => {
         </Link>
       </Menu.Item>
       <Menu.Menu position='right'>
-        {tourPaths[path] && (
+        {tour && (
           <Menu.Item as='a' onClick={openHelp} key='menu-voice-help' data-tour='help-button'>
             <Icon circular name='help' color='blue' inverted size='small' />
           </Menu.Item>

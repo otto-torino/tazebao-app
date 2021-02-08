@@ -343,7 +343,11 @@
     "CreateCampaignHelpStep0Text": "Questa è la pagina di creazione della campagna.",
     "CreateCampaignHelpStep1Text": "Inserisci qui le informazioni richieste: nome della campagna, area contenuto (topic), oggetto dell'email e decidi se renderla disponibile per la visualizzazione online.",
     "CreateCampaignHelpStep2Text": "Utilizza l'utility Mosaico per la creazione dei contenuti: scegli il template preferito e inizia a creare la tua newsletter utilizzando drag&drop per inserire i blocchi di cui hai bisogno. Clicca l'icona di auto che comparirà al fondo del frame per avere maggiori sull'utilizzo dello strumento. Scegli un template prima di proseguire il tour...",
-    "CreateCampaignHelpStep3Text": "Quando avrai finito di creare la newsletter potrai salvarla e continuare la modifica, salvarla ed andare alla pagina di gestione dell'invio, oppure effettuare contestualmente un invio di test ad una delle tue liste di contatti."
-
+    "CreateCampaignHelpStep3Text": "Quando avrai finito di creare la newsletter potrai salvarla e continuare la modifica, salvarla ed andare alla pagina di gestione dell'invio, oppure effettuare contestualmente un invio di test ad una delle tue liste di contatti.",
+    "Edit campaign": "Modifica campagna",
+    "EditCampaignHelpStep0Text": "Questa è la pagina di modifica della campagna.",
+    "EditCampaignHelpStep1Text": "Inserisci qui le informazioni richieste: nome della campagna, area contenuto (topic), oggetto dell'email e decidi se renderla disponibile per la visualizzazione online.",
+    "EditCampaignHelpStep2Text": "Utilizza l'utility Mosaico per la creazione dei contenuti: utilizza il drag&drop per inserire i blocchi di cui hai bisogno. Clicca l'icona di auto al fondo del frame per avere maggiori sull'utilizzo dello strumento.",
+    "EditCampaignHelpStep3Text": "Quando avrai finito di creare la newsletter potrai salvarla e continuare la modifica, salvarla ed andare alla pagina di gestione dell'invio, oppure effettuare contestualmente un invio di test ad una delle tue liste di contatti."
   }
 }

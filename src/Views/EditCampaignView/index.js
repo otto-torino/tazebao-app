@@ -125,7 +125,7 @@ const EditCampaignView = props => {
             <div className={styles.grid}>
               <div className={styles.row}>
                 <div className={styles.columnForm}>
-                  <div data-tour='create-campaign-form'>
+                  <div>
                     <CampaignForm
                       ref={campaignForm}
                       item={campaign ? Object.assign({}, campaign, { topic: campaign.topic_id }) : {}}

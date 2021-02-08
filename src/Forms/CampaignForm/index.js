@@ -53,7 +53,7 @@ class CampaignForm extends React.Component {
   fieldset () {
     const { t } = this.props
     return (
-      <div className='form-fieldset'>
+      <div className='form-fieldset' data-tour='create-campaign-form'>
         <Form.Group widths='equal'>
           <Form.Field>
             <Form.Input
