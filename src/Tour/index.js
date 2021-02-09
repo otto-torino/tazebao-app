@@ -8,6 +8,8 @@ import BouncesSteps from './BouncesSteps'
 import MailerMessagesSteps from './MailerMessagesSteps'
 import CreateCampaignSteps from './CreateCampaignSteps'
 import EditCampaignSteps from './EditCampaignSteps'
+import SendCampaignSteps from './SendCampaignSteps'
+import CampaignDetailSteps from './CampaignDetailSteps'
 
 export const tourPaths = {
   '/': 'Dashboard',
@@ -22,7 +24,9 @@ export const tourPaths = {
 }
 
 export const tourRegExps = {
-  EditCampaign: '^/campaigns/edit/[0-9]+$'
+  EditCampaign: '^/campaigns/edit/[0-9]+$',
+  SendCampaign: '^/campaigns/send/[0-9]+$',
+  CampaignDetail: '^/campaigns/[0-9]+$'
 }
 
 export default {
@@ -35,5 +39,7 @@ export default {
   Bounces: BouncesSteps,
   MailerMessages: MailerMessagesSteps,
   CreateCampaign: CreateCampaignSteps,
-  EditCampaign: EditCampaignSteps
+  EditCampaign: EditCampaignSteps,
+  SendCampaign: SendCampaignSteps,
+  CampaignDetail: CampaignDetailSteps
 }

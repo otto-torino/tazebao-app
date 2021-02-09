@@ -85,7 +85,7 @@ const CampaignDetailView = props => {
             {t('Dispatches')}
           </Header>
           <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-            <Checkbox toggle onChange={(e, { checked }) => setViewTest(checked)} />
+            <Checkbox data-tour='campaign-detail-view-test' toggle onChange={(e, { checked }) => setViewTest(checked)} />
             <span style={{ marginLeft: '.5rem' }}>{t('View test dispatches')}</span>
           </div>
           <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
@@ -106,7 +106,7 @@ const CampaignDetailView = props => {
               <Grid stackable doubling columns={2}>
                 <Grid.Row>
                   <Grid.Column width={5}>
-                    <p style={{ lineHeight: '2rem' }}>
+                    <p style={{ lineHeight: '2rem' }} data-tour='campaign-detail-general-info'>
                       <strong>{t('Oggetto')}</strong>: {campaign.subject}
                       <br />
                       <strong>{t('Topic')}</strong>: {campaign.topic}
@@ -134,7 +134,7 @@ const CampaignDetailView = props => {
                       )}
                     </p>
                   </Grid.Column>
-                  <Grid.Column width={11}>
+                  <Grid.Column width={11} data-tour='campaign-detail-dispatches'>
                     {dispatchesSection(dispatches)}
                   </Grid.Column>
                 </Grid.Row>

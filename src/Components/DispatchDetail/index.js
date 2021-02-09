@@ -37,7 +37,7 @@ const DispatchDetail = ({ dispatch, onChange }) => {
   return (
     <div>
       <p>{t('Information about the campaign dispatch')}</p>
-      <Table definition>
+      <Table definition data-tour='campaign-detail-dispatch-info'>
         <Table.Body>
           <Table.Row>
             <Table.Cell>{t('Start')}</Table.Cell>
@@ -46,14 +46,14 @@ const DispatchDetail = ({ dispatch, onChange }) => {
           <Table.Row>
             <Table.Cell>{t('Lists')}</Table.Cell>
             <Table.Cell>
-              {dispatch.lists.map((l, idx) => lists[l] ? <span>{lists[l].name}, </span> : <span><s>{t('Deleted')}</s>{dispatchListsLength - 1 === idx ? '' : ', '}</span>)}
+              {dispatch.lists.map((l, idx) => lists[l] ? <span>{lists[l].name}{dispatchListsLength - 1 === idx ? '' : ', '}</span> : <span><s>{t('Deleted')}</s>{dispatchListsLength - 1 === idx ? '' : ', '}</span>)}
             </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.Cell>{t('E-mail sent')}</Table.Cell>
             <Table.Cell>{dispatch.sent}</Table.Cell>
           </Table.Row>
-          <Table.Row>
+          <Table.Row data-tour='campaign-detail-bounces'>
             <Table.Cell>
               {t('Bounces')}{' '}
               <Popup
@@ -82,7 +82,7 @@ const DispatchDetail = ({ dispatch, onChange }) => {
               </Label>
             </Table.Cell>
           </Table.Row>
-          <Table.Row>
+          <Table.Row data-tour='campaign-detail-open'>
             <Table.Cell>{t('Open rate')}</Table.Cell>
             <Table.Cell>
               <OpenRateLabel rate={dispatch.open_rate} />{' '}
@@ -95,7 +95,7 @@ const DispatchDetail = ({ dispatch, onChange }) => {
             </Table.Cell>
           </Table.Row>
           {dispatch.click_statistics && (
-            <Table.Row>
+            <Table.Row data-tour='campaign-detail-click'>
               <Table.Cell>{t('Click rate')}</Table.Cell>
               <Table.Cell>
                 <Label color='teal'>{dispatch.click_rate}%</Label>{' '}
@@ -159,7 +159,7 @@ const DispatchDetail = ({ dispatch, onChange }) => {
         </Modal>
       )}
       {!dispatch.error && (
-        <Grid doubling stackable columns={2} style={{ marginTop: '2rem' }}>
+        <Grid doubling stackable columns={2} style={{ marginTop: '2rem' }} data-tour='campaign-detail-charts'>
           <Grid.Row>
             <Grid.Column width={10}>
               <StatisticsTimelineChart

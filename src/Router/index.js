@@ -119,7 +119,8 @@ class AppRouter extends React.Component {
             path={config.urls.sendCampaign}
             component={SendCampaignView}
             actions={[
-              [CampaignsActions.campaignsRequest(), (state) => true]
+              [CampaignsActions.campaignsRequest(), (state) => true],
+              [MailerMessagesActions.mailerMessagesUnsentRequest(), (state) => true]
             ]}
           />
           <PrivateRoute

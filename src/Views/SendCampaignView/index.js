@@ -31,6 +31,7 @@ const SendCampaignView = props => {
   const { t } = useTranslation()
   const id = props.match.params ? parseInt(props.match.params.id) : null
   const campaigns = useSelector(state => state.campaigns.data)
+  const unsent = useSelector(state => state.mailerMessages.unsent)
   const lists = useSelector(state => state.lists.data)
   const campaign = id ? campaigns.filter(c => c.id === id)[0] : null
   const [selectedLists, setSelectedLists] = useState([])
@@ -111,6 +112,7 @@ const SendCampaignView = props => {
                     textAlign='center'
                     verticalAlign='middle'
                     widescreen={3}
+                    data-tour='send-campaign-tot-emails'
                   >
                     <Statistic color='teal' size='huge'>
                       <Statistic.Value>{selectedSubscribers}</Statistic.Value>
@@ -122,7 +124,7 @@ const SendCampaignView = props => {
                     verticalAlign='middle'
                     widescreen={3}
                   >
-                    <div style={{ display: 'inline-block', textAlign: 'left' }}>
+                    <div style={{ display: 'inline-block', textAlign: 'left' }} data-tour='send-campaign-lists'>
                       <MultipleChoiceField
                         items={Object.keys(lists).map(id => ({
                           value: lists[id].id,
@@ -158,6 +160,7 @@ const SendCampaignView = props => {
                       widescreen={4}
                       largeScreen={4}
                       tablet={6}
+                      data-tour='send-campaign-immediately'
                     >
                       <p style={{ fontSize: '1.4rem' }}>{t('Immediately')}</p>
                       <p>
@@ -165,11 +168,11 @@ const SendCampaignView = props => {
                           <span>
                             <Popup
                               basic
-                              content={t('Starting when the process is taken over, that depends on the state of the queue at the moment')}
+                              content={t('SendCampaignTimeAmountPopover', { new: Math.ceil(selectedSubscribers / 50) + ' min', old: unsent })}
                               trigger={<Icon color='blue' name='info circle' />}
                             />{' '}
                             {t('It will take about')}{' '}
-                            {Math.ceil(selectedSubscribers / 50) + 1} min
+                            {Math.ceil((selectedSubscribers + unsent) / 50)} min
                           </span>
                         ) : null}
                       </p>
@@ -188,6 +191,7 @@ const SendCampaignView = props => {
                       widescreen={4}
                       largeScreen={4}
                       tablet={6}
+                      data-tour='send-campaign-schedule'
                     >
                       <Responsive
                         as={Divider}

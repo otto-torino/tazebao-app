@@ -30,3 +30,15 @@ export function * requestMailerMessages (api) {
     yield put(MailerMessagesActions.mailerMessagesRequest())
   }
 }
+
+export function * fetchUnsentMailerMessages (api, { payload }) {
+  // request
+  const response = yield call(api.unsentMailerMessages)
+
+  // success?
+  if (response.ok) {
+    yield put(MailerMessagesActions.mailerMessagesUnsentSuccess(response.data))
+  } else {
+    yield put(MailerMessagesActions.mailerMessagesUnsentFailure({ code: response.status, detail: response.data.detail }))
+  }
+}

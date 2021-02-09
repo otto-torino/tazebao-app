@@ -159,6 +159,10 @@ const create = (baseURL = config.apiBasePath) => {
   }
   const deleteMailerMessage = mailerMessageId =>
     api.delete(`/newsletter/mailermessage/${mailerMessageId}/`)
+  const unsentMailerMessages = (qs = {}) => {
+    const endpoint = '/newsletter/mailermessage/unsent'
+    return api.get(url(endpoint, qs))
+  }
 
   // Return back a collection of functions that we would consider our
   // interface.  Most of the time it'll be just the list of all the
@@ -208,7 +212,8 @@ const create = (baseURL = config.apiBasePath) => {
     bounces,
     deleteBounce,
     mailerMessages,
-    deleteMailerMessage
+    deleteMailerMessage,
+    unsentMailerMessages
   }
 }
 

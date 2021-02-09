@@ -18,6 +18,7 @@
     "tazebao_unsubscribe_topic_helptext": "If you want Tazebao manage the unsubscription process for you, just insert the following URL:",
     "AreYouSure": "Are you sure?",
     "MailerMessages": "Dispatches logs ",
+    "SendCampaignTimeAmountPopover": "Your emails will be sent in {{ new }} and at the moment there are already {{ old }} emails queued.",
     "email-sf": "email",
     "info-sf": "info",
     "name-sf": "name",
@@ -102,6 +103,20 @@
     "CreateCampaignHelpStep0Text": "This is the edit campaign page",
     "CreateCampaignHelpStep1Text": "Insert here the information required: campaign name, topic, email subject and decide if you want to make it public and visible online.",
     "CreateCampaignHelpStep2Text": "Use the Mosaico utility to insert your contents: edit the newsletter using the drag&drop feature provided. Click the bottom help icon to display further information about the tool.",
-    "CreateCampaignHelpStep3Text": "When you're satisfied with your campaign, you can save it and continue editing, save it and go to the send page, or send a test email to one or more of your contacts lists."
+    "CreateCampaignHelpStep3Text": "When you're satisfied with your campaign, you can save it and continue editing, save it and go to the send page, or send a test email to one or more of your contacts lists.",
+    "SendCampaignHelpStep0Text": "In this page you can finally send your newsletter campaign.",
+    "SendCampaignHelpStep1Text": "Select the contacts list that will receive the email.",
+    "SendCampaignHelpStep2Text": "Here you can view the number of emails that will be sent.",
+    "SendCampaignHelpStep3Text": "You can send your campaign immediately...",
+    "SendCampaignHelpStep4Text": "...or you can schedule the dispatch. Select the date and timeclicking on the bottom of the calendar. Finally a button will appear and you can save the scheduling clicking on it.",
+    "CampaignDetailHelpStep0Text": "In this page you can view all the information available for your campaign and all of its dispatches.",
+    "CampaignDetailHelpStep1Text": "Here you can find some information abvout your campaign. If it is visible online you can click the dedicated icon to open in in a news window.",
+    "CampaignDetailHelpStep2Text": "Here you find information about every dispatch. Each dispatch stays in one tab.",
+    "CampaignDetailHelpStep3Text": "By default test dispatches are hidden. You can display them switching this toggler.",
+    "CampaignDetailHelpStep4Text": "This table displays all the available information about the dispatch.",
+    "CampaignDetailHelpStep5Text": "In particular yo can view information about bounces. If present, you can click the viewfinder icon to open the bounces detail in a modal. Here you  can easily unsubscribe the contacts you desire.",
+    "CampaignDetailHelpStep6Text": "The open statistics can tell how many people open your email. This is an under-estimated number, because people who don't load images when reading the emails are not detected. Click the viewfinder icon to see more information.",
+    "CampaignDetailHelpStep7Text": "Tazeao registers every click on a tracked link. You can know exactly who and when has clicked which link. Click the viewfinder icon to see more information.",
+    "CampaignDetailHelpStep8Text": "Finally, you can view open and click statistics in time and global pie charts."
   }
 }
