@@ -360,7 +360,7 @@
     "Schedule dispatch": "Invio programmato",
     "Campaign detail": "Dettaglio campagna",
     "Campaign information": "Informazioni campagna",
-    "CampaignDetailHelpStep0Text": "In questa pagina puoi visualizzare tutte le informazioni disponibile riguardo alla tua campagna e tutti i suoi invii.",
+    "CampaignDetailHelpStep0Text": "In questa pagina puoi visualizzare tutte le informazioni disponibili riguardo alla tua campagna e i suoi invii.",
     "CampaignDetailHelpStep1Text": "Queste sono le informazioni principali della tua campagna. Se essa è visibile online puoi cliccare l'icona dedicata per visualizzarla in una nuova finestra.",
     "CampaignDetailHelpStep2Text": "Qui potrai vedere tutte le informazioni riguardo ogni singolo invio. E' presente una tab per ogni invio.",
     "View test dispatches": "Visualizza invii di test",
@@ -373,7 +373,7 @@
     "Open statistics": "Statistiche di apertura",
     "CampaignDetailHelpStep6Text": "Le statistiche di apertura ti dicono quante persone hanno aperto la tua email. Si tratta di una cifra sottostimata, perché chi visualizza le email senza caricare le immagini non viene rilevato. Clicca sull'icona del mirino per visualizzare ulteriori dettagli.",
     "Click statistics": "Statistiche click",
-    "CampaignDetailHelpStep7Text": "Tazeao si ricorda tutte le volte che un contatto clicca un link tracciato di una email. Queste statistiche ti consentono di capire chi e quando ha cliccato quale link della tua campagna. Clicca sull'icona del mirino per visualizzare ulteriori dettagli.",
+    "CampaignDetailHelpStep7Text": "Tazeao si ricorda tutte le volte che un contatto clicca un link tracciato di un'email. Queste statistiche ti consentono di capire chi e quando ha cliccato quale link della tua campagna. Clicca sull'icona del mirino per visualizzare ulteriori dettagli.",
     "Charts": "Grafici",
     "CampaignDetailHelpStep8Text": "Infine puoi visualizzare le statistiche di apertura e click in grafici temporali e globali a torta."
   }
