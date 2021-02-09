@@ -3,7 +3,7 @@ export default {
   baseAbsPath: process.env.NODE_ENV === 'test' ? '/' : process.env.REACT_APP_BASE_PATH,
   apiBasePath: process.env.NODE_ENV === 'test' ? 'http://wrong' : process.env.REACT_APP_API_BASE_PATH,
   mosaicoBasePath: process.env.REACT_APP_MOSAICO_BASE_PATH,
-  refreshTokenInterval: 6000 * 1,
+  refreshTokenInterval: 60000 * 3,
   breakpoints: { // NB this should coincide with Style/css/_variables.scss breakpoints
     tablet: 768,
     smallDesktop: 992,
