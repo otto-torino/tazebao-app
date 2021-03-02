@@ -7,6 +7,10 @@ import './index.css'
 import './i18n'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+import moment from 'moment'
+import 'moment/locale/it'
+
+moment.locale('it')
 
 ReactDOM.render(
   <Provider store={store}>

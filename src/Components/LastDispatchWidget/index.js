@@ -6,26 +6,23 @@ import { withLoader } from '../../HOC/Loader'
 import { withData } from '../../HOC/Empty'
 import { useTranslation } from 'react-i18next'
 import config from '../../Config'
+import moment from 'moment'
 // import propTypes from 'prop-types'
 
 import styles from './LastDispatchWidget.module.scss'
 
-const LastDispatchWidget = props => {
+const LastDispatchWidget = (props) => {
   const { t } = useTranslation()
-  const stats = useSelector(state => state.stats.data)
-  const isLoading = useSelector(state => state.stats.fetching)
+  const stats = useSelector((state) => state.stats.data)
+  const isLoading = useSelector((state) => state.stats.fetching)
 
-  const content = stats => (
+  const content = (stats) => (
     <div>
       <h3 style={{ textAlign: 'center' }}>
-        <Link
-          to={config.urls.campaignDetail.replace(
-            ':id',
-            stats.lastDispatch.campaign
-          )}
-        >
+        <Link to={config.urls.campaignDetail.replace(':id', stats.lastDispatch.campaign)}>
           {stats.lastDispatch.campaign_name}
-        </Link>
+        </Link><br />
+        <time><small>{moment(stats.lastDispatch.started_at).format('LLL')}</small></time>
       </h3>
       <Table basic='very'>
         <Table.Body>
@@ -37,12 +34,7 @@ const LastDispatchWidget = props => {
               </Statistic>
             </Table.Cell>
             <Table.Cell style={{ padding: 0 }}>
-              <Statistic
-                color='olive'
-                size='mini'
-                style={{ alignItems: 'flex-start' }}
-                className={styles.statistic}
-              >
+              <Statistic color='olive' size='mini' style={{ alignItems: 'flex-start' }} className={styles.statistic}>
                 <Statistic.Value>
                   <Icon name='folder open' style={{ marginRight: '1rem' }} />
                   {stats.lastDispatch.open_rate}%
@@ -53,17 +45,10 @@ const LastDispatchWidget = props => {
           </Table.Row>
           <Table.Row>
             <Table.Cell style={{ borderTopWidth: 0 }}>
-              <Statistic
-                color='yellow'
-                size='mini'
-                style={{ alignItems: 'flex-start' }}
-                className={styles.statistic}
-              >
+              <Statistic color='yellow' size='mini' style={{ alignItems: 'flex-start' }} className={styles.statistic}>
                 <Statistic.Value>
                   <Icon name='hand pointer' style={{ marginRight: '1rem' }} />
-                  {stats.lastDispatch.click_statistics
-                    ? stats.lastDispatch.click_rate + '%'
-                    : 'N.A.'}
+                  {stats.lastDispatch.click_statistics ? stats.lastDispatch.click_rate + '%' : 'N.A.'}
                 </Statistic.Value>
                 <Statistic.Label style={{ textAlign: 'left' }}>
                   {t('Click Rate')}{' '}
@@ -80,12 +65,7 @@ const LastDispatchWidget = props => {
           </Table.Row>
           <Table.Row>
             <Table.Cell style={{ borderTopWidth: 0 }}>
-              <Statistic
-                color='orange'
-                size='mini'
-                style={{ alignItems: 'flex-start' }}
-                className={styles.statistic}
-              >
+              <Statistic color='orange' size='mini' style={{ alignItems: 'flex-start' }} className={styles.statistic}>
                 <Statistic.Value>
                   <Icon name='ban' style={{ marginRight: '1rem' }} />
                   {stats.lastDispatch.bounces.length}
@@ -113,11 +93,7 @@ const LastDispatchWidget = props => {
         <Header.Subheader>{t('The last dispatch stats')}</Header.Subheader>
       </Header>
       {withLoader(
-        withData(
-          content,
-          stats,
-          stats && stats.lastDispatch && stats.lastDispatch.id
-        ),
+        withData(content, stats, stats && stats.lastDispatch && stats.lastDispatch.id),
         isLoading && (!stats || !stats.lastDispatch)
       )}
     </div>
