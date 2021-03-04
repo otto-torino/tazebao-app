@@ -1,14 +1,15 @@
 @import '../../Styles/variables';
 
 .loginForm {
-  background-color: $white90;
+  background-color: $darkgray;
   border-radius: 1.5rem;
+  box-shadow: 0 0 3rem $black;
   max-width: 90%;
   width: 400px;
 }
 
 .logoContainer {
-  background-color: $black80;
+  border-radius: 1.5rem 1.5rem 0 0;
   padding: 1rem;
   text-align: center;
 
@@ -22,6 +23,8 @@
 }
 
 .form {
-  margin-top: 1rem;
-  padding: 1rem;
+  background: $white;
+  border-radius: 0 0 1.5rem 1.5rem;
+  margin-top: 0;
+  padding: 2rem 1rem 1rem;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginForm from '../../Forms/LoginForm'
-import styles from "./LoginView.module.css"
+import styles from "./LoginView.module.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import AuthActions from '../../Redux/Auth'
 

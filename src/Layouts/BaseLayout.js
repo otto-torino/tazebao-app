@@ -49,7 +49,7 @@ const BaseLayout = props => {
         <Sidebar
           as={Menu}
           size='large'
-          animation='overlay'
+          animation='push'
           onHide={() => setNavbarVisibility(false)}
           vertical
           visible={navbarIsVisible}

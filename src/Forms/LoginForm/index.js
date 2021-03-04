@@ -6,9 +6,9 @@ import { Form, Input, Message, Icon, Image, Button } from 'semantic-ui-react'
 
 import styles from './LoginForm.module.scss'
 
-const LoginForm = props => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const LoginForm = (props) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   return (
     <div className={styles.loginForm}>
       <div className={styles.logoContainer}>
@@ -18,19 +18,25 @@ const LoginForm = props => {
         {props.error && (
           <Message size='mini' negative icon>
             <Icon name='warning' />
-            <Message.Content>
-              {props.errorMessage}
-            </Message.Content>
+            <Message.Content>{props.errorMessage}</Message.Content>
           </Message>
         )}
         <Form.Field>
-          <Input placeholder='username' fluid value={username} onChange={e => setUsername(e.target.value)} />
+          <Input placeholder='username' fluid value={username} onChange={(e) => setUsername(e.target.value)} />
         </Form.Field>
         <Form.Field>
-          <Input placeholder='password' type='password' fluid value={password} onChange={e => setPassword(e.target.value)} />
+          <Input
+            placeholder='password'
+            type='password'
+            fluid
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </Form.Field>
         <div style={{ textAlign: 'center' }}>
-          <Button onClick={() => props.onSubmit(username, password)}>Login</Button>
+          <Button color='red' onClick={() => props.onSubmit(username, password)} style={{ textTransform: 'uppercase' }}>
+            Login
+          </Button>
         </div>
       </Form>
     </div>

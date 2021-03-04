@@ -2,10 +2,14 @@ $white: #fff;
 $light-gray: #e0e0e0;
 $white30: rgba(255, 255, 255, .3);
 $white80: rgba(255, 255, 255, .8);
+$white86: rgba(255, 255, 255, .86);
 $white90: rgba(255, 255, 255, .9);
 $black: #000;
 $black80: rgba(0, 0, 0, .8);
+$black50: rgba(0, 0, 0, .5);
 $black40: rgba(0, 0, 0, .4);
+$black30: rgba(0, 0, 0, .3);
+$darkgray: #333;
 
 $primary: #f00;
 $primary-dark: #9b0000;
@@ -29,12 +33,12 @@ $flat-extra-light: #46b3b3;
 
 
 // navbar
-$navbar-bg: $black80;
+$navbar-bg: $black;
 
 // footer
-$footer-bg: #f8f8f8;
-$footer-fg: #333;
+$footer-bg: #000;
+$footer-fg: #fff;
 
 // widget
-$widget-bg: $white90;
+$widget-bg: $white;
 $widget-border-fg: #f2f2f2;
