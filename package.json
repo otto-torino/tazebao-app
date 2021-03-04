@@ -34,7 +34,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "./node_modules/flightplan/bin/fly.js production -f deploy/flightplan.js"
   },
   "eslintConfig": {
     "extends": "react-app"
