@@ -121,13 +121,49 @@ steps.push({
 })
 
 steps.push({
+  selector: '[data-tour="bounces-widget"]',
+  content: ({ goTo, inDOM, close }) => {
+    return (
+      <div>
+        <h4>{i18next.t('Bounces widget')}</h4>
+        <p>{i18next.t('DashboardHelpStep5Text')}</p>
+        {nextButton(goTo, 6)}
+      </div>
+    )
+  },
+  position: 'bottom',
+  style: {
+    backgroundColor: bgColor
+  },
+  stepInteraction: false
+})
+
+steps.push({
+  selector: '[data-tour="dispatches-widget"]',
+  content: ({ goTo, inDOM, close }) => {
+    return (
+      <div>
+        <h4>{i18next.t('Logs widget')}</h4>
+        <p>{i18next.t('DashboardHelpStep6Text')}</p>
+        {nextButton(goTo, 7)}
+      </div>
+    )
+  },
+  position: 'bottom',
+  style: {
+    backgroundColor: bgColor
+  },
+  stepInteraction: false
+})
+
+steps.push({
   selector: '[data-tour="last-dispatch-widget"]',
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
         <h4>{i18next.t('Last dispatch widget')}</h4>
-        <p>{i18next.t('DashboardHelpStep5Text')}</p>
-        {nextButton(goTo, 6)}
+        <p>{i18next.t('DashboardHelpStep7Text')}</p>
+        {nextButton(goTo, 8)}
       </div>
     )
   },
@@ -144,8 +180,8 @@ steps.push({
     return (
       <div>
         <h4>{i18next.t('Planning widget')}</h4>
-        <p>{i18next.t('DashboardHelpStep6Text')}</p>
-        {nextButton(goTo, 7)}
+        <p>{i18next.t('DashboardHelpStep8Text')}</p>
+        {nextButton(goTo, 9)}
       </div>
     )
   },
@@ -162,7 +198,7 @@ steps.push({
     return (
       <div>
         <h4>{i18next.t('Menu')}</h4>
-        <p>{i18next.t('DashboardHelpStep7Text')}</p>
+        <p>{i18next.t('DashboardHelpStep9Text')}</p>
       </div>
     )
   },
@@ -173,7 +209,7 @@ steps.push({
   onSpotClick: (goto, dispatch) => {
     EventDispatcher.emit('tourSuspend', { interval: 500 })
     EventDispatcher.emit('openSidebar')
-    setTimeout(() => goto(8), 500)
+    setTimeout(() => goto(10), 500)
   },
   stepInteraction: false,
   skipIfNotVisible: true
@@ -196,7 +232,7 @@ steps.push({
     return (
       <div>
         <h4>{i18next.t('Help button')}</h4>
-        <p>{i18next.t('DashboardHelpStep9Text')}</p>
+        <p>{i18next.t('DashboardHelpStep10Text')}</p>
         {closeButton(() => {
           EventDispatcher.emit('closeSidebar')
           close()

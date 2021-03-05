@@ -1,0 +1,9 @@
+@import '../../Styles/placeholders';
+
+.widget {
+  @extend %widget;
+}
+
+.icon {
+  color: $accent-light !important;
+}

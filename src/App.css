@@ -28,6 +28,6 @@
   width: 95% !important;
 }
 
-.sidebar-menu a i {
+.sidebar-menu .corner i {
   cursor: pointer !important;
 }

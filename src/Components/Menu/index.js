@@ -56,6 +56,7 @@ const AppMenu = (props) => {
             'data-tour': 'help-button-desktop'
           }
         }
+        style={{ cursor: 'pointer' }}
         src={Logo}
         fluid
         data-tour='logo-desktop'

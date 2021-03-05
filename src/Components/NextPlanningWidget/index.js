@@ -4,6 +4,8 @@ import { Header, Icon } from 'semantic-ui-react'
 import { withLoader } from '../../HOC/Loader'
 import { withData } from '../../HOC/Empty'
 import { useTranslation } from 'react-i18next'
+import config from '../../Config'
+import history from '../../history'
 // import propTypes from 'prop-types'
 import moment from 'moment'
 
@@ -26,7 +28,7 @@ const NextPlanningWidget = props => {
   return (
     <div className={styles.widget} data-tour='planning-widget'>
       <Header as='h2' icon>
-        <Icon name='clock' className={styles.icon} />
+        <Icon name='clock' className={styles.icon} link onClick={() => history.push(config.urls.planning)} />
         {t('Planning')}
         <Header.Subheader>
           {t('Next Scheduling')}
