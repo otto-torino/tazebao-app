@@ -1,4 +1,10 @@
+// sizes
+$desktop: 1300px;
+$tablet: 768px;
+
+// colors
 $white: #fff;
+$xlight-gray: #f7f7f7;
 $light-gray: #e0e0e0;
 $white30: rgba(255, 255, 255, .3);
 $white80: rgba(255, 255, 255, .8);
@@ -36,9 +42,8 @@ $flat-extra-light: #46b3b3;
 $navbar-bg: $black;
 
 // footer
-$footer-bg: #000;
-$footer-fg: #fff;
+$footer-bg: transparent;
+$footer-fg: #000;
 
 // widget
-$widget-bg: $white;
-$widget-border-fg: #f2f2f2;
+$widget-bg: $xlight-gray;

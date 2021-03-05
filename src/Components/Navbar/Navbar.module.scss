@@ -4,6 +4,39 @@
   background: $navbar-bg !important;
   border-radius: 0 !important;
   border-width: 0 !important;
+  display: flex !important;
+  margin: 0 !important;
+
+  @media(min-width: $desktop) {
+    display: none !important;
+  }
+}
+
+.toastItem {
+  padding-right: 0 !important;
+
+  @media(min-width: $desktop) {
+    display: none !important;
+  }
+}
+
+.toast {
+  cursor: pointer;
+  margin-right: 0 !important;
+
+  // repetition because of reactour
+  @media(min-width: $desktop) {
+    display: none !important;
+  }
+}
+
+.logoItem {
+  margin-left: 0 !important;
+
+  @media(min-width: $desktop) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .logo {

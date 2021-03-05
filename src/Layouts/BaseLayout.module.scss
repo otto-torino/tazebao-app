@@ -1,10 +1,32 @@
 @import '../Styles/variables';
 
-.bg {
-  background: $white !important;
-
-  @media (min-width: 500px) {
-    // background: transparent !important;
-  }
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
 }
 
+.mainContent {
+  flex: 1;
+  max-width: 100%;
+  z-index: 1;
+}
+
+.sidebarMenu {
+  display: none !important;
+  height: 100vh !important;
+  overflow: auto;
+  padding-bottom: 80px;
+  position: absolute;
+  width: 100vw !important;
+  z-index: 10;
+
+  @media(min-width: $desktop) {
+    display: block !important;
+    height: auto !important;
+    min-width: 300px;
+    max-width: 300px;
+    overflow: visible !important;
+    position: static;
+  }
+}

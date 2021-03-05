@@ -168,7 +168,7 @@ ModelAdmin.defaultProps = {
   containerProps: {
     fluid: true,
     style: windowWidth > 500
-      ? { padding: '2rem' }
+      ? { padding: '1rem 3rem' }
       : { padding: 0, margin: 0 }
   },
   segmentProps: {
@@ -179,7 +179,7 @@ ModelAdmin.defaultProps = {
       : { padding: 0, paddingTop: '3rem' }
   },
   labelProps: {
-    color: windowWidth > 500 ? 'orange' : '',
+    color: windowWidth > 500 ? 'orange' : 'orange',
     attached: windowWidth <= 500 ? 'top' : null,
     ribbon: windowWidth > 500,
     size: 'big',

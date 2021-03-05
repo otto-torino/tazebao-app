@@ -1,0 +1,23 @@
+@import '../../Styles/variables';
+
+.logoItem {
+  display: none !important;
+  justify-content: center;
+  padding: 0 !important;
+
+  @media(min-width: $desktop) {
+    display: flex !important;
+  }
+}
+
+.profileItem {
+  align-items: center;
+  display: none !important;
+  justify-content: center;
+  flex-direction: row;
+  padding: 22px 0;
+
+  @media(min-width: $desktop) {
+    display: flex !important;
+  }
+}

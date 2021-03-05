@@ -26,7 +26,18 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="logo"]',
+  selectors: [
+    {
+      selector: '[data-tour="logo"]',
+      min: 0,
+      max: 1300
+    },
+    {
+      selector: '[data-tour="logo-desktop"]',
+      min: 1300,
+      max: 1e4
+    }
+  ],
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
@@ -40,11 +51,23 @@ steps.push({
   style: {
     backgroundColor: bgColor
   },
-  stepInteraction: false
+  stepInteraction: false,
+  skipIfNotVisible: true
 })
 
 steps.push({
-  selector: '[data-tour="profile"]',
+  selectors: [
+    {
+      selector: '[data-tour="profile"]',
+      min: 0,
+      max: 1300
+    },
+    {
+      selector: '[data-tour="profile-desktop"]',
+      min: 1300,
+      max: 1e4
+    }
+  ],
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
@@ -152,35 +175,32 @@ steps.push({
     EventDispatcher.emit('openSidebar')
     setTimeout(() => goto(8), 500)
   },
-  stepInteraction: false
+  stepInteraction: false,
+  skipIfNotVisible: true
 })
 
 steps.push({
-  selector: '[data-tour="sidebar"]',
-  content: ({ goTo, inDOM, close }) => {
-    return (
-      <div>
-        <h4>{i18next.t('Sidebar menu')}</h4>
-        <p>{i18next.t('DashboardHelpStep8Text')}</p>
-        {nextButton(goTo, 9)}
-      </div>
-    )
-  },
-  position: 'bottom',
-  style: {
-    backgroundColor: bgColor
-  },
-  stepInteraction: false
-})
-
-steps.push({
-  selector: '[data-tour="help-button"]',
+  selectors: [
+    {
+      selector: '[data-tour="help-button"]',
+      min: 0,
+      max: 1300
+    },
+    {
+      selector: '[data-tour="help-button-desktop"]',
+      min: 1300,
+      max: 1e4
+    }
+  ],
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
         <h4>{i18next.t('Help button')}</h4>
         <p>{i18next.t('DashboardHelpStep9Text')}</p>
-        {closeButton(close)}
+        {closeButton(() => {
+          EventDispatcher.emit('closeSidebar')
+          close()
+        })}
       </div>
     )
   },

@@ -20,6 +20,7 @@ import * as hx from './helpers'
 import { propTypes, defaultProps } from './propTypes'
 import CN from './classNames'
 import EventDispatcher from '../Services/EventDispatcher'
+import { getWindowWidth } from '../Lib/react-admin/Utils'
 
 class Tour extends Component {
   constructor () {
@@ -408,11 +409,22 @@ class Tour extends Component {
       node
     } = this.state
     if (isOpen) {
+      this.windowWidth = getWindowWidth()
       // need to select now and not using inDOM, because inDOM can be false and become true after 2ms because of
       // other state props updating
+      let invisible = false
+      // decide selector basing upon window width
+      if (steps[current].selectors) {
+        const selector = steps[current].selectors.filter(i => i.min <= this.windowWidth && i.max > this.windowWidth)[0].selector
+        steps[current].selector = selector
+      }
       const inDOM = !!window.document.querySelector(steps[current].selector)
+      if (inDOM) {
+        const styles = window.getComputedStyle(window.document.querySelector(steps[current].selector));
+        invisible = inDOM && styles.display === 'none'
+      }
       if (this.state.suspend) return null
-      if (!inDOM && steps[current].skipIfNotVisible) {
+      if (steps[current].skipIfNotVisible && (!inDOM || invisible)) {
         // skip only once
         if (!this.skipMap[current]) {
           this.gotoStep(current + 1)

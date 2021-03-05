@@ -1,14 +1,15 @@
 import React from 'react'
-import { Icon } from 'semantic-ui-react'
 import i18next from 'i18next'
 
 export const nextButton = (goTo, step) => (
   <div style={{ textAlign: 'right' }}>
-    <Icon link name='arrow right' onClick={() => goTo(step)} style={{ margin: 0 }} />
+    <strong style={{ cursor: 'pointer', margin: 0 }} onClick={() => goTo(step)}>
+      {i18next.t('NEXT')}
+    </strong>
   </div>
 )
 
-export const closeButton = close => (
+export const closeButton = (close) => (
   <div style={{ textAlign: 'right' }}>
     <strong
       style={{ cursor: 'pointer' }}

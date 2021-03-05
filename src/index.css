@@ -1,12 +1,20 @@
+body.open-menu {
+  overflow: hidden;
+}
+
+body.open-menu .sidebar-menu {
+  display: block !important;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-/* reactour scrolling */
-.pushable {
-  overflow-x: visible !important;
-}
+/* * { */
+/*   overflow-x: visible !important; */
+/* } */
 
 /* react datetime */
 /*!
