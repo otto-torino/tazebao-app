@@ -8,10 +8,8 @@ import config from '../../Config'
 
 const HomeView = props => {
   const dispatch = useDispatch()
-
-  let rt
   React.useEffect(() => {
-    rt = setInterval(() => {
+    const rt = setInterval(() => {
       dispatch(StatsActions.statsRequest())
     }, config.refreshStatsInterval)
 

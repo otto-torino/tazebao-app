@@ -53,7 +53,7 @@ const IntegrationView = props => {
                     </div>
                     <p>
                       {t('integration_api_link_description')}
-                      <a href='https://github.com/otto-torino/tazebao' target='_blank' rel='noopener noreferrer'>{t('project\'s GitHub page')}</a>
+                      <a href='https://www.tazebao.email/api/' target='_blank' rel='noopener noreferrer'>{t('project\'s API page')}</a>
                     </p>
                   </Grid.Column>
                   <Grid.Column width={12}>
