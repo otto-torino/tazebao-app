@@ -137,7 +137,18 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="help-button"]',
+  selectors: [
+    {
+      selector: '[data-tour="help-button"]',
+      min: 0,
+      max: 1300
+    },
+    {
+      selector: '[data-tour="help-button-desktop"]',
+      min: 1300,
+      max: 1e4
+    }
+  ],
   content: ({ goTo, inDOM, close }) => {
     return (
       <div>
