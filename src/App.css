@@ -23,7 +23,8 @@
 }
 
 .reactour__helper {
-  background: #f3c717 !important;
+  background: #D5CA8A !important;
+  border-radius: 1.5rem !important;
   max-width: 500px !important;
   width: 95% !important;
 }
