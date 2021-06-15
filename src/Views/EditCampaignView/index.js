@@ -57,7 +57,7 @@ const EditCampaignView = props => {
       return
     }
     request(
-      'sendCampaign',
+      'testCampaign',
       [campaignId, listIds, true],
       t('Cannot test the campaign') + ': {error}',
       response => {
@@ -70,14 +70,11 @@ const EditCampaignView = props => {
   }, [setTestModalIsOpen, t])
 
   useEffect(() => {
-    console.log('RUNNING EFFECT')
     const listener = function ({ data }) {
       const { type } = data
       if (type === 'TAZEBAO') {
-        console.log(data.data)
         const { event, campaignId, continueEditing, test, lists } = data.data
         if (event === 'READY') {
-          console.log('SETTING SAVE')
           setEnableSave(true)
         } else if (event === 'SAVE') {
           if (continueEditing) {

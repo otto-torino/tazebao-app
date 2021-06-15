@@ -129,6 +129,8 @@ const create = (baseURL = config.apiBasePath) => {
     api.get(`/newsletter/campaign/${campaignId}/dispatches/?page_size=50000`)
   const sendCampaign = (campaignId, lists, test = false) =>
     api.post(`/newsletter/campaign/${campaignId}/send/${test ? '?test=1' : ''}`, { lists })
+  const testCampaign = (campaignId, lists) =>
+    api.post(`/newsletter/campaign/${campaignId}/test/`, { lists })
   const deleteCampaign = campaignId =>
     api.delete(`/newsletter/campaign/${campaignId}/`)
   const duplicateCampaign = campaignId =>
@@ -199,6 +201,7 @@ const create = (baseURL = config.apiBasePath) => {
     campaigns,
     campaignTemplate,
     sendCampaign,
+    testCampaign,
     mosaicoEditor,
     planning,
     addPlanning,
