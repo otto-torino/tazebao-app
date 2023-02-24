@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import OpenRateLabel from '../OpenRateLabel'
-import { Table, Label, Popup, Icon, Button, Modal, Grid } from 'semantic-ui-react'
+import { Table, Label, Popup, Icon, Button, Modal, Grid, Header } from 'semantic-ui-react'
 import OpenTrackingTable from '../OpenTrackingTable'
 import ClickTrackingTable from '../ClickTrackingTable'
+import ClickStatisticsTable from '../ClickStatisticsTable'
 import RatePieChart from '../RatePieChart'
 import StatisticsTimelineChart from '../StatisticsTimelineChart'
 import BouncesTable from '../BouncesTable'
@@ -193,6 +194,14 @@ const DispatchDetail = ({ dispatch, onChange }) => {
                   title={t('Click through time')}
                   label={t('Clicks')}
                   data={dispatch.trackings.filter(t => t.type === 'click')} />
+              </Grid.Column>
+            </Grid.Row>
+          )}
+          {dispatch.click_statistics && (
+            <Grid.Row>
+              <Grid.Column width={16}>
+                <Header>{t('Click statistics')}</Header>
+                <ClickStatisticsTable events={dispatch.trackings.filter(t => t.type === 'click')} />
               </Grid.Column>
             </Grid.Row>
           )}

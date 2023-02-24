@@ -382,6 +382,7 @@
     "Charts": "Grafici",
     "CampaignDetailHelpStep8Text": "Infine puoi visualizzare le statistiche di apertura e click in grafici temporali e globali a torta.",
     "Please review your bounces": "Controlla tutti i bounces ed elimina i contatti non esistenti",
-    "Enqueued e-mails ready for dispatching": "E-mail in coda pronte per l'invio"
+    "Enqueued e-mails ready for dispatching": "E-mail in coda pronte per l'invio",
+    "Click count": "Numero di click"
   }
 }
