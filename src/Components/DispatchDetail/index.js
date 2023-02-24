@@ -197,14 +197,16 @@ const DispatchDetail = ({ dispatch, onChange }) => {
               </Grid.Column>
             </Grid.Row>
           )}
-          {dispatch.click_statistics && (
-            <Grid.Row>
-              <Grid.Column width={16}>
-                <Header>{t('Click statistics')}</Header>
-                <ClickStatisticsTable events={dispatch.trackings.filter(t => t.type === 'click')} />
-              </Grid.Column>
-            </Grid.Row>
-          )}
+        </Grid>
+      )}
+      {!dispatch.error && dispatch.click_statistics && (
+        <Grid doubling stackable columns={1} style={{ marginTop: '2rem' }} data-tour='campaign-click-statistics'>
+          <Grid.Row data-tour='campaign-click-statistics'>
+            <Grid.Column width={16}>
+              <Header>{t('Click statistics')}</Header>
+              <ClickStatisticsTable events={dispatch.trackings.filter(t => t.type === 'click')} />
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
       )}
     </div>

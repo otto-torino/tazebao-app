@@ -175,6 +175,25 @@ steps.push({
 })
 
 steps.push({
+  selector: '[data-tour="campaign-click-statistics"]',
+  content: ({ goTo, inDOM, close }) => {
+    return (
+      <div>
+        <h4>{i18next.t('Click statistics')}</h4>
+        <p>{i18next.t('CampaignDetailHelpStep9Text')}</p>
+        {nextButton(goTo, 10)}
+      </div>
+    )
+  },
+  position: 'bottom',
+  style: {
+    backgroundColor: bgColor
+  },
+  stepInteraction: false,
+  skipIfNotVisible: true
+})
+
+steps.push({
   selectors: [
     {
       selector: '[data-tour="help-button"]',

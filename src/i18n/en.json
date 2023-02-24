@@ -119,6 +119,7 @@
     "CampaignDetailHelpStep5Text": "In particular yo can view information about bounces. If present, you can click the viewfinder icon to open the bounces detail in a modal. Here you  can easily unsubscribe the contacts you desire.",
     "CampaignDetailHelpStep6Text": "The open statistics can tell how many people open your email. This is an under-estimated number, because people who don't load images when reading the emails are not detected. Click the viewfinder icon to see more information.",
     "CampaignDetailHelpStep7Text": "Tazeao registers every click on a tracked link. You can know exactly who and when has clicked which link. Click the viewfinder icon to see more information.",
-    "CampaignDetailHelpStep8Text": "Finally, you can view open and click statistics in time and global pie charts."
+    "CampaignDetailHelpStep8Text": "You can view open and click statistics in time and global pie charts.",
+    "CampaignDetailHelpStep9Text": "Finally, this table shows tracked link statistics, which one was the most clicked one?"
   }
 }

@@ -380,7 +380,8 @@
     "Click statistics": "Statistiche click",
     "CampaignDetailHelpStep7Text": "Tazeao si ricorda tutte le volte che un contatto clicca un link tracciato di un'email. Queste statistiche ti consentono di capire chi e quando ha cliccato quale link della tua campagna. Clicca sull'icona del mirino per visualizzare ulteriori dettagli.",
     "Charts": "Grafici",
-    "CampaignDetailHelpStep8Text": "Infine puoi visualizzare le statistiche di apertura e click in grafici temporali e globali a torta.",
+    "CampaignDetailHelpStep8Text": "Puoi visualizzare le statistiche di apertura e click in grafici temporali e globali a torta.",
+    "CampaignDetailHelpStep9Text": "Infine, questa tabella ti mostra le statistiche relative ai link tracciati, quale è stato il più cliccato?",
     "Please review your bounces": "Controlla tutti i bounces ed elimina i contatti non esistenti",
     "Enqueued e-mails ready for dispatching": "E-mail in coda pronte per l'invio",
     "Click count": "Numero di click"
