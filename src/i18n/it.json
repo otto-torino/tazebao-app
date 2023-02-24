@@ -384,6 +384,7 @@
     "CampaignDetailHelpStep9Text": "Infine, questa tabella ti mostra le statistiche relative ai link tracciati, quale è stato il più cliccato?",
     "Please review your bounces": "Controlla tutti i bounces ed elimina i contatti non esistenti",
     "Enqueued e-mails ready for dispatching": "E-mail in coda pronte per l'invio",
-    "Click count": "Numero di click"
+    "Click count": "Numero di click",
+    "TourStepHelpButton": "In ogni videata per la quale è disponibile un tour di aiuto interattivo sarà visualizzata questa icona. Cliccala per visualizzarlo."
   }
 }

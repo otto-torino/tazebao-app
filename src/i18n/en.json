@@ -120,6 +120,7 @@
     "CampaignDetailHelpStep6Text": "The open statistics can tell how many people open your email. This is an under-estimated number, because people who don't load images when reading the emails are not detected. Click the viewfinder icon to see more information.",
     "CampaignDetailHelpStep7Text": "Tazeao registers every click on a tracked link. You can know exactly who and when has clicked which link. Click the viewfinder icon to see more information.",
     "CampaignDetailHelpStep8Text": "You can view open and click statistics in time and global pie charts.",
-    "CampaignDetailHelpStep9Text": "Finally, this table shows tracked link statistics, which one was the most clicked one?"
+    "CampaignDetailHelpStep9Text": "Finally, this table shows tracked link statistics, which one was the most clicked one?",
+    "TourStepHelpButton": "For any page that has an help tour available, thvis button is visiible. Click it to start the tour."
   }
 }
