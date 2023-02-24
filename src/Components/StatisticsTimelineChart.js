@@ -2,12 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactHighchars from 'react-highcharts'
 import moment from 'moment'
+import Highcharts from 'highcharts'
 
 const StatisticsTimelineChart = ({ title, label, data }) => {
   let acc = 0
   const config = {
     chart: {
-      type: 'spline',
+      type: 'area',
       zoomType: 'x'
     },
     time: {
@@ -39,10 +40,29 @@ const StatisticsTimelineChart = ({ title, label, data }) => {
     },
 
     plotOptions: {
-      series: {
+      area: {
+        fillColor: {
+          linearGradient: {
+            x1: 0,
+            y1: 0,
+            x2: 0,
+            y2: 1
+          },
+          stops: [
+            [0, Highcharts.getOptions().colors[0]],
+            [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+          ]
+        },
         marker: {
-          enabled: true
-        }
+          radius: 2
+        },
+        lineWidth: 1,
+        states: {
+          hover: {
+            lineWidth: 1
+          }
+        },
+        threshold: null
       }
     },
 
