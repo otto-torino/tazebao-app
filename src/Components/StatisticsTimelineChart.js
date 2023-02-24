@@ -7,7 +7,8 @@ const StatisticsTimelineChart = ({ title, label, data }) => {
   let acc = 0
   const config = {
     chart: {
-      type: 'spline'
+      type: 'spline',
+      zoomType: 'x'
     },
     time: {
       timezoneOffset: -2 * 60
