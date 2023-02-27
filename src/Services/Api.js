@@ -165,6 +165,9 @@ const create = (baseURL = config.apiBasePath) => {
     const endpoint = '/newsletter/mailermessage/unsent'
     return api.get(url(endpoint, qs))
   }
+  // STATISTICS
+  const subscriptionsStatistics = () =>
+    api.get('/newsletter/subscriptions/stats/')
 
   // Return back a collection of functions that we would consider our
   // interface.  Most of the time it'll be just the list of all the
@@ -216,7 +219,8 @@ const create = (baseURL = config.apiBasePath) => {
     deleteBounce,
     mailerMessages,
     deleteMailerMessage,
-    unsentMailerMessages
+    unsentMailerMessages,
+    subscriptionsStatistics
   }
 }
 

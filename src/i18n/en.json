@@ -121,6 +121,9 @@
     "CampaignDetailHelpStep7Text": "Tazeao registers every click on a tracked link. You can know exactly who and when has clicked which link. Click the viewfinder icon to see more information.",
     "CampaignDetailHelpStep8Text": "You can view open and click statistics in time and global pie charts.",
     "CampaignDetailHelpStep9Text": "Finally, this table shows tracked link statistics, which one was the most clicked one?",
-    "TourStepHelpButton": "For any page that has an help tour available, thvis button is visiible. Click it to start the tour."
+    "TourStepHelpButton": "For any page that has an help tour available, thvis button is visiible. Click it to start the tour.",
+    "StatisticsHelpStepPage": "In this page you can view statistics and metrics which describe the trend of subscriptions and unsubscriptions over time",
+    "StatisticsHelpStepSubscriptions": "This chart shows all the single subscriptions, grouped by date, and the total over time. Unsubscribed subscriptions do not appear in this chart.",
+    "StatisticsHelpStepUnsubscriptions": "This chart shows all the single unsubscriptions, grouped by date, and the total over time."
   }
 }

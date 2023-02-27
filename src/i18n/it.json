@@ -261,6 +261,7 @@
     "Add scheduled dispatch": "Aggiungi programmazione",
     "Search scheduled dispatch": "Ricerca programmazione",
     "Datetime": "Data e ora",
+    "Date": "Data",
     "Subscriber email": "Email iscritto",
     "Message": "Messaggio",
     "Bounces list": "Lista rimbalzi",
@@ -385,6 +386,15 @@
     "Please review your bounces": "Controlla tutti i bounces ed elimina i contatti non esistenti",
     "Enqueued e-mails ready for dispatching": "E-mail in coda pronte per l'invio",
     "Click count": "Numero di click",
-    "TourStepHelpButton": "In ogni videata per la quale è disponibile un tour di aiuto interattivo sarà visualizzata questa icona. Cliccala per visualizzarlo."
+    "TourStepHelpButton": "In ogni videata per la quale è disponibile un tour di aiuto interattivo sarà visualizzata questa icona. Cliccala per visualizzarlo.",
+    "Statistics": "Statistiche",
+    "Subscriptions statistics": "Statistiche sottoscrizioni",
+    "New subscriptions number": "Numero nuove sottoscrizioni",
+    "Total": "Totale",
+    "Unsubscriptions statistics": "Statistiche disiscrizioni",
+    "New unsubscriptions number": "Numero nuove disiscrizioni",
+    "StatisticsHelpStepPage": "Questa è la pagina in cui visualizzare statistiche e metriche che descrivono l'andamento delle sottoscrizioni e disiscrizioni nel tempo",
+    "StatisticsHelpStepSubscriptions": "Questo grafico mostra tutte le singole sottoscrizioni, raggruppate per data ed il totale nel tempo. Non sono conteggiate le sottoscrizioni che sono state cancellate, perché non vengono conservati dati al riguardo.",
+    "StatisticsHelpStepUnsubscriptions": "Questo grafico mostra tutte le singole disiscrizioni, raggruppate per data ed il totale nel tempo."
   }
 }

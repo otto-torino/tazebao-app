@@ -11,6 +11,7 @@ import CampaignsActions from '../Redux/Campaigns'
 import PlanningActions from '../Redux/Planning'
 import BouncesActions from '../Redux/Bounces'
 import MailerMessagesActions from '../Redux/MailerMessages'
+import SubscriptionsStatisticsActions from '../Redux/SubscriptionsStatistics'
 // views
 import LoginView from '../Views/LoginView'
 import HomeView from '../Views/HomeView'
@@ -25,6 +26,7 @@ import PlanningView from '../Views/PlanningView'
 import BouncesView from '../Views/BouncesView'
 import MailerMessagesView from '../Views/MailerMessagesView'
 import IntegrationView from '../Views/IntegrationView'
+import StatisticsView from '../Views/StatisticsView'
 import NetworkErrorView from '../Views/NetworkErrorView'
 
 /**
@@ -159,6 +161,14 @@ class AppRouter extends React.Component {
             component={MailerMessagesView}
             actions={[
               [MailerMessagesActions.mailerMessagesRequest(), (state) => true]
+            ]}
+          />
+          <PrivateRoute
+            exact
+            path={config.urls.statistics}
+            component={StatisticsView}
+            actions={[
+              [SubscriptionsStatisticsActions.subscriptionsStatisticsRequest(), (state) => true]
             ]}
           />
           <PrivateRoute

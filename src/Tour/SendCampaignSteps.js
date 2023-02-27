@@ -115,7 +115,7 @@ steps.push({
     return (
       <div>
         <h4>{i18next.t('Help button')}</h4>
-        <p>{i18next.t('DashboardHelpStep9Text')}</p>
+        <p>{i18next.t('DashboardHelpStep11Text')}</p>
         {closeButton(close)}
       </div>
     )

@@ -101,6 +101,10 @@ const AppMenu = (props) => {
       <Icon name='file text' />
       {t('MailerMessages')}
     </Menu.Item>,
+    <Menu.Item as={Link} to={config.urls.statistics} key='menu-voice-statistics'>
+      <Icon name='chart line' />
+      {t('Statistics')}
+    </Menu.Item>,
     <Menu.Item as={Link} to={config.urls.integration} key='menu-voice-integration' data-tour='help-menu-voice'>
       <Icon name='globe' />
       {t('Integration')}

@@ -11,6 +11,7 @@ import { reducer as planningReducer } from './Planning'
 import { reducer as bouncesReducer } from './Bounces'
 import { reducer as mailerMessagesReducer } from './MailerMessages'
 import { reducer as tourReducer } from './Tour'
+import { reducer as subscriptionsStatisticsReducer } from './SubscriptionsStatistics'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
@@ -18,6 +19,7 @@ export default (history) => combineReducers({
   auth: authReducer,
   stats: statsReducer,
   subscribers: subscribersReducer,
+  subscriptionsStatistics: subscriptionsStatisticsReducer,
   lists: listsReducer,
   topics: topicsReducer,
   campaigns: campaignsReducer,

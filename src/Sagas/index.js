@@ -29,6 +29,7 @@ import { takeLatest, all } from 'redux-saga/effects'
 import { STARTUP } from '../Redux/Startup'
 import { LOGIN_REQUEST, LOGOUT, WHOAMI_REQUEST, REFRESH_REQUEST } from '../Redux/Auth'
 import { STATS_REQUEST } from '../Redux/Stats'
+import { SUBSCRIPTIONS_STATISTICS_REQUEST } from '../Redux/SubscriptionsStatistics'
 import { SUBSCRIBERS_REQUEST, SUBSCRIBERS_QUERYSTRING } from '../Redux/Subscribers'
 import { LISTS_REQUEST, LISTS_QUERYSTRING } from '../Redux/Lists'
 import { TOPICS_REQUEST, TOPICS_QUERYSTRING } from '../Redux/Topics'
@@ -48,6 +49,7 @@ import { fetchPlanning, requestPlanning } from './PlanningSagas'
 import { fetchBounces, requestBounces } from './BouncesSagas'
 import { fetchMailerMessages, requestMailerMessages, fetchUnsentMailerMessages } from './MailerMessagesSagas'
 import { fetchStats } from './StatsSagas'
+import { fetchSubscriptionsStatistics } from './SubscriptionsStatisticsSagas'
 
 /* ------------- API ------------- */
 import API from '../Services/Api'
@@ -61,6 +63,7 @@ export default function * root (dispatch) {
     takeLatest(REFRESH_REQUEST, refresh, api),
     takeLatest(WHOAMI_REQUEST, whoami, { api, dispatch }),
     takeLatest(STATS_REQUEST, fetchStats, api),
+    takeLatest(SUBSCRIPTIONS_STATISTICS_REQUEST, fetchSubscriptionsStatistics, api),
     takeLatest(SUBSCRIBERS_QUERYSTRING, requestSubscribers, api),
     takeLatest(SUBSCRIBERS_REQUEST, fetchSubscribers, api),
     takeLatest(LISTS_QUERYSTRING, requestLists, api),

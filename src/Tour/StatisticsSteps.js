@@ -11,8 +11,8 @@ steps.push({
   content: ({ goTo, inDOM }) => {
     return (
       <div>
-        <h4>{i18next.t('Edit campaign')}</h4>
-        <p>{i18next.t('EditCampaignHelpStep0Text')}</p>
+        <h4>{i18next.t('Statistics')}</h4>
+        <p>{i18next.t('StatisticsHelpStepPage')}</p>
         {nextButton(goTo, 1)}
       </div>
     )
@@ -25,12 +25,12 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="create-campaign-form"]',
-  content: ({ goTo, inDOM, close }) => {
+  selector: '[data-tour="subscriptions-statistics"]',
+  content: ({ goTo, inDOM }) => {
     return (
       <div>
-        <h4>{i18next.t('Edit campaign')}</h4>
-        <p>{i18next.t('EditCampaignHelpStep1Text')}</p>
+        <h4>{i18next.t('Subscriptions statistics')}</h4>
+        <p>{i18next.t('StatisticsHelpStepSubscriptions')}</p>
         {nextButton(goTo, 2)}
       </div>
     )
@@ -43,12 +43,12 @@ steps.push({
 })
 
 steps.push({
-  selector: '[data-tour="create-campaign-mosaico"]',
-  content: ({ goTo, inDOM, close }) => {
+  selector: '[data-tour="unsubscriptions-statistics"]',
+  content: ({ goTo, inDOM }) => {
     return (
       <div>
-        <h4>{i18next.t('Edit campaign')}</h4>
-        <p>{i18next.t('EditCampaignHelpStep2Text')}</p>
+        <h4>{i18next.t('Unsubscriptions statistics')}</h4>
+        <p>{i18next.t('StatisticsHelpStepUnsubscriptions')}</p>
         {nextButton(goTo, 3)}
       </div>
     )
@@ -57,26 +57,7 @@ steps.push({
   style: {
     backgroundColor: bgColor
   },
-  stepInteraction: true
-})
-
-steps.push({
-  selector: '[data-tour="create-campaign-submit-row"]',
-  content: ({ goTo, inDOM, close }) => {
-    return (
-      <div>
-        <h4>{i18next.t('Edit campaign')}</h4>
-        <p>{i18next.t('EditCampaignHelpStep3Text')}</p>
-        {nextButton(goTo, 4)}
-      </div>
-    )
-  },
-  position: 'bottom',
-  style: {
-    backgroundColor: bgColor
-  },
-  stepInteraction: false,
-  skipIfNotVisible: true
+  stepInteraction: false
 })
 
 steps.push({
