@@ -14,11 +14,9 @@
     "Click statistics are not available because no links were tracked": "Le statistiche sui click non sono disponibili perché nessun link è stato tracciato",
     "Bounces are cleared every week": "I rimbalzi di e-mail vengono cancellati periodicamente",
     "Sent E-mails": "E-mail inviate",
-    "Planning": "Programmazione",
     "Next Scheduling": "Prossimo invio programmato",
     "No data": "Dati non disponibili",
     "Lists": "Liste",
-    "Topics": "Topics",
     "Campaigns": "Campagne",
     "campaigns": "campagne",
     "campaign_name": "nome campagna",
@@ -395,6 +393,11 @@
     "New unsubscriptions number": "Numero nuove disiscrizioni",
     "StatisticsHelpStepPage": "Questa è la pagina in cui visualizzare statistiche e metriche che descrivono l'andamento delle sottoscrizioni e disiscrizioni nel tempo",
     "StatisticsHelpStepSubscriptions": "Questo grafico mostra tutte le singole sottoscrizioni, raggruppate per data ed il totale nel tempo. Non sono conteggiate le sottoscrizioni che sono state cancellate, perché non vengono conservati dati al riguardo.",
-    "StatisticsHelpStepUnsubscriptions": "Questo grafico mostra tutte le singole disiscrizioni, raggruppate per data ed il totale nel tempo."
+    "StatisticsHelpStepUnsubscriptions": "Questo grafico mostra tutte le singole disiscrizioni, raggruppate per data ed il totale nel tempo.",
+    "Compare statistics": "Compara statistiche",
+    "Campaigns statistics comparison": "Comparazione statistiche campagne",
+    "Campaigns statistics": "Statistiche campagne",
+    "Percentage": "Percentuale",
+    "Sent number": "Numero invii"
   }
 }

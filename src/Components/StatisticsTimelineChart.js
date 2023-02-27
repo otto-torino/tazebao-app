@@ -74,7 +74,6 @@ const StatisticsTimelineChart = ({ title, label, data }) => {
         name: label,
         data: data.map(t => {
           acc = acc + 1
-          console.log(moment.utc(t.datetime).format('x'))
           // const m = moment(t.datetime)
           // return [Date.UTC(m.format('Y'), m.format('M') - 1, m.format('D')), acc]
           return [parseInt(moment.utc(t.datetime).format('x')), acc]

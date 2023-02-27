@@ -168,6 +168,8 @@ const create = (baseURL = config.apiBasePath) => {
   // STATISTICS
   const subscriptionsStatistics = () =>
     api.get('/newsletter/subscriptions/stats/')
+  const dispatchesStatistics = (ids) =>
+    api.get('/newsletter/dispatches/stats/?ids=' + ids.join('-'))
 
   // Return back a collection of functions that we would consider our
   // interface.  Most of the time it'll be just the list of all the
@@ -220,7 +222,8 @@ const create = (baseURL = config.apiBasePath) => {
     mailerMessages,
     deleteMailerMessage,
     unsentMailerMessages,
-    subscriptionsStatistics
+    subscriptionsStatistics,
+    dispatchesStatistics
   }
 }
 

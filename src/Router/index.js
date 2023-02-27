@@ -27,6 +27,7 @@ import BouncesView from '../Views/BouncesView'
 import MailerMessagesView from '../Views/MailerMessagesView'
 import IntegrationView from '../Views/IntegrationView'
 import StatisticsView from '../Views/StatisticsView'
+import CampaignsStatisticsView from '../Views/CampaignsStatisticsView'
 import NetworkErrorView from '../Views/NetworkErrorView'
 
 /**
@@ -88,6 +89,11 @@ class AppRouter extends React.Component {
         <Switch>
           <Route exact path={config.urls.networkError} component={NetworkErrorView} />
           <Route exact path={config.urls.login} component={LoginView} />
+          <PrivateRoute
+            exact
+            path={config.urls.campaignsStatistics}
+            component={CampaignsStatisticsView}
+          />
           <PrivateRoute
             exact
             path={config.urls.adminSubscribers}

@@ -26,7 +26,8 @@ export default {
     campaignDetail: '/campaigns/:id',
     sendCampaign: '/campaigns/send/:id',
     integration: '/integration',
-    statistics: '/statistics'
+    statistics: '/statistics',
+    campaignsStatistics: '/campaigns/statistics'
   },
   ui: {
     adminListPerPage: 50

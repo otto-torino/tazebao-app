@@ -22,7 +22,7 @@ import moment from 'moment'
 
 import styles from './CampaignsView.module.scss'
 
-const AdminSubscribersView = props => {
+const CampaignsView = props => {
   const { t } = useTranslation()
   const [deleteModal, setDeleteModal] = useState({ open: false })
   const dispatch = useDispatch()
@@ -132,6 +132,16 @@ const AdminSubscribersView = props => {
     dispatch(CampaignsActions.campaignsQuerystring(qs))
   }
 
+  const listActions = {
+    compare: {
+      label: t('Compare statistics'),
+      action: ids => {
+        history.push(config.urls.campaignsStatistics, { ids })
+      },
+      options: { setPage: 1 }
+    }
+  }
+
   return (
     <BaseLayout wrapperStyle={styles.adminView}>
       <Container {...layoutProps.containerProps}>
@@ -149,6 +159,7 @@ const AdminSubscribersView = props => {
             isLoading={isLoading}
             listFilters={topicFilters}
             listDisplay={listDisplay}
+            listActions={listActions}
             idProp='id'
             verboseName={t('campaign')}
             verboseNamePlural={t('campaigns')}
@@ -210,6 +221,6 @@ const AdminSubscribersView = props => {
   )
 }
 
-AdminSubscribersView.propTypes = {}
+CampaignsView.propTypes = {}
 
-export default AdminSubscribersView
+export default CampaignsView
