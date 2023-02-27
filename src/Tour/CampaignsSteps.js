@@ -207,6 +207,24 @@ steps.push({
 })
 
 steps.push({
+  selector: '[data-tour="changelist-actions"]',
+  content: ({ goTo, inDOM, close }) => {
+    return (
+      <div>
+        <h4>{i18next.t('Compare campaigns statistics')}</h4>
+        <p>{i18next.t('CampaignsHelpStepCompareStatistics')}</p>
+        {nextButton(goTo, 12)}
+      </div>
+    )
+  },
+  position: 'bottom',
+  style: {
+    backgroundColor: bgColor
+  },
+  stepInteraction: false
+})
+
+steps.push({
   selectors: [
     {
       selector: '[data-tour="help-button"]',

@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactHighchars from 'react-highcharts'
 import moment from 'moment'
-import Highcharts from 'highcharts'
 import { useTranslation } from 'react-i18next'
 
 const CampaignsStatisticsChart = ({ data }) => {

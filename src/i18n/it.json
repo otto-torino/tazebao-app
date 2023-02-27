@@ -398,6 +398,8 @@
     "Campaigns statistics comparison": "Comparazione statistiche campagne",
     "Campaigns statistics": "Statistiche campagne",
     "Percentage": "Percentuale",
-    "Sent number": "Numero invii"
+    "Sent number": "Numero invii",
+    "Compare campaigns statistics": "Comparazione statistiche campagne",
+    "CampaignsHelpStepCompareStatistics": "Seleziona alcune campagne ed esegui una comparazione sull'andamento delle statistiche: open rate, click rate, etc..."
   }
 }
