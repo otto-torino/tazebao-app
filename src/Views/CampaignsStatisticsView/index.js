@@ -8,6 +8,7 @@ import { api } from '../../Sagas'
 import { defaultTo } from 'ramda'
 import { withLoader } from '../../HOC/Loader'
 import CampaignsStatisticsChart from '../../Components/CampaignsStatisticsChart'
+import ClickStatisticsTable from '../../Components/ClickStatisticsTable'
 
 const CampaignsStatisticsView = () => {
   const { t } = useTranslation()
@@ -39,6 +40,10 @@ const CampaignsStatisticsView = () => {
           {withLoader(() => (
             <div>
               <CampaignsStatisticsChart data={data} />
+              <ClickStatisticsTable
+                events={data.reduce(
+                  (acc, curr) => [...acc, ...curr.trackings.filter(t => t.type === 'click')], [])}
+              />
             </div>
           ), isLoading)}
         </Segment>

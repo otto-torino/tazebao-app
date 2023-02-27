@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { apply, groupBy, head, keys, length, map, objOf, pipe, prop, reverse, sortBy, toPairs, values } from 'ramda'
 
 const ClickTrackingTable = ({ events }) => {
+  console.log('EVENTS', events) // eslint-disable-line
   const { t } = useTranslation()
   const freqOrderedEvents = pipe(
     groupBy(prop('notes')),
