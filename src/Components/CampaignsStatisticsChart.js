@@ -45,8 +45,11 @@ const CampaignsStatisticsChart = ({ data }) => {
     ],
     tooltip: {
       shared: true,
-      headerFormat: '<b>{series.name}</b><br>',
-      pointFormat: '{point.campaignName} {point.x: %b %e}: {point.y}{point.unit}<br>'
+      formatter: function () {
+        return this.points.reduce(function (s, point) {
+          return s + '<br/>' + point.series.name + ': ' + point.y + point.point.unit
+        }, '<b>' + this.points[0].point.campaignName + '</b>')
+      }
     },
 
     // Define the data points. All series have a dummy year
