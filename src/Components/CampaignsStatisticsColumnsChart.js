@@ -3,32 +3,27 @@ import PropTypes from 'prop-types'
 import ReactHighchars from 'react-highcharts'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
-import { prop, sortBy } from 'ramda'
+import { prop } from 'ramda'
+import Config from '../Config'
 
-const CampaignsStatisticsChart = ({ data }) => {
+const CampaignsStatisticsColumnsChart = ({ data }) => {
   const { t } = useTranslation()
-
-  const sortedData = sortBy(prop('started_at'), data)
 
   const config = {
     chart: {
       zoomType: 'x'
     },
+    colors: Config.ui.chartColors,
     time: {
       timezoneOffset: new Date(data[0]?.started_at).getTimezoneOffset()
     },
     title: {
-      text: t('Statistics along time')
+      text: t('Statistics per campaign')
     },
     xAxis: {
-      type: 'datetime',
-      dateTimeLabelFormats: {
-        // don't display the dummy year
-        month: '%e. %b',
-        year: '%b'
-      },
+      categories: data.map(prop('campaign_name')),
       title: {
-        text: t('Date')
+        text: t('Campaign')
       }
     },
     yAxis: [
@@ -51,49 +46,48 @@ const CampaignsStatisticsChart = ({ data }) => {
       formatter: function () {
         return this.points.reduce(function (s, point) {
           return s + '<br/>' + point.series.name + ': ' + point.y + point.point.unit
-        }, '<b>' + this.points[0].point.campaignName + '</b>')
+        }, '<b>' + this.points[0].point.datetime + '</b>')
       }
     },
-
+    plotOptions: {
+      column: {
+        /* Here is the setting to limit the maximum column width. */
+        maxPointWidth: 50
+      }
+    },
     // Define the data points. All series have a dummy year
     // of 1970/71 in order to be compared on the same x axis. Note
     // that in JavaScript, months start at 0 for January, 1 for February etc.
     series: [
       {
         name: 'Open rate',
-        type: 'spline',
-        data: sortedData.map(item => {
-          return {
-            x: parseInt(moment(item.started_at).format('x')),
-            y: item.open_rate,
-            campaignName: item.campaign_name,
-            unit: '%'
-          }
-        })
+        type: 'column',
+        data: data.map((item, index) => ({
+          x: index,
+          y: item.open_rate,
+          unit: '%',
+          datetime: moment(item.started_at).format('LLL')
+        }))
       },
       {
         name: 'Click rate',
-        type: 'spline',
-        data: sortedData.map(item => {
-          return {
-            x: parseInt(moment(item.started_at).format('x')),
-            y: item.click_rate,
-            campaignName: item.campaign_name,
-            unit: '%'
-          }
-        })
+        type: 'column',
+        data: data.map((item, index) => ({
+          x: index,
+          y: item.click_rate,
+          unit: '%',
+          datetime: moment(item.started_at).format('LLL')
+        }))
       },
       {
         name: 'Sent',
-        type: 'spline',
-        data: sortedData.map(item => {
-          return {
-            x: parseInt(moment(item.started_at).format('x')),
-            y: item.sent,
-            campaignName: item.campaign_name,
-            unit: ''
-          }
-        }),
+        type: 'column',
+        data: data.map((item, index) => ({
+          x: index,
+          y: item.sent,
+          unit: '%',
+          datetime: moment(item.started_at).format('LLL')
+        })),
         yAxis: 1
       }
     ],
@@ -117,11 +111,12 @@ const CampaignsStatisticsChart = ({ data }) => {
       ]
     }
   }
+
   return <ReactHighchars config={config} />
 }
 
-CampaignsStatisticsChart.propTypes = {
+CampaignsStatisticsColumnsChart.propTypes = {
   data: PropTypes.array
 }
 
-export default CampaignsStatisticsChart
+export default CampaignsStatisticsColumnsChart

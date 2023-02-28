@@ -9,6 +9,9 @@ import { defaultTo } from 'ramda'
 import { withLoader } from '../../HOC/Loader'
 import CampaignsStatisticsChart from '../../Components/CampaignsStatisticsChart'
 import ClickStatisticsTable from '../../Components/ClickStatisticsTable'
+import CampaignsStatisticsColumnsChart from '../../Components/CampaignsStatisticsColumnsChart'
+import history from '../../history'
+import Config from '../../Config'
 
 const CampaignsStatisticsView = () => {
   const { t } = useTranslation()
@@ -28,7 +31,9 @@ const CampaignsStatisticsView = () => {
     }
 
     fetchData()
-  }, [location.state.ids])
+  }, [location.state?.ids])
+
+  if (!location.state?.ids) history.push(Config.urls.campaigns)
 
   return (
     <BaseLayout>
@@ -40,6 +45,7 @@ const CampaignsStatisticsView = () => {
           {withLoader(() => (
             <div>
               <CampaignsStatisticsChart data={data} />
+              <CampaignsStatisticsColumnsChart data={data} />
               <ClickStatisticsTable
                 events={data.reduce(
                   (acc, curr) => [...acc, ...curr.trackings.filter(t => t.type === 'click')], [])}

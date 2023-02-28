@@ -30,6 +30,7 @@ export default {
     campaignsStatistics: '/campaigns/statistics'
   },
   ui: {
-    adminListPerPage: 50
+    adminListPerPage: 50,
+    chartColors: ['#FBBD0A', '#21BA45', '#00B5AD', '#2185D0', '#B6CC19', '#E03997', '#A5673F', '#A333C8']
   }
 }

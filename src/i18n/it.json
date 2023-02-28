@@ -400,6 +400,8 @@
     "Percentage": "Percentuale",
     "Sent number": "Numero invii",
     "Compare campaigns statistics": "Comparazione statistiche campagne",
-    "CampaignsHelpStepCompareStatistics": "Seleziona alcune campagne ed esegui una comparazione sull'andamento delle statistiche: open rate, click rate, etc..."
+    "CampaignsHelpStepCompareStatistics": "Seleziona alcune campagne ed esegui una comparazione sull'andamento delle statistiche: open rate, click rate, etc...",
+    "Statistics along time": "Statistiche nel tempo",
+    "Statistics per campaign": "Statistiche per campagna"
   }
 }
