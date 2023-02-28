@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ReactHighchars from 'react-highcharts'
 import moment from 'moment'
 import Highcharts from 'highcharts'
+import Config from '../Config'
 
 const StatisticsTimelineChart = ({ title, label, data }) => {
   let acc = 0
@@ -11,6 +12,7 @@ const StatisticsTimelineChart = ({ title, label, data }) => {
       type: 'area',
       zoomType: 'x'
     },
+    colors: Config.ui.chartColors,
     time: {
       timezoneOffset: -2 * 60
     },

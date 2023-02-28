@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactHighchars from 'react-highcharts'
+import Config from '../Config'
 
 const RatePieChart = ({ title, label, trueLabel, falseLabel, data }) => {
   const config = {
@@ -26,7 +27,7 @@ const RatePieChart = ({ title, label, trueLabel, falseLabel, data }) => {
         showInLegend: true
       }
     },
-    colors: ['#55d955', '#24a0a0', '#06C', '#036', '#000'],
+    colors: Config.ui.chartColors,
     series: [
       {
         name: label,
