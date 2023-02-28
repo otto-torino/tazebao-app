@@ -3,16 +3,19 @@ import PropTypes from 'prop-types'
 import ReactHighchars from 'react-highcharts'
 import moment from 'moment'
 import { useTranslation } from 'react-i18next'
+import { prop, sortBy } from 'ramda'
 
 const CampaignsStatisticsChart = ({ data }) => {
   const { t } = useTranslation()
+
+  const sortedData = sortBy(prop('started_at'), data)
 
   const config = {
     chart: {
       zoomType: 'x'
     },
     time: {
-      timezoneOffset: -2 * 60
+      timezoneOffset: new Date(data[0]?.started_at).getTimezoneOffset()
     },
     title: {
       text: t('Campaigns statistics')
@@ -59,7 +62,7 @@ const CampaignsStatisticsChart = ({ data }) => {
       {
         name: 'Open rate',
         type: 'spline',
-        data: data.map(item => {
+        data: sortedData.map(item => {
           return {
             x: parseInt(moment(item.started_at).format('x')),
             y: item.open_rate,
@@ -71,7 +74,7 @@ const CampaignsStatisticsChart = ({ data }) => {
       {
         name: 'Click rate',
         type: 'spline',
-        data: data.map(item => {
+        data: sortedData.map(item => {
           return {
             x: parseInt(moment(item.started_at).format('x')),
             y: item.click_rate,
@@ -83,7 +86,7 @@ const CampaignsStatisticsChart = ({ data }) => {
       {
         name: 'Sent',
         type: 'spline',
-        data: data.map(item => {
+        data: sortedData.map(item => {
           return {
             x: parseInt(moment(item.started_at).format('x')),
             y: item.sent,
