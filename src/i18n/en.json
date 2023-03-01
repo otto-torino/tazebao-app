@@ -122,7 +122,7 @@
     "StatisticsHelpStepSubscriptions": "This chart shows all the single subscriptions, grouped by date, and the total over time. Unsubscribed subscriptions do not appear in this chart.",
     "StatisticsHelpStepUnsubscriptions": "This chart shows all the single unsubscriptions, grouped by date, and the total over time.",
     "CampaignsHelpStepCompareStatistics": "Select some campaigns and view a comparison between dispatch statistics: open rate, click rate, etc...",
-    "subscription_forms_description": "In this section you can create new subscription forms that you can embed directly into your web site.",
+    "subscription_forms_description": "In this section you can create new subscription forms that you can share with your users in order to let them subscribe to your newsletter.",
     "ErrorUrlPlaceholder": "i.e. https://www.example.com/error",
     "SucessUrlPlaceholder": "i.e. https://www.example.com/thanks"
   }
