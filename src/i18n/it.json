@@ -422,6 +422,7 @@
     "Needed when embedding the form": "Necessario quando si embedda il form",
     "ErrorUrlPlaceholder": "es. https://www.example.com/error",
     "SucessUrlPlaceholder": "es. https://www.example.com/thanks",
-    "Last edited": "Ultima modifica"
+    "Last edited": "Ultima modifica",
+    "Standalone link": "Link form esterno"
   }
 }

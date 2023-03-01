@@ -10,6 +10,7 @@ import { request } from '../../Services/Request'
 
 import styles from './SubscriptionFormsView.module.scss'
 import moment from 'moment'
+import { Icon } from 'semantic-ui-react'
 
 const SubscriptionFormsView = props => {
   const { t } = useTranslation()
@@ -21,9 +22,10 @@ const SubscriptionFormsView = props => {
   const isLoading = useSelector(state => state.subscriptionForms.fetching)
   const lists = useSelector(state => state.lists.data)
 
-  const listDisplay = ['id', 'last_edited', 'name', 'title']
+  const listDisplay = ['id', 'last_edited', 'name', 'title', 'code', 'standalone_link']
   const fieldsMapping = {
-    last_edited: dt => moment(dt).format('LLL')
+    last_edited: dt => moment(dt).format('LLL'),
+    standalone_link: url => <a href={url} target='_blank' rel='noopener noreferrer'><Icon name='linkify' /></a>
   }
 
   const handleInsert = data => {
