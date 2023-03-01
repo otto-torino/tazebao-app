@@ -36,6 +36,7 @@ import { TOPICS_REQUEST, TOPICS_QUERYSTRING } from '../Redux/Topics'
 import { CAMPAIGNS_REQUEST, CAMPAIGNS_QUERYSTRING } from '../Redux/Campaigns'
 import { PLANNING_REQUEST, PLANNING_QUERYSTRING } from '../Redux/Planning'
 import { BOUNCES_REQUEST, BOUNCES_QUERYSTRING } from '../Redux/Bounces'
+import { SUBSCRIPTION_FORMS_REQUEST, SUBSCRIPTION_FORMS_QUERYSTRING } from '../Redux/SubscriptionForms'
 import { MAILER_MESSAGES_REQUEST, MAILER_MESSAGES_QUERYSTRING, MAILER_MESSAGES_UNSENT_REQUEST } from '../Redux/MailerMessages'
 
 /* ------------- Sagas ------------- */
@@ -50,6 +51,7 @@ import { fetchBounces, requestBounces } from './BouncesSagas'
 import { fetchMailerMessages, requestMailerMessages, fetchUnsentMailerMessages } from './MailerMessagesSagas'
 import { fetchStats } from './StatsSagas'
 import { fetchSubscriptionsStatistics } from './SubscriptionsStatisticsSagas'
+import { fetchSubscriptionForms, requestSubscriptionForms } from './SubscriptionFormsSagas'
 
 /* ------------- API ------------- */
 import API from '../Services/Api'
@@ -76,6 +78,8 @@ export default function * root (dispatch) {
     takeLatest(PLANNING_REQUEST, fetchPlanning, api),
     takeLatest(BOUNCES_QUERYSTRING, requestBounces, api),
     takeLatest(BOUNCES_REQUEST, fetchBounces, api),
+    takeLatest(SUBSCRIPTION_FORMS_QUERYSTRING, requestSubscriptionForms, api),
+    takeLatest(SUBSCRIPTION_FORMS_REQUEST, fetchSubscriptionForms, api),
     takeLatest(MAILER_MESSAGES_QUERYSTRING, requestMailerMessages, api),
     takeLatest(MAILER_MESSAGES_REQUEST, fetchMailerMessages, api),
     takeLatest(MAILER_MESSAGES_UNSENT_REQUEST, fetchUnsentMailerMessages, api)

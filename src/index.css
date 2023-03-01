@@ -247,3 +247,22 @@ td.rdtYear:hover {
 .rdtTime td {
   cursor: default;
 }
+
+/* EDITOR */
+.wysiwyg-wrapper {
+  height:300px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.wysiwyg-editor {
+  border: 1px solid #f7f7f7;
+  height:200px !important;
+  padding-bottom: 20px;
+  position: relative;
+  top: -6px;
+}
+
+.DraftEditor-root {
+  height: auto !important;
+}

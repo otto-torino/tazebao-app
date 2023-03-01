@@ -31,7 +31,7 @@ const CampaignsStatisticsView = () => {
     }
 
     fetchData()
-  }, [location.state?.ids])
+  }, [location.state?.ids]) // eslint-disable-line
 
   if (!location.state?.ids) history.push(Config.urls.campaigns)
 

@@ -105,7 +105,11 @@ const AppMenu = (props) => {
       <Icon name='chart line' />
       {t('Statistics')}
     </Menu.Item>,
-    <Menu.Item as={Link} to={config.urls.integration} key='menu-voice-integration' data-tour='help-menu-voice'>
+    <Menu.Item as={Link} to={config.urls.subscriptionForms} key='menu-voice-subscription-forms'>
+      <Icon name='wpforms' />
+      {t('Subscription forms')}
+    </Menu.Item>,
+    <Menu.Item as={Link} to={config.urls.integration} key='menu-voice-integration'>
       <Icon name='globe' />
       {t('Integration')}
     </Menu.Item>

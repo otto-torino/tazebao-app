@@ -170,6 +170,14 @@ const create = (baseURL = config.apiBasePath) => {
     api.get('/newsletter/subscriptions/stats/')
   const dispatchesStatistics = (ids) =>
     api.get('/newsletter/dispatches/stats/?ids=' + ids.join('-'))
+  // SUBSCRIPTION FORM
+  const subscriptionForms = (qs = {}) => {
+    const endpoint = '/newsletter/subscriptionform/'
+    return api.get(url(endpoint, qs))
+  }
+  const addSubscriptionForm = data => api.post('/newsletter/subscriptionform/', data)
+  const editSubscriptionForm = data => api.put(`/newsletter/subscriptionform/${data.id}/`, data)
+  const deleteSubscriptionForm = id => api.delete(`/newsletter/subscriptionform/${id}/`)
 
   // Return back a collection of functions that we would consider our
   // interface.  Most of the time it'll be just the list of all the
@@ -223,7 +231,11 @@ const create = (baseURL = config.apiBasePath) => {
     deleteMailerMessage,
     unsentMailerMessages,
     subscriptionsStatistics,
-    dispatchesStatistics
+    dispatchesStatistics,
+    subscriptionForms,
+    addSubscriptionForm,
+    editSubscriptionForm,
+    deleteSubscriptionForm
   }
 }
 

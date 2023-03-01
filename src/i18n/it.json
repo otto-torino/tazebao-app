@@ -402,6 +402,20 @@
     "Compare campaigns statistics": "Comparazione statistiche campagne",
     "CampaignsHelpStepCompareStatistics": "Seleziona alcune campagne ed esegui una comparazione sull'andamento delle statistiche: open rate, click rate, etc...",
     "Statistics along time": "Statistiche nel tempo",
-    "Statistics per campaign": "Statistiche per campagna"
+    "Statistics per campaign": "Statistiche per campagna",
+    "Subscription forms": "Form di sottoscrizione",
+    "subscription form": "form di sottoscrizione",
+    "subscription forms": "form di sottoscrizione",
+    "subscription_forms_description": "In questa sezione puoi creare dei form di sottoscrizione da embeddare nel tuo sito web.",
+    "i.e. Home page form": "es. form home page",
+    "i.e. Subscribe to our site": "es. Iscriviti alla nostra newsletter!",
+    "i.e. Accept the terms and conditions...": "es. Accetta i termini e le condizioni del servizio...",
+    "i.e. Become part of our community...": "es. Entra a far parte della nostra community...",
+    "Title": "Titolo",
+    "Content": "Contenuto",
+    "There was an error inserting the subscription form": "Si è verificato un errore nell'inserimento del form di sottoscrizione",
+    "There was an error editing the subscription form": "Si è verificato un errore nella modifica del form di sottoscrizione",
+    "There was an error deleting the subscription form": "Si è verificato un errore nell'eliminazione del form di sottoscrizione",
+    "subscription_form_delete_message": "I form di sottoscrizione eliminati non possono essere recuperati. Procedere?</strong>"
   }
 }
