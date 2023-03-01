@@ -9,6 +9,7 @@ import { ModelAdmin, ChangeList } from '../../Lib/react-admin'
 import { request } from '../../Services/Request'
 
 import styles from './SubscriptionFormsView.module.scss'
+import moment from 'moment'
 
 const SubscriptionFormsView = props => {
   const { t } = useTranslation()
@@ -18,8 +19,12 @@ const SubscriptionFormsView = props => {
   const querystring = useSelector(state => state.subscriptionForms.qs)
   const subscriptionFormsCount = useSelector(state => state.subscriptionForms.count)
   const isLoading = useSelector(state => state.subscriptionForms.fetching)
+  const lists = useSelector(state => state.lists.data)
 
-  const listDisplay = ['id', 'name']
+  const listDisplay = ['id', 'last_edited', 'name', 'title']
+  const fieldsMapping = {
+    last_edited: dt => moment(dt).format('LLL')
+  }
 
   const handleInsert = data => {
     return request(
@@ -66,6 +71,7 @@ const SubscriptionFormsView = props => {
         icon='wpforms'
         title={t('Subscription forms')}
         FormComponent={SubscriptionFormForm}
+        formProps={{ lists }}
         toStringProp='name'
         verboseName={t('subscription form')}
         verboseNamePlural={t('subscription forms')}
@@ -91,6 +97,7 @@ const SubscriptionFormsView = props => {
             items={Object.keys(subscriptionForms).map(k => subscriptionForms[k])}
             isLoading={isLoading}
             listDisplay={listDisplay}
+            fieldsMapping={fieldsMapping}
             idProp={idProp}
             verboseName={verboseName}
             verboseNamePlural={verboseNamePlural}

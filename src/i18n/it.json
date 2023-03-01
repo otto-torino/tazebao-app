@@ -416,6 +416,12 @@
     "There was an error inserting the subscription form": "Si è verificato un errore nell'inserimento del form di sottoscrizione",
     "There was an error editing the subscription form": "Si è verificato un errore nella modifica del form di sottoscrizione",
     "There was an error deleting the subscription form": "Si è verificato un errore nell'eliminazione del form di sottoscrizione",
-    "subscription_form_delete_message": "I form di sottoscrizione eliminati non possono essere recuperati. Procedere?</strong>"
+    "subscription_form_delete_message": "I form di sottoscrizione eliminati non possono essere recuperati. Procedere?</strong>",
+    "Success URL": "URL pagina iscrizione effettuata con successo",
+    "Error URL": "URL pagina iscrizione fallita",
+    "Needed when embedding the form": "Necessario quando si embedda il form",
+    "ErrorUrlPlaceholder": "es. https://www.example.com/error",
+    "SucessUrlPlaceholder": "es. https://www.example.com/thanks",
+    "Last edited": "Ultima modifica"
   }
 }
