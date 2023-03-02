@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Editor } from 'react-draft-wysiwyg'
-import { ContentState, convertFromHTML, EditorState, convertToRaw } from 'draft-js'
-import draftToHtml from 'draftjs-to-html'
+import JoditEditor from 'jodit-react'
 import { Icon, Form, Input, Message, Tab } from 'semantic-ui-react'
 import { withTranslation } from 'react-i18next'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
@@ -16,14 +14,8 @@ class SubscriptionFormForm extends React.Component {
       fields: {
         id: this.props.item ? this.props.item.id : '',
         name: this.props.item ? this.props.item.name : '',
-        title: this.props.item ? this.props.item.title : '',
-        content: this.props.item
-          ? EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(this.props.item.content)))
-          : EditorState.createEmpty(),
-        privacy_disclaimer: this.props.item
-          // eslint-disable-next-line max-len
-          ? EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(this.props.item.privacy_disclaimer)))
-          : EditorState.createEmpty(),
+        content: this.props.item ? this.props.item.content : '',
+        privacy_disclaimer: this.props.item ? this.props.item.privacy_disclaimer : '',
         success_url: this.props.item ? this.props.item.success_url : '',
         error_url: this.props.item ? this.props.item.error_url : '',
         lists: this.props.item ? this.props.item.lists : []
@@ -50,12 +42,6 @@ class SubscriptionFormForm extends React.Component {
       result = false
     }
 
-    const rawContent = convertToRaw(this.state.fields.privacy_disclaimer.getCurrentContent())
-    if (rawContent.blocks.length === 1 && rawContent.blocks[0].text === '') {
-      errors.privacy_disclaimer = t('this field is required')
-      result = false
-    }
-
     this.setState({ errors: errors })
     return result
   }
@@ -67,8 +53,8 @@ class SubscriptionFormForm extends React.Component {
     if (isValid === true) {
       const fields = {
         ...this.state.fields,
-        content: draftToHtml(convertToRaw(this.state.fields.content.getCurrentContent())),
-        privacy_disclaimer: draftToHtml(convertToRaw(this.state.fields.privacy_disclaimer.getCurrentContent()))
+        content: this.state.fields.content,
+        privacy_disclaimer: this.state.fields.privacy_disclaimer
       }
       return { id: this.state.fields.id, data: fields }
     }
@@ -131,24 +117,13 @@ class SubscriptionFormForm extends React.Component {
               )}
             </Form.Field>
             <Form.Field>
-              <label>{t('Title')}</label>
-              <Input
-                placeholder={t('i.e. Subscribe to our site')}
-                error={!!this.state.errors.title}
-                defaultValue={this.state.fields.title}
-                onChange={this.onChangeField('title', 'value')}
-              />
-              {!!this.state.errors.title && (
-                <Message attached='top'><Icon name='warning circle' /> {this.state.errors.title}</Message>
-              )}
-            </Form.Field>
-            <Form.Field>
               <label>{t('Content')}</label>
-              <Editor
-                editorState={this.state.fields.content}
-                wrapperClassName='wysiwyg-wrapper'
-                editorClassName='wysiwyg-editor'
-                onEditorStateChange={(content) => this.setState({ fields: { ...this.state.fields, content } })}
+              <JoditEditor
+                value={this.state.fields.content}
+                tabIndex={1} // tabIndex of textarea
+                onBlur={(content) =>
+                  this.setState({ fields: { ...this.state.fields, content } })} // preferred to use only this option to update the content for performance reasons
+                onChange={(newContent) => {}}
               />
               {!!this.state.errors.content && (
                 <Message attached='top'><Icon name='warning circle' /> {this.state.errors.content}</Message>
@@ -156,14 +131,12 @@ class SubscriptionFormForm extends React.Component {
             </Form.Field>
             <Form.Field>
               <label>{t('Privacy disclaimer')}</label>
-              <Editor
-                editorState={this.state.fields.privacy_disclaimer}
-                wrapperClassName='wysiwyg-wrapper'
-                editorClassName='wysiwyg-editor'
-                onEditorStateChange={
-                  // eslint-disable-next-line camelcase
-                  (privacy_disclaimer) => this.setState({ fields: { ...this.state.fields, privacy_disclaimer } })
-                }
+              <JoditEditor
+                value={this.state.fields.privacy_disclaimer}
+                tabIndex={1} // tabIndex of textarea
+                onBlur={(content) =>
+                  this.setState({ fields: { ...this.state.fields, privacy_disclaimer: content } })}
+                onChange={(newContent) => {}}
               />
               {!!this.state.errors.privacy_disclaimer && (
                 <Message attached='top'><Icon name='warning circle' /> {this.state.errors.privacy_disclaimer}</Message>
@@ -181,7 +154,7 @@ class SubscriptionFormForm extends React.Component {
                 <Message attached='top'><Icon name='warning circle' /> {this.state.errors.success_url}</Message>
               )}
               {!this.state.errors.success_url && (
-                <div style={{ marginTop: '.5rem', fontStyle: 'italic' }}><Icon name='info circle' /> {t('Needed when embedding the form')}</div>
+                <div style={{ marginTop: '.5rem', fontStyle: 'italic' }}><Icon name='info circle' /> {t('SubscriptionFormSuccessUrlHelpText')}</div>
               )}
             </Form.Field>
             <Form.Field>
@@ -217,7 +190,8 @@ class SubscriptionFormForm extends React.Component {
 
 SubscriptionFormForm.propTypes = {
   item: PropTypes.object,
-  lists: PropTypes.object
+  lists: PropTypes.object,
+  t: PropTypes.func
 }
 
 export default withTranslation(null, { withRef: true })(SubscriptionFormForm)

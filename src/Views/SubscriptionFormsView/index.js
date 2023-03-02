@@ -22,7 +22,7 @@ const SubscriptionFormsView = props => {
   const isLoading = useSelector(state => state.subscriptionForms.fetching)
   const lists = useSelector(state => state.lists.data)
 
-  const listDisplay = ['id', 'last_edited', 'name', 'title', 'code', 'standalone_link']
+  const listDisplay = ['id', 'last_edited', 'name', 'code', 'standalone_link']
   const fieldsMapping = {
     last_edited: dt => moment(dt).format('LLL'),
     standalone_link: url => <a href={url} target='_blank' rel='noopener noreferrer'><Icon name='linkify' /></a>

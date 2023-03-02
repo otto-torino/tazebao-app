@@ -124,6 +124,7 @@
     "CampaignsHelpStepCompareStatistics": "Select some campaigns and view a comparison between dispatch statistics: open rate, click rate, etc...",
     "subscription_forms_description": "In this section you can create new subscription forms that you can share with your users in order to let them subscribe to your newsletter.",
     "ErrorUrlPlaceholder": "i.e. https://www.example.com/error",
-    "SucessUrlPlaceholder": "i.e. https://www.example.com/thanks"
+    "SucessUrlPlaceholder": "i.e. https://www.example.com/thanks",
+    "SubscriptionFormSuccessUrlHelpText": "Redirect URL when the subscription is successfull, if empty it's the same page."
   }
 }

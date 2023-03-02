@@ -423,6 +423,7 @@
     "ErrorUrlPlaceholder": "es. https://www.example.com/error",
     "SucessUrlPlaceholder": "es. https://www.example.com/thanks",
     "Last edited": "Ultima modifica",
-    "Standalone link": "Link form esterno"
+    "Standalone link": "Link form esterno",
+    "SubscriptionFormSuccessUrlHelpText": "URL cui si viene reindirizzati quando l'iscrizione avviene con successo, se vuoto è la pagina stessa."
   }
 }
