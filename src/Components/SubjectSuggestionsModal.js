@@ -19,8 +19,9 @@ const SubjectSuggestionsModal = props => {
   const handleSubmit = async () => {
     setLoading(true)
     const res = await api.suggestSubject(fields)
-    if (res.status === 409) {
+    if (res.status === 429) {
       toast.error(t('Service unavailable at the moment. Please try again later.'))
+      setLoading(false)
       return
     }
     const content = res.data.text
