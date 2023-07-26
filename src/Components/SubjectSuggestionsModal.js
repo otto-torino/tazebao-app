@@ -22,7 +22,7 @@ const SubjectSuggestionsModal = props => {
       return
     }
     const content = res.data.answer.content
-    const items = content.split('\n').map(item => item.replace(/^[0-9]*\. /, '').replace(/^"/, '').replace(/"$/, ''))
+    const items = content.split('\n').map(item => item.replace(/^[0-9]*.*"/, '').replace(/"$/, ''))
     setFields({ topic: '', mean_age: '' })
     setSuggestions(items)
   }
