@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withTranslation } from 'react-i18next'
-import { Icon, Form, Message, Checkbox } from 'semantic-ui-react'
+import { Icon, Form, Message, Checkbox, Popup } from 'semantic-ui-react'
+import SubjectSuggestionsModal from '../../Components/SubjectSuggestionsModal'
 
 class CampaignForm extends React.Component {
   constructor (props) {
@@ -13,7 +14,8 @@ class CampaignForm extends React.Component {
         topic: this.props.item ? this.props.item.topic : '',
         subject: this.props.item ? this.props.item.subject : '',
         view_online: this.props.item ? this.props.item.view_online : false
-      }
+      },
+      suggestionModalOpen: false
     }
   }
 
@@ -90,6 +92,7 @@ class CampaignForm extends React.Component {
               error={!!this.state.errors.subject}
               defaultValue={this.state.fields.subject}
               onChange={this.onChangeField('subject', 'value')}
+              icon={<Popup content={t('AI suggestions')} trigger={<Icon name='space shuttle' inverted circular link onClick={() => this.setState({ suggestionModalOpen: true })} />} />}
             />
             {!!this.state.errors.subject && (
               <Message attached='top'><Icon name='warning circle' /> {this.state.errors.subject}</Message>
@@ -115,6 +118,12 @@ class CampaignForm extends React.Component {
     return (
       <Form>
         {this.fieldset()}
+        {this.state.suggestionModalOpen && (
+          <SubjectSuggestionsModal
+            onClose={() => this.setState({ suggestionModalOpen: false })}
+            onSelectSuggestion={s => this.setState({ fields: { ...this.state.fields, subject: s } })}
+          />
+        )}
       </Form>
     )
   }

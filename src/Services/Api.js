@@ -135,6 +135,8 @@ const create = (baseURL = config.apiBasePath) => {
     api.delete(`/newsletter/campaign/${campaignId}/`)
   const duplicateCampaign = campaignId =>
     api.post(`/newsletter/campaign/${campaignId}/duplicate/`)
+  const suggestSubject = (body) =>
+    api.post('/newsletter/suggestions/subject/', body)
   // MOSAICO
   const mosaicoEditor = () => api.get('/mosaico/editor/')
   // PLANNING
@@ -222,6 +224,7 @@ const create = (baseURL = config.apiBasePath) => {
     deletePlanning,
     deleteCampaign,
     duplicateCampaign,
+    suggestSubject,
     campaignDispatches,
     deleteSubscribersFromBounces,
     deleteSubscribersFromMailerMessages,
