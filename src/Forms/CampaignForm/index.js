@@ -92,7 +92,7 @@ class CampaignForm extends React.Component {
               error={!!this.state.errors.subject}
               defaultValue={this.state.fields.subject}
               onChange={this.onChangeField('subject', 'value')}
-              icon={/*<Popup content={t('AI suggestions')} trigger={<Icon name='space shuttle' inverted circular link onClick={() => this.setState({ suggestionModalOpen: true })} />} />*/undefined}
+              icon={<Popup content={t('AI suggestions')} trigger={<Icon name='space shuttle' inverted circular link onClick={() => this.setState({ suggestionModalOpen: true })} />} />}
             />
             {!!this.state.errors.subject && (
               <Message attached='top'><Icon name='warning circle' /> {this.state.errors.subject}</Message>

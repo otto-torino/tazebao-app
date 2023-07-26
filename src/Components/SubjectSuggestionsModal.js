@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Modal, Button, Icon, Form, List, Header } from 'semantic-ui-react'
+import { Modal, Button, Icon, Form, List, Header, Dimmer, Loader } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { api } from '../Sagas'
 import { toast } from 'react-toastify'
@@ -12,19 +12,22 @@ const SubjectSuggestionsModal = props => {
     topic: '',
     mean_age: ''
   })
+  const [loading, setLoading] = useState(false)
   const [suggestions, setSuggestions] = useState([])
   const setField = fieldName => (evt) => setFields({ ...fields, [fieldName]: evt.target.value })
 
   const handleSubmit = async () => {
+    setLoading(true)
     const res = await api.suggestSubject(fields)
     if (res.status === 409) {
       toast.error(t('Service unavailable at the moment. Please try again later.'))
       return
     }
-    const content = res.data.answer.content
-    const items = content.split('\n').map(item => item.replace(/^[0-9]*.*"/, '').replace(/"$/, ''))
+    const content = res.data.text
+    const suggestions = content.split('\n').map(s => s.trim()).map(s => s.replace(/^"/, '').replace(s => s.replace(/"$/, ''))).filter(s => s.length > 0)
     setFields({ topic: '', mean_age: '' })
-    setSuggestions(items)
+    setSuggestions(suggestions)
+    setLoading(false)
   }
 
   const selectSuggestion = (suggestion) => () => {
@@ -36,13 +39,18 @@ const SubjectSuggestionsModal = props => {
     <Modal open size='tiny' onClose={props.onClose}>
       <Modal.Header>{t('AI subject suggestions')}</Modal.Header>
       <Modal.Content>
+        {loading && (
+          <Dimmer active inverted>
+            <Loader />
+          </Dimmer>
+        )}
         <p>{t('SubjectSuggestionDescription')}</p>
         <Form>
           <Form.Field>
             <Form.Input
               label={t('Main newsletter argument')}
               placeholder={t('i.e. Use of AI in the health sector')}
-              defaultValue={fields.topic}
+              value={fields.topic}
               onChange={setField('topic')}
             />
           </Form.Field>
@@ -50,7 +58,7 @@ const SubjectSuggestionsModal = props => {
             <Form.Input
               label={t('Audience mean age')}
               placeholder={t('i.e. 27')}
-              defaultValue={fields.mean_age}
+              value={fields.mean_age}
               onChange={setField('mean_age')}
               type='number'
             />
