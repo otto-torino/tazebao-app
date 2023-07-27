@@ -25,6 +25,10 @@ const SubjectSuggestionsModal = props => {
       toast.error(t('Service unavailable at the moment. Please try again later.'))
       setLoading(false)
       return
+    } else if (res.status === 400) {
+      toast.error(t('Max suggestions per day reached. Please try again tomorrow.'))
+      setLoading(false)
+      return
     }
     const content = res.data.text
     const suggestions = content.split('\n').map(s => s.trim()).map(s => s.replace(/^"/, '').replace(s => s.replace(/"$/, ''))).filter(s => s.length > 0)
