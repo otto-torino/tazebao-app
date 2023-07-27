@@ -29,6 +29,7 @@ import { takeLatest, all } from 'redux-saga/effects'
 import { STARTUP } from '../Redux/Startup'
 import { LOGIN_REQUEST, LOGOUT, WHOAMI_REQUEST, REFRESH_REQUEST } from '../Redux/Auth'
 import { STATS_REQUEST } from '../Redux/Stats'
+import { SYSTEM_MESSAGES_REQUEST } from '../Redux/SystemMessages'
 import { SUBSCRIPTIONS_STATISTICS_REQUEST } from '../Redux/SubscriptionsStatistics'
 import { SUBSCRIBERS_REQUEST, SUBSCRIBERS_QUERYSTRING } from '../Redux/Subscribers'
 import { LISTS_REQUEST, LISTS_QUERYSTRING } from '../Redux/Lists'
@@ -50,6 +51,7 @@ import { fetchPlanning, requestPlanning } from './PlanningSagas'
 import { fetchBounces, requestBounces } from './BouncesSagas'
 import { fetchMailerMessages, requestMailerMessages, fetchUnsentMailerMessages } from './MailerMessagesSagas'
 import { fetchStats } from './StatsSagas'
+import { fetchSystemMessages } from './SystemMessagesSagas'
 import { fetchSubscriptionsStatistics } from './SubscriptionsStatisticsSagas'
 import { fetchSubscriptionForms, requestSubscriptionForms } from './SubscriptionFormsSagas'
 
@@ -65,6 +67,7 @@ export default function * root (dispatch) {
     takeLatest(REFRESH_REQUEST, refresh, api),
     takeLatest(WHOAMI_REQUEST, whoami, { api, dispatch }),
     takeLatest(STATS_REQUEST, fetchStats, api),
+    takeLatest(SYSTEM_MESSAGES_REQUEST, fetchSystemMessages, api),
     takeLatest(SUBSCRIPTIONS_STATISTICS_REQUEST, fetchSubscriptionsStatistics, api),
     takeLatest(SUBSCRIBERS_QUERYSTRING, requestSubscribers, api),
     takeLatest(SUBSCRIBERS_REQUEST, fetchSubscribers, api),

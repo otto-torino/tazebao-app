@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Menu, Icon, Image } from 'semantic-ui-react'
+import { Menu, Icon, Image, Label } from 'semantic-ui-react'
 import Logo from '../../Assets/img/logo-sidebar.png'
 import AuthActions from '../../Redux/Auth'
 import TourActions from '../../Redux/Tour'
@@ -13,15 +13,22 @@ import { useTranslation } from 'react-i18next'
 import _ from 'lodash'
 import history from '../../history'
 import styles from './Menu.module.scss'
+import SystemMessagesModal from '../SystemMessagesModal'
 
 const AppMenu = (props) => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const user = useSelector((state) => state.auth.user)
+  const systemMessages = useSelector((state) => state.systemMessages.data)
+  const [systemMessagesModalOpen, setSystemMessagesModalOpen] = React.useState(false)
 
   const handleLogout = () => {
     dispatch(AuthActions.logout())
   }
+
+  // systemMessages
+  const handleOpenSystemMessages = () => setSystemMessagesModalOpen(true)
+  const handleCloseSystemMessages = () => setSystemMessagesModalOpen(false)
 
   // tour
   const path = useSelector((state) => state.router.location.pathname)
@@ -63,7 +70,12 @@ const AppMenu = (props) => {
       />
     </Menu.Item>,
     <Menu.Item as='span' key='menu-voice-links' className={styles.profileItem} data-tour='profile-desktop'>
-      <Icon circular name='user' color='teal' inverted style={{ marginLeft: 0 }} />
+      <span style={{ position: 'relative' }}>
+        <Icon circular name='user' color='teal' inverted style={{ marginLeft: 0 }} />
+        {systemMessages.length > 0 && (
+          <Label style={{ cursor: 'pointer'}} onClick={handleOpenSystemMessages} color='yellow' floating>{systemMessages.length}</Label>
+        )}
+      </span>
       <div style={{ marginLeft: '1rem', fontsize: '1.3rem' }}>
         {user.userName}
         <Icon name='sign-out' link style={{ marginLeft: '1rem' }} onClick={handleLogout} />
@@ -124,6 +136,9 @@ const AppMenu = (props) => {
       className={`sidebar-menu ${props.className}`}
     >
       {items}
+      {systemMessagesModalOpen && (
+        <SystemMessagesModal onClose={handleCloseSystemMessages} messages={systemMessages} />
+      )}
     </Menu>
   )
 }

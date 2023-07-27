@@ -172,6 +172,11 @@ const create = (baseURL = config.apiBasePath) => {
     api.get('/newsletter/subscriptions/stats/')
   const dispatchesStatistics = (ids) =>
     api.get('/newsletter/dispatches/stats/?ids=' + ids.join('-'))
+  // SYSTEM MESSAGES
+  const systemMessages = () =>
+    api.get('/newsletter/systemmessages/')
+  const systemMessageMarkAsRead = (id) =>
+    api.post(`/newsletter/systemmessages/${id}/mark_as_read/`)
   // SUBSCRIPTION FORM
   const subscriptionForms = (qs = {}) => {
     const endpoint = '/newsletter/subscriptionform/'
@@ -235,6 +240,8 @@ const create = (baseURL = config.apiBasePath) => {
     unsentMailerMessages,
     subscriptionsStatistics,
     dispatchesStatistics,
+    systemMessages,
+    systemMessageMarkAsRead,
     subscriptionForms,
     addSubscriptionForm,
     editSubscriptionForm,

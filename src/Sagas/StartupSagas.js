@@ -1,5 +1,6 @@
 import { put, select, call } from 'redux-saga/effects'
 import AuthActions from '../Redux/Auth'
+import SystemMessagaesActions from '../Redux/SystemMessages'
 
 // process STARTUP actions
 export function * startup (api, action) {
@@ -10,4 +11,5 @@ export function * startup (api, action) {
     yield call(api.setAuthToken, token)
   }
   yield put(AuthActions.whoamiRequest())
+  yield put(SystemMessagaesActions.systemMessagesRequest())
 }

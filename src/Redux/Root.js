@@ -13,12 +13,14 @@ import { reducer as mailerMessagesReducer } from './MailerMessages'
 import { reducer as tourReducer } from './Tour'
 import { reducer as subscriptionsStatisticsReducer } from './SubscriptionsStatistics'
 import { reducer as subscriptionFormsReducer } from './SubscriptionForms'
+import { reducer as systemMessagesReducer } from './SystemMessages'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
   startup: startupReducer,
   auth: authReducer,
   stats: statsReducer,
+  systemMessages: systemMessagesReducer,
   subscribers: subscribersReducer,
   subscriptionsStatistics: subscriptionsStatisticsReducer,
   lists: listsReducer,

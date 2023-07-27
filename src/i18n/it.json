@@ -437,6 +437,9 @@
     "Click a suggestion to use it": "Clicca un suggerimento per utilizzarlo",
     "SubjectSuggestionDescription": "Fatti aiutare dall'intelligenza artificiale per scegliere un titolo accattivante per la tua newsletter. Inserisci l'argomento principale, l'età media del tuo pubblico e clicca su \"Suggerisci\".",
     "SuggestionsLimitMessage": "Hai a disposizione {{ limit }} suggerimenti al giorno, contattaci per aumentare il limite",
-    "Max suggestions per day reached. Please try again tomorrow.": "Limite massimo di suggerimenti giornalieri raggiunto. Riprova domani."
+    "Max suggestions per day reached. Please try again tomorrow.": "Limite massimo di suggerimenti giornalieri raggiunto. Riprova domani.",
+    "Messages": "Messaggi",
+    "Mark as read": "Ok, non visualizzare più",
+    "All clear!": "Tutto letto!"
   }
 }
