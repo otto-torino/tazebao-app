@@ -4,8 +4,9 @@ import React from 'react'
 import { useTranslation, Trans } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { Modal, Button, Icon, Form, Header, Divider } from 'semantic-ui-react'
-import { api } from '../Sagas'
+
 import SystemMessagesActions from '../Redux/SystemMessages'
+import { api } from '../Sagas'
 
 const SystemMessagesModal = (props) => {
   // translations
@@ -23,8 +24,9 @@ const SystemMessagesModal = (props) => {
       <Modal.Content>
         {props.messages.map((message, index) => (
           <div key={index}>
-            <Header as="h4">
-              {message.title} {moment(message.datetime).format('LLL')}
+            <Header as="h3">
+              {message.title}
+              <Header.Subheader>{moment(message.datetime).format('LLL')}</Header.Subheader>
             </Header>
             <div dangerouslySetInnerHTML={{ __html: message.html }} />
             <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'flex-end' }}>
@@ -37,7 +39,7 @@ const SystemMessagesModal = (props) => {
         ))}
         {props.messages.length === 0 && (
           <div style={{ textAlign: 'center' }}>
-            <Icon name="check" size="huge" color='green' />
+            <Icon name="check" size="huge" color="green" />
             <Header as="h3" style={{ marginTop: '1rem' }}>
               {t('All clear!')}
             </Header>
