@@ -4,10 +4,12 @@ import { Modal, Button, Icon, Form, List, Header, Dimmer, Loader } from 'semanti
 import { useTranslation } from 'react-i18next'
 import { api } from '../Sagas'
 import { toast } from 'react-toastify'
+import { useSelector } from 'react-redux'
 
 const SubjectSuggestionsModal = props => {
   // translations
   const { t } = useTranslation()
+  const client = useSelector(state => state.auth.user.client)
   const [fields, setFields] = useState({
     topic: '',
     mean_age: ''
@@ -46,6 +48,7 @@ const SubjectSuggestionsModal = props => {
           </Dimmer>
         )}
         <p>{t('SubjectSuggestionDescription')}</p>
+        <p><strong>{t('SuggestionsLimitMessage', { limit: client.suggestionsPerDay })}</strong></p>
         <Form>
           <Form.Field>
             <Form.Input

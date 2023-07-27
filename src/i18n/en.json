@@ -126,6 +126,7 @@
     "ErrorUrlPlaceholder": "i.e. https://www.example.com/error",
     "SucessUrlPlaceholder": "i.e. https://www.example.com/thanks",
     "SubscriptionFormSuccessUrlHelpText": "Redirect URL when the subscription is successfull, if empty it's the same page.",
-    "SubjectSuggestionDescription": "Let artificial intelligence help you choose a catchy title for your newsletter. Enter the main topic, the average age of your audience and click the \"Suggest\" button."
+    "SubjectSuggestionDescription": "Let artificial intelligence help you choose a catchy title for your newsletter. Enter the main topic, the average age of your audience and click the \"Suggest\" button.",
+    "SuggestionsLimitMessage": "You have {{ limit }} suggestions per day, contact us to increase the limit"
   }
 }

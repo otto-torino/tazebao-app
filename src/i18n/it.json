@@ -435,6 +435,7 @@
     "Service unavailable at the moment. Please try again later.": "Servizio non disponibile al momento. Riprova più tardi.",
     "Suggestions": "Suggerimenti",
     "Click a suggestion to use it": "Clicca un suggerimento per utilizzarlo",
-    "SubjectSuggestionDescription": "Fatti aiutare dall'intelligenza artificiale per scegliere un titolo accattivante per la tua newsletter. Inserisci l'argomento principale, l'età media del tuo pubblico e clicca su \"Suggerisci\"."
+    "SubjectSuggestionDescription": "Fatti aiutare dall'intelligenza artificiale per scegliere un titolo accattivante per la tua newsletter. Inserisci l'argomento principale, l'età media del tuo pubblico e clicca su \"Suggerisci\".",
+    "SuggestionsLimitMessage": "Hai a disposizione {{ limit }} suggerimenti al giorno, contattaci per aumentare il limite"
   }
 }
