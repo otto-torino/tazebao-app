@@ -5,6 +5,7 @@ import SubscribersActions from '../Redux/Subscribers'
 import ListsActions from '../Redux/Lists'
 import TopicsActions from '../Redux/Topics'
 import CampaignsActions from '../Redux/Campaigns'
+import SystemMessagaesActions from '../Redux/SystemMessages'
 import history from '../history'
 import config from '../Config'
 
@@ -24,6 +25,7 @@ export function * login (api, { payload }) {
     // store auth data in redux store
     yield put(AuthActions.loginSuccess(response.data))
     yield put(AuthActions.whoamiRequest())
+  yield put(SystemMessagaesActions.systemMessagesRequest())
   } else {
     yield put(AuthActions.loginFailure({ code: response.status, detail: 'Wrong username or password' }))
   }

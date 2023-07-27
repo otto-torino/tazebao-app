@@ -1,9 +1,9 @@
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
-import { Modal, Button, Icon, Form, Header, Divider } from 'semantic-ui-react'
+import { Modal, Button, Icon, Header, Divider } from 'semantic-ui-react'
 
 import SystemMessagesActions from '../Redux/SystemMessages'
 import { api } from '../Sagas'
@@ -14,7 +14,7 @@ const SystemMessagesModal = (props) => {
   const dispatch = useDispatch()
 
   const handleReadMessage = (message) => async () => {
-    const res = await api.systemMessageMarkAsRead(message.id)
+    await api.systemMessageMarkAsRead(message.id)
     dispatch(SystemMessagesActions.systemMessagesRequest())
   }
 
