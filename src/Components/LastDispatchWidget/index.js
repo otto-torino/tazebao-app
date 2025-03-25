@@ -27,30 +27,30 @@ const LastDispatchWidget = (props) => {
       <Table basic='very'>
         <Table.Body>
           <Table.Row>
-            <Table.Cell rowSpan={3} textAlign='center'>
+            <Table.Cell textAlign='center' colSpan={3}>
               <Statistic color='teal' className={styles.statistic} size='huge'>
                 <Statistic.Value>{stats.lastDispatch.sent}</Statistic.Value>
                 <Statistic.Label>{t('Sent E-mails')}</Statistic.Label>
               </Statistic>
             </Table.Cell>
-            <Table.Cell style={{ padding: 0 }}>
-              <Statistic color='olive' size='mini' style={{ alignItems: 'flex-start' }} className={styles.statistic}>
+          </Table.Row>
+          <Table.Row>
+            <Table.Cell style={{ verticalAlign: 'top', textAlign: 'center' }}>
+              <Statistic color='olive' size='mini' className={styles.statistic}>
                 <Statistic.Value>
                   <Icon name='folder open' style={{ marginRight: '1rem' }} />
                   {stats.lastDispatch.open_rate}%
                 </Statistic.Value>
-                <Statistic.Label style={{ textAlign: 'left' }}>{t('Open Rate')}</Statistic.Label>
+                <Statistic.Label>{t('Open Rate')}</Statistic.Label>
               </Statistic>
             </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell style={{ borderTopWidth: 0 }}>
-              <Statistic color='yellow' size='mini' style={{ alignItems: 'flex-start' }} className={styles.statistic}>
+            <Table.Cell style={{ verticalAlign: 'top', textAlign: 'center' }}>
+              <Statistic color='yellow' size='mini' className={styles.statistic}>
                 <Statistic.Value>
                   <Icon name='hand pointer' style={{ marginRight: '1rem' }} />
                   {stats.lastDispatch.click_statistics ? stats.lastDispatch.click_rate + '%' : 'N.A.'}
                 </Statistic.Value>
-                <Statistic.Label style={{ textAlign: 'left' }}>
+                <Statistic.Label>
                   {t('Click Rate')}{' '}
                   {!stats.lastDispatch.click_statistics && (
                     <Popup
@@ -62,10 +62,8 @@ const LastDispatchWidget = (props) => {
                 </Statistic.Label>
               </Statistic>
             </Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.Cell style={{ borderTopWidth: 0 }}>
-              <Statistic color='orange' size='mini' style={{ alignItems: 'flex-start' }} className={styles.statistic}>
+            <Table.Cell style={{ verticalAlign: 'top', textAlign: 'center' }}>
+              <Statistic color='orange' size='mini' className={styles.statistic}>
                 <Statistic.Value>
                   <Icon name='ban' style={{ marginRight: '1rem' }} />
                   {stats.lastDispatch.bounces.length}
